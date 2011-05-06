@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"  
+	xmlns:components="components.*"
+	creationComplete="init();"
+	styleName="ezygroupheader"
+	verticalGap="0"
+	width="100%" 
+	height="100%">
+	
+	<mx:Script source="ActivitySearch.as" />
+		
+	<mx:Style source="styles/EzyBookStyle.css"/> 
+	
+	
+	<mx:TabNavigator width="100%" height="100%" id="activitySearchTabNavigator" change="tabChanged(event)" styleName="ezygroupheader">
+	   		
+	   	<mx:Canvas label="Activity Search" width="100%" height="100%" styleName="ezygroupheader">
+	   			
+	   		<mx:VDividedBox width="100%" height="100%">	   			
+	   			<mx:VBox width="100%"  height="282" styleName="ezygroupheader"  id="topVBox">	
+	   			
+	   				<mx:TitleWindow  width="100%" height="282" 
+			   			styleName="ezytitlewindowheader" 
+			   			titleIcon="@Embed(source=&apos;assets/images/Searchv2_32x32.png&apos;)"		   						
+			   			layout="absolute" 
+			   			title="Activity Search" 
+			   			id="activitySearchTitleWindow">
+	   			
+		   				<mx:Canvas x="10" y="10" width="457" height="180" styleName="ezycanvas" id="carCanvas1">
+		   					<mx:Label x="10" y="6" text="Location" styleName="ezylabel" />
+		   					<mx:ComboBox id="locationComboBox" labelField="@label" x="112" y="6" width="214.5"  styleName="ezycombobox"></mx:ComboBox>
+		   					<mx:Canvas x="8" y="69" width="440" height="73" borderStyle="solid" borderColor="#67A95E" id="dateRangeCanvas1">
+		   						<mx:Label x="10" y="10" text="Departing Date" styleName="ezylabel" />
+		   						<mx:DateField  tabIndex="2" id="departingDate" 
+		   							formatString="DD/MM/YYYY" 
+		   							yearNavigationEnabled="true" 
+		   							x="103" y="8" height="20"
+		   							styleName="ezydatefield"/>
+		   						<mx:Canvas x="203" y="8" width="225" height="55" styleName="ezycanvas">
+		   							<mx:CheckBox x="10" y="0" label="Multi Day Activity" styleName="ezycheckbox" id="multiDayActivity"/>
+		   							<mx:DateField tabIndex="3" id="returningDate" 
+		   								formatString="DD/MM/YYYY" 
+		   								yearNavigationEnabled="true" 
+		   								x="109" y="26" 
+		   								styleName="ezydatefield" height="20"/>
+		   							<mx:Label x="10" y="26" text="Returning Date" styleName="ezylabel" />
+		   						</mx:Canvas>
+		   					</mx:Canvas>
+		   					<mx:TextArea x="265" y="150" height="20.5" width="181" id="keywordSearchTextBox"  styleName="ezutextarea"  maxChars="20"/>
+		   					<mx:Label x="162" y="150" text="Keyword search" styleName="ezylabel" />
+		   					<mx:Label x="10" y="38" text="Type of Activity" styleName="ezylabel" />
+		   					<mx:ComboBox id="typeOfActivityComboBox" labelField="@label" styleName="ezycombobox" x="112" y="38" width="214.5" ></mx:ComboBox>
+		   				</mx:Canvas>
+		   				<mx:Canvas x="475" y="10" width="251.5" height="104" borderStyle="solid" borderColor="#67A95E" id="dateRangeCanvas">
+		   					<mx:Label x="10" y="8" text="Adults" styleName="ezylabel" />					
+		   					<mx:Label x="10" y="38.5" text="Children" styleName="ezylabel" />					
+		   					<mx:Label x="10" y="69.5" text="Infants" styleName="ezylabel" />					
+		   					<mx:Label x="140" y="8" text="Total Pax" styleName="ezylabel" />
+		   					<mx:TextInput tabIndex="4" x="206" y="7" width="32"
+		   						 styleName="ezytextbox" 
+		   						 height="20" 
+		   						 id="totalPaxTextBox" 
+		   						 maxChars="2"  
+		   						 editable="false" 
+		   						 enabled="true" 
+		   						 backgroundColor="#E1DDDD"/>  
+		   					
+		   					<mx:ComboBox x="69" y="7" id="adultsComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63"></mx:ComboBox>
+		   					<mx:ComboBox x="69" y="38" id="childrenComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63"></mx:ComboBox>
+		   					<mx:ComboBox x="69" y="69" id="infantsComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63" ></mx:ComboBox>
+		   				</mx:Canvas>
+		   				<mx:Button  x="10" y="203"  
+		   					label="Search"  
+		   					styleName="ezybutton" 
+		   					click="validateForm(event)"  
+		   					id="searchFormButton" height="21">					
+		   					<mx:icon>@Embed(source='../../assets/images/Find_20x20.png')</mx:icon>
+		   				</mx:Button>
+		   				<mx:Button  x="107" y="203"  
+		   					label="Clear"  
+		   					styleName="ezybutton" 
+		   					click="resetForm(event)"  
+		   					id="resetFormButton" height="21">					
+		   				</mx:Button>
+		   				
+		   			</mx:TitleWindow>	
+	   				
+	   			</mx:VBox>
+	   				
+   				<mx:VBox width="100%" height="100%" id="bottomVBox" y="241" x="0">		    
+   					<components:ProductSearchResultsGrid id="searchResultsGrid" width="100%" height="100%" />			
+   				</mx:VBox>	   		  
+	   		  	
+	   		  </mx:VDividedBox>
+	   		  		
+	   	</mx:Canvas>
+	   			
+   		<mx:Canvas label="Activity Locator" width="100%" height="100%" styleName="ezygroupheader">
+   			<mx:VBox width="100%"  height="100%" styleName="ezygroupheader" > 	   
+		   		<mx:TitleWindow  width="100%"  height="100%"
+		   			styleName="ezytitlewindowheader" 
+		   			titleIcon="@Embed(source=&apos;assets/images/Searchv2_32x32.png&apos;)"		   						
+		   			layout="absolute" 
+		   			title="Activity Locator" 
+		   			id="cityRegionSearchTitleWindow">
+			   					
+					<mx:HBox width="100%" height="100%" x="400" id="mapHBox">
+						<maps:Map xmlns:maps="com.google.maps.*"
+							 	id="map" mapevent_mapready="onMapReady(event)" 
+								width="100%" 
+								height="100%" 
+								key="{GoogleConstants.KEY}"/>					
+					</mx:HBox>
+					
+					<mx:Canvas width="382" height="593" styleName="ezycanvas" id="activityCanvas" x="10" y="10">
+						<mx:Button tabIndex="7"  
+							label="Display on map"  
+							styleName="ezybutton" 
+							click="displayActivityLocationsOnMap(event)" 
+							id="majorCentresDisplayButton" 
+							y="8" height="21"  width="164" x="206">					
+							<mx:icon>@Embed(source='../../assets/images/Zoom_20x20.png')</mx:icon>
+						</mx:Button>
+					
+					
+						<mx:DataGrid id="activitiesLocationsGrid" 				
+							width="360" height="544"				
+							styleName="ezydataGrid" x="10" y="37">
+							<mx:columns>
+								<mx:DataGridColumn width="128" headerText="Activity"  >
+									<mx:itemRenderer>
+						               <mx:Component>
+						                   <mx:Label text="{data.markerData.name}" click="{outerDocument.locateActivityLocationsOnMap(event)}" />
+						               </mx:Component>
+							        </mx:itemRenderer>
+						        </mx:DataGridColumn>                  
+					            <mx:DataGridColumn width="12"   >	                    	                  
+					                <mx:itemRenderer>
+					             		<mx:Component>
+				             				<mx:Button  toolTip="Locate on the map" icon="@Embed(source=&apos;assets/images/Information-icon_16x16.png&apos;)"	
+				             					click="{outerDocument.locateActivityLocationsOnMap(event)}"			                        				                        	
+				             				    	fillColors="[0xacb5b5]"  />				                        	                  	   
+				             		     </mx:Component>	                  	   	      
+					             	</mx:itemRenderer>	                  
+					           </mx:DataGridColumn>					                        
+							</mx:columns>
+						</mx:DataGrid>
+						<mx:Text text="Activities" width="124" color="#2E5693" fontWeight="bold" fontFamily="Verdana" x="10" y="7"/>
+					</mx:Canvas>
+			   </mx:TitleWindow>		     	
+			   
+			</mx:VBox>   		
+   		
+   		</mx:Canvas>
+	   			
+	</mx:TabNavigator>
+		  
+							
+</mx:VBox>

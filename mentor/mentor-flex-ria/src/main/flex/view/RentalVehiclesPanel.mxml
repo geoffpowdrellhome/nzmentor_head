@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VDividedBox xmlns:mx="http://www.adobe.com/2006/mxml"  
+	xmlns:components="components.*"
+	width="100%" height="100%">
+	
+	<mx:Style source="styles/EzyBookStyle.css"/>
+	
+	<mx:Script source="RentalVehicles.as" />
+	
+	<mx:Canvas width="100%"  height="100%" styleName="ezygroupheader">
+	
+	   <mx:HBox width="100%" height="100%">	   
+				
+			<mx:Panel width="100%" height="100%" id="mainPanel" 
+				title="Available to rent" styleName="ezytitlewindowheader"> 
+				
+			      <mx:LinkButton label="Cars"  icon="@Embed(source=&apos;assets/images/products/Car_48x48.png&apos;)" fontSize="11" fontStyle="normal"/>			      	
+				  <mx:TextArea text="{vehicleHireText}" wordWrap="true" 
+						editable="false" width="100%"
+						height="70" 
+						styleName="ezyblogPanel" />
+									      
+			      <mx:LinkButton label="Motor homes"  icon="@Embed(source=&apos;assets/images/products/Jeep_48x48.png&apos;)" fontSize="11" fontStyle="normal"/>
+			      <mx:TextArea text="{vehicleHireText}" wordWrap="true" 
+						editable="false" width="100%"
+						height="70" 
+						styleName="ezyblogPanel" />
+			      			      			      
+			</mx:Panel>
+					     	
+	   </mx:HBox>
+	   
+	</mx:Canvas>   
+							
+</mx:VDividedBox>

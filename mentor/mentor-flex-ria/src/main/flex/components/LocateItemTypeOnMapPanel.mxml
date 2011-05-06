@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+           xmlns:components="components.*"
+           width="100%"
+           height="100%"
+           styleName="ezygroupheader"
+           label="X Locator">
+
+    <mx:Script source="LocateItemTypeOnMap.as"/>
+
+    <mx:VBox width="100%"
+             height="100%"
+             styleName="ezygroupheader"
+             verticalScrollPolicy="off"
+             horizontalScrollPolicy="off">
+
+        <mx:Panel layout="absolute" width="100%" height="100%" styleName="ezytitlewindowheader">
+
+            <mx:HBox width="100%" height="100%" x="400" id="mapHBox" verticalScrollPolicy="off"
+                     horizontalScrollPolicy="off">
+                <maps:Map xmlns:maps="com.google.maps.*"
+                          id="map" mapevent_mapready="onMapReady(event)"
+                          width="100%"
+                          height="100%"
+                          key="{GoogleConstants.KEY}"/>
+            </mx:HBox>
+
+            <mx:Canvas width="100%" height="100%" styleName="ezycanvas" id="activityCanvas" x="0" y="0">
+                <mx:DataGrid id="locationsGrid"
+                             width="398" height="100%"
+                             styleName="ezydataGrid" x="0" y="0">
+                    <mx:columns>
+                        <mx:DataGridColumn width="128" headerText="Category">
+                            <mx:itemRenderer>
+                                <mx:Component>
+                                    <mx:Label text="{data.markerData.name}"
+                                              click="{outerDocument.locateLocationsOnMap(event)}"/>
+                                </mx:Component>
+                            </mx:itemRenderer>
+                        </mx:DataGridColumn>
+                        <mx:DataGridColumn width="12">
+                            <mx:itemRenderer>
+                                <mx:Component>
+                                    <mx:Button toolTip="Locate on the map"
+                                               icon="@Embed(source=&apos;assets/images/Information-icon_16x16.png&apos;)"
+                                               click="{outerDocument.locateLocationsOnMap(event)}"
+                                               fillColors="[0xacb5b5]"/>
+                                </mx:Component>
+                            </mx:itemRenderer>
+                        </mx:DataGridColumn>
+                    </mx:columns>
+                </mx:DataGrid>
+            </mx:Canvas>
+
+        </mx:Panel>
+
+    </mx:VBox>
+
+</mx:Canvas>

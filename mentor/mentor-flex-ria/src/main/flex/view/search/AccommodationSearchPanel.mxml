@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VDividedBox xmlns:mx="http://www.adobe.com/2006/mxml"  
+	xmlns:components="components.*"
+	creationComplete="init();"
+	verticalGap="0"	
+	width="100%" 
+	height="100%">
+	
+	<mx:Script source="AccommodationSearch.as" />
+	
+	<mx:Style source="styles/EzyBookStyle.css"/> 
+	
+	   <mx:VBox width="100%"  height="282" styleName="ezygroupheader" > 	   
+	   		<mx:TitleWindow  width="100%"  height="100%"
+	   			styleName="ezytitlewindowheader" 
+	   			titleIcon="@Embed(source=&apos;assets/images/Searchv2_32x32.png&apos;)"		   						
+	   			layout="absolute" 
+	   			title="Accommodation Search">
+					
+				<mx:Button  x="10" y="203"  
+					label="Search"  
+					styleName="ezybutton" 
+					click="validateForm(event)"  
+					id="searchFormButton" height="21">					
+					<mx:icon>@Embed(source='../../assets/images/Find_20x20.png')</mx:icon>
+				</mx:Button>				
+				<mx:Button  x="107" y="203"  
+					label="Clear"  
+					styleName="ezybutton" 
+					click="resetForm(event)" 
+					id="resetFormButton" height="21">					
+				</mx:Button>
+				<mx:Canvas x="475" y="10" width="251.5" height="104" borderStyle="solid" borderColor="#67A95E" id="dateRangeCanvas">
+					<mx:Label x="10" y="8" text="Adults" styleName="ezylabel" />					
+					<mx:Label x="10" y="38.5" text="Children" styleName="ezylabel" />					
+					<mx:Label x="10" y="69.5" text="Infants" styleName="ezylabel" />					
+					<mx:Label x="140" y="8" text="Total Pax" styleName="ezylabel" />
+					<mx:TextInput tabIndex="4" x="206" y="7" width="32"
+						 styleName="ezytextbox" 
+						 height="20" 
+						 id="totalPaxTextBox" 
+						 maxChars="2"  
+						 editable="false" 
+						 enabled="true" 
+						 backgroundColor="#E1DDDD"/>  
+					
+					<mx:ComboBox x="69" y="7" id="adultsComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63"></mx:ComboBox>
+					<mx:ComboBox x="69" y="38" id="childrenComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63"></mx:ComboBox>
+					<mx:ComboBox x="69" y="69" id="infantsComboBox" labelField="@label" change="updateTotalPax(event)" styleName="ezycombobox" width="63" ></mx:ComboBox>
+				</mx:Canvas>
+				<mx:Canvas x="10" y="10" width="457" height="180" styleName="ezycanvas" id="carCanvas1">
+					<mx:Label x="10" y="24.5" text="Location" styleName="ezylabel" />
+					<mx:ComboBox id="locationComboBox" x="71" y="22" width="248"  styleName="ezycombobox"></mx:ComboBox>
+					<mx:Canvas x="10" y="69" width="436" height="68" borderStyle="solid" borderColor="#67A95E" id="dateRangeCanvas1">
+						<mx:Label x="10" y="10" text="Checking In Date" styleName="ezylabel" />
+						<mx:DateField  tabIndex="2" id="checkingInDate" close="updateTotalDuration(event)" 
+							formatString="DD/MM/YYYY" 
+							yearNavigationEnabled="true" 
+							x="130" y="10.5" height="20"
+							styleName="ezydatefield"/>
+							
+						<mx:Label x="10" y="36" text="Checking Out Date" styleName="ezylabel" />
+						<mx:DateField tabIndex="3" id="checkingOutDate" close="updateTotalDuration(event)" 
+							formatString="DD/MM/YYYY" 
+							yearNavigationEnabled="true" 
+							x="130" y="36" 
+							styleName="ezydatefield" height="20"/>
+							
+						<mx:Label x="318" y="10" text="Total Nights" styleName="ezylabel" />
+						<mx:TextInput tabIndex="4" x="391" y="11" width="32" 
+							styleName="ezytextbox" 
+							height="20" 
+							id="totalDurationTextBox" 
+							maxChars="2"  
+							editable="false" enabled="true" 
+							backgroundColor="#E1DDDD"/>
+						<mx:Label x="230" y="10" text="Time" styleName="ezylabel" />
+						<mx:TextArea x="271" y="11" height="20.5" width="33" id="checkingInTimeTextBox"  styleName="ezytextarea"  maxChars="20"/>
+						<mx:TextArea x="271" y="35.5" height="20.5" width="33" id="checkingOutTimeTextBox"  styleName="ezytextarea"  maxChars="20"/>
+						<mx:Label x="230" y="35.5" text="Time" styleName="ezylabel" />
+					</mx:Canvas>
+					<mx:TextArea x="265" y="145" height="20.5" width="181" id="keywordSearchTextBox"  styleName="ezutextarea"  maxChars="20"/>
+					<mx:Label x="162" y="145" text="Keyword search" styleName="ezylabel" />
+				</mx:Canvas>
+				<mx:Canvas x="475" y="122" width="251.5" height="68" styleName="ezycanvas">
+					<mx:Label x="10" y="10" text="Star Rating" styleName="ezylabel" />
+					<mx:ComboBox id="starRatingComboBox" labelField="@label" styleName="ezycombobox" x="87" y="10" width="152.5"  ></mx:ComboBox>
+					<mx:Label x="10" y="37" text="Room Type" styleName="ezylabel" />
+					<mx:ComboBox id="roomTypeComboBox" labelField="@label" styleName="ezycombobox" x="87" y="37" width="152.5" ></mx:ComboBox>
+				</mx:Canvas>											
+		    </mx:TitleWindow>		     	
+	   </mx:VBox>
+		
+		<mx:VBox width="100%" height="100%">		    
+			<components:ProductSearchResultsGrid  id="searchResultsGrid"  width="100%" height="100%" />			
+		</mx:VBox>  	
+	     	     
+	     <mx:NumberValidator id="locationValidator"
+	        source="{locationComboBox}"
+	        lowerThanMinError="This field is required."
+	        property="selectedIndex" minValue="0">		
+	     </mx:NumberValidator>
+	     	     
+	     <mx:DateValidator id="checkingInDateValidator" 
+                source="{checkingInDate}" 
+                property="text"                
+                allowedFormatChars="/"> 
+		 </mx:DateValidator>
+		 
+		 <mx:DateValidator id="checkingOutDateValidator" 
+                source="{checkingOutDate}" 
+                property="text"                
+                allowedFormatChars="/"> 
+		 </mx:DateValidator>
+	     				
+</mx:VDividedBox>
+	
