@@ -1,0 +1,2090 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://faregate.flitech.net" xmlns:air="http://air.faregate.flitech.net"
+  xmlns:info="http://common.fareinfo.flitech.net" xmlns:impl="http://faregate.flitech.net" xmlns:intf="http://faregate.flitech.net"
+  xmlns:fare="http://fares.flitech.net" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://air.faregate.flitech.net">
+      <import namespace="http://faregate.flitech.net" />
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <complexType name="Flight">
+        <annotation>
+          <documentation>A quoted flight.</documentation>
+        </annotation> 
+        <sequence>
+          <!-- TODO change to mandatory after change control accepts this -->
+          <element name="provider" type="air:Provider" nillable="false" minOccurs="0" maxOccurs="1" />
+          <element name="fares" nillable="false" minOccurs="0" maxOccurs="unbounded" type="air:Fare" />
+          <element name="legs" nillable="false" type="air:Leg" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="AvailableFlight">
+        <annotation>
+          <documentation>An available flight, with either fully-available legs, or partially-specified legs.
+          </documentation>
+        </annotation>
+        <sequence>
+          <element name="preferenceType" type="air:PreferenceType" nillable="false" minOccurs="1" maxOccurs="1" />
+          <element name="provider" type="air:Provider" nillable="false" minOccurs="1" maxOccurs="1" />
+          <element name="availableFares" nillable="false" minOccurs="0" maxOccurs="unbounded" type="air:AvailableFare" />
+          <choice>
+            <element name="legs" nillable="false" type="air:Leg" maxOccurs="unbounded" />
+            <element name="partialLegs" nillable="false" type="air:PartialLeg" maxOccurs="unbounded" />
+          </choice>
+        </sequence>
+      </complexType>
+      <complexType name="PartialLeg">
+        <annotation>
+          <documentation>A partial leg is system-generated to attach a fare to, and is unbookable.</documentation>
+        </annotation>
+        <sequence>
+          <element name="airlineCode" nillable="false" type="string" />
+          <element name="departureAirport" nillable="false" type="string" />
+          <element name="arrivalAirport" nillable="false" type="string" />
+        </sequence>
+        <attribute name="index" type="int" use="optional" />
+      </complexType>
+
+
+      <!-- see new improved Leg in fareinfo schema... -->
+      <complexType name="Leg">
+        <sequence>
+          <element name="airlineCode" nillable="false" type="string" />
+          <element name="operatingAirlineCode" nillable="false" type="string" minOccurs="0" />
+          <element name="departureAirport" nillable="false" type="string" />
+          <element name="departureTime" nillable="false" type="string" />
+          <element name="departureTerminal" nillable="true" minOccurs="0" type="air:Terminal" />
+          <element name="arrivalAirport" nillable="false" type="string" />
+          <element name="arrivalTime" nillable="false" type="string" />
+          <element name="arrivalTerminal" nillable="true" minOccurs="0" type="air:Terminal" />
+          <element name="duration" nillable="false" type="int" />
+          <element name="flightNumber" nillable="false" type="string" />
+          <element name="operatingFlightNumber" nillable="false" type="string" minOccurs="0" />
+        </sequence>
+        <attribute name="index" type="int" use="optional" />
+      </complexType>
+      <complexType name="Terminal">
+        <sequence>
+          <element name="name" nillable="false" minOccurs="0" type="air:TerminalName" />
+          <element name="type" nillable="false" type="air:TerminalType" />
+        </sequence>
+      </complexType>
+      <simpleType name="TerminalName">
+        <annotation>
+          <documentation>The name of a terminal</documentation>
+        </annotation>
+        <restriction base="xsd:string">
+          <maxLength value="20" />
+        </restriction>
+      </simpleType>
+      <simpleType name="TerminalType">
+        <annotation>
+          <documentation>The type of a terminal</documentation>
+        </annotation>
+        <restriction base="xsd:string">
+          <enumeration value="DOMESTIC">
+            <annotation>
+              <documentation>A terminal for domestic departures</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="INTERNATIONAL">
+            <annotation>
+              <documentation>A terminal for international departures</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="ALL">
+            <annotation>
+              <documentation>A terminal for both domestic and international departures</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="UNKNOWN">
+            <annotation>
+              <documentation>A terminal that we dont have any data on</documentation>
+            </annotation>
+          </enumeration>
+        </restriction>
+      </simpleType>
+      <simpleType name="PreferenceType">
+        <annotation>
+          <documentation>The airline preference type, whether the airline is preferred, unpopular or blacklisted</documentation>
+        </annotation>
+        <restriction base="xsd:string">
+          <enumeration value="PREFERRED">
+            <annotation>
+              <documentation>Preferred airline</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="UNPOPULAR">
+            <annotation>
+              <documentation>Unpopular airline</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="BLACKLISTED">
+            <annotation>
+              <documentation>Blacklisted airline</documentation>
+            </annotation>
+          </enumeration>
+        </restriction>
+      </simpleType>
+      <simpleType name="JourneyType">
+        <annotation>
+          <documentation>The type of a fare</documentation>
+        </annotation>
+        <restriction base="xsd:string">
+          <enumeration value="OW">
+            <annotation>
+              <documentation>A one-way fare</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="RT">
+            <annotation>
+              <documentation>A Return fare which should be booked with more than one segment</documentation>
+            </annotation>
+          </enumeration>
+        </restriction>
+      </simpleType>
+      <complexType name="Fare">
+        <annotation>
+          <documentation>A quoted fare.</documentation>
+        </annotation>
+        <sequence>
+          <element name="prices" nillable="false" type="air:FarePrice" maxOccurs="unbounded" />
+          <element name="details" nillable="false" type="air:FareBasisDetails" maxOccurs="unbounded" />
+          <element name="fareKey" nillable="false" type="string" />
+        </sequence>
+        <attribute name="type" type="air:JourneyType" use="optional" />
+      </complexType>
+      <complexType name="FareBasisDetails">
+        <sequence>
+          <element name="fareType" nillable="true" type="string" />
+          <element name="fareClass" nillable="true" type="air:FareClass" />
+          <element name="fareBasis" nillable="true" type="string" />
+        </sequence>
+        <attribute name="travellerType" type="impl:TravellerType" use="optional" />
+        <attribute name="legIndex" type="int" use="optional">
+          <annotation>
+            <documentation> The Leg Index starts from zero (0).</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="private" type="boolean" use="optional" default="false" />
+      </complexType>
+      <complexType name="AvailableFare">
+        <complexContent>
+          <extension base="air:Fare">
+            <sequence>
+              <element name="optionGroups" nillable="true" type="air:OptionGroup" maxOccurs="unbounded"
+                minOccurs="0" />
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="OptionGroup">
+        <annotation>
+          <documentation>Groups of options</documentation>
+        </annotation>
+        <sequence>
+          <element name="optionType" nillable="false" type="air:OptionType" minOccurs="1" maxOccurs="1" />
+          <element name="applicability" nillable="false" type="air:Applicability" minOccurs="1" maxOccurs="1"
+            default="FLIGHT" />
+          <element name="name" nillable="false" type="string" minOccurs="0" maxOccurs="1" />
+          <element name="description" nillable="false" type="string" minOccurs="0" maxOccurs="1" />
+          <element name="minimumChoices" nillable="false" type="int" minOccurs="1" maxOccurs="1" default="1" />
+          <element name="maximumChoices" nillable="false" type="int" minOccurs="1" maxOccurs="1" default="1" />
+          <element name="options" nillable="true" type="air:Option" maxOccurs="unbounded" minOccurs="1" />
+        </sequence>
+      </complexType>
+      <simpleType name="OptionType">
+        <annotation>
+          <documentation>The type of options in this group.</documentation>
+        </annotation>
+        <restriction base="string">
+          <!--
+						TODO: Reserve the right to enumerate the types of options that are
+						available
+					-->
+          <enumeration value="BAG" />
+          <enumeration value="MEAL" />
+          <enumeration value="INFANT" />
+        </restriction>
+      </simpleType>
+      <simpleType name="Applicability">
+        <annotation>
+          <documentation>The applicability of this option group.</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="BOOKING" />
+          <enumeration value="FLIGHT" />
+          <enumeration value="LEG" />
+        </restriction>
+      </simpleType>
+      <complexType name="Option">
+        <annotation>
+          <documentation>Optional extras for this flight or fare, with prices attached.</documentation>
+        </annotation>
+        <complexContent>
+          <extension base="air:OptionDetail">
+            <sequence>
+              <element name="cost" nillable="false" type="air:Currency" />
+              <element name="tax" nillable="false" type="air:Currency" minOccurs="0" maxOccurs="1" />
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="OptionDetail">
+        <annotation>
+          <documentation>Optional extras for this flight or fare without pricing</documentation>
+        </annotation>
+        <sequence>
+          <element name="optionType" nillable="false" type="air:OptionType" minOccurs="1" maxOccurs="1" />
+          <element name="code" nillable="false" type="string" minOccurs="1" maxOccurs="1" />
+          <element name="name" nillable="false" type="string" minOccurs="0" maxOccurs="1" />
+          <element name="description" nillable="false" type="string" minOccurs="0" maxOccurs="1" />
+        </sequence>
+        <attribute name="default" type="boolean" default="false" >
+          <annotation>
+            <documentation>
+              A hint that this is a default option for this group (only valid for option groups with minimumChoices &gt; 1).
+              If no option is selected, default options will be selected, in order to validate the option group.
+            </documentation>
+          </annotation>
+        </attribute>
+      </complexType>
+      <complexType name="FarePrice">
+        <sequence>
+          <element name="creditPrice" nillable="false" type="air:Currency" />
+          <element name="cashPrice" nillable="false" type="air:Currency" />
+          <element name="tax" nillable="true" type="air:Currency" minOccurs="0" />
+          <element name="fareClass" nillable="true" type="air:FareClass" minOccurs="0" />
+          <element name="travellerType" nillable="false" type="impl:TravellerType" />
+        </sequence>
+        <attribute name="incomplete" type="boolean" use="optional" default="false">
+          <annotation>
+            <documentation>Incomplete prices are those that are missing such things as taxes and fees.</documentation>
+          </annotation>
+        </attribute>
+      </complexType>
+      <complexType name="Currency">
+        <annotation>
+          <documentation>A representation of a currency, containing amount and currency code.</documentation>
+        </annotation>
+        <sequence>
+          <element name="amount" nillable="false" type="air:CurrencyAmount" />
+          <element name="code" nillable="false" type="air:CurrencyCode" />
+          <element name="originalAmount" nillable="false" type="air:CurrencyAmount" />
+          <element name="originalCode" nillable="false" type="air:CurrencyCode" />
+          <!--would be an attribute save for Axis 1.4 bug -->
+        </sequence>
+      </complexType>
+      <simpleType name="CurrencyAmount">
+        <annotation>
+          <documentation>A currency amount without currency symbol. Signature may be subject to change as more
+            currencies are supported (e.g. Bahrain Dinars have 3 fractional digits)</documentation>
+        </annotation>
+        <restriction base="decimal">
+          <fractionDigits value="2" />
+        </restriction>
+      </simpleType>
+      <simpleType name="KnownCurrencyCode">
+        <annotation>
+          <documentation>A currency code known to be returned by this application.</documentation>
+        </annotation>
+        <restriction base="air:CurrencyCode">
+          <enumeration value="AUD" />
+          <enumeration value="NZD" />
+          <enumeration value="GBP" />
+        </restriction>
+      </simpleType>
+      <simpleType name="CurrencyCode">
+        <annotation>
+          <documentation>A currency code is the ISO 4217-standard code for that currency.</documentation>
+        </annotation>
+        <restriction base="string">
+          <pattern value="[A-Z]{3}" />
+        </restriction>
+      </simpleType>
+      <simpleType name="FareClass">
+        <restriction base="string">
+          <pattern value="[A-Z0-9]{1,2}" />
+        </restriction>
+      </simpleType>
+      <simpleType name="FareBasisCode">
+        <annotation>
+          <documentation>Fare Basis code</documentation>
+        </annotation>
+        <restriction base="xsd:string">
+          <pattern value="[A-Z]{2}" />
+        </restriction>
+      </simpleType>
+      <complexType name="CancelBookingRequest">
+        <sequence>
+          <element name="reservationId" nillable="false" type="string" />
+          <element name="airline" nillable="false" type="air:Airline" />
+        </sequence>
+      </complexType>
+      <complexType name="CancelBookingResponse">
+        <sequence>
+          <element name="status" nillable="false" minOccurs="1" maxOccurs="1" type="air:ResponseStatus" />
+          <element name="reservationId" nillable="false" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Booking">
+        <sequence>
+          <element name="clientReservation" nillable="false" type="air:Reservation" minOccurs="0" maxOccurs="1" />
+          <element name="contactAddress" type="air:Address" nillable="false" />
+          <element name="contactFirstName" type="string" nillable="false" />
+          <element name="contactSurname" type="string" nillable="false" />
+          <element name="contactEmail" type="string" nillable="false" />
+          <element name="contactPhone" type="air:Telephone" nillable="false" />
+          <element name="alternativePhone" type="air:Telephone" nillable="true" minOccurs="0" />
+          <element name="agent" type="air:Agent" nillable="false" minOccurs="0" />
+          <element name="emailConfirmation" type="boolean" />
+          <element name="inboundFare" type="air:Fare" nillable="true" minOccurs="0" />
+          <element name="outboundFare" type="air:Fare" nillable="false" />
+          <element name="creditCardPayment" type="boolean" />
+          <element name="creditCard" type="impl:CreditCard" nillable="true" minOccurs="0" />
+          <element name="departureAirport" type="string" nillable="false" />
+          <element name="departureTime" type="string" nillable="false" />
+          <element name="arrivalAirport" type="string" nillable="false" />
+          <element name="arrivalTime" type="string" nillable="false" />
+          <element name="returnDepartureTime" type="string" nillable="true" minOccurs="0" />
+          <element name="returnArrivalTime" type="string" nillable="true" minOccurs="0" />
+          <element name="returnFlight" type="boolean" />
+          <element name="airline" type="air:Airline" nillable="false" />
+          <element name="travellers" type="impl:Traveller" nillable="false" maxOccurs="unbounded" />
+          <element name="outboundLegs" type="air:Leg" maxOccurs="unbounded" />
+          <element name="inboundLegs" type="air:Leg" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+		<complexType name="Telephone">
+			<!-- see http://www.opentravel.org/2010B/OTA_CommonTypes.xsd -->
+			<simpleContent>
+				<extension base="string">
+					<attribute name="countryAccessCode" type="air:NumericStringLength1to3" use="optional" />
+					<attribute name="areaCityCode" type="air:NumericStringLength1to8" use="optional" />
+					<attribute name="extension" type="air:NumericStringLength1to5" use="optional" />
+				</extension>
+			</simpleContent>
+		</complexType>
+		<simpleType name="NumericStringLength1to3">
+			<annotation>
+				<documentation>Used for Numeric Strings length 1 to 3.</documentation>
+			</annotation>
+			<restriction base="string">
+				<pattern value="[0-9]{1,3}" />
+			</restriction>
+		</simpleType>
+		<simpleType name="NumericStringLength1to5">
+			<annotation>
+				<documentation>Used for Numeric Strings length 1 to 5.</documentation>
+			</annotation>
+			<restriction base="string">
+				<pattern value="[0-9]{1,5}" />
+			</restriction>
+		</simpleType>
+		<simpleType name="NumericStringLength1to8">
+			<annotation>
+				<documentation>Used for Numeric Strings length 1 to 8.</documentation>
+			</annotation>
+			<restriction base="string">
+				<pattern value="[0-9]{1,8}" />
+			</restriction>
+		</simpleType>
+      <complexType name="Address">
+        <sequence>
+          <element name="AddressName" nillable="true" type="string" />
+          <element name="Line1" nillable="false" type="string" />
+          <element name="Line2" nillable="false" type="string" minOccurs="0" />
+          <element name="Line3" nillable="false" type="string" minOccurs="0" />
+          <element name="City" nillable="false" type="string" />
+          <element name="State" nillable="false" type="string" minOccurs="0" />
+          <element name="Postcode" nillable="false" type="string" />
+          <element name="Country" nillable="false" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="Agent">
+        <sequence>
+          <element name="id" type="string" nillable="false" />
+          <element name="firstName" type="string" nillable="false" />
+          <element name="surname" type="string" nillable="false" />
+        </sequence>
+      </complexType>
+      <simpleType name="HealthStatusDetailNeeded">
+         <annotation>
+            <documentation>Based on its enum values, the detail of the response for faregate health status is decided.</documentation>
+         </annotation>
+         <restriction base="xsd:string">
+            <enumeration value="Full"/>
+            <enumeration value="General"/>
+            <enumeration value="Memory"/>
+            <enumeration value="Thread"/>
+            <enumeration value="CircuitBreaker"/>
+         </restriction>
+      </simpleType>
+      <complexType name="HealthStatus">
+        <annotation>
+          <documentation>A detailed health status of Faregate.</documentation>
+        </annotation>
+        <sequence>
+          <element name="fareGateCharacteristics" type="air:FareGateCharacteristics" />
+          <element name="memoryStatus" type="air:MemoryStatus" />
+          <element name="threadStatus" type="air:ThreadStatus" />
+          <element name="circuitBreakerStatuses" type="air:CircuitBreakerStatus" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="FareGateCharacteristics">
+        <sequence>
+          <element name="version" type="xsd:string" />
+          <element name="serverName" type="xsd:string" />
+          <element name="startTime" type="xsd:string" />
+        </sequence>
+      </complexType>
+      <complexType name="MemoryStatus">
+        <annotation>
+          <documentation>Memory status for Faregate.</documentation>
+        </annotation>
+        <sequence>
+          <element name="maxMemory" type="xsd:long" />
+          <element name="totalMemory" type="xsd:long" />
+          <element name="usedMemory"  type="xsd:long"/>
+          <element name="freeMemory" type="xsd:long" />
+        </sequence>
+      </complexType>
+      <complexType name="ThreadStatus">
+        <annotation>
+          <documentation>Thread status for Faregate.</documentation>
+        </annotation>
+        <sequence>
+          <element name="activeThreadNumber" type="xsd:integer" />
+        </sequence>
+      </complexType>
+      <complexType name="DatabaseStatus">
+        <annotation>
+          <documentation>Database status for Faregate.</documentation>
+        </annotation>
+        <sequence>
+          <element name="activeConnectionNumber" type="xsd:integer" />
+        </sequence>
+      </complexType>
+      <complexType name="CircuitBreakerStatus">
+        <annotation>
+          <documentation> Circuit Breaker open or close status for each of Faregate services.</documentation>
+        </annotation>
+        <sequence>
+          <element name="serviceName" type="xsd:string" />
+          <element name="status" type="xsd:string" />
+          <element name="circuitOpenSince" type="xsd:string" />
+        </sequence>
+      </complexType>
+      <complexType name="Confirmation">
+        <annotation>
+          <documentation>A confirmation record of a booking.</documentation>
+        </annotation>
+        <sequence>
+          <element name="reservation" nillable="false" type="air:Reservation" minOccurs="0" maxOccurs="1" />
+          <element name="clientReservation" nillable="false" type="air:Reservation" minOccurs="0" maxOccurs="1" />
+          <element name="outboundReservation" nillable="false" type="air:Reservation" minOccurs="0" maxOccurs="1" />
+          <element name="inboundReservation" nillable="false" type="air:Reservation" minOccurs="0" maxOccurs="1" />
+          <element name="status" nillable="false" type="air:ConfirmationStatus" minOccurs="0" maxOccurs="1" />
+          <element name="message" nillable="false" type="string" minOccurs="0" maxOccurs="1" />
+          <element name="outboundFareSummary" nillable="false" type="air:FareSummary" minOccurs="0" maxOccurs="1" />
+          <element name="inboundFareSummary" nillable="false" type="air:FareSummary" minOccurs="0" maxOccurs="1" />
+          <element name="travellers" nillable="false" type="impl:Traveller" minOccurs="0" maxOccurs="unbounded" />
+          <element name="outboundFlight" nillable="false" type="air:Flight" minOccurs="0" maxOccurs="1" />
+          <element name="inboundFlight" nillable="false" type="air:Flight" minOccurs="0" maxOccurs="1" />
+          <element name="ticket" nillable="false" type="air:Ticket" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="Ticket">
+        <annotation>
+          <documentation>Ticket Information for a booking.</documentation>
+        </annotation>
+        <sequence>
+          <element name="status" type="air:TicketStatus" />
+        </sequence>
+        <attribute name="sequenceNumber" type="int" use="optional" />
+        <attribute name="ticketNumber" type="string" />
+        <attribute name="airlineNumber" type="string" />
+      </complexType>
+      <complexType name="TicketStatus">
+        <annotation>
+          <documentation>The status of the Ticket.</documentation>
+        </annotation>
+        <attribute name="type" type="air:TicketStatusType" />
+        <attribute name="code" type="air:TicketStatusCode" use="optional" />
+      </complexType>
+      <simpleType name="TicketStatusType">
+        <annotation>
+          <documentation>The generalised type of status for a Ticket.</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="ok" />
+          <enumeration value="void" />
+          <enumeration value="unvoid" />
+          <enumeration value="exchange" />
+          <enumeration value="refund" />
+        </restriction>
+      </simpleType>
+      <simpleType name="TicketStatusCode">
+        <annotation>
+          <documentation> The status code for a Ticket. All known codes are A-Z with 2 characters, but keeping
+            specification open just in case.</documentation>
+        </annotation>
+        <restriction base="string">
+          <pattern value="[0-9A-Z]{1,4}" />
+        </restriction>
+      </simpleType>
+      <simpleType name="KnownTicketStatusCode">
+        <annotation>
+          <documentation>Specific status codes for a Ticket.</documentation>
+        </annotation>
+        <restriction base="air:TicketStatusCode">
+          <enumeration value="VA">
+            <annotation>
+              <documentation>Void by agent</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="VR">
+            <annotation>
+              <documentation>Void by retransmission</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="VN">
+            <annotation>
+              <documentation>Void by Electronic Ticket, no response from vendor, or void of a test ticket
+              </documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="VU">
+            <annotation>
+              <documentation>Unvoid by agent</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="XA">
+            <annotation>
+              <documentation>Exchange with additional collection</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="XR">
+            <annotation>
+              <documentation>Exchange with refund</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="XE">
+            <annotation>
+              <documentation>Exchange with even exchange</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="RA">
+            <annotation>
+              <documentation>TRA refund</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="RE">
+            <annotation>
+              <documentation>TRNE refund</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="RF">
+            <annotation>
+              <documentation>TRN refund</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="RC">
+            <annotation>
+              <documentation>TRNC cancel refund</documentation>
+            </annotation>
+          </enumeration>
+        </restriction>
+      </simpleType>
+      <complexType name="FareSummary">
+        <annotation>
+          <documentation>A summation of all the fares booked on a particular segment.</documentation>
+        </annotation>
+        <sequence>
+          <element name="base" nillable="false" type="air:Currency">
+            <annotation>
+              <documentation>Note: Doesnt include fees or taxes</documentation>
+            </annotation>
+          </element>
+          <element name="fees" nillable="false" type="air:Fees" />
+          <element name="taxes" nillable="false" type="air:Taxes" />
+        </sequence>
+        <attribute name="type" type="air:JourneyType" use="optional" />
+      </complexType>
+      <complexType name="Taxes">
+        <annotation>
+          <documentation>A list of taxes, including summary.</documentation>
+        </annotation>
+        <sequence>
+          <element name="total" nillable="false" type="air:Currency" />
+          <element name="taxes" nillable="false" type="air:Tax" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="Fees">
+        <annotation>
+          <documentation>A list of fees, including summary.</documentation>
+        </annotation>
+        <sequence>
+          <element name="total" nillable="false" type="air:Currency" />
+          <element name="fees" nillable="false" type="air:Fee" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="Charge" abstract="true">
+        <annotation>
+          <documentation>A charge.</documentation>
+        </annotation>
+        <sequence>
+          <element name="type" nillable="false" type="air:ChargeType" />
+          <element name="code" nillable="false" type="string" />
+          <element name="cost" nillable="false" type="air:Currency" />
+          <element name="details" nillable="true" type="string" minOccurs="0" />
+        </sequence>
+      </complexType>
+      <complexType name="Fee">
+        <annotation>
+          <documentation>A fee is a non-tax charge.</documentation>
+        </annotation>
+        <complexContent>
+          <restriction base="air:Charge">
+            <sequence>
+              <element name="type" nillable="false" type="air:ChargeType" fixed="FEE" />
+              <element name="code" nillable="false" type="air:FeeCode" />
+              <element name="cost" nillable="false" type="air:Currency" />
+              <element name="details" nillable="true" type="string" minOccurs="0" />
+            </sequence>
+          </restriction>
+        </complexContent>
+      </complexType>
+      <complexType name="Tax">
+        <annotation>
+          <documentation>A tax charge.</documentation>
+        </annotation>
+        <complexContent>
+          <restriction base="air:Charge">
+            <sequence>
+              <element name="type" nillable="false" type="air:ChargeType" fixed="TAX" />
+              <element name="code" nillable="false" type="air:TaxCode" />
+              <element name="cost" nillable="false" type="air:Currency" />
+              <element name="details" nillable="true" type="string" minOccurs="0" />
+            </sequence>
+          </restriction>
+        </complexContent>
+      </complexType>
+      <simpleType name="ChargeType">
+        <annotation>
+          <documentation>The type of charge, fee or tax</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="FEE" />
+          <enumeration value="TAX" />
+          <!--
+            FarePrice The price of the base fare and is the basis of the price calculation Discount A discount given on
+            a fare price IncludedTravelFee Travel Fee that is already encluded in the base fare price IncludedTax Tax
+            that is already encluded in the base fare price TravelFee Travel Fee that gets added to a given fare price
+            Tax Tax that gets added to a given fare price ServiceCharge charge for a service eg. a diabetic meal
+            PromotionDiscount A discount given for a promotion ConnectionAdjustmentAmount An extra amount added to the
+            fare when sum-of-sector faring is used AddOnServicePrice The base price of the add-on service
+            IncludedAddOnServiceFee A fee that is included in the base price of an add-on service AddOnServiceFee A fee
+            that gets added to an add-on service Calculated a service charge entry that is not stored in the database
+            but calculated to be returned to the client. Note A Service Charge that is stored, but not used in
+            calculations AddOnServiceMarkupDenotes markup for add on services Unmapped No API mappping defined
+          -->
+        </restriction>
+      </simpleType>
+      <simpleType name="ChargeCode">
+        <annotation>
+          <documentation>The code assigned to a charge, fee or tax</documentation>
+        </annotation>
+        <restriction base="string">
+          <minLength value="1" />
+        </restriction>
+      </simpleType>
+      <simpleType name="FeeCode">
+        <restriction base="air:ChargeCode">
+          <enumeration value="APT" /><!-- Airport Charges-->
+          <enumeration value="CC" /><!-- Credit Card Fee -->
+          <enumeration value="FSC" /><!-- Fuel Surcharge -->
+          <enumeration value="GSL" /><!-- Global security charge
+-->
+          <enumeration value="DEP" /><!-- Departure tax -->
+          <enumeration value="BGNO" /><!-- Baggage Fee -->
+          <enumeration value="NBG1" /><!-- 1 paid bag baggage fee -->
+          <enumeration value="BX20" /><!-- Baggage Fee -->
+          <enumeration value="BG23" /><!-- Baggage Fee -->
+          <enumeration value="BX23" /><!-- Baggage Fee -->
+          <enumeration value="BX32" /><!-- Baggage Fee -->
+          <enumeration value="BX69" /><!-- Baggage Fee -->
+          <enumeration value="UNKNOWN" /><!-- everything else -->
+          <!--  DJ New Skies  -->
+          <enumeration value="ABRM" /><!-- 	Blue Room Membership
+-->
+          <enumeration value="APPA" /><!--	Australian Passenger Movement Tax-->
+          <enumeration value="AU" /><!--		Passenger Movement Charge-->
+          <enumeration value="AURF" /><!--	Passenger Movement Charge Refund (Aust)-->
+          <enumeration value="AVI1" /><!--	Pet In Hold 0-20 kg-->
+          <enumeration value="AVI1X" /><!--	Pet in Hold-->
+          <enumeration value="AVI2" /><!--	Pet In Hold 21-30 kg-->
+          <enumeration value="AVI2X" /><!--	Pet In Hold-->
+          <enumeration value="AVI3" /><!--	Pet In Hold DOM NZ-->
+          <enumeration value="AVIF" /><!--	Pet Transport Fee - Freight-->
+          <enumeration value="AVIL" /><!--	Pet in Hold Large 21-30kgs-->
+          <enumeration value="AVIM" /><!--	Pet in Hold Medium 11-20kgs-->
+          <enumeration value="AVIN" /><!--	Pet In Hold-->
+          <enumeration value="AVIS" /><!--	Pet In Hold - Small-->
+          <enumeration value="AVISS" /><!--	Pet in Hold Small 0-10kgs-->
+          <enumeration value="AVIX" /><!--	Pet In Hold-->
+          <enumeration value="AVIXL" /><!--	Pet in Hold Extra Large 30+ kgs up to 65kgs-->
+          <enumeration value="AVNZ" /><!--	Pet Transport Fee-->
+          <enumeration value="BAG" /><!--	    Airport Baggage Fee-->
+          <enumeration value="BGATE" /><!--	Paid Baggage Boarding Gate-->
+          <enumeration value="BIKE" /><!--	Bike Box Fee-->
+          <enumeration value="BPC" /><!--		Blue + Closed All-->
+          <enumeration value="BPF" /><!--		Blue Plus Fee-->
+          <enumeration value="BZL" /><!--		Blue Zone - LONG-->
+          <enumeration value="BZLX" /><!--	Blue Zone - LONG-->
+          <enumeration value="BZM" /><!--		Blue Zone - MEDIUM-->
+          <enumeration value="BZMX" /><!--	Blue Zone - MEDIUM-->
+          <enumeration value="BZNDX" /><!--	Blue Zone Deviant Fee
+-->
+          <enumeration value="BZS" /><!--		Blue Zone - SHORT-->
+          <enumeration value="BZSX" /><!--	Blue Zone - SHORT-->
+          <enumeration value="CCDJ" /><!--	Credit Card Surcharge-->
+          <enumeration value="CCK" /><!--		Airport Departure Tax-->
+          <enumeration value="CE" /><!--		Domestic Security Screening Levy (NZ)-->
+          <enumeration value="CHG" /><!--		Change Fee-->
+          <enumeration value="CHGGST" /><!--	GST on charges-->
+          <enumeration value="CKBAG" /><!--	Paid Baggage Check-in Counter-->
+          <enumeration value="CXL" /><!--		Cancel Fee -->
+          <enumeration value="DENY" /><!--	Deny Board Fee-->
+          <enumeration value="DEPREV" /><!--	Group Deposit Spoilage Fee-->
+          <enumeration value="EXAB" /><!--	Excess Baggage -->
+          <enumeration value="EXP" /><!--		Express Postage-->
+          <enumeration value="EXPOM" /><!--	Excess Baggage PNG-->
+          <enumeration value="EY" /><!--		Airport Departure Tax-->
+          <enumeration value="EZ" /><!--		Airport Security Charge-->
+          <enumeration value="FA" /><!--		Airport Development Charge-->
+          <enumeration value="FBTD" /><!--	Interline Fee-->
+          <enumeration value="FOR" /><!--		Forfeit Fee-->
+          <enumeration value="FORF" /><!--	Forfeit Fee-->
+          <enumeration value="FR" /><!--		Airport Tax -->
+          <enumeration value="GC" /><!--		Terminal Facility Charge-->
+          <enumeration value="GCCBA" /><!--	GCC Baggage Surcharge-->
+          <enumeration value="GCCS" /><!--	GCC Surcharge-->
+          <enumeration value="GCCSWO" /><!--	GCC Surcharge Write-off-->
+          <enumeration value="GIFT" /><!--	Gift Voucher Postage Express-->
+          <enumeration value="GRBG" /><!--	Group Baggage-->
+          <enumeration value="GSF" /><!--		GSF inserted by conversion-->
+          <enumeration value="GSFR" /><!--	Global Security Fee Refund-->
+          <enumeration value="GSPF" /><!--	Spoilage for Groups-->
+          <enumeration value="GSR" /><!--		Global Security Fee Refund-->
+          <enumeration value="GUEST" /><!--	Guest Relations Fee-->
+          <enumeration value="GUESTC" /><!--	Guest Relations Compensation Fee-->
+          <enumeration value="GUESTR" /><!--	Guest Relations Compensation Fee-->
+          <enumeration value="IA" /><!--		Passenger Security Charge-->
+          <enumeration value="IARF" /><!--	Passenger Security Charge Refund (NZ)-->
+          <enumeration value="INS" /><!--		Insurance-->
+          <enumeration value="KK" /><!--		Passenger Service Charge-->
+          <enumeration value="LH" /><!--		Airport Departure Tax-->
+          <enumeration value="LMC" /><!--		Last Minute Change-->
+          <enumeration value="LMCC" /><!--	Loyalty MCC Fee-->
+          <enumeration value="LNGF" /><!--	Loyalty Service Fee-->
+          <enumeration value="LOUN" /><!--	Lounge Fee-Single Entry Fee-->
+          <enumeration value="LPAX" /><!--	Loyalty Passenger-->
+          <enumeration value="LSEF" /><!--	Lounge Fee - Single Entry-->
+          <enumeration value="MEDA" /><!--	Medical Certificate Fee
+-->
+          <enumeration value="MY" /><!--		Passenger Service Charge-->
+          <enumeration value="NC" /><!--		Passenger Service Charge-->
+          <enumeration value="NF" /><!--		Departure Tax-->
+          <enumeration value="NOS" /><!--		No Show fee-->
+          <enumeration value="NOSHOW" /><!--	No Show Forfeit Fee-->
+          <enumeration value="NX" /><!--		Airport Security Charge-->
+          <enumeration value="NZ" /><!--		Goods and ServicesTax-->
+          <enumeration value="NZRF" /><!--	GST Refund (NZ)-->
+          <enumeration value="PBGD" /><!--	Prepaid Checked Baggage-->
+          <enumeration value="PBGDX" /><!--	Baggage-Prepaid Checked-->
+          <enumeration value="PBNZ" /><!--	PBNZ inserted by conversion-->
+          <enumeration value="PEUL" /><!--	PE Upgrade Fee - Long-->
+          <enumeration value="PEUM" /><!--	PE Upgrade Fee - Medium-->
+          <enumeration value="PEUS" /><!--	PE Upgrade Fee - Short-->
+          <enumeration value="PFEE" /><!--	Staff Travel Phone Booking Fee-->
+          <enumeration value="PG" /><!--		International Departure Tax-->
+          <enumeration value="PMC" /><!--		Prior Month Cancel-->
+          <enumeration value="QR" /><!--		Domestic Head Tax-->
+          <enumeration value="REFYW" /><!--	Corp Plus & PE Admin Refund Fee-->
+          <enumeration value="REP" /><!--		Reprotect Fee-->
+          <enumeration value="RFD" /><!--		Corp Plus & PE Admin Fee-->
+          <enumeration value="SB" /><!--		Sales Tax -->
+          <enumeration value="SEAT" /><!--	Seat Fee-->
+          <enumeration value="SEATSE" /><!--	Seat Selection Fee-->
+          <enumeration value="SPF" /><!--		Spoilage Fee-->
+          <enumeration value="SPOIL" /><!--	Spoilage Fee-->
+          <enumeration value="SPONS" /><!--	Sponsorship Fee-->
+          <enumeration value="STBY" /><!--	Standby Fee-->
+          <enumeration value="STML" /><!--	Food & Beverage Prepaid-->
+          <enumeration value="STMLX" /><!--	Food & Beverage Prepaid-->
+          <enumeration value="STPH" /><!--	Staff Travel Phone Booking Fee-->
+          <enumeration value="TO" /><!--		Departure and Security Charge
+-->
+          <enumeration value="TR" /><!--		Sales Tax-->
+          <enumeration value="TRANSL" /><!--	Transit Lounge Transfer Fee-->
+          <enumeration value="TS" /><!--		Passenger Service Charge-->
+          <enumeration value="UMNR" /><!--	Unaccompanied Minor-->
+          <enumeration value="UMNRX" /><!--	Unaccompanied Minor-->
+          <enumeration value="UO" /><!--		Goods and Services Tax-->
+          <enumeration value="UORF" /><!--	GST Refund (Aust)-->
+          <enumeration value="VU" /><!--		International Departure Fee-->
+          <enumeration value="WG" /><!--		Baggage Screening Charge-->
+          <enumeration value="WGRF" /><!--	Global Security Fee Refund-->
+          <enumeration value="WX" /><!--		Passenger Domestic Levy (NZ)-->
+          <enumeration value="WY" /><!--		Passenger Service Charge-->
+          <enumeration value="XCH" /><!--		Passenger Service Charge-->
+          <enumeration value="YQ" /><!--		Fuel Surcharge-->
+          <enumeration value="YWRF" /><!--	xCorp Plus & PE Admin Refund Fee-->
+          
+          <!-- JQ Asia Fee Codes -->
+          <enumeration value="INF" /><!--   Infant Fee -->
+        </restriction>
+      </simpleType>
+      <simpleType name="TaxCode">
+        <restriction base="air:ChargeCode">
+          <enumeration value="CHGGST" /><!-- GST on Charges -->
+          <enumeration value="CCGST" /><!-- GST on Credit card fee
+-->
+          <enumeration value="GST" /> <!-- Goods + Services Tax -->
+          <enumeration value="GSTF" /> <!-- Goods + Services Tax on Baggage -->
+          <enumeration value="GSTBF" /><!-- DJ new skies API - GST on Fare
+-->
+          <enumeration value="GSTR" /><!--  GST Refund AU & NZ-->
+          <enumeration value="GSTTF" /><!-- GST on Travel Fees-->
+          <enumeration value="UNKNOWN" /><!-- everything else -->
+        </restriction>
+      </simpleType>
+      <simpleType name="ConfirmationStatus">
+        <annotation>
+          <documentation> The status of a booking.</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="Unconfirmed">
+            <annotation>
+              <documentation> Unconfirmed bookings hold neither seats or money.</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="OK">
+            <annotation>
+              <documentation> Functionally identical to 'Booked'. Also, likely to be removed at a later date.
+              </documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="Pending" />
+          <enumeration value="Timeout" />
+          <enumeration value="Declined" />
+          <enumeration value="Sold Out" />
+          <enumeration value="Cancelled" />
+          <enumeration value="Error" />
+          <enumeration value="Ticketed">
+            <annotation>
+              <documentation> A booking that has been booked and ticketed.</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="Booked">
+            <annotation>
+              <documentation> A booking that has been booked, but not ticketed.</documentation>
+            </annotation>
+          </enumeration>
+        </restriction>
+      </simpleType>
+      <simpleType name="ConfirmationSection">
+        <annotation>
+          <documentation> States which sections to include in a Confirmation.</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="tickets" />
+          <!--
+            <enumeration value="legs" /> <enumeration value="fares" /> <enumeration value="fareSummaries" />
+          -->
+        </restriction>
+      </simpleType>
+      <complexType name="RetrieveBookingsRequest">
+        <annotation>
+          <documentation> Retrieve Booking information for a list of Reservation IDs (PNRs). Optionally only retrieve
+            what is required. If no inclusions provided, includes everything in the Retrieve Bookings Response
+            Confirmation List. Only retrieves PNRs for one Provider (Airline Source System) in one request. If the
+            reportDate is not provided and there are no reservations, the report is retrieved for the previous day.
+          </documentation>
+        </annotation>
+        <sequence>
+          <element name="reportDate" type="date" minOccurs="0" maxOccurs="1" nillable="false" />
+          <element name="reservation" type="air:Reservation" minOccurs="0" maxOccurs="unbounded" nillable="false" />
+          <element name="inclusion" type="air:ConfirmationSection" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+          <element name="provider" type="air:Airline" nillable="false" />
+        </sequence>
+      </complexType>
+      <complexType name="Reservation">
+        <annotation>
+          <documentation> An identifier for a reservation.</documentation>
+        </annotation>
+        <attribute name="reservationId" type="string" use="optional">
+          <annotation>
+            <documentation> The identifier for the reservation. Also called the PNR or "reloc" by airline source
+              systems. May not exist if FareGate cannot find the PNR in the airline source system.</documentation>
+          </annotation>
+        </attribute>
+        <attribute name="pseudo" type="string" use="optional">
+          <annotation>
+            <documentation> This is the pseudo that the reservation was booked in, and does not necessarily have to be
+              the pseudo of the provider. May not exist if FareGate cannot find the pseudo in the airline source system.
+            </documentation>
+          </annotation>
+        </attribute>
+      </complexType>
+      <complexType name="RetrieveBookingsResponse">
+        <annotation>
+          Confirmation responses for a list of Reservation IDs (PNRs).
+        </annotation>
+        <sequence>
+          <element name="status" nillable="false" minOccurs="1" maxOccurs="1" type="air:ResponseStatus" />
+          <element name="confirmation" type="air:Confirmation" minOccurs="1" maxOccurs="unbounded" nillable="false" />
+        </sequence>
+      </complexType>
+      <complexType name="Enquiry">
+        <sequence>
+          <element name="departureAirport" nillable="false" type="string" />
+          <element name="departureDate" nillable="false" type="string" />
+          <element name="departureDateEnd" nillable="true" type="string" />
+          <element name="arrivalAirport" nillable="false" type="string" />
+          <element name="returnDate" nillable="true" type="string" />
+          <element name="returnDateEnd" nillable="true" type="string" />
+          <element name="returnFlight" type="boolean" />
+          <element name="numberAdults" nillable="false" type="int" />
+          <element name="numberChildren" nillable="false" type="int" />
+          <element name="numberInfants" nillable="false" type="int" />
+          <element name="airlines" nillable="false" type="air:AirlineDetails" maxOccurs="unbounded" />
+          <element name="currencyCode" nillable="false" type="air:CurrencyCode" />
+          <element name="cabinClass" nillable="true" type="air:CabinClass" minOccurs="0" maxOccurs="1" />
+        </sequence>
+      </complexType>
+      <complexType name="FareRuleItem">
+        <sequence>
+          <element name="fareRuleItemName" nillable="false" type="string" minOccurs="1" maxOccurs="1" />
+          <element name="fareRuleItemValues" nillable="false" type="string" minOccurs="0"  maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="FareRule">
+        <annotation>
+            <documentation> Retrieve Fare Rules for a varied list of input criteria - namely AirlineCode, travelDepartureDate,
+              fareBasisCode and class code. The AirlineCode and travelDepartureDate are mandatory, the other 2 optional.
+              This will be used by E3 and other systems.
+            </documentation>
+        </annotation>
+        <sequence>
+          <element name="fareRuleName" nillable="false" type="string" minOccurs="1" maxOccurs="1" />
+          <element name="fareRuleItems" nillable="false" type="air:FareRuleItem" minOccurs="0"  maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <complexType name="ApprovedRulesRequest">
+        <annotation>
+          <documentation> Retrieve Fare Rules for a varied list of input criteria - namely AirlineCode, travelDepartureDate,
+              fareBasisCode and class code. The AirlineCode and travelDepartureDate are mandatory, the other 2 optional.
+              This will be used by E3 and other systems.
+          </documentation>
+        </annotation>
+        <sequence>
+            <element name="airlineCode" type="info:AirlineCode" minOccurs="0" maxOccurs="1" />
+            <element name="travelDepartureDate" type="date" minOccurs="0" maxOccurs="1" />
+            <element name="fareBasisCode" type="air:FareBasisCode" minOccurs="0" maxOccurs="1" />
+            <element name="classCode" type="air:FareClass" minOccurs="0" maxOccurs="1" />
+        </sequence>
+      </complexType>
+      <complexType name="ApprovedRulesResponse">
+        <annotation>
+          <documentation> For every Fare Rule returned there is a collection of Fare Rule Items, which in turn
+              have a collection of values associated with them.</documentation>
+        </annotation>
+        <sequence>
+          <element name="status" nillable="false" minOccurs="1" maxOccurs="1" type="air:ResponseStatus" />
+          <element name="fare" nillable="false" minOccurs="0" maxOccurs="1" type="fare:gneFare" />
+          <element name="fareRules" nillable="false" minOccurs="1" maxOccurs="unbounded" type="air:FareRule" />
+        </sequence>
+      </complexType>
+      <simpleType name="CabinClass">
+        <annotation>
+          <documentation>Cabin class</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="economy" />
+          <enumeration value="premium economy" />
+          <enumeration value="business" />
+          <enumeration value="first" />
+          <enumeration value="premium first" />
+        </restriction>
+      </simpleType>
+      <!-- TODO rename to Provider -->
+      <complexType name="Airline">
+        <annotation>
+          <documentation>Provider credentials</documentation>
+        </annotation>
+        <sequence>
+          <element name="agencyPassword" nillable="true" type="string" />
+          <element name="agencyUsername" nillable="true" type="string" />
+          <element name="cashPassword" nillable="true" type="string" />
+          <element name="airlineCode" nillable="false" type="string" />
+          <element name="pseudo" nillable="false" type="string" minOccurs="0" />
+        </sequence>
+      </complexType>
+      <!-- TODO rename to ProviderDetails -->
+      <complexType name="AirlineDetails">
+        <annotation>
+          <documentation> Airline details with the possible inclusion of traveller details used to affect the results of
+            an availability request.</documentation>
+        </annotation>
+        <complexContent>
+          <extension base="air:Airline">
+            <sequence>
+              <element name="membershipDetails" nillable="false" type="impl:MembershipDetails" minOccurs="0"
+                maxOccurs="1" />
+            </sequence>
+          </extension>
+        </complexContent>
+      </complexType>
+      <complexType name="Availability">
+        <sequence>
+          <element name="status" nillable="false" minOccurs="1" maxOccurs="1" type="air:ResponseStatus" />
+          <element name="outboundFlights" nillable="false" minOccurs="0" maxOccurs="unbounded" type="air:AvailableFlight" />
+          <element name="inboundFlights" nillable="false" minOccurs="0" maxOccurs="unbounded" type="air:AvailableFlight" />
+          <element name="timezoneOffset" minOccurs="0" maxOccurs="1" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="ResponseStatus">
+        <annotation>
+          <documentation>The status of an availability response. Returns success INFO message if all is well.
+          </documentation>
+        </annotation>
+        <sequence>
+          <element name="type" type="air:StatusType" nillable="false" />
+          <element name="message" type="air:StatusMessage" nillable="false" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+      </complexType>
+      <simpleType name="StatusType">
+        <annotation>
+          <documentation>Status type</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="INFO" />
+          <enumeration value="OK" />
+          <enumeration value="WARNING" />
+          <enumeration value="ERROR" />
+        </restriction>
+      </simpleType>
+      <complexType name="StatusMessage">
+        <annotation>
+          <documentation>A message pertaining to a Status</documentation>
+        </annotation>
+        <sequence>
+          <element name="provider" type="air:Provider" nillable="false" minOccurs="1" maxOccurs="1" />
+          <element name="text" type="string" nillable="false" minOccurs="1" maxOccurs="1" />
+        </sequence>
+        <attribute name="type" type="air:StatusType" use="required" />
+        <attribute name="code" type="air:StatusCode" use="required" />
+      </complexType>
+      <simpleType name="StatusCode">
+        <annotation>
+          <documentation> Status Code Categories: 1XX=INFORMATION, 2XX=SUCCESS, 3XX=UNSURE (eg. timeout), 4XX=FAILED DUE
+            TO FAREGATE (error from inside FareGate like a NullPointerException), 5XX=FAILED DUE TO PROVIDER (eg. error
+            from an airline)</documentation>
+        </annotation>
+        <restriction base="string">
+          <pattern value="\d{3}"></pattern>
+        </restriction>
+      </simpleType>
+      <!-- TODO move this to impl namespace -->
+      <complexType name="Provider">
+        <annotation>
+          <documentation>The provider or airline that provides responses</documentation>
+        </annotation>
+        <attribute name="productType" type="impl:ProductType" use="optional" />
+        <attribute name="code" type="string" use="required" />
+        <attribute name="name" type="string" use="optional" />
+      </complexType>
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://faregate.flitech.net">
+      <import namespace="http://air.faregate.flitech.net" />
+      <import namespace="http://common.fareinfo.flitech.net" />
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <complexType name="CreditCard">
+        <sequence>
+          <element name="cardNumber" nillable="false" type="string" />
+          <element name="verificationNumber" nillable="true" type="string" />
+          <element name="expiryMonth" nillable="false" type="string" />
+          <element name="expiryYear" nillable="false" type="string" />
+          <element name="holderName" nillable="false" type="string" />
+          <element name="cardType" nillable="false" type="impl:CardType" />
+        </sequence>
+      </complexType>
+      <simpleType name="CardType">
+        <restriction base="string">
+          <enumeration value="MASTERCARD" />
+          <enumeration value="VISA" />
+          <enumeration value="BANKCARD" />
+          <enumeration value="DINERS" />
+          <enumeration value="AMEX" />
+        </restriction>
+      </simpleType>
+      <complexType name="MembershipDetails">
+        <annotation>
+          <documentation> A loosely-defined set of traveller details that may be provided to an availability request,
+            perhaps to alter the results of the availability.</documentation>
+        </annotation>
+        <sequence>
+          <element name="firstName" nillable="false" type="string" minOccurs="0" />
+          <element name="surname" nillable="false" type="string" minOccurs="0" />
+          <element name="title" nillable="false" type="impl:Title" minOccurs="0" />
+          <element name="provider" nillable="false" type="air:Provider" minOccurs="0">
+            <annotation>
+              <documentation>The provider to use this frequent flyer details against. If not specified, the frequent
+                flyer details will be offered to all providers in the booking.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+        <attribute name="productType" type="impl:ProductType" use="optional" />
+        <attribute name="programId" type="string" use="required" />
+        <attribute name="customerId" type="string" use="required" />
+      </complexType>
+      <complexType name="Traveller">
+        <annotation>
+          <documentation>Traveller details used for booking.</documentation>
+        </annotation>
+        <sequence>
+          <element name="companionForInfant" nillable="false" type="int" minOccurs="0">
+            <annotation>
+              <documentation>Traveller number that is the adult companion for this infant. Indexed from 1.
+              </documentation>
+            </annotation>
+          </element>
+          <element name="dob" nillable="true" type="string" />
+          <element name="firstName" nillable="false" type="string" />
+          <element name="surname" nillable="false" type="string" />
+          <element name="title" nillable="false" type="impl:Title" />
+          <element name="type" nillable="false" type="impl:TravellerType" />
+          <element name="outboundOptionGroups" nillable="false" type="air:OptionGroup" maxOccurs="unbounded"
+            minOccurs="0" />
+          <element name="inboundOptionGroups" nillable="false" type="air:OptionGroup" maxOccurs="unbounded"
+            minOccurs="0" />
+          <element name="membershipDetails" nillable="false" type="impl:MembershipDetails" minOccurs="0"
+            maxOccurs="unbounded" />
+          <element name="passport" nillable="false" type="impl:Passport" minOccurs="0" />
+        </sequence>
+      </complexType>
+      <complexType name="Passport">
+        <annotation>
+          <documentation>A passport.</documentation>
+        </annotation>
+        <attribute name="country" type="info:CountryCode" use="required" />
+        <attribute name="number" type="string" use="required" />
+        <attribute name="expiry" type="date" use="required" />
+        <attribute name="issued" type="date" use="optional" />
+      </complexType>
+      <simpleType name="TravellerType">
+        <restriction base="string">
+          <enumeration value="Infant" />
+          <enumeration value="Child" />
+          <enumeration value="Adult" />
+        </restriction>
+      </simpleType>
+      <simpleType name="Title">
+        <restriction base="string">
+          <enumeration value="Mr" />
+          <enumeration value="Mrs" />
+          <enumeration value="Ms" />
+          <enumeration value="Miss" />
+          <enumeration value="Master" />
+        </restriction>
+      </simpleType>
+      <simpleType name="ProductType">
+        <annotation>
+          <documentation>The type of product in broad terms.</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="flight" />
+          <enumeration value="hotel" />
+          <enumeration value="car" />
+          <enumeration value="all" />
+        </restriction>
+      </simpleType>
+      <complexType name="BrokerMessage">
+        <annotation>
+          <documentation> The message of the exception that is thrown by FareGate. May contain a Reservation ID (PNR).
+            Includes a ConfirmationStatus to indicate what type of exception this is.</documentation>
+        </annotation>
+        <sequence>
+          <element name="exceptionMessage" nillable="false" type="impl:ExceptionMessage">
+            <annotation>
+              <documentation>The Exception message details</documentation>
+            </annotation>
+          </element>
+          <element name="reservationId" nillable="true" type="string">
+            <annotation>
+              <documentation>The Reservation ID (PNR) of the context that produced this message.</documentation>
+            </annotation>
+          </element>
+          <element name="status" nillable="true" type="air:ConfirmationStatus">
+            <annotation>
+              <documentation>ConfirmationStatus to indicate what type of exception this is.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </complexType>
+      <simpleType name="ExceptionMessage">
+        <annotation>
+          <documentation>The message of the exception that is thrown by FareGate.</documentation>
+        </annotation>
+        <xsd:restriction base="string" />
+      </simpleType>
+      <element name="BrokerMessage" type="impl:BrokerMessage" />
+      <element name="TimeoutMessage" type="impl:ExceptionMessage" />
+      <element name="ValidationMessage" type="impl:ExceptionMessage" />
+      <element name="LoginMessage" type="impl:ExceptionMessage" />
+      <element name="FilteringMessage" type="impl:ExceptionMessage" />
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://common.fareinfo.flitech.net">
+      <import namespace="http://air.faregate.flitech.net" />
+      <import namespace="http://faregate.flitech.net" />
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="FareInfoDetails">
+        <xsd:annotation>
+          <xsd:documentation>Request</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="siteCode" type="info:SiteCode" />
+          <xsd:element name="journey" type="info:Journey" />
+          <xsd:element name="fareType" type="info:FareType" />
+          <xsd:element name="cabinClass" type="info:CabinClass" />
+          <xsd:element name="ptcs" type="info:PassengerTypeCodes" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+        <xsd:attribute name="currency" type="info:CurrencyCode" />
+      </xsd:complexType>
+      <xsd:complexType name="FareInfoResponse">
+        <xsd:annotation>
+          <xsd:documentation>Response</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="status" type="info:ResponseStatus" />
+          <xsd:element name="journey" type="info:Journey" />
+          <xsd:element name="fareType" type="info:FareType" />
+          <xsd:element name="cabinClass" type="info:CabinClass" />
+          <xsd:element name="fare" type="info:Fare" nillable="true" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="FareType">
+        <xsd:annotation>
+          <xsd:documentation>Fare type.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="MAINSTREAM" />
+          <xsd:enumeration value="WHOLESALE" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SiteCode">
+        <xsd:annotation>
+          <xsd:documentation>Site Codes</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ET" />
+          <xsd:enumeration value="FC" />
+          <xsd:enumeration value="MAS" />
+          <xsd:enumeration value="SF" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CabinClass">
+        <xsd:annotation>
+          <xsd:documentation>Cabin class</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="economy" />
+          <xsd:enumeration value="premium economy" />
+          <xsd:enumeration value="business" />
+          <xsd:enumeration value="first" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StatusType">
+        <xsd:annotation>
+          <xsd:documentation>Status type</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <!--
+            Change order to OK, WARNING, ERROR, which means ERROR gets a higher int value than WARNING?
+            PassThroughStatusFilter, eg, uses Math.max() to pick the status type with the highest int value, which
+            should probably be ERROR.
+          -->
+          <xsd:enumeration value="OK" />
+          <xsd:enumeration value="ERROR" />
+          <xsd:enumeration value="WARNING" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StatusCode">
+        <xsd:annotation>
+          <xsd:documentation>Status code</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="01" />
+          <xsd:enumeration value="02" />
+          <xsd:enumeration value="03" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="StatusMessage">
+        <xsd:annotation>
+          <xsd:documentation>A message pertaining to a ResponseStatus</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="text" type="xsd:string" />
+        </xsd:sequence>
+        <xsd:attribute name="type" type="info:StatusType" use="optional" />
+        <xsd:attribute name="code" type="info:StatusCode" use="optional" />
+      </xsd:complexType>
+      <xsd:complexType name="ResponseStatus">
+        <xsd:annotation>
+          <xsd:documentation>The status of a response.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="type" type="info:StatusType" />
+          <xsd:element name="message" type="info:StatusMessage" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Airline">
+        <xsd:annotation>
+          <xsd:documentation>Representation of an airline.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="code" type="info:AirlineCode" />
+          <xsd:element name="name" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="AirlineCode">
+        <xsd:annotation>
+          <xsd:documentation>IATA airline code</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[A-Z]{2}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Airport">
+        <xsd:annotation>
+          <xsd:documentation>IATA airport/city code</xsd:documentation>
+        </xsd:annotation>
+        <sequence>
+          <element name="city" minOccurs="0" nillable="false" type="info:City" />
+        </sequence>
+        <xsd:attribute name="code" type="info:CityCode" />
+        <xsd:attribute name="name" type="xsd:string" use="optional" />
+      </xsd:complexType>
+      <xsd:complexType name="City">
+        <xsd:annotation>
+          <xsd:documentation>IATA city/airport code</xsd:documentation>
+        </xsd:annotation>
+        <sequence>
+          <element name="country" minOccurs="0" nillable="false" type="info:Country" />
+        </sequence>
+        <xsd:attribute name="code" type="info:CityCode" />
+        <xsd:attribute name="name" type="xsd:string" use="optional" />
+      </xsd:complexType>
+      <xsd:complexType name="Country">
+        <xsd:annotation>
+          <xsd:documentation>ISO 3166-1 alpha-2 country code</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="code" type="info:CountryCode" />
+        <xsd:attribute name="name" type="xsd:string" use="optional" />
+      </xsd:complexType>
+      <xsd:simpleType name="CityCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[A-Z]{3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CountryCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[A-Z]{2}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CurrencyCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[A-Z]{3}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Money">
+        <xsd:annotation>
+          <xsd:documentation>Money</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:decimal">
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="JourneyType">
+        <xsd:annotation>
+          <xsd:documentation>Type of journey.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="one-way" />
+          <xsd:enumeration value="return" />
+          <enumeration value="RW">
+            <annotation>
+              <documentation>Round The World</documentation>
+            </annotation>
+          </enumeration>
+          <enumeration value="CT">
+            <annotation>
+              <documentation>Circle Trip</documentation>
+            </annotation>
+          </enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PreferenceStatus">
+        <xsd:annotation>
+          <xsd:documentation>Preferred is better than normal, which is better than non-preferred.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="preferred" />
+          <xsd:enumeration value="normal" />
+          <xsd:enumeration value="non-preferred" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PassengerTypeCode">
+        <xsd:annotation>
+          <xsd:documentation>Passenger Type Code, eg ADT (Adult), STU (Student), YTH (Youth), SRC (Senior), CMP
+            (companion)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ADT" />
+          <xsd:enumeration value="STU" />
+          <xsd:enumeration value="YTH" />
+          <xsd:enumeration value="SRC" />
+          <xsd:enumeration value="CMP" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="PassengerTypeCodes">
+        <xsd:annotation>
+          List of Passenger Type Codes
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ptc" type="info:PassengerTypeCode" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FarePrice">
+        <xsd:annotation>
+          <xsd:documentation>A monetary amount which includes currency code.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="price" type="info:Money" />
+          <xsd:element name="tax" type="info:Money" minOccurs="0" />
+          <xsd:element name="maximumPrice" type="info:Money" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="currency" type="info:CurrencyCode" />
+        <xsd:attribute name="priceIncludingTax" type="xsd:boolean" default="false" />
+      </xsd:complexType>
+      <xsd:complexType name="Fare">
+        <xsd:annotation>
+          <xsd:documentation>An airline fare.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="airline" type="info:Airline" />
+          <xsd:element name="nett" type="info:FarePrice" />
+          <xsd:element name="creditCardSurcharge" type="info:FarePrice" minOccurs="0" />
+          <xsd:element name="rules" type="xsd:string" minOccurs="0" />
+          <xsd:element name="sku" type="xsd:string" minOccurs="0" />
+          <xsd:element name="url" type="xsd:string" minOccurs="0" />
+          <xsd:element name="travelConstraint" type="info:DateConstraint" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="sellConstraint" type="info:DateConstraint" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="leg" nillable="false" type="info:Leg" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="preferenceStatus" type="info:PreferenceStatus" />
+        <xsd:attribute name="name" type="xsd:string" />
+        <xsd:attribute name="code" type="xsd:string" use="optional" />
+        <xsd:attribute name="advertised" type="xsd:boolean" use="optional" />
+        <xsd:attribute name="src" type="xsd:string" use="optional" />
+        <xsd:attribute name="ptc" type="info:PassengerTypeCode" use="optional" />
+      </xsd:complexType>
+
+      <!--
+				added improved Leg type. FareGate should eventually be using this as
+				well.
+			-->
+      <complexType name="Leg">
+        <sequence>
+          <element name="airline" nillable="false" type="info:Airline" />
+          <element name="operatingAirline" nillable="false" type="info:Airline" minOccurs="0" />
+          <element name="departureAirport" nillable="false" type="info:Airport" />
+          <element name="departureTime" nillable="false" type="string" />
+          <element name="departureDate" nillable="false" type="string" />
+          <element name="departureTerminal" nillable="true" minOccurs="0" type="air:Terminal" />
+          <element name="arrivalAirport" nillable="false" type="info:Airport" />
+          <element name="arrivalTime" nillable="false" type="string" />
+          <element name="arrivalTerminal" nillable="true" minOccurs="0" type="air:Terminal" />
+          <element name="duration" nillable="false" type="int">
+            <annotation>
+              <documentation>Flight duration in minutes</documentation>
+            </annotation>
+          </element>
+          <element name="flightNumber" nillable="false" type="string" />
+          <element name="operatingFlightNumber" nillable="false" type="string" minOccurs="0" />
+          <element name="aircraftEquipType" nillable="false" type="string" minOccurs="0" />
+          <element name="isArrivingLeg" nillable="false" type="boolean" minOccurs="0">
+            <annotation>
+              <documentation>Indicates whether this is the last leg in a sequence of legs making up a single journey.
+                Example 1; in a one-way fare SYD-SIN-LON, SIN-LON would be the arriving leg because its the leg that
+                arrives at the journey arrival point. Example 2; in a return fare SYD-KUL-LON + LON-SIN-SYD, KUL-LON
+                would be the arriving leg.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+        <attribute name="index" type="int" use="optional" />
+      </complexType>
+      <xsd:complexType name="DateConstraint">
+        <xsd:annotation>
+          <xsd:documentation>Restrictions on a Fare</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="from" type="xsd:date" use="optional">
+          <xsd:annotation>
+            <xsd:documentation>Allowed from date (inclusive)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="to" type="xsd:date" use="optional">
+          <xsd:annotation>
+            <xsd:documentation>Allowed to date (inclusive)</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+      <xsd:complexType name="Journey">
+        <xsd:annotation>
+          <xsd:documentation>The data pertaining to part of an itinerary.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="departureCity" type="info:City" />
+          <xsd:element name="departureDate" type="xsd:date" />
+          <xsd:element name="arrivalCity" type="info:City" />
+          <xsd:element name="returnDate" type="xsd:date" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="journeyType" type="info:JourneyType" />
+      </xsd:complexType>
+      <xsd:complexType name="AirportListResponse">
+        <xsd:annotation>
+          <xsd:documentation>Available airports for the service response</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="status" type="info:ResponseStatus" />
+          <xsd:element name="airport" type="info:Airport" nillable="false" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fares.flitech.net">
+      <import namespace="http://air.faregate.flitech.net" />
+      <import namespace="http://faregate.flitech.net" />
+      <import namespace="http://common.fareinfo.flitech.net" />
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <complexType name="LineOfText">
+        <simpleContent>
+          <extension base="string">
+            <attribute name="type" type="fare:LineOfTextType" use="optional" default="text" />
+          </extension>
+        </simpleContent>
+      </complexType>
+      <simpleType name="LineOfTextType">
+        <annotation>
+          <documentation>The type of a line of text</documentation>
+        </annotation>
+        <restriction base="string">
+          <enumeration value="heading" />
+          <enumeration value="text" />
+        </restriction>
+      </simpleType>
+      <complexType name="RulesRequest">
+        <sequence>
+          <xsd:element name="journey" type="info:Journey" />
+          <xsd:element name="cabinClass" type="air:CabinClass" />
+          <xsd:element name="fareType" type="info:FareType" />
+          <xsd:element name="airlineCode" type="info:AirlineCode" minOccurs="0" maxOccurs="3" />
+          <xsd:element name="ptcs" type="info:PassengerTypeCodes" minOccurs="0" />
+          <xsd:element name="airlines" type="air:AirlineDetails" maxOccurs="unbounded" />
+          <xsd:element name="currencyCode" type="info:CurrencyCode" />
+          <xsd:element name="accountCode" type="string" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="fare" type="fare:gneFare"/>
+        </sequence>
+      </complexType>
+      <complexType name="RulesResponse">
+        <sequence>
+          <xsd:element name="status" type="air:ResponseStatus" />
+          <xsd:element name="fare" type="fare:gneFare" minOccurs="0" maxOccurs="1" />
+          <xsd:element name="SummaryNotes" minOccurs="0" maxOccurs="unbounded" type="fare:LineOfText" />
+          <xsd:element name="Details" minOccurs="0" maxOccurs="unbounded" type="fare:LineOfText" />
+          <xsd:element name="DetailedNotes" minOccurs="0" maxOccurs="unbounded" type="fare:LineOfText" />
+          <xsd:element name="Routing" minOccurs="0" maxOccurs="unbounded" type="fare:LineOfText" />
+        </sequence>
+      </complexType>
+      <xsd:complexType name="getFaresRequest">
+        <xsd:annotation>
+          <xsd:documentation>getFares Request</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="journey" type="info:Journey" />
+          <xsd:element name="cabinClass" type="air:CabinClass" />
+          <xsd:element name="fareType" type="info:FareType" />
+          <xsd:element name="airlineCode" type="info:AirlineCode" minOccurs="0" maxOccurs="3" />
+          <xsd:element name="ptcs" type="info:PassengerTypeCodes" minOccurs="0" />
+          <xsd:element name="airlines" type="air:AirlineDetails" maxOccurs="unbounded" />
+          <xsd:element name="currencyCode" type="info:CurrencyCode" />
+          <xsd:element name="accountCode" type="string" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="accountCodeOnly" type="boolean" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getFaresResponse">
+        <xsd:annotation>
+          <xsd:documentation>getFares Response</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="status" type="air:ResponseStatus" />
+          <xsd:element name="journey" type="info:Journey" />
+          <xsd:element name="fareType" type="info:FareType" />
+          <xsd:element name="cabinClass" type="air:CabinClass" />
+          <xsd:element name="fare" type="fare:gneFare" nillable="true" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="FareIndicator">
+        <xsd:annotation>
+          <xsd:documentation>Fare information indicator.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="APF" />
+          <xsd:enumeration value="PUBLISHED" />
+          <xsd:enumeration value="PRIVATE" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="gneFare">
+        <xsd:annotation>
+          <xsd:documentation>An airline fare for GNE.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="airline" type="info:Airline" />
+          <xsd:element name="price" type="info:FarePrice" />
+          <xsd:element name="fareBasis" type="string" />
+          <xsd:element name="fareClass" type="air:FareClass" />
+          <xsd:element name="fareInd" type="fare:FareIndicator" />
+          <xsd:element name="seasons" type="string" />
+          <xsd:element name="validity" type="string" />
+          <xsd:element name="mileOrRoute" type="fare:mileOrRoute" />
+          <xsd:element name="globalInd" nillable="true" type="string" />
+          <xsd:element name="dateTimeRest" type="boolean" />
+          <xsd:element name="advOrInstant" type="boolean" />
+        </xsd:sequence>
+        <xsd:attribute name="uniqueKey" type="xsd:string"/>
+        <xsd:attribute name="name" type="xsd:string" use="optional" />
+        <xsd:attribute name="accountCode" type="xsd:string" use="optional" />
+        <xsd:attribute name="ptc" type="xsd:string" use="optional" />
+      </xsd:complexType>
+      <xsd:simpleType name="mileOrRoute">
+        <xsd:annotation>
+          <xsd:documentation>Mileage or route indicator, eg M (mileage), R (route), MR (mileage and route restrictions
+            apply)</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="M" />
+          <xsd:enumeration value="R" />
+          <xsd:enumeration value="MR" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="bookFlightRequest">
+    <wsdl:part name="booking" type="air:Booking" />
+  </wsdl:message>
+  <wsdl:message name="getAvailabilityRequest">
+    <wsdl:part name="enquiry" type="air:Enquiry" />
+  </wsdl:message>
+  <wsdl:message name="cancelBookingRequest">
+    <wsdl:part name="request" type="air:CancelBookingRequest" />
+  </wsdl:message>
+  <wsdl:message name="cancelBookingResponse">
+    <wsdl:part name="response" type="air:CancelBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRulesRequest">
+    <wsdl:part name="request" type="fare:RulesRequest" />
+  </wsdl:message>
+  <wsdl:message name="getRulesResponse">
+    <wsdl:part name="response" type="fare:RulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getApprovedRulesRequest">
+    <wsdl:part name="request" type="air:ApprovedRulesRequest" />
+  </wsdl:message>
+  <wsdl:message name="getApprovedRulesResponse">
+    <wsdl:part name="response" type="air:ApprovedRulesResponse" />
+  </wsdl:message>
+  <wsdl:message name="BrokerException">
+    <wsdl:part name="fault" element="impl:BrokerMessage" />
+  </wsdl:message>
+  <wsdl:message name="TimeoutException">
+    <wsdl:part name="fault" element="impl:TimeoutMessage" />
+  </wsdl:message>
+  <wsdl:message name="ValidationException">
+    <wsdl:part name="fault" element="impl:ValidationMessage" />
+  </wsdl:message>
+  <wsdl:message name="LoginException">
+    <wsdl:part name="fault" element="impl:LoginMessage" />
+  </wsdl:message>
+  <wsdl:message name="FilteringException">
+    <wsdl:part name="fault" element="impl:FilteringMessage" />
+  </wsdl:message>
+  <wsdl:message name="getAvailabilityResponse">
+    <wsdl:part name="getAvailabilityReturn" type="air:Availability" />
+  </wsdl:message>
+  <wsdl:message name="checkHealthDetailedResponse">
+    <wsdl:part name="checkHealthDetailedReturn" type="air:HealthStatus" />
+  </wsdl:message>
+  <wsdl:message name="checkHealthDetailedRequest" >
+    <wsdl:part name="detailNeeded" type="air:HealthStatusDetailNeeded" />
+  </wsdl:message>
+  <wsdl:message name="checkHealthResponse">
+    <wsdl:part name="checkHealthReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkHealthRequest" />
+  <wsdl:message name="bookFlightResponse">
+    <wsdl:part name="bookFlightReturn" type="air:Confirmation" />
+  </wsdl:message>
+  <wsdl:message name="quoteFlightRequest">
+    <wsdl:part name="booking" type="air:Booking" />
+  </wsdl:message>
+  <wsdl:message name="quoteFlightResponse">
+    <wsdl:part name="quoteFlightReturn" type="air:Confirmation" />
+  </wsdl:message>
+  <wsdl:message name="retrieveBookingsRequest">
+    <wsdl:part name="request" type="air:RetrieveBookingsRequest" />
+  </wsdl:message>
+  <wsdl:message name="retrieveBookingsResponse">
+    <wsdl:part name="response" type="air:RetrieveBookingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="fareInfoRequest">
+    <wsdl:part name="request" type="info:FareInfoDetails" />
+  </wsdl:message>
+  <wsdl:message name="fareInfoResponse">
+    <wsdl:part name="response" type="info:FareInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAirportsRequest" />
+  <wsdl:message name="getAirportsResponse">
+    <wsdl:part name="airportList" type="info:AirportListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFaresRequest">
+    <wsdl:part name="request" type="fare:getFaresRequest" />
+  </wsdl:message>
+  <wsdl:message name="getFaresResponse">
+    <wsdl:part name="response" type="fare:getFaresResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FareGateBroker">
+    <wsdl:operation name="bookFlight" parameterOrder="booking">
+      <wsdl:input name="bookFlightRequest" message="impl:bookFlightRequest" />
+      <wsdl:output name="bookFlightResponse" message="impl:bookFlightResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelBooking" parameterOrder="request">
+      <wsdl:input name="cancelBookingRequest" message="impl:cancelBookingRequest" />
+      <wsdl:output name="cancelBookingResponse" message="impl:cancelBookingResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getHealthReport">
+      <wsdl:input name="checkHealthDetailedRequest" message="impl:checkHealthDetailedRequest" />
+      <wsdl:output name="checkHealthDetailedResponse" message="impl:checkHealthDetailedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkHealth">
+      <wsdl:input name="checkHealthRequest" message="impl:checkHealthRequest" />
+      <wsdl:output name="checkHealthResponse" message="impl:checkHealthResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getFares">
+      <wsdl:input name="getFaresRequest" message="impl:getFaresRequest" />
+      <wsdl:output name="getFaresResponse" message="impl:getFaresResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+    <wsdl:operation name="fareInfo" parameterOrder="request">
+      <wsdl:input name="fareInfoRequest" message="impl:fareInfoRequest" />
+      <wsdl:output name="fareInfoResponse" message="impl:fareInfoResponse" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAvailability" parameterOrder="enquiry">
+      <wsdl:input name="getAvailabilityRequest" message="impl:getAvailabilityRequest" />
+      <wsdl:output name="getAvailabilityResponse" message="impl:getAvailabilityResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="FilteringException" message="impl:FilteringException" />  
+    </wsdl:operation>
+    <wsdl:operation name="getRules" parameterOrder="request">
+      <wsdl:input name="getRulesRequest" message="impl:getRulesRequest" />
+      <wsdl:output name="getRulesResponse" message="impl:getRulesResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+    <wsdl:operation name="getApprovedRules" parameterOrder="request">
+      <wsdl:input name="getApprovedRulesRequest" message="impl:getApprovedRulesRequest" />
+      <wsdl:output name="getApprovedRulesResponse" message="impl:getApprovedRulesResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+    <wsdl:operation name="quoteFlight" parameterOrder="booking">
+      <wsdl:input name="quoteFlightRequest" message="impl:quoteFlightRequest" />
+      <wsdl:output name="quoteFlightResponse" message="impl:quoteFlightResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAirports">
+      <wsdl:input name="getAirportsRequest" message="impl:getAirportsRequest" />
+      <wsdl:output name="getAirportsResponse" message="impl:getAirportsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="retrieveBookings" parameterOrder="request">
+      <wsdl:input name="retrieveBookingsRequest" message="impl:retrieveBookingsRequest" />
+      <wsdl:output name="retrieveBookingsResponse" message="impl:retrieveBookingsResponse" />
+      <wsdl:fault name="BrokerException" message="impl:BrokerException" />
+      <wsdl:fault name="TimeoutException" message="impl:TimeoutException" />
+      <wsdl:fault name="ValidationException" message="impl:ValidationException" />
+      <wsdl:fault name="LoginException" message="impl:LoginException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FareGateSoapBinding" type="impl:FareGateBroker">
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" wsu:Id="UTOverTransport"
+      xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <wsp:ExactlyOne>
+        <wsp:All>
+          <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+            <wsp:Policy>
+              <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" />
+            </wsp:Policy>
+          </sp:SignedSupportingTokens>
+        </wsp:All>
+      </wsp:ExactlyOne>
+    </wsp:Policy>
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="bookFlight">
+      <soap:operation soapAction="" />
+      <wsdl:input name="bookFlightRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="bookFlightResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFares">
+      <soap:operation soapAction="" />
+      <wsdl:input name="getFaresRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="getFaresResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="fareInfo">
+      <soap:operation soapAction="" />
+      <wsdl:input name="fareInfoRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="fareInfoResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAvailability">
+      <soap:operation soapAction="" />
+      <wsdl:input name="getAvailabilityRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="getAvailabilityResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="FilteringException">
+        <soap:fault name="FilteringException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRules">
+      <soap:operation soapAction="" />
+      <wsdl:input name="getRulesRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="getRulesResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getApprovedRules">
+      <soap:operation soapAction="" />
+      <wsdl:input name="getApprovedRulesRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="getApprovedRulesResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelBooking">
+      <soap:operation soapAction="" />
+      <wsdl:input name="cancelBookingRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="cancelBookingResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkHealth">
+      <soap:operation soapAction="" />
+      <wsdl:input name="checkHealthRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="checkHealthResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHealthReport">
+      <soap:operation soapAction="" />
+      <wsdl:input name="checkHealthDetailedRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="checkHealthDetailedResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="quoteFlight">
+      <soap:operation soapAction="" />
+      <wsdl:input name="quoteFlightRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="quoteFlightResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAirports">
+      <soap:operation soapAction="" />
+      <wsdl:input name="getAirportsRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="getAirportsResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveBookings">
+      <soap:operation soapAction="" />
+      <wsdl:input name="retrieveBookingsRequest">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:input>
+      <wsdl:output name="retrieveBookingsResponse">
+        <soap:body use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:output>
+      <wsdl:fault name="BrokerException">
+        <soap:fault name="BrokerException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="TimeoutException">
+        <soap:fault name="TimeoutException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="ValidationException">
+        <soap:fault name="ValidationException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+      <wsdl:fault name="LoginException">
+        <soap:fault name="LoginException" use="literal" namespace="http://faregate.flitech.net" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FareGate">
+    <wsdl:port name="FareGate" binding="impl:FareGateSoapBinding">
+      <soap:address location="http://localhost:8084/faregate/services/FareGate" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

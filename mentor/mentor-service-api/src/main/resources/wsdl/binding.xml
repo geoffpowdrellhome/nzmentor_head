@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" version="2.0" extensionBindingPrefixes="xjc"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+  <globalBindings>
+    <serializable uid="1" />
+    <xjc:javaType name="org.joda.time.LocalDate" xmlType="xs:date" adapter="net.flitech.integration.jaxb.XSDateAdapter" />
+    <xjc:javaType name="org.joda.time.DateTime" xmlType="xs:dateTime" adapter="net.flitech.integration.jaxb.XSDateTimeAdapter" />
+  </globalBindings>
+</bindings>

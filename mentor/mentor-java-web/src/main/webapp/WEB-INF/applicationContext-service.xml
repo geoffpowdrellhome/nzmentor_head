@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.0.xsd">
+
+    <import resource="jndi-config.xml"/>
+    <!-- @@TODO - include this import below, when I get around to configuring JMS/ActiveMQ
+    <import resource="jms-config.xml"/>-->
+
+    <!-- Load spring config from DAO layer -->
+    <import resource="classpath:service-impl-context.xml"/>
+    <import resource="classpath:dolphin-service-context.xml"/>
+
+    <context:annotation-config/>
+
+    <!--<context:component-scan base-package="net.flitech.faregate.conversion"/>-->
+    <!--<context:component-scan base-package="net.flitech.faregate.filter"/>-->
+    <!--<context:component-scan base-package="net.flitech.faregate.jms"/>    -->
+    <!--<context:component-scan base-package="net.flitech.fareinfo" />-->
+
+
+    <!-- services -->
+    <bean class="com.tzavellas.circuitbreaker.spring.SpringXmlConfigurationSupport"/>
+
+    <bean id="fareGateServiceInterrogatorFactory" class="net.flitech.faregate.impl.FareGateServiceInterrogatorFactory">
+    <constructor-arg>
+      <list>
+        <!--<ref bean="virginService" />-->
+        <!--<ref bean="jetstarService" />-->
+        <!--<ref bean="airAsiaService" />-->
+        <!--<ref bean="galileoService" />-->
+        <ref bean="dolphinService" />
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <!-- these classes deal with providing health status for  faregate-->
+  <bean id="fareGateTimer" class="net.flitech.faregate.model.FareGateTimer"/>
+  <bean id="faregateDoctor" class="net.flitech.faregate.health.impl.FareGateDoctorImpl"/>
+  <bean id="generalDoctor" class="net.flitech.faregate.health.impl.GeneralDoctor">
+      <property name="fareGateTimer"><ref local="fareGateTimer"/></property>
+  </bean>
+
+  <bean id="memoryDoctor" class="net.flitech.faregate.health.impl.MemoryDoctor"/>
+
+
+  <bean id="cktBreakerDoctor" class="net.flitech.faregate.health.impl.CircuitBreakerDoctor">
+      <constructor-arg type="java.util.Map">
+         <map>
+          <!--<entry><key><value>JQ</value></key><ref bean="jetstarSearchBreaker" /></entry>-->
+          <!--<entry><key><value>DJ</value></key><ref bean="virginSearchBreaker" /></entry>-->
+          <!--<entry><key><value>GAL</value></key><ref bean="galileoDomesticSearchBreaker" /></entry>-->
+        </map>
+      </constructor-arg>
+  </bean>
+
+
+  <bean id="threadDoctor" class="net.flitech.faregate.health.impl.ThreadDoctor"/>
+  <bean id="fullDoctor" class="net.flitech.faregate.health.impl.FullDoctor"/>
+  <bean id="doctorFactory" class="net.flitech.faregate.health.impl.DoctorFactory">
+      <property name="general"><ref local="generalDoctor"/></property>
+      <property name="memory"><ref local="memoryDoctor"/></property>
+      <property name="circuitBreaker"><ref local="cktBreakerDoctor"/></property>
+      <property name="thread"><ref local="threadDoctor"/></property>
+      <property name="full"><ref local="fullDoctor"/></property>
+  </bean>
+
+  <util:properties id="fareErrorMessages" location="classpath:fare-error-messages.properties" />
+
+</beans>
