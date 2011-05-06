@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.nz.travel.mentor</groupId>
+    <artifactId>mentor-standards</artifactId>
+    <name>mentor-standards</name>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+
+    <properties>
+        <m2.repo>${user.home}/.m2/repository</m2.repo>
+
+        <!-- dependency versions, add in alphabetical order here -->
+        <apache-commons-lang.version>2.0</apache-commons-lang.version>
+        <apache-commons-io.version>1.3.2</apache-commons-io.version>
+        <backport-util-concurrent.version>3.1</backport-util-concurrent.version>
+       
+        <circuit-breaker.version>0.9.1</circuit-breaker.version>
+        <commons.dbcp.version>1.4</commons.dbcp.version> <!-- used primarily by jetty plugin -->
+        <commons-jxpath.version>1.3</commons-jxpath.version>
+                
+        <commons.lang.version>2.0</commons.lang.version>
+        <commons.logging.log4j.version>1.1.0.jboss</commons.logging.log4j.version>
+        <commons.httpclient.version>3.0.1</commons.httpclient.version>
+        <custom-monkey.version>1.2.0</custom-monkey.version>
+        
+        <cxf.version>2.3.1</cxf.version>
+        <cxf-xjc-ts.version>2.2.9</cxf-xjc-ts.version>        
+        <ehcache-spring-annotations.version>1.1.2</ehcache-spring-annotations.version>
+
+
+        <flex.sdk.version>3.5.0.12683</flex.sdk.version>
+        <flex.datavisualization.version>4.0.0.13555</flex.datavisualization.version>
+        <flex.version>3.3.0.4852</flex.version>
+        <flex-info-archetypes-mojo.version>2.0.3</flex-info-archetypes-mojo.version>
+        <flex-info-compiler-mojo.version>2.0.3</flex-info-compiler-mojo.version>
+        <google-maps-swc.version>1.18</google-maps-swc.version>
+
+        <hamcrest.version>1.1</hamcrest.version>
+
+        <!-- hibernate -->
+        <hibernate-annotations.version>3.5.4-Final</hibernate-annotations.version>
+        <hibernate-commons-annotations.version>3.2.0.Final</hibernate-commons-annotations.version>
+        <hibernate-core.version>3.5.4-Final</hibernate-core.version>
+        <hibernate-entitymanager.version>3.5.4-Final</hibernate-entitymanager.version>
+        <hibernate-ehcache.version>3.5.6-Final</hibernate-ehcache.version>                                 
+        <hibernate-javax-persistence.version>1.0.0.Final</hibernate-javax-persistence.version>
+
+        <hsqldb.version>1.8.0.10</hsqldb.version>
+
+        <java-jdk-version>1.6</java-jdk-version> <!-- jdk -->
+
+        <jaxb-impl.version>2.2.2</jaxb-impl.version>
+        <jaxb-commons-basic.version>0.6.0</jaxb-commons-basic.version>
+        <jaxb-commons-basics-runtime.version>0.6.0</jaxb-commons-basics-runtime.version>
+        <jmock.version>1.2.0</jmock.version>
+        <joda-time.version>1.6.2</joda-time.version>
+        <joda-time-hibernate.version>1.2</joda-time-hibernate.version>
+        <junit.version>4.8.2</junit.version>
+        <log4j.version>1.2.16</log4j.version>
+
+        <!-- maven boilerplate versions -->
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
+        <maven-install-plugin.version>2.3.1</maven-install-plugin.version>
+        <maven-surefire-plugin.version>2.6</maven-surefire-plugin.version>
+        <maven-jetty-plugin.version>6.1.9</maven-jetty-plugin.version> <!-- used primarily by jetty plugin -->
+        <maven-jaxb-plugin.version>0.7.4</maven-jaxb-plugin.version>
+         
+        <mockito.version>1.8.5</mockito.version>
+                
+        <ojdbc6.version>11.1.0.7.0</ojdbc6.version> <!-- oracle jdbc driver -->
+
+        <playerglobal.version>10-3.3.0.4852</playerglobal.version>
+
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring-library.version>3.0.3.RELEASE</spring-library.version>
+        <springsource-bundlor.version>1.0.0.RELEASE</springsource-bundlor.version>
+
+        <slf4j.version>1.5.8</slf4j.version>
+    </properties>
+
+    <repositories>
+        <!-- general java/jee modules download from these repos -->
+        <repository>
+            <id>maven-repo2</id>
+            <name>maven-repo2</name>
+            <url>http://repo2.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>r.j.o-groups-public</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+
+        <!-- spring-library(libd) and spring-instrument downloads from this repo -->
+        <repository>
+            <id>nexus-public</id>
+            <url>http://maven.nuxeo.org/nexus/content/groups/public/</url>
+        </repository>
+
+        <!-- circuitbreaker module downloads from this repo -->
+        <repository>
+            <id>tzavellas.com-repo</id>
+            <url>http://www.tzavellas.com/maven</url>
+        </repository>
+
+
+    </repositories>
+
+    <!--<pluginRepositories>-->
+    <!--<pluginRepository>-->
+    <!--<id>com.springsource.repository.bundles.milestone</id>-->
+    <!--<name>SpringSource Enterprise Bundle Repository - SpringSource Milestone Releases</name>-->
+    <!--<url>http://repository.springsource.com/maven/bundles/milestone</url>-->
+    <!--</pluginRepository>-->
+    <!--</pluginRepositories>-->
+
+    <dependencies>
+                
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java-jdk-version}</source>
+                    <target>${java-jdk-version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
