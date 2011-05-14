@@ -14,33 +14,9 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d206fbb8-895f-4254-bdb6-f7bb73c7aaf9" name="Default" comment="making the mentor code both IntelliJ and Flash Builder compliant.">
+    <list id="d206fbb8-895f-4254-bdb6-f7bb73c7aaf9" name="Default" comment="making the mentor code both IntelliJ and Flash Builder compliant." />
+    <list default="true" id="9fa82067-0b99-44fa-affa-915199a0a677" name="Flex Unwanted ChangeList" comment="List of files in folders such as bin-debug and .metaData that are unwanted to be part of the build">
       <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\.metadata\.plugins\org.eclipse.core.resources\.root\7.tree" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.actionScriptProperties" afterPath="$PROJECT_DIR$/mentor-flex-ria/.actionScriptProperties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.flexProperties" afterPath="$PROJECT_DIR$/mentor-flex-ria/.flexProperties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/com.adobe.flash.profiler/ProfilerAgent.swf" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/com.adobe.flash.profiler/ProfilerAgent.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexbuilder.project.prefs" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexbuilder.project.prefs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/bin-debug/Home.swf" afterPath="$PROJECT_DIR$/mentor-flex-ria/bin-debug/Home.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.project" afterPath="$PROJECT_DIR$/mentor-flex-ria/.project" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" afterPath="$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/LocateItemTypeOnMapPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/LocateItemTypeOnMapPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/styles/EzyBookStyle.css" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/styles/EzyBookStyle.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomeBlogText.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomeBlogText.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanel.as" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanel.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanelText.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanelText.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/AccommodationSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/AccommodationSearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/ActivitySearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/ActivitySearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/CarSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/CarSearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/LocationSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/LocationSearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/MotorhomeSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/MotorhomeSearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/RailTourSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/RailTourSearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/SuggestedItinerarySearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/SuggestedItinerarySearchPanel.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/TransferSearchPanel.mxml" afterPath="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/TransferSearchPanel.mxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-toplevel-pom.iws" afterPath="$PROJECT_DIR$/mentor-toplevel-pom.iws" />
     </list>
     <ignored path="mentor-toplevel-pom.iws" />
@@ -241,7 +217,7 @@
       <file leaf-file-name="InfoWindowClosedEvent.as" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/events/map/InfoWindowClosedEvent.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="40" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
+            <state line="10" column="56" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
               <folding />
             </state>
           </provider>
@@ -814,9 +790,11 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d206fbb8-895f-4254-bdb6-f7bb73c7aaf9" name="Default" comment="" />
+      <changelist id="9fa82067-0b99-44fa-affa-915199a0a677" name="Flex Unwanted ChangeList" comment="List of files in folders such as bin-debug and .metaData that are unwanted to be part of the build" />
       <created>1303125639250</created>
-      <updated>1303125639250</updated>
+      <updated>1305359424296</updated>
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1116,7 +1094,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/events/map/InfoWindowClosedEvent.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="40" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
+        <state line="10" column="56" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
           <folding />
         </state>
       </provider>
