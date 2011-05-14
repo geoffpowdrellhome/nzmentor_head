@@ -9,12 +9,12 @@
 	
 	<mx:Script source="LocationSearch.as" />
 		
-	<mx:Style source="styles/EzyBookStyle.css"/> 
+	<mx:Style source="../../styles/EzyBookStyle.css"/>
 	
 	<mx:VBox width="100%"  height="100%" styleName="ezygroupheader" > 	   
    		<mx:TitleWindow  width="100%"  height="100%"
    			styleName="ezytitlewindowheader" 
-   			titleIcon="@Embed(source=&apos;assets/images/Searchv2_32x32.png&apos;)"		   						
+   			titleIcon="@Embed(source='../../assets/images/Searchv2_32x32.png')"
    			layout="absolute" 
    			title="Places of Interest" 
    			id="cityRegionSearchTitleWindow">
@@ -42,7 +42,7 @@
 			             <mx:DataGridColumn width="12">		                                    	                  
 			               <mx:itemRenderer>
 			               		<mx:Component>
-			               			<mx:Button  toolTip="Locate on the map" icon="@Embed(source=&apos;assets/images/Information-icon_16x16.png&apos;)"	
+			               			<mx:Button  toolTip="Locate on the map" icon="@Embed(source='../../assets/images/Information-icon_16x16.png')"
 			               				click="{outerDocument.locatePopularLocationsOnMap(event)}"			                        				                        	
 			               			    	fillColors="[0xacb5b5]"  />				                        	                  	   
 			               		</mx:Component>	                  	   	      
@@ -85,7 +85,7 @@
 			            <mx:DataGridColumn width="12">	                    	                  
 			                <mx:itemRenderer>
 			             		<mx:Component>
-			             			<mx:Button  toolTip="Locate on the map" icon="@Embed(source=&apos;assets/images/Information-icon_16x16.png&apos;)"	
+			             			<mx:Button  toolTip="Locate on the map" icon="@Embed(source='../../assets/images/Information-icon_16x16.png')"
 			             					click="{outerDocument.locateMajorCentresOnMap(event)}"			                        				                        	
 			             		    	fillColors="[0xacb5b5]"  />				                        	                  	   
 			             	    </mx:Component>	                  	   	      

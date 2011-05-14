@@ -42,7 +42,7 @@
                             <mx:itemRenderer>
                                 <mx:Component>
                                     <mx:Button toolTip="Locate on the map"
-                                               icon="@Embed(source=&apos;assets/images/Information-icon_16x16.png&apos;)"
+                                               icon="@Embed(source='../assets/images/Information-icon_16x16.png')"
                                                click="{outerDocument.locateLocationsOnMap(event)}"
                                                fillColors="[0xacb5b5]"/>
                                 </mx:Component>

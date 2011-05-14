@@ -13,7 +13,7 @@
 	 <mx:VBox width="100%"  height="282" styleName="ezygroupheader" > 	   
 	   		<mx:TitleWindow  width="100%"  height="100%" 
 	   			styleName="ezytitlewindowheader" 
-	   			titleIcon="@Embed(source=&apos;assets/images/Searchv2_32x32.png&apos;)"	   			 			
+	   			titleIcon="@Embed(source='../../assets/images/Searchv2_32x32.png')"
 	   			layout="absolute" 
 	   			title="Motorhome /Campervan Hire Search">
 	   			   		
