@@ -1,14 +1,17 @@
 import components.BaseProductSearchValidator;
+
+import constants.WidgetConstants;
+
 import flash.events.MouseEvent;
+
 import mx.collections.ArrayCollection;
 import mx.controls.*;
 import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
-import mx.events.DropdownEvent;
-import mx.events.ListEvent;
-import constants.WidgetConstants;
+
+import spark.events.IndexChangeEvent;
+
 import vo.MotorhomeSearchVO;
-import components.BaseProductSearchValidator;
 
 [Bindable] public var validatorArr:Array = new Array();
 [Bindable] private var searchItems:ArrayCollection;
@@ -21,9 +24,9 @@ private function init():void {
     
     motorhomeSearchVO = new  MotorhomeSearchVO(); 
     
-    adultsComboBox.dataProvider = WidgetConstants.getPaxSelectableData();    
-    childrenComboBox.dataProvider = WidgetConstants.getPaxSelectableData();
-    infantsComboBox.dataProvider = WidgetConstants.getPaxSelectableData();
+    adultsComboBox.dataProvider = WidgetConstants.getPaxSelectableStaticDataSpark();
+    childrenComboBox.dataProvider = WidgetConstants.getPaxSelectableStaticDataSpark();
+    infantsComboBox.dataProvider = WidgetConstants.getPaxSelectableStaticDataSpark();
     totalPaxTextBox.text = "0"; 
     
     locateItemTypeOnMapPanel.label = "Ferry Locator";                 
@@ -49,28 +52,37 @@ private function resetForm(evt:MouseEvent):void {
 
 public function search():void
 {
+    Alert.show("about to perform a search");
     //this.motorhomeSearchVO = new MotorhomeSearchVO();
    // this.accommodationSearchVO.id = new Number(idText.text);
     //this.accommodationSearchVO.name = nameText.text;
     //accommodationSearchController.search(accommodationSearchVO);
 }
 
-private function updateTotalPax(evt:ListEvent):void {	
-	var totalPax:int = 0;	
-	if (adultsComboBox.selectedLabel != null) {
-		totalPax+= int(adultsComboBox.selectedLabel);
-	} 
+//private function updateTotalPax(evt:ListEvent):void {
+private function updateTotalPax(evt:IndexChangeEvent):void {
+	var totalPax:int = 0;
+    if (adultsComboBox.selectedItem != null) {
+		totalPax+= int(adultsComboBox.selectedItem.id);
+	}
 		
-	if (childrenComboBox.selectedLabel != null) {
-		totalPax+= int(childrenComboBox.selectedLabel);
+	if (childrenComboBox.selectedItem != null) {
+        totalPax+= int(childrenComboBox.selectedItem.id);
 	}
 	
-	if (infantsComboBox.selectedLabel != null) {
-		totalPax+= int(infantsComboBox.selectedLabel);
+	if (infantsComboBox.selectedItem != null) {
+        totalPax+= int(infantsComboBox.selectedItem.id);
 	}
 	
 	totalPaxTextBox.text = totalPax.toString();		
 }
+
+
+public function sparkComboBoxIdValuePairLabelFunc(item:Object):String {
+    return item.name;
+}
+
+
 
 public function onResultDoSearch(event:ResultEvent):void {
     searchItems = event.result as ArrayCollection;

@@ -12,7 +12,7 @@ import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
 
 import vo.SuggestedItinerarySearchVO;
-import vo.common.SelectableVO;
+import vo.SelectableVO;
 
 
 [Bindable] public var validatorArr:Array = new Array();

@@ -11,7 +11,7 @@ package components
         public var validatorArr:Array = new Array();
                 
         public function BaseProductSearchValidator(fieldsToValidate:Array) {    
-        	this.validatorArr =  fieldsToValidate;   	
+        	this.validatorArr = fieldsToValidate;
         }
 				
 		public function validateForm(evt:MouseEvent):Boolean {

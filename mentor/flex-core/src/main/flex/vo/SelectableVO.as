@@ -1,4 +1,4 @@
-package vo.common
+package vo
 {
 	public class SelectableVO
 	{
