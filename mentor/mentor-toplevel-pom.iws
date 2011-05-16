@@ -14,13 +14,30 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list id="d206fbb8-895f-4254-bdb6-f7bb73c7aaf9" name="Default" comment="making the mentor code both IntelliJ and Flash Builder compliant." />
-    <list default="true" id="9fa82067-0b99-44fa-affa-915199a0a677" name="Flex Unwanted ChangeList" comment="List of files in folders such as bin-debug and .metaData that are unwanted to be part of the build">
+    <list id="d206fbb8-895f-4254-bdb6-f7bb73c7aaf9" name="Default" comment="making the mentor code both IntelliJ and Flash Builder compliant.">
       <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\.metadata\.plugins\org.eclipse.core.resources\.root\7.tree" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\classes\config.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\classes\fonts.ser" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\classes\libraries\playerglobal.swc" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\classes\remoting-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\classes\services-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\dependency-maven-plugin-markers\com.o4reports-o4reports-blazeds-config-zip-resources-1.0.marker" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\generated-resources\remoting-config.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\dev\nzmentor_head\mentor\mentor-flex-ria\target\generated-resources\services-config.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-toplevel-pom.iws" afterPath="$PROJECT_DIR$/mentor-toplevel-pom.iws" />
+    </list>
+    <list default="true" id="9fa82067-0b99-44fa-affa-915199a0a677" name="Flex Unwanted ChangeList" comment="List of files in folders such as bin-debug and .metaData that are unwanted to be part of the build">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/com.adobe.flash.profiler/ProfilerAgent.swf" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/com.adobe.flash.profiler/ProfilerAgent.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexbuilder.project.prefs" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexbuilder.project.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/bin-debug/Home.swf" afterPath="$PROJECT_DIR$/mentor-flex-ria/bin-debug/Home.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.ide/dialog_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml" afterPath="$PROJECT_DIR$/mentor-flex-ria/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml" />
     </list>
     <ignored path="mentor-toplevel-pom.iws" />
     <ignored path=".idea/workspace.xml" />
+    <file path="$PROJECT_DIR$/mentor-toplevel-pom.iws" changelist="9fa82067-0b99-44fa-affa-915199a0a677" time="1305360258078" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,147 +94,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeBlogText.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomeBlogText.mxml">
+      <file leaf-file-name="SelectableVO.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/vo/SelectableVO.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="125" selection-start="1914" selection-end="1974" vertical-scroll-proportion="0.0">
+            <state line="8" column="26" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocationSearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/LocationSearchPanel.mxml">
+      <file leaf-file-name="WidgetConstants.as" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/constants/WidgetConstants.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="30" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305359133781" expanded="true" signature="172:179" placeholder="{...}" />
-                <marker date="1305359133781" expanded="true" signature="831:848" placeholder="{...}" />
-                <marker date="1305359133781" expanded="true" signature="1880:1930" placeholder="{...}" />
-                <marker date="1305359133781" expanded="true" signature="2577:2603" placeholder="{...}" />
-                <marker date="1305359133781" expanded="true" signature="3112:3143" placeholder="{...}" />
-                <marker date="1305359133781" expanded="true" signature="4095:4141" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SuggestedItinerarySearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/SuggestedItinerarySearchPanel.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="77" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305356277187" expanded="true" signature="169:176" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="1312:1338" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="1609:1635" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="2835:2856" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="2992:3013" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="3148:3169" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="3355:3374" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="3632:3648" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="4663:4690" placeholder="{...}" />
-                <marker date="1305356277187" expanded="true" signature="5528:5555" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomePanel.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanel.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="11" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TransferSearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/TransferSearchPanel.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="81" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305356393234" expanded="true" signature="168:175" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="692:711" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="946:962" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1785:1806" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1941:1962" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2096:2117" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2935:2961" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="3246:3272" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RailTourSearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/RailTourSearchPanel.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="81" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305356393234" expanded="true" signature="168:175" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="693:712" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="947:963" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1786:1807" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1942:1963" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2097:2118" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2936:2962" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="3247:3273" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccommodationSearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/AccommodationSearchPanel.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="72" selection-start="3657" selection-end="3657" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305356393234" expanded="true" signature="151:158" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="714:733" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="974:990" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1796:1817" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="1951:1972" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2105:2126" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="2724:2750" placeholder="{...}" />
-                <marker date="1305356393234" expanded="true" signature="3042:3068" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomePanelText.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanelText.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="46" selection-start="1105" selection-end="1105" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305358384328" expanded="true" signature="146:156" placeholder="{...}" />
-                <marker date="1305358384328" expanded="true" signature="637:658" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FerrySearchPanel.mxml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="17" selection-start="5387" selection-end="5387" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1305359124625" expanded="true" signature="158:165" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="808:815" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="3187:3208" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="3541:3562" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="3893:3914" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="4780:4799" placeholder="{...}" />
-                <marker date="1305359124625" expanded="true" signature="5186:5202" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InfoWindowClosedEvent.as" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/events/map/InfoWindowClosedEvent.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="56" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
+            <state line="40" column="8" selection-start="2108" selection-end="2108" vertical-scroll-proportion="0.15330662">
               <folding />
             </state>
           </provider>
@@ -230,6 +119,10 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="FlexCompilerConfiguration">
+    <option name="USE_BUILT_IN_COMPILER" value="false" />
+    <option name="USE_MXMLC_COMPC" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
     <option name="UPDATE_CHANGES_POLICY" value="STASH" />
@@ -237,12 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/mentor-service-api/src/main/java/com/nz/travel/mentor/util/GSTCalculator.java" />
-        <option value="$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/jsp/faregate/acccdatamanagement/index.jsp" />
-        <option value="$PROJECT_DIR$/mentor-domain/src/main/java/com/nz/travel/mentor/model/AbstractJPAEntity.java" />
-        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/MotorhomeSearchPanel.mxml" />
-        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/CarSearchPanel.mxml" />
-        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/ActivitySearchPanel.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomeBlogText.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/LocateItemTypeOnMapPanel.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/SuggestedItinerarySearchPanel.mxml" />
@@ -251,8 +138,14 @@
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/RailTourSearchPanel.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/AccommodationSearchPanel.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanelText.mxml" />
-        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/LocationSearchPanel.mxml" />
+        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/Policies.mxml" />
+        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/BaseProductSearchValidator.as" />
+        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/constants/WidgetConstants.as" />
+        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml" />
+        <option value="$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as" />
+        <option value="$PROJECT_DIR$/flex-core/src/main/flex/events/WidgetConstants.as" />
+        <option value="$PROJECT_DIR$/flex-core/src/main/flex/constants/WidgetConstants.as" />
       </list>
     </option>
   </component>
@@ -327,9 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -358,7 +248,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="mentor-flex-ria" />
+              <option name="myItemId" value="flex-core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,7 +262,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="mentor-flex-ria" />
+              <option name="myItemId" value="flex-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mentor-toplevel-pom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mentor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flex-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -380,8 +308,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mentor-toplevel-pom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mentor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flex-core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flex" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -405,7 +366,9 @@
   </component>
   <component name="RunManager" selected="Flex.Flex Local">
     <configuration default="false" name="Flex Local" type="FlexRunConfigurationType" factoryName="Flex" temporary="true" browser_family="FIREFOX" debugger_sdk="4.5.0 (player 10.2)" html_or_swf_file_path="$PROJECT_DIR$/mentor-flex-ria/target/mentor-flex-ria.swf" launcher_type="OSDefault" main_class_name="Home" module_name="mentor-flex-ria" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="false" url_to_launch="http://">
+      <RunnerSettings RunnerId="FlexDebugRunner" />
       <RunnerSettings RunnerId="FlexRunner" />
+      <ConfigurationWrapper RunnerId="FlexDebugRunner" />
       <ConfigurationWrapper RunnerId="FlexRunner" />
       <method />
     </configuration>
@@ -799,13 +762,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1174" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.6702544" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3707317" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297456" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -817,11 +780,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17005348" sideWeight="0.55512196" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24278075" sideWeight="0.55512196" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17754011" sideWeight="0.69756097" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35804877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297561" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30243903" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -841,7 +804,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="making the mentor code both IntelliJ and Flash Builder compliant." />
+    <option name="LAST_COMMIT_MESSAGE" value="project updates and refactors" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -858,6 +821,9 @@
     <MESSAGE value="adding mentor-standards" />
     <MESSAGE value="adding code" />
     <MESSAGE value="making the mentor code both IntelliJ and Flash Builder compliant." />
+    <MESSAGE value="List of files in folders such as bin-debug and .metaData that are unwanted to be part of the build" />
+    <MESSAGE value="removed policies - redundant" />
+    <MESSAGE value="project updates and refactors" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -894,207 +860,71 @@
     </GetOptions>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="flex">
+          <url>file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as</url>
+          <line>65</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="flex">
+          <url>file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as</url>
+          <line>63</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="flex">
+          <url>file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as</url>
+          <line>69</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="flex">
+          <url>file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as</url>
+          <line>73</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="flex">
+          <url>file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as</url>
+          <line>76</line>
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/jsp/faregate/acccdatamanagement/index.jsp">
+    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearch.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-domain/src/main/java/com/nz/travel/mentor/model/AbstractJPAEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="51" selection-start="416" selection-end="416" vertical-scroll-proportion="0.13627255" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/MotorhomeSearchPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="62" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305355725312" expanded="true" signature="168:175" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="713:732" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="970:986" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="1809:1830" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="1965:1986" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="2120:2141" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="2959:2985" placeholder="{...}" />
-            <marker date="1305355725312" expanded="true" signature="3270:3296" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/CarSearchPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="45" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305355791625" expanded="true" signature="168:175" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="687:706" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="941:957" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="1771:1792" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="1926:1947" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="2080:2101" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="2919:2945" placeholder="{...}" />
-            <marker date="1305355791625" expanded="true" signature="3230:3256" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/ActivitySearchPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="152" selection-start="6825" selection-end="6825" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305355891875" expanded="true" signature="144:151" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="412:429" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="3552:3573" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="3712:3733" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="3871:3892" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="4082:4101" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="4373:4389" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="5422:5439" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="5758:5794" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="6351:6402" placeholder="{...}" />
-            <marker date="1305355891875" expanded="true" signature="6857:6908" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/components/LocateItemTypeOnMapPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="68" selection-start="2099" selection-end="2099" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305356152953" expanded="true" signature="836:853" placeholder="{...}" />
-            <marker date="1305356152953" expanded="true" signature="1621:1664" placeholder="{...}" />
-            <marker date="1305356152953" expanded="true" signature="2200:2243" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/SuggestedItinerarySearchPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="77" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305356277187" expanded="true" signature="169:176" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="1312:1338" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="1609:1635" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="2835:2856" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="2992:3013" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="3148:3169" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="3355:3374" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="3632:3648" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="4663:4690" placeholder="{...}" />
-            <marker date="1305356277187" expanded="true" signature="5528:5555" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="11" selection-start="567" selection-end="567" vertical-scroll-proportion="0.0">
+        <state line="2" column="8" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/TransferSearchPanel.mxml">
+    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/events/SelectProductSearchScreenEvent.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="81" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305356393234" expanded="true" signature="168:175" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="692:711" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="946:962" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1785:1806" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1941:1962" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2096:2117" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2935:2961" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="3246:3272" placeholder="{...}" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/RailTourSearchPanel.mxml">
+    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/Home.mxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="81" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305356393234" expanded="true" signature="168:175" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="693:712" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="947:963" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1786:1807" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1942:1963" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2097:2118" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2936:2962" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="3247:3273" placeholder="{...}" />
-          </folding>
-        </state>
+        <state line="3" column="21" selection-start="138" selection-end="138" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/AccommodationSearchPanel.mxml">
+    <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/events/LoginEvent.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="72" selection-start="3657" selection-end="3657" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305356393234" expanded="true" signature="151:158" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="714:733" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="974:990" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1796:1817" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="1951:1972" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2105:2126" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="2724:2750" placeholder="{...}" />
-            <marker date="1305356393234" expanded="true" signature="3042:3068" placeholder="{...}" />
-          </folding>
-        </state>
+        <state line="15" column="27" selection-start="342" selection-end="342" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomeBlogText.mxml">
+    <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/vo/IdValuePair.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="125" selection-start="1914" selection-end="1974" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="4" column="9" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/HomePanelText.mxml">
+    <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/vo/SelectableVO.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="46" selection-start="1105" selection-end="1105" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305358384328" expanded="true" signature="146:156" placeholder="{...}" />
-            <marker date="1305358384328" expanded="true" signature="637:658" placeholder="{...}" />
-          </folding>
-        </state>
+        <state line="8" column="26" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/LocationSearchPanel.mxml">
+    <entry file="file://$PROJECT_DIR$/flex-core/src/main/flex/constants/WidgetConstants.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="30" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305359133781" expanded="true" signature="172:179" placeholder="{...}" />
-            <marker date="1305359133781" expanded="true" signature="831:848" placeholder="{...}" />
-            <marker date="1305359133781" expanded="true" signature="1880:1930" placeholder="{...}" />
-            <marker date="1305359133781" expanded="true" signature="2577:2603" placeholder="{...}" />
-            <marker date="1305359133781" expanded="true" signature="3112:3143" placeholder="{...}" />
-            <marker date="1305359133781" expanded="true" signature="4095:4141" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/view/search/FerrySearchPanel.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="17" selection-start="5387" selection-end="5387" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1305359124625" expanded="true" signature="158:165" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="808:815" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="3187:3208" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="3541:3562" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="3893:3914" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="4780:4799" placeholder="{...}" />
-            <marker date="1305359124625" expanded="true" signature="5186:5202" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mentor-flex-ria/src/main/flex/events/map/InfoWindowClosedEvent.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="56" selection-start="276" selection-end="276" vertical-scroll-proportion="0.1734694">
+        <state line="40" column="8" selection-start="2108" selection-end="2108" vertical-scroll-proportion="0.15330662">
           <folding />
         </state>
       </provider>
@@ -1142,7 +972,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>4.5.0 (player 10.2)</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1154,12 +984,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>mentor-flex-ria</last-edited>
+          <last-edited>mentor-flex-ria|flex-artifacts</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
