@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.nz.travel.mentor</groupId>
+        <groupId>com.travel.mentor</groupId>
         <artifactId>mentor-standards</artifactId>
         <version>1.0</version>
         <relativePath>../mentor-standards</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nz.travel.mentor</groupId>
+    <groupId>com.travel.mentor</groupId>
     <artifactId>mentor-java-web</artifactId>
     <version>1.0</version>
     <name>mentor-java-web</name>
@@ -19,35 +19,35 @@
     <dependencies>
         <!-- module/jar dependencies -->
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-core</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-domain</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>        
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-dao</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-service-api</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-service-impl</artifactId>
             <version>1.0</version>
             <type>jar</type>
@@ -162,11 +162,6 @@
             <version>${mockito.version}</version>
             <type>jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.tzavellas</groupId>
-            <artifactId>circuit-breaker</artifactId>
-            <version>${circuit-breaker.version}</version>
         </dependency>
     </dependencies>
 

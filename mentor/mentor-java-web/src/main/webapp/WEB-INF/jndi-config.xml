@@ -11,7 +11,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<jee:jndi-lookup id="faregateConfigurationLocation" jndi-name="faregate/faregate-configuration" expected-type="java.lang.String" />
 
-	<bean id="faregateConfigurationResourceFactory" class="com.nz.travel.mentor.util.FileResourceFactory">
+	<bean id="faregateConfigurationResourceFactory" class="com.travel.mentor.util.FileResourceFactory">
 		<property name="location" ref="faregateConfigurationLocation" />
 	</bean>
 

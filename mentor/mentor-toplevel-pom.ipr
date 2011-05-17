@@ -123,7 +123,6 @@
             <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.6.8" />
             <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.6.8" />
             <element id="library" level="project" name="Maven: apache-lang:commons-lang:2.0" />
-            <element id="library" level="project" name="Maven: com.tzavellas:circuit-breaker:0.9.1" />
             <element id="library" level="project" name="Maven: org.jmock:jmock-cglib:1.2.0" />
             <element id="library" level="project" name="Maven: org.jmock:jmock-core:1.2.0" />
             <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.0.5.RELEASE" />
@@ -349,6 +348,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/flex-core/flex-core.iml" filepath="$PROJECT_DIR$/flex-core/flex-core.iml" group="flex-artifacts" />
+      <module fileurl="file://$PROJECT_DIR$/mentor-core/mentor-core.iml" filepath="$PROJECT_DIR$/mentor-core/mentor-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/mentor-dao/mentor-dao.iml" filepath="$PROJECT_DIR$/mentor-dao/mentor-dao.iml" group="java-artifacts" />
       <module fileurl="file://$PROJECT_DIR$/mentor-domain/mentor-domain.iml" filepath="$PROJECT_DIR$/mentor-domain/mentor-domain.iml" group="java-artifacts" />
       <module fileurl="file://$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" filepath="$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" group="flex-artifacts" />
@@ -942,6 +942,71 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/ehcache-spring-annotations/ehcache-spring-annotations/1.1.2/ehcache-spring-annotations-1.1.2-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: com.nz.travel.mentor:mentor-core:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/mentor-core/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/mentor-core/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.nz.travel.mentor:mentor-dao:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/mentor-dao/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/mentor-dao/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.nz.travel.mentor:mentor-domain:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/mentor-domain/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/mentor-domain/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.nz.travel.mentor:mentor-service-api:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/mentor-service-api/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/mentor-service-api/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.nz.travel.mentor:mentor-service-impl:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/mentor-service-impl/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/mentor-service-impl/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.oracle:ojdbc6:11.1.0.7.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/oracle/ojdbc6/11.1.0.7.0/ojdbc6-11.1.0.7.0.jar!/" />
@@ -962,17 +1027,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.tzavellas:circuit-breaker:0.9.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/tzavellas/circuit-breaker/0.9.1/circuit-breaker-0.9.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/tzavellas/circuit-breaker/0.9.1/circuit-breaker-0.9.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/tzavellas/circuit-breaker/0.9.1/circuit-breaker-0.9.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: commons-beanutils:commons-beanutils:1.7.0">

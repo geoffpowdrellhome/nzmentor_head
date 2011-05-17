@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nz.travel.mentor</groupId>
+    <groupId>com.travel.mentor</groupId>
     <artifactId>mentor-standards</artifactId>
     <name>mentor-standards</name>
     <packaging>pom</packaging>
@@ -17,8 +17,7 @@
         <apache-commons-lang.version>2.0</apache-commons-lang.version>
         <apache-commons-io.version>1.3.2</apache-commons-io.version>
         <backport-util-concurrent.version>3.1</backport-util-concurrent.version>
-       
-        <circuit-breaker.version>0.9.1</circuit-breaker.version>
+
         <commons.dbcp.version>1.4</commons.dbcp.version> <!-- used primarily by jetty plugin -->
         <commons-jxpath.version>1.3</commons-jxpath.version>
                 
@@ -106,20 +105,9 @@
             <id>tzavellas.com-repo</id>
             <url>http://www.tzavellas.com/maven</url>
         </repository>
-
-
     </repositories>
 
-    <!--<pluginRepositories>-->
-    <!--<pluginRepository>-->
-    <!--<id>com.springsource.repository.bundles.milestone</id>-->
-    <!--<name>SpringSource Enterprise Bundle Repository - SpringSource Milestone Releases</name>-->
-    <!--<url>http://repository.springsource.com/maven/bundles/milestone</url>-->
-    <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
-
     <dependencies>
-                
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

@@ -35,7 +35,6 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/flex" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.metadata" />
       <excludeFolder url="file://$MODULE_DIR$/.settings" />
@@ -129,6 +128,48 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="flex-core" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:datavisualization:swc:4.0.0.13555" level="project" />
+    <orderEntry type="library" name="Maven: com.google:map:swc:1.18" level="project" />
+    <orderEntry type="library" name="Maven: com.google:map_flex:swc:1.18" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-dom:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-awt-util:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:mxmlc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-transcoder:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-parser:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:fdb:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-script:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-css:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:compc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-svggen:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:optimizer:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-ext:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:commons-logging:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:asdoc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:fcsh:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:flex-messaging-common:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:commons-collections:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:copylocale:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-util:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:xercesImpl:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:commons-discovery:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:xalan:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:flex-compiler-oem:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-bridge:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:xmlParserAPIs:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:digest:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:mm-velocity-1.4:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:xercesPatch:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-gvt:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:swfutils:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-svg-dom:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:asc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.compiler:batik-xml:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:playerglobal:swc:10-3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:framework:swc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:rpc:swc:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:rpc:resource-bundle:en_US:3.3.0.4852" level="project" />
+    <orderEntry type="library" name="Maven: com.adobe.flex.framework:utilities:swc:3.3.0.4852" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: log4j:log4j:1.2.16" level="project" />
   </component>
 </module>
 

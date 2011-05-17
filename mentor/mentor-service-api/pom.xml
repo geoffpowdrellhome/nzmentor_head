@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.nz.travel.mentor</groupId>
+        <groupId>com.travel.mentor</groupId>
         <artifactId>mentor-standards</artifactId>
         <version>1.0</version>
         <relativePath>../mentor-standards</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nz.travel.mentor</groupId>
+    <groupId>com.travel.mentor</groupId>
     <artifactId>mentor-service-api</artifactId>
     <version>1.0</version>
     <name>mentor-service-api</name>
@@ -19,21 +19,21 @@
     <dependencies>
         <!-- module/jar dependencies -->
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-core</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-domain</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.nz.travel.mentor</groupId>
+            <groupId>com.travel.mentor</groupId>
             <artifactId>mentor-dao</artifactId>
             <version>1.0</version>
             <type>jar</type>
@@ -109,82 +109,7 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <!-- @see http://cxf.apache.org/docs/maven-cxf-codegen-plugin-wsdl-to-java.html -->
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-codegen-plugin</artifactId>
-                <version>${cxf.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.cxf</groupId>
-                        <artifactId>cxf-codegen-plugin</artifactId>
-                        <version>${cxf.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jvnet.jaxb2_commons</groupId>
-                        <artifactId>jaxb2-basics</artifactId>
-                        <version>${jaxb-commons-basic.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.jvnet.jaxb2_commons</groupId>
-                        <artifactId>jaxb2-basics-runtime</artifactId>
-                        <version>${jaxb-commons-basics-runtime.version}</version>
-                    </dependency>
-                </dependencies>
 
-                <executions>
-                    <execution>
-                        <id>generate-sources</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <wsdlOptions>
-                                <wsdlOption>
-                                    <wsdl>${basedir}/src/main/resources/wsdl/faregate.wsdl</wsdl>
-                                    <bindingFiles>
-                                        <bindingFile>${basedir}/src/main/resources/wsdl/binding.xml</bindingFile>
-                                    </bindingFiles>
-                                    <extraargs>
-                                        <!-- validates the wsdl before generating the code -->
-                                        <extraarg>-validate</extraarg>
-
-                                        <!-- displays comments during the code generation process -->
-                                        <extraarg>-verbose</extraarg>
-                                    </extraargs>
-
-                                    <extraargs>
-                                        <!-- Turns on the toString plugin, generates a toString(), append() and appendFields() method -->
-                                        <extraarg>-xjc-XtoString</extraarg>
-
-                                        <!-- Turns on the equals plugin, generates an equals() method -->
-                                        <extraarg>-xjc-Xequals</extraarg>
-
-                                        <!-- Turns on the hashCode plugin, generates a hashCode() method -->
-                                        <extraarg>-xjc-XhashCode</extraarg>
-
-                                        <!-- Turns on the copyable plugin, generates a clone(), copyTo() and createNewInstance() method -->
-                                        <extraarg>-xjc-Xcopyable</extraarg>
-
-                                        <!-- Turns on the mergeFrom plugin, generates a mergeFrom() method -->
-                                        <extraarg>-xjc-Xmergeable</extraarg>
-
-                                        <!-- Turns on the Setters plugin, generates missing setter methods -->
-                                        <extraarg>-xjc-Xsetters</extraarg>
-
-                                    </extraargs>
-
-                                </wsdlOption>
-                            </wsdlOptions>
-
-                            <!-- the code generation directory -->
-                            <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
-
-                        </configuration>
-                        <goals>
-                            <goal>wsdl2java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 

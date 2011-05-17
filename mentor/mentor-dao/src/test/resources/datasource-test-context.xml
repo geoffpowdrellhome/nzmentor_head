@@ -65,9 +65,9 @@
         <constructor-arg ref="fareGateDataSource"/>
     </bean>
 
-    <context:component-scan base-package="net.flitech.faregate.dao.assemble"/>
+    <context:component-scan base-package="com.travel.mentor.dao.assemble"/>
 
-    <context:component-scan base-package="net.flitech.faregate.dao">
+    <context:component-scan base-package="com.travel.mentor.dao">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 
