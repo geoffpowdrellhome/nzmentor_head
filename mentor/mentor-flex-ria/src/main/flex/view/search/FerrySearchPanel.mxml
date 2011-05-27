@@ -53,8 +53,9 @@
                                      styleName="ezutextarea" maxChars="20"/>
 
 
-                        <mx:Canvas x="338.5" y="10" width="249.5" height="104" borderStyle="solid" borderColor="#67A95E"
-                                   id="dateRangeCanvas" cornerRadius="20">
+                        <!--<mx:Canvas x="338.5" y="10" width="249.5" height="104" borderStyle="solid" borderColor="#67A95E"-->
+                                   <!--id="dateRangeCanvas" cornerRadius="20">-->
+                        <s:Group x="338.5" y="10" width="249.5" height="104">
                             <s:Label x="10" y="8" text="Adults" styleName="ezylabel"/>
                             <s:ComboBox x="69" y="7" id="adultsComboBox" labelField="@id"
                                         labelFunction="sparkComboBoxIdValuePairLabelFunc"
@@ -81,7 +82,8 @@
                                          maxChars="2"
                                          editable="false"
                                          enabled="false"/>
-                        </mx:Canvas>
+                        <!--</mx:Canvas>-->
+                        </s:Group>
 
                         <mx:Button x="380" y="132" label="Show Ferries" styleName="ezybigbutton"
                                    click="validateForm(event)" id="searchFormButton" height="21" width="138">

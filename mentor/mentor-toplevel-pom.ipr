@@ -136,6 +136,9 @@
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
+  <component name="ClearCaseSharedConfig">
+    <option name="myUseUcmModel" value="true" />
+  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions>
@@ -188,6 +191,14 @@
         </modules>
       </facet-type>
     </autodetection-disabled>
+  </component>
+  <component name="FlexPMDProjectComponent">
+    <option name="flexPMDPath" value="" />
+    <option name="customRulePath" value="" />
+    <option name="additionalParameters" value="-Xmx256m" />
+  </component>
+  <component name="GradleUISettings2">
+    <setting name="root" />
   </component>
   <component name="IdProvider" IDEtalkID="696629E64782422C81D4D112A9E31C58" />
   <component name="IvyProjectSettings">
