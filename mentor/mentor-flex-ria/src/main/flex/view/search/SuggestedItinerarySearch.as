@@ -12,7 +12,6 @@ import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
 
 import vo.SuggestedItinerarySearchVO;
-import vo.SelectableVO;
 
 
 [Bindable] public var validatorArr:Array = new Array();
@@ -44,18 +43,18 @@ import vo.SelectableVO;
 [Bindable] private var selectLocationCheckBox5:CheckBox = new CheckBox();
 [Bindable] private var selectLocationCheckBox6:CheckBox = new CheckBox();
  
-//[Bindable] private var selectableActivitiesVO1:SelectableVO;  
-//[Bindable] private var selectableActivitiesVO2:SelectableVO; 
-//[Bindable] private var selectableActivitiesVO3:SelectableVO; 
-//[Bindable] private var selectableActivitiesVO4:SelectableVO;
-//[Bindable] private var selectableActivitiesVO5:SelectableVO;
-//
-//[Bindable] private var selectableLocationsVO1:SelectableVO;
-//[Bindable] private var selectableLocationsVO2:SelectableVO;
-//[Bindable] private var selectableLocationsVO3:SelectableVO;
-//[Bindable] private var selectableLocationsVO4:SelectableVO;
-//[Bindable] private var selectableLocationsVO5:SelectableVO;
-//[Bindable] private var selectableLocationsVO6:SelectableVO;
+[Bindable] private var selectableActivitiesVO1:SelectableVO;
+[Bindable] private var selectableActivitiesVO2:SelectableVO;
+[Bindable] private var selectableActivitiesVO3:SelectableVO;
+[Bindable] private var selectableActivitiesVO4:SelectableVO;
+[Bindable] private var selectableActivitiesVO5:SelectableVO;
+
+[Bindable] private var selectableLocationsVO1:SelectableVO;
+[Bindable] private var selectableLocationsVO2:SelectableVO;
+[Bindable] private var selectableLocationsVO3:SelectableVO;
+[Bindable] private var selectableLocationsVO4:SelectableVO;
+[Bindable] private var selectableLocationsVO5:SelectableVO;
+[Bindable] private var selectableLocationsVO6:SelectableVO;
 
 private function init():void {					
     validatorArr = new Array();    

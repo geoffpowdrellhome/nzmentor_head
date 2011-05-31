@@ -127,7 +127,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="flex-core" />
+    <orderEntry type="module" module-name="flex-core" exported="" />
     <orderEntry type="library" name="Maven: com.adobe.flex.framework:datavisualization:swc:4.0.0.13555" level="project" />
     <orderEntry type="library" name="Maven: com.google:map:swc:1.18" level="project" />
     <orderEntry type="library" name="Maven: com.google:map_flex:swc:1.18" level="project" />
