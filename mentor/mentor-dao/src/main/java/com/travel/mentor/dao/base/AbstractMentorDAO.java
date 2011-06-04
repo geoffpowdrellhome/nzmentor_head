@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContextType;
  * Created by powdrelg Date: 2-Mar-2011  *
  * Base DAO for those DAO's using the 'mentorPU' persistence layer
  */
-public abstract class AbstractFaregateDAO extends AbstractDAO {
+public abstract class AbstractMentorDAO extends AbstractDAO {
 
     @PersistenceContext(type = PersistenceContextType.TRANSACTION, unitName = "mentorPU")
     protected EntityManager em;
