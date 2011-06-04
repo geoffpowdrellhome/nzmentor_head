@@ -13,4 +13,6 @@ import javax.persistence.*;
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.activity_site_type_id_seq", allocationSize = 1)
 public class ActivitySiteType extends BaseReferenceType {
 
+    public static final String FIND_ALL_ACTIVITY_SITE_TYPES_NAMED_QUERY = "ActivitySiteType.findAll";
+
 }

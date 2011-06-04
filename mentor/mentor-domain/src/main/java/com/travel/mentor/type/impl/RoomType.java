@@ -15,4 +15,6 @@ import javax.persistence.Table;
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.room_type_id_seq", allocationSize = 1)
 public class RoomType extends BaseReferenceType {
 
+    public static final String FIND_ALL_ROOM_TYPES_NAMED_QUERY = "RoomType.findAll";
+
 }
