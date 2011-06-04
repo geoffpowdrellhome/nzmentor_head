@@ -3,52 +3,15 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="fareGatePU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="mentorPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>net.flitech.faregate.model.impl.Airline</class>
-        <class>net.flitech.faregate.model.impl.AirlineFareDetails</class>
-        <class>net.flitech.faregate.model.impl.AirlineMarkup</class>
-        <class>net.flitech.faregate.model.impl.AirlinePreference</class>
-        <class>net.flitech.faregate.model.impl.Airport</class>
-        <class>net.flitech.faregate.model.impl.Business</class>
-        <class>net.flitech.faregate.model.impl.BusinessAttribute</class>
-        <class>net.flitech.faregate.model.impl.CabinClass</class>
-        <class>net.flitech.faregate.model.impl.City</class>
-        <class>com.nz.travel.mentor.model.impl.Country</class>
-        <class>net.flitech.faregate.model.impl.DateType</class>
-        <class>net.flitech.faregate.model.impl.Day</class>
-        <class>net.flitech.faregate.model.impl.ErrorType</class>
-        <class>net.flitech.faregate.model.impl.ErrorCode</class>
-        <class>net.flitech.faregate.model.impl.FareRule</class>
-        <class>net.flitech.faregate.model.impl.FareRuleVersion</class>
-        <class>net.flitech.faregate.model.impl.FareRuleItem</class>
-        <class>net.flitech.faregate.model.impl.FareRuleItemValue</class>
-        <class>net.flitech.faregate.model.impl.FareRuleVersionItem</class>
-        <class>net.flitech.faregate.model.impl.FareBase</class>
-        <class>net.flitech.faregate.model.impl.FareClass</class>
-        <class>net.flitech.faregate.model.impl.FareFamily</class>
-        <class>net.flitech.faregate.model.impl.Flight</class>
-        <class>net.flitech.faregate.model.impl.MarkupType</class>
-        <class>net.flitech.faregate.model.impl.Message</class>
-        <class>net.flitech.faregate.model.impl.MessageType</class>
-        <class>net.flitech.faregate.model.impl.PreferenceType</class>
-        <class>net.flitech.faregate.model.impl.Provider</class>
-        <class>net.flitech.faregate.model.impl.Queue</class>
-        <class>net.flitech.faregate.model.impl.QueueOverride</class>
-        <class>net.flitech.faregate.model.impl.QueueSchedule</class>
-        <class>net.flitech.faregate.model.impl.QueueScheduleEntry</class>
-        <class>net.flitech.faregate.model.impl.Region</class>
-        <class>net.flitech.faregate.model.impl.Route</class>
-        <class>net.flitech.faregate.model.impl.RouteMarkup</class>
-        <class>net.flitech.faregate.model.impl.RoutePoint</class>
-        <class>net.flitech.faregate.model.impl.RouteSegment</class>
-        <class>net.flitech.faregate.model.impl.Site</class>
-        <class>net.flitech.faregate.model.impl.Terminal</class>
-        <class>net.flitech.faregate.model.impl.TerminalType</class>
-        <class>com.nz.travel.mentor.model.impl.User</class>
-        <class>net.flitech.faregate.model.impl.UserProviderSetting</class>
-        <class>net.flitech.faregate.model.impl.ValidDate</class>
+        <class>com.travel.mentor.model.impl.User</class>
+
+        <class>com.travel.mentor.type.impl.AccommodationSiteType</class>
+        <class>com.travel.mentor.type.impl.ActivitySiteType</class>
+        <class>com.travel.mentor.type.impl.RoomConfigurationType</class>
+        <class>com.travel.mentor.type.impl.RoomType</class>
 
         <properties>
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
@@ -57,41 +20,6 @@
             <property name="hibernate.generate_statistics" value="true"/>
             <property name="hibernate.jdbc.batch_size" value="0"/>
         </properties>
-    </persistence-unit>
-
-    <persistence-unit name="corePU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-
-        <class>net.flitech.faregate.model.impl.Business</class>
-        <class>net.flitech.faregate.model.impl.BusinessAttribute</class>
-        <class>net.flitech.faregate.model.core.impl.CoreBusiness</class>
-        <class>net.flitech.faregate.model.core.impl.CoreBusinessAttribute</class>
-
-        <properties>
-            <property name="hibernate.cache.use_second_level_cache" value="true"/>
-            <property name="hibernate.cache.use_query_cache" value="true"/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
-            <property name="hibernate.generate_statistics" value="true"/>
-            <property name="hibernate.jdbc.batch_size" value="0"/>
-        </properties>
-    </persistence-unit>
-
-    <persistence-unit name="fareSaverPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-
-        <class>net.flitech.faregate.model.faresaverinfo.impl.SearchRequest</class>
-        <class>net.flitech.faregate.model.faresaverinfo.impl.SearchRequestLog</class>
-        <class>net.flitech.faregate.model.faresaverinfo.impl.Fare</class>
-        <class>net.flitech.faregate.model.faresaverinfo.impl.Leg</class>
-
-        <properties>
-            <property name="hibernate.cache.use_second_level_cache" value="true"/>
-            <property name="hibernate.cache.use_query_cache" value="true"/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
-            <property name="hibernate.generate_statistics" value="true"/>
-            <property name="hibernate.jdbc.batch_size" value="0"/>
-        </properties>
-
     </persistence-unit>
 
 </persistence>

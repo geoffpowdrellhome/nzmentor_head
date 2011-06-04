@@ -181,7 +181,7 @@ CREATE UNIQUE INDEX ix_site_type_name ON site_type(name);
 INSERT INTO site_type(id, name, description)
 VALUES( nextval('site_type_id_seq'), 'Vehicle Hire Site', 'Vehicle Hire Site');
 INSERT INTO site_type(id, name, description)
-VALUES( nextval('site_type_id_seq'), 'Leisure Activity Site', 'Leisure Activity Site');
+VALUES( nextval('site_type_id_seq'), 'Activity Site', 'Activity Site');
 INSERT INTO site_type(id, name, description)
 VALUES( nextval('site_type_id_seq'), 'Accommodation Site', 'Accommodation Site');
 INSERT INTO site_type(id, name, description)
@@ -793,7 +793,7 @@ VALUES( nextval('room_type_id_seq'), '1 Bed, 1 Bath', '1 Bed, 1 Bath');
 
 
 -- NEED TO ROOM_CONFIGURATION_TYPE.....
-/* room type table */
+/* room configuration table */
 CREATE SEQUENCE room_configuration_type_id_seq INCREMENT 1;
 CREATE TABLE room_configuration_type
 (
@@ -815,7 +815,7 @@ INSERT INTO room_configuration_type(id, name, description)
 VALUES( nextval('room_configuration_type_id_seq'), 'Includes Kitchenette', 'Includes Kitchenette');
 
 
-/* site table */
+/* accommodation_site table */
 CREATE SEQUENCE accommodation_site_id_seq INCREMENT 1;
 CREATE TABLE accommodation_site
 (
@@ -838,8 +838,529 @@ ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_type FO
 ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_configuration_type FOREIGN KEY (room_configuration_type_id) REFERENCES room_configuration_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_accomodation_site_name ON accommodation_site(name);
-CREATE INDEX accommodation_site_search_1 ON site(name);
+CREATE INDEX accommodation_site_search_1 ON accommodation_site(name);
 
+
+
+/* motel_site table */
+CREATE SEQUENCE motel_site_id_seq INCREMENT 1;
+CREATE TABLE motel_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('motel_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE motel_site ADD CONSTRAINT pk_motel_site PRIMARY KEY (id);
+ALTER TABLE motel_site ADD CONSTRAINT fk_motel_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_motel_site_name ON motel_site(name);
+CREATE INDEX motel_site_search_1 ON motel_site(name);
+
+
+/* hotel_site table */
+CREATE SEQUENCE hotel_site_id_seq INCREMENT 1;
+CREATE TABLE hotel_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('hotel_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE hotel_site ADD CONSTRAINT pk_hotel_site PRIMARY KEY (id);
+ALTER TABLE hotel_site ADD CONSTRAINT fk_hotel_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_hotel_site_name ON hotel_site(name);
+CREATE INDEX hotel_site_search_1 ON hotel_site(name);
+
+
+/* lodge_site table */
+CREATE SEQUENCE lodge_site_id_seq INCREMENT 1;
+CREATE TABLE lodge_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('lodge_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE lodge_site ADD CONSTRAINT pk_lodge_site PRIMARY KEY (id);
+ALTER TABLE lodge_site ADD CONSTRAINT fk_lodge_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_lodge_site_name ON lodge_site(name);
+CREATE INDEX lodge_site_search_1 ON lodge_site(name);
+
+
+/* homestay_site table */
+CREATE SEQUENCE homestay_site_id_seq INCREMENT 1;
+CREATE TABLE homestay_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('homestay_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE homestay_site ADD CONSTRAINT pk_homestay_site PRIMARY KEY (id);
+ALTER TABLE homestay_site ADD CONSTRAINT fk_homestay_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_homestay_site_name ON homestay_site(name);
+CREATE INDEX homestay_site_search_1 ON homestay_site(name);
+
+
+/* farmstay_site table */
+CREATE SEQUENCE farm_site_id_seq INCREMENT 1;
+CREATE TABLE farmstay_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('farm_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE farmstay_site ADD CONSTRAINT pk_farmstay_site PRIMARY KEY (id);
+ALTER TABLE farmstay_site ADD CONSTRAINT fk_farmstay_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_farmstay_site_name ON farmstay_site(name);
+CREATE INDEX farmstay_site_search_1 ON farmstay_site(name);
+
+
+/* backpacker_site table */
+CREATE SEQUENCE backpacker_site_id_seq INCREMENT 1;
+CREATE TABLE backpacker_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('backpacker_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE backpacker_site ADD CONSTRAINT pk_backpacker_site PRIMARY KEY (id);
+ALTER TABLE backpacker_site ADD CONSTRAINT fk_backpacker_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_backpacker_site_name ON backpacker_site(name);
+CREATE INDEX backpacker_site_search_1 ON backpacker_site(name);
+
+/* holiday_park_cabin_site table */
+CREATE SEQUENCE holiday_park_cabin_site_id_seq INCREMENT 1;
+CREATE TABLE holiday_park_cabin_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('holiday_park_cabin_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE holiday_park_cabin_site ADD CONSTRAINT pk_holiday_park_cabin_site PRIMARY KEY (id);
+ALTER TABLE holiday_park_cabin_site ADD CONSTRAINT fk_holiday_park_cabin_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_holiday_park_cabin_site_name ON holiday_park_cabin_site(name);
+CREATE INDEX holiday_park_cabin_site_search_1 ON holiday_park_cabin_site(name);
+
+
+/* apartment_site table */
+CREATE SEQUENCE apartment_site_id_seq INCREMENT 1;
+CREATE TABLE apartment_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('apartment_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE apartment_site ADD CONSTRAINT pk_apartment_site PRIMARY KEY (id);
+ALTER TABLE apartment_site ADD CONSTRAINT fk_apartment_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_apartment_site_name ON apartment_site(name);
+CREATE INDEX apartment_site_search_1 ON apartment_site(name);
+
+
+/* bed_and_breakfast_site table */
+CREATE SEQUENCE bed_and_breakfast_site_id_seq INCREMENT 1;
+CREATE TABLE bed_and_breakfast_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('bed_and_breakfast_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE bed_and_breakfast_site ADD CONSTRAINT pk_bed_and_breakfast_site PRIMARY KEY (id);
+ALTER TABLE bed_and_breakfast_site ADD CONSTRAINT fk_bed_and_breakfast_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_bed_and_breakfast_site_name ON bed_and_breakfast_site(name);
+CREATE INDEX bed_and_breakfast_site_search_1 ON bed_and_breakfast_site(name);
+
+
+
+
+/* transfer_site type table */
+CREATE SEQUENCE transfer_site_type_id_seq INCREMENT 1;
+CREATE TABLE transfer_site_type
+(
+	id INTEGER NOT NULL DEFAULT nextval('transfer_site_type_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE transfer_site_type ADD CONSTRAINT pk_transfer_site_type PRIMARY KEY (id);
+CREATE UNIQUE INDEX ix_transfer_site_type_name ON transfer_site_type(name);
+
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'Ferry Terminal Site', 'Ferry Terminal Site');
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'Bus Depot Site', 'Bus Depot Site');
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'Railway Station Site', 'Railway Station Site');
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'International Airport Terminal Site', 'International Airport Terminal Site');
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'Domestic Airport Terminal Site', 'Domestic Airport Terminal Site');
+INSERT INTO transfer_site_type(id, name, description)
+VALUES( nextval('transfer_site_type_id_seq'), 'Cruise Mooring Site', 'Cruise Mooring Site');
+
+
+
+/* transfer_site table */
+CREATE SEQUENCE transfer_site_id_seq INCREMENT 1;
+CREATE TABLE transfer_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('transfer_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	transfer_site_type_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE transfer_site ADD CONSTRAINT pk_transfer_site PRIMARY KEY (id);
+ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_transfer_site_type FOREIGN KEY (transfer_site_type_id) REFERENCES transfer_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_transfer_site_name ON transfer_site(name);
+CREATE INDEX transfer_site_search_1 ON transfer_site(name);
+
+
+
+/* ferry_terminal_site table */
+CREATE SEQUENCE ferry_terminal_site_id_seq INCREMENT 1;
+CREATE TABLE ferry_terminal_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('ferry_terminal_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE ferry_terminal_site ADD CONSTRAINT pk_ferry_terminal_site PRIMARY KEY (id);
+ALTER TABLE ferry_terminal_site ADD CONSTRAINT fk_ferry_terminal_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_ferry_terminal_site_name ON ferry_terminal_site(name);
+CREATE INDEX ferry_terminal_site_search_1 ON ferry_terminal_site(name);
+
+
+/* bus_depot_site table */
+CREATE SEQUENCE bus_depot_site_id_seq INCREMENT 1;
+CREATE TABLE bus_depot_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('bus_depot_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE bus_depot_site ADD CONSTRAINT pk_bus_depot_site PRIMARY KEY (id);
+ALTER TABLE bus_depot_site ADD CONSTRAINT fk_bus_depot_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_bus_depot_site_name ON bus_depot_site(name);
+CREATE INDEX bus_depot_site_search_1 ON bus_depot_site(name);
+
+
+/* railway_station_site table */
+CREATE SEQUENCE railway_station_site_id_seq INCREMENT 1;
+CREATE TABLE railway_station_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('railway_station_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE railway_station_site ADD CONSTRAINT pk_railway_station_site PRIMARY KEY (id);
+ALTER TABLE railway_station_site ADD CONSTRAINT fk_railway_station_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_railway_station_site_name ON railway_station_site(name);
+CREATE INDEX railway_station_site_search_1 ON railway_station_site(name);
+
+
+
+/* airport_terminal_site table */
+CREATE SEQUENCE airport_terminal_site_id_seq INCREMENT 1;
+CREATE TABLE airport_terminal_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('airport_terminal_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE airport_terminal_site ADD CONSTRAINT pk_airport_terminal_site PRIMARY KEY (id);
+ALTER TABLE airport_terminal_site ADD CONSTRAINT fk_airport_terminal_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_airport_terminal_site_name ON airport_terminal_site(name);
+CREATE INDEX airport_terminal_site_search_1 ON airport_terminal_site(name);
+
+
+
+/* cruise_mooring_site table */
+CREATE SEQUENCE cruise_mooring_site_id_seq INCREMENT 1;
+CREATE TABLE cruise_mooring_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('cruise_mooring_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE cruise_mooring_site ADD CONSTRAINT pk_cruise_mooring_site PRIMARY KEY (id);
+ALTER TABLE cruise_mooring_site ADD CONSTRAINT fk_cruise_mooring_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_cruise_mooring_site_name ON cruise_mooring_site(name);
+CREATE INDEX cruise_mooring_site_search_1 ON cruise_mooring_site(name);
+
+
+
+/* activity_site_type table */
+CREATE SEQUENCE activity_site_type_id_seq INCREMENT 1;
+CREATE TABLE activity_site_type
+(
+	id INTEGER NOT NULL DEFAULT nextval('activity_site_type_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+
+ALTER TABLE activity_site_type ADD CONSTRAINT pk_activity_site_type PRIMARY KEY (id);
+CREATE UNIQUE INDEX ix_activity_site_type_name ON activity_site_type(name);
+
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'Landmark Site', 'Landmark Site');
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'SkiField Site', 'SkiField Site');
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'Sky Diving Site', 'Sky Diving Site');
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'Jet Boating Site', 'Jet Boating Site');
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'Wine Tasting Site', 'Wine Tasting Site');
+INSERT INTO activity_site_type(id, name, description)
+VALUES( nextval('activity_site_type_id_seq'), 'Snow Mobiles Site', 'Snow Mobiles Site');
+
+
+/* vehicle_hire_site_type table */
+CREATE SEQUENCE vehicle_hire_site_type_id_seq INCREMENT 1;
+CREATE TABLE vehicle_hire_site_type
+(
+	id INTEGER NOT NULL DEFAULT nextval('vehicle_hire_site_type_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+
+ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT pk_vehicle_hire_site_type PRIMARY KEY (id);
+CREATE UNIQUE INDEX ix_vehicle_hire_site_type_name ON vehicle_hire_site_type(name);
+
+INSERT INTO vehicle_hire_site_type(id, name, description)
+VALUES( nextval('vehicle_hire_site_type_id_seq'), 'Campervan Hire Site', 'Campervan Hire Site');
+INSERT INTO vehicle_hire_site_type(id, name, description)
+VALUES( nextval('vehicle_hire_site_type_id_seq'), 'Car Hire Site', 'Car Hire Site');
+INSERT INTO vehicle_hire_site_type(id, name, description)
+VALUES( nextval('vehicle_hire_site_type_id_seq'), 'Boat Hire Site', 'Boat Hire Site');
+INSERT INTO vehicle_hire_site_type(id, name, description)
+VALUES( nextval('vehicle_hire_site_type_id_seq'), 'Motorbike Hire Site', 'Motorbike Hire Site');
+INSERT INTO vehicle_hire_site_type(id, name, description)
+VALUES( nextval('vehicle_hire_site_type_id_seq'), 'Caravan Hire Site', 'Caravan Hire Site');
+
+
+/* vehicle_hire_site table */
+CREATE SEQUENCE vehicle_hire_site_id_seq INCREMENT 1;
+CREATE TABLE vehicle_hire_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('vehicle_hire_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	vehicle_hire_site_type_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE vehicle_hire_site ADD CONSTRAINT pk_vehicle_hire_site PRIMARY KEY (id);
+ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_vehicle_hire_site_type FOREIGN KEY (vehicle_hire_site_type_id) REFERENCES vehicle_hire_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_vehicle_hire_site_name ON vehicle_hire_site(name);
+CREATE INDEX vehicle_hire_site_search_1 ON vehicle_hire_site(name);
+
+
+
+/* vehicle_hire_site table */
+CREATE SEQUENCE activity_site_id_seq INCREMENT 1;
+CREATE TABLE activity_site
+(
+	id INTEGER NOT NULL DEFAULT nextval('activity_site_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	activity_site_type_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE activity_site ADD CONSTRAINT pk_activity_site PRIMARY KEY (id);
+ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_activity_site_type FOREIGN KEY (activity_site_type_id) REFERENCES activity_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+
+CREATE UNIQUE INDEX ix_activity_site_name ON activity_site(name);
+CREATE INDEX activity_site_search_1 ON activity_site(name);
+
+
+
+/* user table */
+CREATE SEQUENCE system_user_id_seq INCREMENT 1;
+CREATE TABLE system_user
+(
+	id INTEGER NOT NULL DEFAULT nextval('system_user_id_seq'::regclass),
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    title VARCHAR(10) NOT NULL,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE system_user ADD CONSTRAINT pk_system_user PRIMARY KEY (id);
+
+CREATE UNIQUE INDEX ix_system_user_username ON system_user(username);
+CREATE INDEX system_user_search_1 ON system_user(username);
+
+INSERT INTO system_user(id, username, password, title, firstname, lastname)
+VALUES( nextval('system_user_id_seq'), 'donr', 'mtalford', 'Mr', 'Don', 'Rea');
+INSERT INTO system_user(id, username, password, title, firstname, lastname)
+VALUES( nextval('system_user_id_seq'), 'region1', 'region1', 'Mr', 'Region', 'Number1');
+INSERT INTO system_user(id, username, password, title, firstname, lastname)
+VALUES( nextval('system_user_id_seq'), 'supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
+
+
+
+
+/* auth_role table */
+CREATE SEQUENCE auth_role_id_seq INCREMENT 1;
+CREATE TABLE auth_role
+(
+	id INTEGER NOT NULL DEFAULT nextval('auth_role_id_seq'::regclass),
+    rolename VARCHAR(30) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE auth_role ADD CONSTRAINT pk_auth_role PRIMARY KEY (id);
+
+CREATE UNIQUE INDEX ix_auth_role_rolename ON auth_role(rolename);
+CREATE INDEX auth_role_search_1 ON auth_role(rolename);
+
+INSERT INTO auth_role(id, rolename)
+VALUES( nextval('auth_role_id_seq'), 'MENTOR_ADMIN_ROLE');
+INSERT INTO auth_role(id, rolename)
+VALUES( nextval('auth_role_id_seq'), 'REGIONAL_MAINTENANCE_ROLE');
+INSERT INTO auth_role(id, rolename)
+VALUES( nextval('auth_role_id_seq'), 'SUPPLIER_MAINTENANCE_ROLE');
+
+
+
+CREATE TABLE user_auth
+(
+	username VARCHAR(30) NOT NULL,
+    rolename VARCHAR(30) NOT NULL
+);
+
+-- ALTER TABLE user_auth ADD CONSTRAINT pk_auth_role PRIMARY KEY (username, rolename);
+
+ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_system_username FOREIGN KEY (username) REFERENCES system_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_auth_rolename FOREIGN KEY (rolename) REFERENCES auth_role(rolename) ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE UNIQUE INDEX ix_user_auth ON user_auth(username, rolename);
+
+INSERT INTO user_auth(username, rolename)
+VALUES('donr', 'MENTOR_ADMIN_ROLE');
+INSERT INTO user_auth(username, rolename)
+VALUES('region1', 'REGIONAL_MAINTENANCE_ROLE');
+INSERT INTO user_auth(username, rolename)
+VALUES('supplier1', 'SUPPLIER_MAINTENANCE_ROLE');
 
 
 

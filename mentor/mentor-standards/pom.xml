@@ -70,10 +70,11 @@
         <maven-jaxb-plugin.version>0.7.4</maven-jaxb-plugin.version>
          
         <mockito.version>1.8.5</mockito.version>
-                
-        <ojdbc6.version>11.1.0.7.0</ojdbc6.version> <!-- oracle jdbc driver -->
 
         <playerglobal.version>10-3.3.0.4852</playerglobal.version>
+
+        <postgresql.version>9.0-801.jdbc4</postgresql.version> <!-- postgresql jdbc driver -->
+
 
         <spring.version>3.0.5.RELEASE</spring.version>
         <spring-library.version>3.0.3.RELEASE</spring-library.version>
@@ -87,7 +88,8 @@
         <repository>
             <id>maven-repo2</id>
             <name>maven-repo2</name>
-            <url>http://repo2.maven.org/maven2/</url>
+            <!--<url>http://repo2.maven.org/maven2/</url>-->
+            <url>http://search.maven.org/</url>
         </repository>
         <repository>
             <id>r.j.o-groups-public</id>

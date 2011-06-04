@@ -16,40 +16,24 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <!-- Put the fgconfig.properties file that lives in ../faregate-dao/config to your home/fgconfiguration folder -->
-                <value>file:${user.home}/fgconfiguration/fgconfig.properties</value>
+                <!-- Put the mentorconfig.properties file that lives in ../faregate-dao/config to your home/mentorconfiguration folder -->
+                <value>file:${user.home}/mentorconfiguration/mentorconfig.properties</value>
             </list>
         </property>
     </bean>
 
-    <bean id="fareGateDataSource"
+    <bean id="mentorDataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${fg.jdbc.driverclassname}"/>
-        <property name="url" value="${fg.jdbc.url}"/>
-        <property name="username" value="${fg.jdbc.username}"/>
-        <property name="password" value="${fg.jdbc.password}"/>
+        <property name="driverClassName" value="${mentor.jdbc.driverclassname}"/>
+        <property name="url" value="${mentor.jdbc.url}"/>
+        <property name="username" value="${mentor.jdbc.username}"/>
+        <property name="password" value="${mentor.jdbc.password}"/>
     </bean>
 
-    <bean id="coreDataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${core.jdbc.driverclassname}"/>
-        <property name="url" value="${core.jdbc.url}"/>
-        <property name="username" value="${core.jdbc.username}"/>
-        <property name="password" value="${core.jdbc.password}"/>
-    </bean>
-
-    <bean id="fareSaverDataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${faresaver.jdbc.driverclassname}"/>
-        <property name="url" value="${faresaver.jdbc.url}"/>
-        <property name="username" value="${faresaver.jdbc.username}"/>
-        <property name="password" value="${faresaver.jdbc.password}"/>
-    </bean>
-
-    <bean id="fareGateEntityManagerFactory"
+    <bean id="mentorEntityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="fareGatePU"/>
-        <property name="dataSource" ref="fareGateDataSource"/>
+        <property name="persistenceUnitName" value="mentorPU"/>
+        <property name="dataSource" ref="mentorDataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="false"/>
@@ -62,83 +46,24 @@
                 <entry key="hibernate.cache.use_query_cache" value="true"/>
                 <entry key="hibernate.show_sql" value="true"/>
                 <entry key="hibernate.format_sql" value="true"/>
-                <entry key="hibernate.dialect" value="${fg.hibernate.dialect}"/>
+                <entry key="hibernate.dialect" value="${mentor.hibernate.dialect}"/>
                 <entry key="hibernate.generate_statistics" value="true"/>
                 <entry key="hibernate.jdbc.batch_size" value="0"/>
             </map>
         </property>
     </bean>
 
-    <bean id="coreEntityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="corePU"/>
-        <property name="dataSource" ref="coreDataSource"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="false"/>
-            </bean>
-        </property>
-        <property name="jpaPropertyMap">
-            <map>
-                <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
-                <entry key="hibernate.cache.use_second_level_cache" value="true"/>
-                <entry key="hibernate.cache.use_query_cache" value="true"/>
-                <entry key="hibernate.show_sql" value="true"/>
-                <entry key="hibernate.format_sql" value="true"/>
-                <entry key="hibernate.dialect" value="${core.hibernate.dialect}"/>
-                <entry key="hibernate.generate_statistics" value="true"/>
-                <entry key="hibernate.jdbc.batch_size" value="0"/>
-            </map>
-        </property>
+    <bean id="mentorTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="mentorEntityManagerFactory"/>
     </bean>
 
-    <bean id="fareSaverEntityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="fareSaverPU"/>
-        <property name="dataSource" ref="fareSaverDataSource"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="false"/>
-            </bean>
-        </property>
-        <property name="jpaPropertyMap">
-            <map>
-                <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
-                <entry key="hibernate.cache.use_second_level_cache" value="true"/>
-                <entry key="hibernate.cache.use_query_cache" value="true"/>
-                <entry key="hibernate.show_sql" value="true"/>
-                <entry key="hibernate.format_sql" value="true"/>
-                <entry key="hibernate.dialect" value="${faresaver.hibernate.dialect}"/>
-                <entry key="hibernate.generate_statistics" value="true"/>
-                <entry key="hibernate.jdbc.batch_size" value="0"/>
-            </map>
-        </property>
-    </bean>
+    <context:component-scan base-package="com.travel.mentor.dao.assemble"/>
 
-    <bean id="fareGateTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="fareGateEntityManagerFactory"/>
-    </bean>
-
-    <bean id="fareSaverTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="fareSaverEntityManagerFactory"/>
-    </bean>
-
-    <bean id="coreTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="coreEntityManagerFactory"/>
-    </bean>
-
-    <context:component-scan base-package="net.flitech.faregate.dao.assemble"/>
-
-    <context:component-scan base-package="com.nz.travel.mentor.util">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
-    </context:component-scan>
-    <context:component-scan base-package="net.flitech.faregate.dao">
+    <context:component-scan base-package="com.travel.mentor.dao">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 
-    <tx:annotation-driven transaction-manager="fareGateTransactionManager"/>
-    <tx:annotation-driven transaction-manager="fareSaverTransactionManager"/>
-    <tx:annotation-driven transaction-manager="coreTransactionManager"/>
+    <tx:annotation-driven transaction-manager="mentorTransactionManager"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
@@ -148,23 +73,6 @@
         <property name="configLocation">
             <value>classpath:ehcache.xml</value>
         </property>
-    </bean>
-
-    <bean id="citiesCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheManager" ref="cacheManager"/>
-        <property name="cacheName" value="cities"/>
-    </bean>
-    <bean id="flightsDataCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheManager" ref="cacheManager"/>
-        <property name="cacheName" value="flightData"/>
-    </bean>
-    <bean id="sitesCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheManager" ref="cacheManager"/>
-        <property name="cacheName" value="sites"/>
-    </bean>
-    <bean id="faresCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
-        <property name="cacheManager" ref="cacheManager"/>
-        <property name="cacheName" value="fares"/>
     </bean>
 
 

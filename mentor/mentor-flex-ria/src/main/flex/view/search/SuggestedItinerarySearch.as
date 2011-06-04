@@ -43,18 +43,18 @@ import vo.SuggestedItinerarySearchVO;
 [Bindable] private var selectLocationCheckBox5:CheckBox = new CheckBox();
 [Bindable] private var selectLocationCheckBox6:CheckBox = new CheckBox();
  
-[Bindable] private var selectableActivitiesVO1:SelectableVO;
-[Bindable] private var selectableActivitiesVO2:SelectableVO;
-[Bindable] private var selectableActivitiesVO3:SelectableVO;
-[Bindable] private var selectableActivitiesVO4:SelectableVO;
-[Bindable] private var selectableActivitiesVO5:SelectableVO;
-
-[Bindable] private var selectableLocationsVO1:SelectableVO;
-[Bindable] private var selectableLocationsVO2:SelectableVO;
-[Bindable] private var selectableLocationsVO3:SelectableVO;
-[Bindable] private var selectableLocationsVO4:SelectableVO;
-[Bindable] private var selectableLocationsVO5:SelectableVO;
-[Bindable] private var selectableLocationsVO6:SelectableVO;
+//[Bindable] private var selectableActivitiesVO1:SelectableVO;
+//[Bindable] private var selectableActivitiesVO2:SelectableVO;
+//[Bindable] private var selectableActivitiesVO3:SelectableVO;
+//[Bindable] private var selectableActivitiesVO4:SelectableVO;
+//[Bindable] private var selectableActivitiesVO5:SelectableVO;
+//
+//[Bindable] private var selectableLocationsVO1:SelectableVO;
+//[Bindable] private var selectableLocationsVO2:SelectableVO;
+//[Bindable] private var selectableLocationsVO3:SelectableVO;
+//[Bindable] private var selectableLocationsVO4:SelectableVO;
+//[Bindable] private var selectableLocationsVO5:SelectableVO;
+//[Bindable] private var selectableLocationsVO6:SelectableVO;
 
 private function init():void {					
     validatorArr = new Array();    
@@ -69,34 +69,34 @@ private function init():void {
     childrenComboBox.dataProvider = WidgetConstants.getPaxSelectableData();
     infantsComboBox.dataProvider = WidgetConstants.getPaxSelectableData();        
     
-    selectableActivitiesVO1 = new SelectableVO(true, 1, "Fishing");
-    selectableActivitiesVO2 = new SelectableVO(true, 2, "Skiing");
-    selectableActivitiesVO3 = new SelectableVO(true, 3, "Sky diving");
-    selectableActivitiesVO4 = new SelectableVO(true, 4, "Walks");
-    selectableActivitiesVO5 = new SelectableVO(true, 5, "Wine tours");    
+//    selectableActivitiesVO1 = new SelectableVO(true, 1, "Fishing");
+//    selectableActivitiesVO2 = new SelectableVO(true, 2, "Skiing");
+//    selectableActivitiesVO3 = new SelectableVO(true, 3, "Sky diving");
+//    selectableActivitiesVO4 = new SelectableVO(true, 4, "Walks");
+//    selectableActivitiesVO5 = new SelectableVO(true, 5, "Wine tours");    
         
     activitiesDataGridProvider = new ArrayCollection();
-    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox1, colId:selectableActivitiesVO1.id, colDescription: selectableActivitiesVO1.description});
-    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox2, colId:selectableActivitiesVO2.id, colDescription: selectableActivitiesVO2.description});
-    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox3, colId:selectableActivitiesVO3.id, colDescription: selectableActivitiesVO3.description});
-    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox4, colId:selectableActivitiesVO4.id, colDescription: selectableActivitiesVO4.description});
-    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox5, colId:selectableActivitiesVO5.id, colDescription: selectableActivitiesVO5.description});
+//    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox1, colId:selectableActivitiesVO1.id, colDescription: selectableActivitiesVO1.description});
+//    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox2, colId:selectableActivitiesVO2.id, colDescription: selectableActivitiesVO2.description});
+//    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox3, colId:selectableActivitiesVO3.id, colDescription: selectableActivitiesVO3.description});
+//    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox4, colId:selectableActivitiesVO4.id, colDescription: selectableActivitiesVO4.description});
+//    activitiesDataGridProvider.addItem({colSelectable:selectActivityCheckBox5, colId:selectableActivitiesVO5.id, colDescription: selectableActivitiesVO5.description});
     activitiesToIncludeGrid.dataProvider = activitiesDataGridProvider;
     
-    selectableLocationsVO1 = new SelectableVO(true, 1, "Auckland");
-    selectableLocationsVO2 = new SelectableVO(true, 2, "Christchurch");
-    selectableLocationsVO3 = new SelectableVO(true, 3, "Nelson");
-    selectableLocationsVO4 = new SelectableVO(true, 4, "Rotorua");
-    selectableLocationsVO5 = new SelectableVO(true, 5, "Queenstown"); 
-    selectableLocationsVO6 = new SelectableVO(true, 6, "Wanaka"); 
+//    selectableLocationsVO1 = new SelectableVO(true, 1, "Auckland");
+//    selectableLocationsVO2 = new SelectableVO(true, 2, "Christchurch");
+//    selectableLocationsVO3 = new SelectableVO(true, 3, "Nelson");
+//    selectableLocationsVO4 = new SelectableVO(true, 4, "Rotorua");
+//    selectableLocationsVO5 = new SelectableVO(true, 5, "Queenstown"); 
+//    selectableLocationsVO6 = new SelectableVO(true, 6, "Wanaka"); 
     
     locationsDataGridProvider = new ArrayCollection(); 
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox1, colId:selectableLocationsVO1.id, colDescription: selectableLocationsVO1.description});
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox2, colId:selectableLocationsVO2.id, colDescription: selectableLocationsVO2.description});
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox3, colId:selectableLocationsVO3.id, colDescription: selectableLocationsVO3.description});
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox4, colId:selectableLocationsVO4.id, colDescription: selectableLocationsVO4.description});
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox5, colId:selectableLocationsVO5.id, colDescription: selectableLocationsVO5.description});
-    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox6, colId:selectableLocationsVO6.id, colDescription: selectableLocationsVO6.description});    
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox1, colId:selectableLocationsVO1.id, colDescription: selectableLocationsVO1.description});
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox2, colId:selectableLocationsVO2.id, colDescription: selectableLocationsVO2.description});
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox3, colId:selectableLocationsVO3.id, colDescription: selectableLocationsVO3.description});
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox4, colId:selectableLocationsVO4.id, colDescription: selectableLocationsVO4.description});
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox5, colId:selectableLocationsVO5.id, colDescription: selectableLocationsVO5.description});
+//    locationsDataGridProvider.addItem({colSelectable:selectLocationCheckBox6, colId:selectableLocationsVO6.id, colDescription: selectableLocationsVO6.description});    
     locationsToIncludeGrid.dataProvider = locationsDataGridProvider;  
      
     totalPaxTextBox.text = "0";  

@@ -6,12 +6,12 @@
   <component name="ArtifactManager">
     <artifact type="war" name="mentor-java-web:war">
       <output-path>$PROJECT_DIR$/mentor-java-web/target</output-path>
-      <root id="archive" name="mentor-java-web-1.0.war">
+      <root id="archive" name="mentorweb.war">
         <element id="artifact" artifact-name="mentor-java-web:war exploded" />
       </root>
     </artifact>
-    <artifact type="exploded-war" name="mentor-java-web:war exploded">
-      <output-path>$PROJECT_DIR$/mentor-java-web/target/mentor-java-web-1.0</output-path>
+    <artifact type="exploded-war" build-on-make="true" name="mentor-java-web:war exploded">
+      <output-path>$PROJECT_DIR$/mentor-java-web/target/mentorweb</output-path>
       <root id="root">
         <element id="javaee-facet-resources" facet="mentor-java-web/web/Web" />
         <element id="directory" name="WEB-INF">
@@ -165,6 +165,7 @@
   <component name="CopyrightManager" default="">
     <module2copyright />
   </component>
+  <component name="DataSourceManagerImpl" compressed="false" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -230,6 +231,28 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/mentor-flex-ria/pom.xml" />
       </list>
+    </option>
+  </component>
+  <component name="NullableNotNullManager">
+    <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
+    <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
+    <option name="myNullables">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
+        </list>
+      </value>
+    </option>
+    <option name="myNotNulls">
+      <value>
+        <list size="3">
+          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
+          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
+          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
+        </list>
+      </value>
     </option>
   </component>
   <component name="Palette2">
@@ -2050,6 +2073,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.5.RELEASE/spring-webmvc-3.0.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: postgresql:postgresql:9.0-801.jdbc4">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: wsdl4j:wsdl4j:1.6.2">
