@@ -6,8 +6,6 @@
     <persistence-unit name="mentorPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>com.travel.mentor.model.impl.User</class>
-
         <class>com.travel.mentor.type.impl.AccommodationSiteType</class>
         <class>com.travel.mentor.type.impl.ActivitySiteType</class>
         <class>com.travel.mentor.type.impl.RoomConfigurationType</class>
