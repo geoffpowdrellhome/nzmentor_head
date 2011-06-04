@@ -19,10 +19,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
     @Override
     public List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery) {
-
         Assert.notNull(findAllNamedQuery);
-
-        //List<BaseReferenceType> accommodationSiteTypeList =  em.createNamedQuery("AccommodationSiteType.findAll").getResultList();
         List<BaseReferenceType> accommodationSiteTypeList = em.createNamedQuery(findAllNamedQuery).getResultList();
         return referenceTypeAssembler.assembleToReferenceTypeDTOList(accommodationSiteTypeList);
     }
