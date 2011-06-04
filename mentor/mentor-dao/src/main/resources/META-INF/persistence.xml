@@ -8,8 +8,21 @@
 
         <class>com.travel.mentor.type.impl.AccommodationSiteType</class>
         <class>com.travel.mentor.type.impl.ActivitySiteType</class>
+        <class>com.travel.mentor.type.impl.ClimateConditionType</class>
+        <class>com.travel.mentor.type.impl.ClimateWindfactorType</class>
+        <class>com.travel.mentor.type.impl.ClothingType</class>
+        <class>com.travel.mentor.type.impl.EventType</class>
+        <class>com.travel.mentor.type.impl.FootwearType</class>
+        <class>com.travel.mentor.type.impl.HeadwearType</class>
+        <class>com.travel.mentor.type.impl.ItemType</class>
+        <class>com.travel.mentor.type.impl.LocationType</class>
+        <class>com.travel.mentor.type.impl.PopularityRankingType</class>
         <class>com.travel.mentor.type.impl.RoomConfigurationType</class>
         <class>com.travel.mentor.type.impl.RoomType</class>
+        <class>com.travel.mentor.type.impl.SiteType</class>
+        <class>com.travel.mentor.type.impl.SupplierType</class>
+        <class>com.travel.mentor.type.impl.TransferSiteType</class>
+        <class>com.travel.mentor.type.impl.VehicleHireSiteType</class>
 
         <properties>
             <property name="hibernate.cache.use_second_level_cache" value="true"/>
