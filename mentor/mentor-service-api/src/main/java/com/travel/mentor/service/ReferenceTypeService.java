@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface ReferenceTypeService {
 
-    List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery);
+    List<ReferenceTypeDTO> findAllAccommodationSiteTypes();
+    List<ReferenceTypeDTO> findAllActivitySiteTypes();
+    List<ReferenceTypeDTO> findAllRoomConfigurationTypes();
+    List<ReferenceTypeDTO> findAllRoomTypes();
 
 }

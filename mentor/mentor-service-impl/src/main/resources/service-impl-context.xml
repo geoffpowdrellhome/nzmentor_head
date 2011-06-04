@@ -51,22 +51,6 @@
         </cxf:features>
     </cxf:bus>
 
-    <bean id="outPasswordInterceptor" class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
-        <constructor-arg>
-            <map>
-                <entry key="action" value="UsernameToken"/>
-                <entry key="passwordType" value="PasswordText"/>
-                <entry key="signaturePropFile" value="..."/>
-                <entry key="user" value="anything"/>
-                <entry key="passwordCallbackRef">
-                    <ref bean="passwordCallback"/>
-                </entry>
-            </map>
-        </constructor-arg>
-    </bean>
-
-
-
     <util:set id="ignoredExceptionsForSearch">
         <value>net.flitech.faregate.ValidationException</value>
     </util:set>
