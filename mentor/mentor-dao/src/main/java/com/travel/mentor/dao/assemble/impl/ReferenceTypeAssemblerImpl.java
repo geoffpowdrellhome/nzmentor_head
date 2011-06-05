@@ -13,15 +13,34 @@ public class ReferenceTypeAssemblerImpl implements ReferenceTypeAssembler {
 
     @Override
     public List<ReferenceTypeDTO> assembleToReferenceTypeDTOList(List<BaseReferenceType> baseReferenceTypeList) {
-
         List<ReferenceTypeDTO> referenceTypeDTOList = new ArrayList<ReferenceTypeDTO>();
-
         for (BaseReferenceType baseReferenceType : baseReferenceTypeList) {
-            ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO(baseReferenceType.getId(), baseReferenceType.getName(), baseReferenceType.getDescription());
-            referenceTypeDTOList.add(referenceTypeDTO);
+            referenceTypeDTOList.add(assembleToReferenceTypeDTO(baseReferenceType));
         }
 
         return referenceTypeDTOList;
+    }
+
+    public ReferenceTypeDTO assembleToReferenceTypeDTO(BaseReferenceType baseReferenceType) {
+        return new ReferenceTypeDTO(baseReferenceType.getId(),
+                baseReferenceType.getName(),
+                baseReferenceType.getDescription(),
+                baseReferenceType.getClass().getName());
+    }
+
+    public BaseReferenceType assembleToReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO) {
+
+        BaseReferenceType baseReferenceType = null;
+        try {
+            baseReferenceType = (BaseReferenceType) Class.forName(referenceTypeDTO.getMappedDomainClassName()).newInstance();
+            baseReferenceType.setId(referenceTypeDTO.getId());
+            baseReferenceType.setDescription(referenceTypeDTO.getDescription());
+            baseReferenceType.setName(referenceTypeDTO.getName());
+            return baseReferenceType;
+        } catch (Exception ex) {
+            return null;
+        }
+
     }
 
 }

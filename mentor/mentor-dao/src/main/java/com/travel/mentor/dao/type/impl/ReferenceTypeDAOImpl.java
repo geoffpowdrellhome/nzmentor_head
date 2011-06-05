@@ -9,13 +9,12 @@ import com.travel.mentor.type.impl.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.lang.model.type.ReferenceType;
 import java.util.List;
-import org.springframework.util.Assert;
-import org.springframework.util.StopWatch;
-
 
 @Repository("referenceTypeDAO")
 @Transactional
@@ -31,6 +30,23 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         return referenceTypeAssembler.assembleToReferenceTypeDTOList(accommodationSiteTypeList);
     }
 
+    @Override
+    public void addReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
+        em.persist(baseReferenceType);
+    }
+
+    @Override
+    public void updateReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
+        em.merge(baseReferenceType);
+    }
+
+    @Override
+    public void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
+        em.remove(baseReferenceType);
+    }
 
     @SuppressWarnings("unchecked")
     @PostConstruct

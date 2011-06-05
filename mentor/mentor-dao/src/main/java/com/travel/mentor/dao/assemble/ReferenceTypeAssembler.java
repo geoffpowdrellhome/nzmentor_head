@@ -9,4 +9,8 @@ public interface ReferenceTypeAssembler {
 
     List<ReferenceTypeDTO> assembleToReferenceTypeDTOList(List<BaseReferenceType> baseReferenceTypeList);
 
+    ReferenceTypeDTO assembleToReferenceTypeDTO(BaseReferenceType baseReferenceType);
+
+    BaseReferenceType assembleToReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO);
+
 }

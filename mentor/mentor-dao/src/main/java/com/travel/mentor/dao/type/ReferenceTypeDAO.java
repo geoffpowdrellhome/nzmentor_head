@@ -8,4 +8,10 @@ public interface ReferenceTypeDAO {
 
     List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery);
 
+    void addReferenceType(ReferenceTypeDTO referenceTypeDTO);
+
+    void updateReferenceType(ReferenceTypeDTO referenceTypeDTO);
+
+    void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO);
+
 }

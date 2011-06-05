@@ -7,13 +7,15 @@ public class ReferenceTypeDTO implements Serializable {
     private Long id;
     private String name;
     private String description;
+    private String mappedDomainClassName;
 
     public ReferenceTypeDTO() {}
 
-    public ReferenceTypeDTO(Long _id, String _name, String _description) {
+    public ReferenceTypeDTO(Long _id, String _name, String _description, String _mappedDomainClassName) {
         this.id = _id;
         this.name = _name;
         this.description = _description;
+        this.mappedDomainClassName = _mappedDomainClassName;
     }
 
     public Long getId() {
@@ -40,4 +42,11 @@ public class ReferenceTypeDTO implements Serializable {
         this.description = description;
     }
 
+    public String getMappedDomainClassName() {
+        return mappedDomainClassName;
+    }
+
+    public void setMappedDomainClassName(String mappedDomainClassName) {
+        this.mappedDomainClassName = mappedDomainClassName;
+    }
 }
