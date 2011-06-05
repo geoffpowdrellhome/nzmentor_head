@@ -19,12 +19,38 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
         Assert.assertTrue(referenceTypeDTOList.size() != 0);
     }
 
-
     @Test
     public void testGetAccommodationSiteTypes() {
         List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
         doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
     }
+
+    @Test
+    public void testAddAccommodationSiteType() {
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class.getName());
+        referenceTypeDAO.addReferenceType(referenceTypeDTO);
+    }
+
+    @Test
+    public void testDeleteAccommodationSiteType() {
+        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+        doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
+
+        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+        referenceTypeDAO.deleteReferenceType(referenceTypeDTO);
+    }
+
+    @Test
+    public void testUpdateAccommodationSiteType() {
+        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+        doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
+
+        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+        referenceTypeDTO.setName("update2");
+        referenceTypeDTO.setDescription("update2");
+        referenceTypeDAO.updateReferenceType(referenceTypeDTO);
+    }
+
 
     @Test
     public void testGetActivitySiteTypes() {
@@ -37,6 +63,33 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
         List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
         doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
     }
+
+    @Test
+    public void testAddClimateConditionType() {
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class.getName());
+        referenceTypeDAO.addReferenceType(referenceTypeDTO);
+    }
+
+    @Test
+    public void testDeleteClimateConditionType() {
+        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+        doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
+
+        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+        referenceTypeDAO.deleteReferenceType(referenceTypeDTO);
+    }
+
+    @Test
+    public void testUpdateClimateConditionType() {
+        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAllReferenceTypes(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+        doPostRetrievalAssertsExpectingReferenceTypes(referenceTypeDTOList);
+
+        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+        referenceTypeDTO.setName("update2");
+        referenceTypeDTO.setDescription("update2");
+        referenceTypeDAO.updateReferenceType(referenceTypeDTO);
+    }
+
 
     @Test
     public void testGetClimateWindfactorTypes() {

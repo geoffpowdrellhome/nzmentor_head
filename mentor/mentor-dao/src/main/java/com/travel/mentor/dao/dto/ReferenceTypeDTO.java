@@ -18,6 +18,12 @@ public class ReferenceTypeDTO implements Serializable {
         this.mappedDomainClassName = _mappedDomainClassName;
     }
 
+    public ReferenceTypeDTO(String _name, String _description, String _mappedDomainClassName) {
+        this.name = _name;
+        this.description = _description;
+        this.mappedDomainClassName = _mappedDomainClassName;
+    }
+
     public Long getId() {
         return id;
     }

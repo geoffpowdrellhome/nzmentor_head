@@ -28,19 +28,24 @@ public class ReferenceTypeAssemblerImpl implements ReferenceTypeAssembler {
                 baseReferenceType.getClass().getName());
     }
 
-    public BaseReferenceType assembleToReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO) {
-
-        BaseReferenceType baseReferenceType = null;
+    public BaseReferenceType instantiateReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO) {
         try {
-            baseReferenceType = (BaseReferenceType) Class.forName(referenceTypeDTO.getMappedDomainClassName()).newInstance();
+            return (BaseReferenceType) Class.forName(referenceTypeDTO.getMappedDomainClassName()).newInstance();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public BaseReferenceType assembleToReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO) {
+        BaseReferenceType baseReferenceType = instantiateReferenceTypeDomainObject(referenceTypeDTO);
+        if (baseReferenceType != null) {
             baseReferenceType.setId(referenceTypeDTO.getId());
             baseReferenceType.setDescription(referenceTypeDTO.getDescription());
             baseReferenceType.setName(referenceTypeDTO.getName());
             return baseReferenceType;
-        } catch (Exception ex) {
-            return null;
         }
 
+        return null;
     }
 
 }

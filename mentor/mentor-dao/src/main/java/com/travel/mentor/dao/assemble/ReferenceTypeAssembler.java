@@ -13,4 +13,6 @@ public interface ReferenceTypeAssembler {
 
     BaseReferenceType assembleToReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO);
 
+    BaseReferenceType instantiateReferenceTypeDomainObject(ReferenceTypeDTO referenceTypeDTO);
+
 }

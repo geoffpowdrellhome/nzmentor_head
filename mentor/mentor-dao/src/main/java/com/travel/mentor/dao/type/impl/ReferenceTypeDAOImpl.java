@@ -44,7 +44,8 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
     @Override
     public void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO) {
-        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
+        BaseReferenceType baseReferenceType = referenceTypeAssembler.instantiateReferenceTypeDomainObject(referenceTypeDTO);
+        baseReferenceType = em.find(baseReferenceType.getClass(), referenceTypeDTO.getId());
         em.remove(baseReferenceType);
     }
 

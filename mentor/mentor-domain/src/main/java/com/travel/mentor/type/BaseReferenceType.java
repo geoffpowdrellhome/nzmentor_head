@@ -2,15 +2,14 @@ package com.travel.mentor.type;
 
 import com.travel.mentor.model.impl.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class BaseReferenceType extends Audited {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
     private Long id;
 
     @Column(name = "name", nullable = false)

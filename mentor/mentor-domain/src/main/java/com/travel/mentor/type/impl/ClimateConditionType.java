@@ -4,12 +4,10 @@ import com.travel.mentor.type.BaseReferenceType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(schema = "public", name = "activity_site_type")
+@Table(schema = "public", name = "climate_condition_type")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="ClimateConditionType.findAll", query="SELECT o FROM ClimateConditionType o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.climate_condition_type_id_seq", allocationSize = 1)
