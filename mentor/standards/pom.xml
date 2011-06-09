@@ -30,14 +30,6 @@
         <cxf-xjc-ts.version>2.2.9</cxf-xjc-ts.version>        
         <ehcache-spring-annotations.version>1.1.2</ehcache-spring-annotations.version>
 
-
-        <flex.sdk.version>3.5.0.12683</flex.sdk.version>
-        <flex.datavisualization.version>4.0.0.13555</flex.datavisualization.version>
-        <flex.version>3.3.0.4852</flex.version>
-        <flex-info-archetypes-mojo.version>2.0.3</flex-info-archetypes-mojo.version>
-        <flex-info-compiler-mojo.version>2.0.3</flex-info-compiler-mojo.version>
-        <google-maps-swc.version>1.18</google-maps-swc.version>
-
         <hamcrest.version>1.1</hamcrest.version>
 
         <!-- hibernate -->

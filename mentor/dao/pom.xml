@@ -5,9 +5,9 @@
 
     <parent>
         <groupId>com.travel.mentor</groupId>
-        <artifactId>mentor-standards</artifactId>
+        <artifactId>standards</artifactId>
         <version>1.0</version>
-        <relativePath>../mentor-standards</relativePath>
+        <relativePath>../standards</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -22,14 +22,14 @@
         <!-- module/jar dependencies -->
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-core</artifactId>
+            <artifactId>core</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-domain</artifactId>
+            <artifactId>domain</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>

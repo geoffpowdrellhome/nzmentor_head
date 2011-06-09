@@ -250,6 +250,127 @@
         </element>
       </root>
     </artifact>
+    <artifact type="exploded-war" name="maint-web:maint-web exploded">
+      <root id="root">
+        <element id="javaee-facet-resources" facet="maint-web/web/maint-web" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="maint-web" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="archive" name="service-api-1.0.jar">
+              <element id="module-output" name="service-api" />
+            </element>
+            <element id="archive" name="core-1.0.jar">
+              <element id="module-output" name="core" />
+            </element>
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/joda-time/joda-time/1.6.2/joda-time-1.6.2.jar" />
+            <element id="archive" name="domain-1.0.jar">
+              <element id="module-output" name="domain" />
+            </element>
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/joda-time/joda-time-hibernate/1.2/joda-time-hibernate-1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-annotations/3.5.4-Final/hibernate-annotations-3.5.4-Final.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.5.4-Final/hibernate-core-3.5.4-Final.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.1/commons-collections-3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/javax/transaction/jta/1.1/jta-1.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final.jar" />
+            <element id="archive" name="dao-1.0.jar">
+              <element id="module-output" name="dao" />
+            </element>
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/com/googlecode/ehcache-spring-annotations/ehcache-spring-annotations/1.1.2/ehcache-spring-annotations-1.1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.5.RELEASE/spring-beans-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-core/3.0.5.RELEASE/spring-core-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-asm/3.0.5.RELEASE/spring-asm-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-aop/3.0.5.RELEASE/spring-aop-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.1.0/ehcache-core-2.1.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/hsqldb/hsqldb/1.8.0.10/hsqldb-1.8.0.10.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-tx/3.0.5.RELEASE/spring-tx-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-context/3.0.5.RELEASE/spring-context-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-expression/3.0.3.RELEASE/spring-expression-3.0.3.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/3.0.5.RELEASE/spring-jdbc-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-orm/3.0.5.RELEASE/spring-orm-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-context-support/3.0.5.RELEASE/spring-context-support-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/3.5.4-Final/hibernate-entitymanager-3.5.4-Final.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/cglib/cglib/2.2/cglib-2.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/asm/asm/3.3/asm-3.3.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hibernate/hibernate-ehcache/3.5.6-Final/hibernate-ehcache-3.5.6-Final.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.5.0/ehcache-1.5.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/net/sf/jsr107cache/jsr107cache/1.0/jsr107cache-1.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-frontend-jaxrs/2.3.1/cxf-rt-frontend-jaxrs-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-common-utilities/2.3.1/cxf-common-utilities-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/ws/commons/schema/XmlSchema/1.4.7/XmlSchema-1.4.7.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/codehaus/woodstox/woodstox-core-asl/4.0.8/woodstox-core-asl-4.0.8.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/codehaus/woodstox/stax2-api/3.0.2/stax2-api-3.0.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-api/2.3.1/cxf-api-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/neethi/neethi/2.0.4/neethi-2.0.4.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/wsdl4j/wsdl4j/1.6.2/wsdl4j-1.6.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-common-schemas/2.3.1/cxf-common-schemas-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-core/2.3.1/cxf-rt-core-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/geronimo/specs/geronimo-javamail_1.4_spec/1.7.1/geronimo-javamail_1.4_spec-1.7.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-xml/2.3.1/cxf-rt-bindings-xml-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-transports-http/2.3.1/cxf-rt-transports-http-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-web/3.0.5.RELEASE/spring-web-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-databinding-aegis/2.3.1/cxf-rt-databinding-aegis-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/codehaus/jettison/jettison/1.2/jettison-1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/xmlbeans/xmlbeans/2.4.0/xmlbeans-2.4.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-transports-http-jetty/2.3.1/cxf-rt-transports-http-jetty-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/7.2.0.v20101020/jetty-server-7.2.0.v20101020.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-continuation/7.2.0.v20101020/jetty-continuation-7.2.0.v20101020.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-http/7.2.0.v20101020/jetty-http-7.2.0.v20101020.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-io/7.2.0.v20101020/jetty-io-7.2.0.v20101020.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-util/7.2.0.v20101020/jetty-util-7.2.0.v20101020.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/geronimo/specs/geronimo-servlet_3.0_spec/1.0/geronimo-servlet_3.0_spec-1.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-frontend-jaxws/2.3.1/cxf-rt-frontend-jaxws-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-soap/2.3.1/cxf-rt-bindings-soap-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-tools-common/2.3.1/cxf-tools-common-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-databinding-jaxb/2.3.1/cxf-rt-databinding-jaxb-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-frontend-simple/2.3.1/cxf-rt-frontend-simple-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-addr/2.3.1/cxf-rt-ws-addr-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-security/2.3.1/cxf-rt-ws-security-2.3.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/ws/security/wss4j/1.5.10/wss4j-1.5.10.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/santuario/xmlsec/1.4.4/xmlsec-1.4.4.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/xalan/xalan/2.7.1/xalan-2.7.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/xalan/serializer/2.7.1/serializer-2.7.1.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk15/1.45/bcprov-jdk15-1.45.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jvnet/jaxb2_commons/jaxb2-basics/0.6.0/jaxb2-basics-0.6.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jvnet/jaxb2_commons/jaxb2-basics-runtime/0.6.0/jaxb2-basics-runtime-0.6.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jvnet/jaxb2_commons/jaxb2-basics-tools/0.6.0/jaxb2-basics-tools-0.6.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.2/commons-lang-2.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.0.5.RELEASE/spring-security-core-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/aspectj/aspectjrt/1.6.8/aspectjrt-1.6.8.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/aspectj/aspectjweaver/1.6.8/aspectjweaver-1.6.8.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/3.0.5.RELEASE/spring-webmvc-3.0.5.RELEASE.jar" />
+            <element id="archive" name="service-impl-1.0.jar">
+              <element id="module-output" name="service-impl" />
+            </element>
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/commons/commons-io/1.3.2/commons-io-1.3.2.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/spring-jms/3.0.5.RELEASE/spring-jms-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jmock/jmock-cglib/1.2.0/jmock-cglib-1.2.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/jmock/jmock-core/1.2.0/jmock-core-1.2.0.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/3.0.5.RELEASE/spring-security-config-3.0.5.RELEASE.jar" />
+            <element id="file-copy" path="$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.0.5.RELEASE/spring-security-web-3.0.5.RELEASE.jar" />
+          </element>
+        </element>
+      </root>
+    </artifact>
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
@@ -264,19 +385,7 @@
       <entry name=".+\.(gif|png|jpeg|jpg)" />
     </resourceExtensions>
     <wildcardResourcePatterns>
-      <entry name="?*.properties" />
-      <entry name="?*.xml" />
-      <entry name="?*.gif" />
-      <entry name="?*.png" />
-      <entry name="?*.jpeg" />
-      <entry name="?*.jpg" />
-      <entry name="?*.html" />
-      <entry name="?*.dtd" />
-      <entry name="?*.tld" />
-      <entry name="?*.ftl" />
-      <entry name="?*.js" />
-      <entry name="?*.css" />
-      <entry name="?*.swf" />
+      <entry name="!?*.java" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -542,7 +651,6 @@
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/dao/dao.iml" filepath="$PROJECT_DIR$/dao/dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flex-core/flex-core.iml" filepath="$PROJECT_DIR$/flex-core/flex-core.iml" group="flex-artifacts" />
       <module fileurl="file://$PROJECT_DIR$/maint-web/maint-web.iml" filepath="$PROJECT_DIR$/maint-web/maint-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/mentor-toplevel-pom.iml" filepath="$PROJECT_DIR$/mentor-toplevel-pom.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-api/service-api.iml" filepath="$PROJECT_DIR$/service-api/service-api.iml" />

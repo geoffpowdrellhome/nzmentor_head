@@ -4,38 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.nz.travel.mentor</groupId>
+    <groupId>com.travel.mentor</groupId>
     <artifactId>mentor-toplevel-pom</artifactId>
     <name>The parent pom for the mentor application</name>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
     <modules> 
-        <module>mentor-standards</module>
-        <module>mentor-core</module>		
-        <module>mentor-domain</module>
-        <module>mentor-dao</module>
-        <module>mentor-service-api</module>
-        <module>mentor-service-impl</module>
+        <module>standards</module>
+        <module>core</module>
+        <module>domain</module>
+        <module>dao</module>
+        <module>service-api</module>
+        <module>service-impl</module>
 
-        <module>mentor-java-web</module>
+        <module>maint-web</module>
 
-        <!-- todo: create CXF/jaxb bound models from WSDL
-            <module>model-faregate</module>
-            <module>model-galileo</module>
-            <module>model-jetstar</module>
-            <module>model-virgin</module>
-        -->
-        <!-- todo: create service modules
-            <module>service-faregate</module>
-            <module>service-galileo</module>
-            <module>service-jetstar</module>
-            <module>service-virgin</module>
-            <module>web</module>
-        -->
-        <!-- todo: build release package from modules
-       <module>build</module>
-        -->
     </modules>
 
 </project>

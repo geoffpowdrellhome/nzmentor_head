@@ -20,35 +20,35 @@
         <!-- module/jar dependencies -->
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-core</artifactId>
+            <artifactId>core</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-domain</artifactId>
+            <artifactId>domain</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>        
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-dao</artifactId>
+            <artifactId>dao</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-service-api</artifactId>
+            <artifactId>service-api</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.travel.mentor</groupId>
-            <artifactId>mentor-service-impl</artifactId>
+            <artifactId>service-impl</artifactId>
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
