@@ -18,7 +18,7 @@
     <orderEntry type="module" module-name="core" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
     <orderEntry type="module" module-name="domain" />
-    <orderEntry type="module" module-name="mentor-core" />
+    <orderEntry type="library" name="Maven: com.travel.mentor:mentor-core:1.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time-hibernate:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-annotations:3.5.4-Final" level="project" />
