@@ -27,7 +27,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="mentor-core" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
-    <orderEntry type="module" module-name="mentor-domain" />
+    <orderEntry type="library" name="Maven: com.travel.mentor:mentor-domain:1.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time-hibernate:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-annotations:3.5.4-Final" level="project" />
@@ -68,7 +68,7 @@
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: net.sf.jsr107cache:jsr107cache:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-all:1.1" level="project" />
-    <orderEntry type="module" module-name="mentor-service-api" />
+    <orderEntry type="library" name="Maven: com.travel.mentor:mentor-service-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxrs:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-common-utilities:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.ws.commons.schema:XmlSchema:1.4.7" level="project" />
@@ -113,7 +113,7 @@
     <orderEntry type="library" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-tools:0.6.0" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.2" level="project" />
-    <orderEntry type="module" module-name="mentor-service-impl" />
+    <orderEntry type="library" name="Maven: com.travel.mentor:mentor-service-impl:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-io:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jms:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.0.5.RELEASE" level="project" />

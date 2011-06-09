@@ -151,9 +151,7 @@
               <element id="module-output" name="mentor-core" />
             </element>
             <element id="library" level="project" name="Maven: joda-time:joda-time:1.6.2" />
-            <element id="archive" name="mentor-domain.jar">
-              <element id="module-output" name="mentor-domain" />
-            </element>
+            <element id="library" level="project" name="Maven: com.travel.mentor:mentor-domain:1.0" />
             <element id="library" level="project" name="Maven: joda-time:joda-time-hibernate:1.2" />
             <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-annotations:3.5.4-Final" />
@@ -193,9 +191,7 @@
             <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
             <element id="library" level="project" name="Maven: net.sf.jsr107cache:jsr107cache:1.0" />
             <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-all:1.1" />
-            <element id="archive" name="mentor-service-api-1.0.jar">
-              <element id="module-output" name="mentor-service-api" />
-            </element>
+            <element id="library" level="project" name="Maven: com.travel.mentor:mentor-service-api:1.0" />
             <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxrs:2.3.1" />
             <element id="library" level="project" name="Maven: org.apache.cxf:cxf-common-utilities:2.3.1" />
             <element id="library" level="project" name="Maven: org.apache.ws.commons.schema:XmlSchema:1.4.7" />
@@ -240,9 +236,7 @@
             <element id="library" level="project" name="Maven: org.jvnet.jaxb2_commons:jaxb2-basics-tools:0.6.0" />
             <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.7.0" />
             <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.2" />
-            <element id="archive" name="mentor-service-impl-1.0.jar">
-              <element id="module-output" name="mentor-service-impl" />
-            </element>
+            <element id="library" level="project" name="Maven: com.travel.mentor:mentor-service-impl:1.0" />
             <element id="library" level="project" name="Maven: org.apache.commons:commons-io:1.3.2" />
             <element id="library" level="project" name="Maven: org.springframework:spring-jms:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:3.0.5.RELEASE" />
@@ -326,6 +320,20 @@
           <module name="mentor-dao">
             <files>
               <file url="file://$PROJECT_DIR$/mentor-dao/src/main/resources/datasource-context.xml" />
+            </files>
+          </module>
+          <module name="mentor-java-web">
+            <files>
+              <file url="file://$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/applicationContext-security.xml" />
+              <file url="file://$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/applicationContext-service.xml" />
+              <file url="file://$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/jndi-config.xml" />
+              <file url="file://$PROJECT_DIR$/mentor-java-web/src/main/webapp/WEB-INF/presentation-servlet.xml" />
+            </files>
+          </module>
+          <module name="mentor-service-impl">
+            <files>
+              <file url="file://$PROJECT_DIR$/mentor-service-impl/src/main/resources/service-impl-context.xml" />
+              <file url="file://$PROJECT_DIR$/mentor-service-impl/src/main/resources/services-context.xml" />
             </files>
           </module>
         </modules>
@@ -539,12 +547,7 @@
       <module fileurl="file://$PROJECT_DIR$/flex-core/flex-core.iml" filepath="$PROJECT_DIR$/flex-core/flex-core.iml" group="flex-artifacts" />
       <module fileurl="file://$PROJECT_DIR$/maint-web/maint-web.iml" filepath="$PROJECT_DIR$/maint-web/maint-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/mentor-core/mentor-core.iml" filepath="$PROJECT_DIR$/mentor-core/mentor-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mentor-domain/mentor-domain.iml" filepath="$PROJECT_DIR$/mentor-domain/mentor-domain.iml" group="java-artifacts" />
       <module fileurl="file://$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" filepath="$PROJECT_DIR$/mentor-flex-ria/mentor-flex-ria.iml" group="flex-artifacts" />
-      <module fileurl="file://$PROJECT_DIR$/mentor-java-web/mentor-java-web.iml" filepath="$PROJECT_DIR$/mentor-java-web/mentor-java-web.iml" group="java-artifacts" />
-      <module fileurl="file://$PROJECT_DIR$/mentor-service-api/mentor-service-api.iml" filepath="$PROJECT_DIR$/mentor-service-api/mentor-service-api.iml" group="java-artifacts" />
-      <module fileurl="file://$PROJECT_DIR$/mentor-service-impl/mentor-service-impl.iml" filepath="$PROJECT_DIR$/mentor-service-impl/mentor-service-impl.iml" group="java-artifacts" />
-      <module fileurl="file://$PROJECT_DIR$/mentor-standards/mentor-standards.iml" filepath="$PROJECT_DIR$/mentor-standards/mentor-standards.iml" />
       <module fileurl="file://$PROJECT_DIR$/mentor-toplevel-pom.iml" filepath="$PROJECT_DIR$/mentor-toplevel-pom.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-api/service-api.iml" filepath="$PROJECT_DIR$/service-api/service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/service-impl/service-impl.iml" filepath="$PROJECT_DIR$/service-impl/service-impl.iml" />
@@ -1199,17 +1202,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.oracle:ojdbc6:11.1.0.7.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/oracle/ojdbc6/11.1.0.7.0/ojdbc6-11.1.0.7.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/oracle/ojdbc6/11.1.0.7.0/ojdbc6-11.1.0.7.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/oracle/ojdbc6/11.1.0.7.0/ojdbc6-11.1.0.7.0-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: com.sun.xml.bind:jaxb-impl:2.1.13">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar!/" />
@@ -1230,6 +1222,39 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-dao/1.0/mentor-dao-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.travel.mentor:mentor-domain:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-domain/1.0/mentor-domain-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.travel.mentor:mentor-service-api:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.travel.mentor:mentor-service-impl:1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: commons-beanutils:commons-beanutils:1.7.0">
