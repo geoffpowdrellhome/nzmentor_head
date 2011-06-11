@@ -1,4 +1,4 @@
-package com.travel.mentor.model.impl;
+package com.travel.mentor.model.base;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

@@ -13,17 +13,12 @@ import javax.persistence.*;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "AccommodationSite.findAll", query = "SELECT o FROM AccommodationSite o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.accommodation_site_id_seq", allocationSize = 1)
-public class AccommodationSite extends Audited {
+public class AccommodationSite extends Site {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "description", nullable = false)
-    private String description;
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    private Long id;
+    //ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
     @ManyToOne
     @JoinColumn(name = "accommodation_site_type_id", referencedColumnName = "id")
@@ -36,30 +31,6 @@ public class AccommodationSite extends Audited {
     @ManyToOne
     @JoinColumn(name = "room_configuration_type_id", referencedColumnName = "id")
     private RoomConfigurationType roomConfigurationType;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public AccommodationSiteType getAccommodationSiteType() {
         return accommodationSiteType;

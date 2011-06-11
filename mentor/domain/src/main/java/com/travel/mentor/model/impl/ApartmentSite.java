@@ -1,5 +1,6 @@
 package com.travel.mentor.model.impl;
 
+import com.travel.mentor.model.base.Audited;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

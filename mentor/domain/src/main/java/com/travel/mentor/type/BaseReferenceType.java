@@ -1,6 +1,6 @@
 package com.travel.mentor.type;
 
-import com.travel.mentor.model.impl.Audited;
+import com.travel.mentor.model.base.Audited;
 
 import javax.persistence.*;
 

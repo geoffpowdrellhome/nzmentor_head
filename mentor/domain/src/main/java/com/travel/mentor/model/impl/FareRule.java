@@ -1,5 +1,6 @@
 package com.travel.mentor.model.impl;
 
+import com.travel.mentor.model.base.Audited;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 
@@ -8,8 +9,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Created by powdrelg

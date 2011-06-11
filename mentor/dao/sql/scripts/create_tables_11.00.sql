@@ -57,6 +57,7 @@ CREATE TABLE region
 (
 	id INTEGER NOT NULL DEFAULT nextval('region_id_seq'::regclass),
     name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
 	island_id INTEGER NOT NULL,
 	area_in_square_kms NUMERIC(10, 2) NOT NULL DEFAULT 0,
 	population NUMERIC(10, 2) NOT NULL DEFAULT 0,
@@ -197,7 +198,6 @@ CREATE TABLE site
 	id INTEGER NOT NULL DEFAULT nextval('site_id_seq'::regclass),
     name VARCHAR(50) NOT NULL,
     description VARCHAR(150) NOT NULL,
-    locality_description VARCHAR(50) NOT NULL,
 	location_id INTEGER NOT NULL,
 	site_type_id INTEGER NOT NULL,
 	longitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
@@ -1287,10 +1287,10 @@ CREATE INDEX activity_site_search_1 ON activity_site(name);
 
 
 /* user table */
-CREATE SEQUENCE system_user_id_seq INCREMENT 1;
-CREATE TABLE system_user
+CREATE SEQUENCE users_id_seq INCREMENT 1;
+CREATE TABLE users
 (
-	id INTEGER NOT NULL DEFAULT nextval('system_user_id_seq'::regclass),
+	id INTEGER NOT NULL DEFAULT nextval('users_id_seq'::regclass),
     username VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
     title VARCHAR(10) NOT NULL,
@@ -1302,17 +1302,17 @@ CREATE TABLE system_user
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE system_user ADD CONSTRAINT pk_system_user PRIMARY KEY (id);
+ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (id);
 
-CREATE UNIQUE INDEX ix_system_user_username ON system_user(username);
-CREATE INDEX system_user_search_1 ON system_user(username);
+CREATE UNIQUE INDEX ix_users_username ON users(username);
+CREATE INDEX users_search_1 ON users(username);
 
-INSERT INTO system_user(id, username, password, title, firstname, lastname)
-VALUES( nextval('system_user_id_seq'), 'donr', 'mtalford', 'Mr', 'Don', 'Rea');
-INSERT INTO system_user(id, username, password, title, firstname, lastname)
-VALUES( nextval('system_user_id_seq'), 'region1', 'region1', 'Mr', 'Region', 'Number1');
-INSERT INTO system_user(id, username, password, title, firstname, lastname)
-VALUES( nextval('system_user_id_seq'), 'supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
+INSERT INTO users(id, username, password, title, firstname, lastname)
+VALUES( nextval('users_id_seq'), 'donr', 'mtalford', 'Mr', 'Don', 'Rea');
+INSERT INTO users(id, username, password, title, firstname, lastname)
+VALUES( nextval('users_id_seq'), 'region1', 'region1', 'Mr', 'Region', 'Number1');
+INSERT INTO users(id, username, password, title, firstname, lastname)
+VALUES( nextval('users_id_seq'), 'supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
 
 
 
@@ -1351,7 +1351,7 @@ CREATE TABLE user_auth
 
 -- ALTER TABLE user_auth ADD CONSTRAINT pk_auth_role PRIMARY KEY (username, rolename);
 
-ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_system_username FOREIGN KEY (username) REFERENCES system_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_users_username FOREIGN KEY (username) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_auth_rolename FOREIGN KEY (rolename) REFERENCES auth_role(rolename) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_user_auth ON user_auth(username, rolename);
 
