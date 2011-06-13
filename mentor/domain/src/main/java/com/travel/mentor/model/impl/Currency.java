@@ -1,5 +1,6 @@
 package com.travel.mentor.model.impl;
 
+import com.travel.mentor.model.base.NameDescAudited;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,32 +10,22 @@ import javax.persistence.*;
 @Table(schema = "public", name = "currency")
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Currency.findAll", query = "SELECT o FROM Currency o order by o.name")
-public class Currency {
+@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.currency_id_seq", allocationSize = 1)
+public class Currency extends NameDescAudited {
 
     @Id
-    @Column(name = "code")
-    private String code;
-
-    @Column(name = "name")
-    private String name;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "symbol")
     private String symbol;
 
-    public String getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSymbol() {

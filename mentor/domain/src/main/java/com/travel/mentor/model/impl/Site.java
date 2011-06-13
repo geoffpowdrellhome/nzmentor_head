@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "public", name = "site")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
 public class Site extends NameDescAudited {
-
 
     @Id
     @Column(name = "id", nullable = false)

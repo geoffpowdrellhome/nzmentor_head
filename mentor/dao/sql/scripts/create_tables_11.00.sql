@@ -1,16 +1,25 @@
 ﻿BEGIN;
 
 /* currency table */
+CREATE SEQUENCE currency_id_seq INCREMENT 1;
 CREATE TABLE currency
 (
+	id INTEGER NOT NULL DEFAULT nextval('currency_id_seq'::regclass),
 	code VARCHAR(10) NOT NULL,
+	name VARCHAR(30) NOT NULL,
+	description VARCHAR(150) NOT NULL,
 	symbol VARCHAR(10) NOT NULL,
-	name VARCHAR(30) NOT NULL
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE currency ADD CONSTRAINT pk_currency PRIMARY KEY (code);
+ALTER TABLE currency ADD CONSTRAINT pk_currency PRIMARY KEY (id);
 CREATE UNIQUE INDEX ix_currency_code ON currency(code);
-INSERT INTO currency(code, symbol, name) values('NZD', '$', 'New Zealand dollars');
+
+INSERT INTO currency(id, code, name, symbol, description)
+VALUES( nextval('currency_id_seq'), 'NZD', 'New Zealand', '$', 'New Zealand dollars');
 
 
 /* country table */
@@ -20,16 +29,21 @@ CREATE TABLE country
 	id INTEGER NOT NULL DEFAULT nextval('country_id_seq'::regclass),
 	code VARCHAR(10) NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	currency_code VARCHAR(10) NOT NULL
+	description VARCHAR(150) NOT NULL,
+	currency_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
 ALTER TABLE country ADD CONSTRAINT pk_country PRIMARY KEY (id);
-ALTER TABLE country ADD CONSTRAINT fk_country_currency FOREIGN KEY (currency_code) REFERENCES currency (code) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE country ADD CONSTRAINT fk_country_currency FOREIGN KEY (currency_id) REFERENCES currency (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_country_code ON country(code);
 CREATE UNIQUE INDEX ix_country_name ON country(name);
 
-INSERT INTO country(id, code, name, currency_code)
-VALUES( nextval('country_id_seq'), 'NZ', 'New Zealand', 'NZD');
+INSERT INTO country(id, code, name, currency_id, description)
+VALUES( nextval('country_id_seq'), 'NZ', 'New Zealand', 1, 'New Zealand');
 
 
 /* island table */
@@ -38,17 +52,22 @@ CREATE TABLE island
 (
 	id INTEGER NOT NULL DEFAULT nextval('island_id_seq'::regclass),
 	name VARCHAR(30) NOT NULL,
-	country_id INTEGER NOT NULL
+	description VARCHAR(150) NOT NULL,
+	country_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
 ALTER TABLE island ADD CONSTRAINT pk_island PRIMARY KEY (id);
 ALTER TABLE island ADD CONSTRAINT fk_island_country FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_island_name ON island(name);
 
-INSERT INTO island(id, name, country_id) 
-VALUES( nextval('island_id_seq'), 'North', (SELECT id from country where code = 'NZ'));
-INSERT INTO island(id, name, country_id) 
-VALUES( nextval('island_id_seq'), 'South', (SELECT id from country where code = 'NZ'));
+INSERT INTO island(id, name, country_id, description)
+VALUES( nextval('island_id_seq'), 'North', (SELECT id from country where code = 'NZ'), 'North');
+INSERT INTO island(id, name, country_id, description)
+VALUES( nextval('island_id_seq'), 'South', (SELECT id from country where code = 'NZ'), 'South');
 
 
 /* region table */
@@ -73,14 +92,17 @@ ALTER TABLE region ADD CONSTRAINT fk_region_island FOREIGN KEY (island_id) REFER
 CREATE UNIQUE INDEX ix_region_name ON region(name);
 CREATE INDEX region_search_1 ON region(name);
 
+INSERT INTO region(id, name, description, island_id, area_in_square_kms, population, regional_council_name)
+VALUES( nextval('region_id_seq'), 'Otago', 'Otago', 2, 3456345.45, 246987, 'Otago Regional Council');
+
 
 /* popularity ranking table */
 CREATE SEQUENCE popularity_ranking_type_id_seq INCREMENT 1;
 CREATE TABLE popularity_ranking_type
 (
 	id INTEGER NOT NULL DEFAULT nextval('popularity_ranking_type_id_seq'::regclass),
-        name VARCHAR(50) NOT NULL,
-        description VARCHAR(150) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
@@ -143,9 +165,9 @@ CREATE TABLE location
 (
 	id INTEGER NOT NULL DEFAULT nextval('location_id_seq'::regclass),
     name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
     location_type_id INTEGER NOT NULL,
     region_id INTEGER NOT NULL,
-    description VARCHAR(150) NOT NULL,
     longitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
 	latitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
@@ -161,6 +183,8 @@ ALTER TABLE location ADD CONSTRAINT fk_location_region FOREIGN KEY (region_id) R
 CREATE UNIQUE INDEX ix_location_name ON location(name);
 CREATE INDEX location_search_1 ON location(name);
 
+INSERT INTO location(id, name, description, location_type_id, region_id, longitude, latitude)
+VALUES( nextval('location_id_seq'), 'Downtown Queenstown', 'Downtown Queenstown', 3, 1, -3456.456, 4567.5551);
 
 
 /* site type table */
@@ -202,6 +226,7 @@ CREATE TABLE site
 	site_type_id INTEGER NOT NULL,
 	longitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
 	latitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
+	site_entity_type VARCHAR(20) NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
@@ -214,6 +239,10 @@ ALTER TABLE site ADD CONSTRAINT fk_site_site_type FOREIGN KEY (site_type_id) REF
 
 CREATE UNIQUE INDEX ix_site_name ON site(name);
 CREATE INDEX site_search_1 ON site(name);
+
+
+INSERT INTO site(id, name, description, location_id, site_type_id, longitude, latitude, site_entity_type)
+VALUES( nextval('site_id_seq'), 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 3, -3456.456, 4567.5551, 'AccommodationSite');
 
 
 /* event type table */
@@ -816,10 +845,10 @@ VALUES( nextval('room_configuration_type_id_seq'), 'Includes Kitchenette', 'Incl
 
 
 /* accommodation_site table */
-CREATE SEQUENCE accommodation_site_id_seq INCREMENT 1;
+--CREATE SEQUENCE accommodation_site_id_seq INCREMENT 1;
 CREATE TABLE accommodation_site
 (
-	id INTEGER NOT NULL DEFAULT nextval('accommodation_site_id_seq'::regclass),
+	id INTEGER NOT NULL, -- DEFAULT nextval('accommodation_site_id_seq'::regclass),
     name VARCHAR(50) NOT NULL,
     description VARCHAR(150) NOT NULL,
 	accommodation_site_type_id INTEGER NOT NULL,
@@ -840,6 +869,8 @@ ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_configu
 CREATE UNIQUE INDEX ix_accomodation_site_name ON accommodation_site(name);
 CREATE INDEX accommodation_site_search_1 ON accommodation_site(name);
 
+INSERT INTO accommodation_site(id, name, description, accommodation_site_type_id, room_type_id, room_configuration_type_id)
+VALUES( 1, 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 1, 1);
 
 
 /* motel_site table */

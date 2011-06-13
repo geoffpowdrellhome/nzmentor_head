@@ -178,6 +178,8 @@
             <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.1.0" />
             <element id="library" level="project" name="Maven: postgresql:postgresql:9.0-801.jdbc4" />
+            <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils-core:1.8.3" />
+            <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
             <element id="library" level="project" name="Maven: hsqldb:hsqldb:1.8.0.10" />
             <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.0.5.RELEASE" />
             <element id="library" level="project" name="Maven: org.springframework:spring-context:3.0.5.RELEASE" />
@@ -192,7 +194,6 @@
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-ehcache:3.5.6-Final" />
             <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:1.5.0" />
             <element id="library" level="project" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" />
-            <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
             <element id="library" level="project" name="Maven: net.sf.jsr107cache:jsr107cache:1.0" />
             <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-all:1.1" />
             <element id="archive" name="service-api-1.0.jar">
@@ -876,6 +877,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: commons-beanutils:commons-beanutils-core:1.8.3">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils-core/1.8.3/commons-beanutils-core-1.8.3.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils-core/1.8.3/commons-beanutils-core-1.8.3-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils-core/1.8.3/commons-beanutils-core-1.8.3-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: commons-beanutils:commons-beanutils:1.7.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar!/" />
@@ -918,17 +930,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.2/commons-lang-2.2-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: commons-logging:commons-logging:1.0.4">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: commons-logging:commons-logging:1.1.1">

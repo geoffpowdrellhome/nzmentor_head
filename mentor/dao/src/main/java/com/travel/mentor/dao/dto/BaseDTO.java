@@ -1,26 +1,41 @@
-package com.travel.mentor.model.base;
+package com.travel.mentor.dao.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import java.util.Date;
+public abstract class BaseDTO implements Serializable {
 
-@MappedSuperclass
-public class Audited implements Serializable {
+    protected Long id;
+    protected String name;
+    protected String description;
+    protected String createUser;
+    protected Timestamp createDate;
+    protected String updateUser;
+    protected Timestamp updateDate;
 
-    @Column(name = "created_by")
-    protected String createUser = "sysadm";
+    public Long getId() {
+        return id;
+    }
 
-    @Column(name = "created")
-    protected Timestamp createDate = new Timestamp(new Date().getTime());
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Column(name = "updated_by")
-    protected String updateUser = "sysadm";
+    public String getName() {
+        return name;
+    }
 
-    @Column(name = "updated")
-    protected Timestamp updateDate = new Timestamp(new Date().getTime());
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getCreateUser() {
         return createUser;
@@ -53,4 +68,5 @@ public class Audited implements Serializable {
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
+
 }

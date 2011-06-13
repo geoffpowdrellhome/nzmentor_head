@@ -1,5 +1,7 @@
 package com.travel.mentor.model.impl;
 
+import com.travel.mentor.model.base.BaseEntity;
+import com.travel.mentor.model.base.NameDescAudited;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
@@ -9,40 +11,31 @@ import javax.persistence.*;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Island.findAll", query = "SELECT o FROM Island o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.island_id_seq", allocationSize = 1)
-public class Island {
+public class Island extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    public static final String FIND_ALL_ISLANDS_NAMED_QUERY = "Island.findAll";
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
-    private Country country;
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    private Long id;
 
-    @Column(name = "name")
-    private String name;
+//    @ManyToOne
+//    @JoinColumn(name = "country_id", referencedColumnName = "id")
+//    private Country country;
 
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public Country getCountry() {
+//        return country;
+//    }
+//
+//    public void setCountry(Country country) {
+//        this.country = country;
+//    }
 }

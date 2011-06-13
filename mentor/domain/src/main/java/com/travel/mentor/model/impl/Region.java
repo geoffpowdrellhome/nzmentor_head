@@ -1,6 +1,6 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.NameDescAudited;
+import com.travel.mentor.model.base.BaseEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -12,11 +12,13 @@ import java.math.BigDecimal;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Region.findAll", query = "SELECT o FROM Region o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.region_id_seq", allocationSize = 1)
-public class Region extends NameDescAudited {
+public class Region extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    public static final String FIND_ALL_REGIONS_NAMED_QUERY = "Region.findAll";
+
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "island_id", referencedColumnName = "id")
@@ -28,7 +30,7 @@ public class Region extends NameDescAudited {
     @Column(name = "population")
     private Integer population;
 
-    @Column(name = "regionalCouncilName")
+    @Column(name = "regional_council_name")
     private String regionalCouncilName;
 
     public Long getId() {

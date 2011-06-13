@@ -10,10 +10,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "public", name = "accommodation_site")
+//@DiscriminatorValue("AccommodationSite")
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "AccommodationSite.findAll", query = "SELECT o FROM AccommodationSite o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.accommodation_site_id_seq", allocationSize = 1)
+//@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.accommodation_site_id_seq", allocationSize = 1)
+//@PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 public class AccommodationSite extends Site {
+
+    public static final String FIND_ALL_ACCOMMODATION_SITES_NAMED_QUERY = "AccommodationSite.findAll";
 
 //    @Id
 //    @Column(name = "id", nullable = false)
