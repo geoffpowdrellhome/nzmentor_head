@@ -1,9 +1,9 @@
 package com.travel.mentor.model.impl;
 
 import com.travel.mentor.model.base.BaseEntity;
-import com.travel.mentor.model.base.NameDescAudited;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,27 +15,15 @@ public class Island extends BaseEntity {
 
     public static final String FIND_ALL_ISLANDS_NAMED_QUERY = "Island.findAll";
 
-//    @Id
-//    @Column(name = "id", nullable = false)
-//    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
 
-//    @ManyToOne
-//    @JoinColumn(name = "country_id", referencedColumnName = "id")
-//    private Country country;
+    public Country getCountry() {
+        return country;
+    }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-
-//    public Country getCountry() {
-//        return country;
-//    }
-//
-//    public void setCountry(Country country) {
-//        this.country = country;
-//    }
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 }

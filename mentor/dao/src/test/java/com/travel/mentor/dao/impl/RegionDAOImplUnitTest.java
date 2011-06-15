@@ -60,5 +60,25 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
         regionDAO.addRegion(regionDTO);
     }
 
+    @Test
+    public void testDeleteRegion() {
+        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
+        doPostRetrievalAssertsExpectingRecords(regionDTOList);
+        RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
+
+        regionDAO.deleteRegion(regionDTO);
+    }
+
+    @Test
+    public void testUpdateRegion() {
+        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
+        doPostRetrievalAssertsExpectingRecords(regionDTOList);
+        RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
+        regionDTO.setName("update name 2");
+        regionDTO.setDescription("update desc 2");
+
+        regionDAO.updateRegion(regionDTO);
+    }
+
 
 }

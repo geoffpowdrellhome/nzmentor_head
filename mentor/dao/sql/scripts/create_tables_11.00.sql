@@ -130,7 +130,7 @@ VALUES( nextval('popularity_ranking_type_id_seq'), 'Extremely Popular', 'Extreme
 
 
 
-/* item_type table */
+/* location_type table */
 CREATE SEQUENCE location_type_id_seq INCREMENT 1;
 CREATE TABLE location_type
 (
@@ -504,6 +504,77 @@ CREATE INDEX event_history_search_1 ON event_history(startTime,endTime);
 -- CREATE UNIQUE INDEX ix_route_starting_and_ending ON route(starting_location_id,ending_location_id);
 
 
+
+/* item_type table */
+CREATE SEQUENCE item_type_id_seq INCREMENT 1;
+CREATE TABLE item_type
+(
+	id INTEGER NOT NULL DEFAULT nextval('item_type_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE item_type ADD CONSTRAINT pk_item_type PRIMARY KEY (id);
+CREATE UNIQUE INDEX ix_type_name ON item_type(name);
+
+INSERT INTO item_type(id, name, description)
+VALUES( nextval('item_type_id_seq'), 'Accommodation', 'Accommodation');
+INSERT INTO item_type(id, name, description)
+VALUES( nextval('item_type_id_seq'), 'Rental Vehicles', 'Rental Vehicles');
+INSERT INTO item_type(id, name, description)
+VALUES( nextval('item_type_id_seq'), 'Activities', 'Activities');
+INSERT INTO item_type(id, name, description)
+VALUES( nextval('item_type_id_seq'), 'Transfers', 'Transfers');
+
+
+
+/* item table  */
+CREATE SEQUENCE item_id_seq INCREMENT 1;
+CREATE TABLE item
+(
+    id INTEGER NOT NULL DEFAULT nextval('item_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+    helpful_comments VARCHAR(150) NOT NULL,
+	item_type_id INTEGER NOT NULL,
+	site_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (id);
+ALTER TABLE item ADD CONSTRAINT fk_item_item_type FOREIGN KEY (item_type_id) REFERENCES item_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item ADD CONSTRAINT fk_item_site FOREIGN KEY (site_id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE UNIQUE INDEX ix_item_name ON item(name);
+
+
+/* item_schedule_time table  */
+CREATE SEQUENCE item_schedule_time_id_seq INCREMENT 1;
+CREATE TABLE item_schedule_time
+(
+    id INTEGER NOT NULL DEFAULT nextval('item_schedule_time_id_seq'::regclass),
+	item_id INTEGER NOT NULL,
+	start_time TIMESTAMP NOT NULL DEFAULT 'now',
+	end_time TIMESTAMP NOT NULL DEFAULT 'now',
+	helpful_comments VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE item_schedule_time ADD CONSTRAINT pk_item_schedule_time PRIMARY KEY (id);
+ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE UNIQUE INDEX ix_item_schedule_time ON item_schedule_time(item_id, start_time);
+
+
+
 /* suggested_itinerary table */
 CREATE SEQUENCE suggested_itinerary_id_seq INCREMENT 1;
 CREATE TABLE suggested_itinerary
@@ -523,27 +594,27 @@ CREATE UNIQUE INDEX ix_suggested_itinerary_name ON suggested_itinerary(name);
 
 
 
-/* suggested_itinerary_location table  */
-CREATE SEQUENCE suggested_itinerary_location_id_seq INCREMENT 1;
-CREATE TABLE suggested_itinerary_location
+/* suggested_itinerary_item table  */
+CREATE SEQUENCE suggested_itinerary_item_id_seq INCREMENT 1;
+CREATE TABLE suggested_itinerary_item
 (
-    id INTEGER NOT NULL DEFAULT nextval('suggested_itinerary_location_id_seq'::regclass),
+    id INTEGER NOT NULL DEFAULT nextval('suggested_itinerary_item_id_seq'::regclass),
+	item_id INTEGER NOT NULL,
 	suggested_itinerary_id INTEGER NOT NULL,
-	location_id INTEGER NOT NULL,
 	order_sequence INTEGER NOT NULL,
+	start_date_time TIMESTAMP NOT NULL,
+	end_date_time TIMESTAMP NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE suggested_itinerary_location ADD CONSTRAINT pk_suggested_itinerary_location PRIMARY KEY (id);
-ALTER TABLE suggested_itinerary_location ADD CONSTRAINT fk_suggested_itinerary_location_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE suggested_itinerary_location ADD CONSTRAINT fk_suggested_itinerary_location_suggested_itinerary FOREIGN KEY (suggested_itinerary_id) REFERENCES suggested_itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary_item ADD CONSTRAINT pk_suggested_itinerary_item PRIMARY KEY (id);
+ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_suggested_itinerary FOREIGN KEY (suggested_itinerary_id) REFERENCES suggested_itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-CREATE UNIQUE INDEX ix_suggested_itinerary_location ON suggested_itinerary_location(suggested_itinerary_id,location_id);
-
-
+CREATE UNIQUE INDEX ix_suggested_itinerary_item ON suggested_itinerary_item(suggested_itinerary_id, item_id);
 
 
 
@@ -564,25 +635,27 @@ ALTER TABLE itinerary ADD CONSTRAINT pk_itinerary PRIMARY KEY (id);
 CREATE UNIQUE INDEX ix_itinerary_name ON itinerary(name);
 
 
-/* itinerary_location table  */
-CREATE SEQUENCE itinerary_location_id_seq INCREMENT 1;
-CREATE TABLE itinerary_location
+/* itinerary_item table  */
+CREATE SEQUENCE itinerary_item_id_seq INCREMENT 1;
+CREATE TABLE itinerary_item
 (
-    id INTEGER NOT NULL DEFAULT nextval('itinerary_location_id_seq'::regclass),
+    id INTEGER NOT NULL DEFAULT nextval('itinerary_item_id_seq'::regclass),
 	itinerary_id INTEGER NOT NULL,
-	location_id INTEGER NOT NULL,
+	item_id INTEGER NOT NULL,
 	order_sequence INTEGER NOT NULL,
+	start_date_time TIMESTAMP NOT NULL,
+	end_date_time TIMESTAMP NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE itinerary_location ADD CONSTRAINT pk_itinerary_location PRIMARY KEY (id);
-ALTER TABLE itinerary_location ADD CONSTRAINT fk_itinerary_location_itinerary FOREIGN KEY (itinerary_id) REFERENCES itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE itinerary_location ADD CONSTRAINT fk_itinerary_location_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary_item ADD CONSTRAINT pk_itinerary_item PRIMARY KEY (id);
+ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_itinerary FOREIGN KEY (itinerary_id) REFERENCES itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-CREATE UNIQUE INDEX ix_itinerary_location ON itinerary_location(itinerary_id,location_id);
+CREATE UNIQUE INDEX ix_itinerary_item ON itinerary_item(itinerary_id,item_id);
 
 
 
@@ -636,53 +709,6 @@ CREATE UNIQUE INDEX ix_supplier_name ON supplier(name);
 
 
 
-/* item_type table */
-CREATE SEQUENCE item_type_id_seq INCREMENT 1;
-CREATE TABLE item_type
-(
-	id INTEGER NOT NULL DEFAULT nextval('item_type_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE item_type ADD CONSTRAINT pk_item_type PRIMARY KEY (id);
-CREATE UNIQUE INDEX ix_type_name ON item_type(name);
-
-INSERT INTO item_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Accommodation', 'Accommodation');
-INSERT INTO item_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Rental Vehicles', 'Rental Vehicles');
-INSERT INTO item_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Activities', 'Activities');
-INSERT INTO item_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Transfers', 'Transfers');
-
-
-
-/* item table  */
-CREATE SEQUENCE item_id_seq INCREMENT 1;
-CREATE TABLE item
-(
-    id INTEGER NOT NULL DEFAULT nextval('item_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	item_type_id INTEGER NOT NULL,
-	site_id INTEGER NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (id);
-ALTER TABLE item ADD CONSTRAINT fk_item_item_type FOREIGN KEY (item_type_id) REFERENCES item_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item ADD CONSTRAINT fk_item_location FOREIGN KEY (site_id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_item_name ON item(name);
 
 
 
@@ -704,26 +730,6 @@ ALTER TABLE bookline ADD CONSTRAINT pk_bookline PRIMARY KEY (id);
 ALTER TABLE bookline ADD CONSTRAINT fk_bookline_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_bookline_item_startdatetime_enddatetime ON bookline(item_id, start_date_time, end_date_time);
-
-
-/* itinerary_bookline table  */
-CREATE SEQUENCE itinerary_location_bookline_id_seq INCREMENT 1;
-CREATE TABLE itinerary_location_bookline
-(
-    id INTEGER NOT NULL DEFAULT nextval('itinerary_location_bookline_id_seq'::regclass),
-	itinerary_location_id INTEGER NOT NULL,
-	bookline_id INTEGER NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE itinerary_location_bookline ADD CONSTRAINT pk_itinerary_location_bookline PRIMARY KEY (id);
-ALTER TABLE itinerary_location_bookline ADD CONSTRAINT fk_itinerary_location_bookline_itinerary_location FOREIGN KEY (itinerary_location_id) REFERENCES itinerary_location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE itinerary_location_bookline ADD CONSTRAINT fk_itinerary_location_bookline_bookline FOREIGN KEY (bookline_id) REFERENCES bookline(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_itinerary_location_bookline_location_bookline ON itinerary_location_bookline(itinerary_location_id, bookline_id);
 
 
 

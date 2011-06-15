@@ -16,10 +16,6 @@ public class Region extends BaseEntity {
 
     public static final String FIND_ALL_REGIONS_NAMED_QUERY = "Region.findAll";
 
-//    @Id
-//    @Column(name = "id", nullable = false)
-//    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "island_id", referencedColumnName = "id")
     private Island island;

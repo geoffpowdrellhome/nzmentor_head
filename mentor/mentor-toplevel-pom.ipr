@@ -706,9 +706,7 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6.jar!/" />
       </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6-javadoc.jar!/" />
-      </JAVADOC>
+      <JAVADOC />
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6-sources.jar!/" />
       </SOURCES>
@@ -739,12 +737,8 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0.jar!/" />
       </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0-sources.jar!/" />
-      </SOURCES>
+      <JAVADOC />
+      <SOURCES />
     </library>
     <library name="Maven: asm:asm:3.1">
       <CLASSES>
@@ -801,78 +795,11 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/ehcache-spring-annotations/ehcache-spring-annotations/1.1.2/ehcache-spring-annotations-1.1.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.nz.travel.mentor:mentor-core:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/mentor-core/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/mentor-core/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-core/1.0/mentor-core-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.nz.travel.mentor:mentor-dao:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/mentor-dao/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/mentor-dao/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-dao/1.0/mentor-dao-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.nz.travel.mentor:mentor-domain:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/mentor-domain/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/mentor-domain/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-domain/1.0/mentor-domain-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.nz.travel.mentor:mentor-service-api:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/mentor-service-api/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/mentor-service-api/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-api/1.0/mentor-service-api-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: com.nz.travel.mentor:mentor-service-impl:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/mentor-service-impl/pom-javadoc.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/mentor-service-impl/pom-sources.jar!/" />
-        <root url="jar://$MAVEN_REPOSITORY$/com/nz/travel/mentor/mentor-service-impl/1.0/mentor-service-impl-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: com.sun.xml.bind:jaxb-impl:2.1.13">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar!/" />
       </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-javadoc.jar!/" />
-      </JAVADOC>
+      <JAVADOC />
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar!/" />
       </SOURCES>

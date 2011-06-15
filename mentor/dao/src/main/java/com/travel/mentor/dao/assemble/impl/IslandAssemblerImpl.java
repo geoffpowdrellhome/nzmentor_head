@@ -21,16 +21,9 @@ public class IslandAssemblerImpl extends BaseAssemblerImpl implements IslandAsse
     }
 
     @Override
-    public Island assembleToIslandDomainObject(IslandDTO islandDTO) {
-        Island island = (Island) shallowCopy(islandDTO, Island.class);
-        //island.setCountry( (Country) shallowCopy(regionDTO.getIslandDTO(), Island.class) );
-        return island;
-    }
-
-    @Override
     public IslandDTO assembleToIslandDTO(Island island) {
         IslandDTO islandDTO = (IslandDTO) shallowCopy(island, IslandDTO.class);
-        //islandDTO.setIslandDTO( (IslandDTO) shallowCopy(region.getIsland(), IslandDTO.class) );
         return islandDTO;
     }
+
 }

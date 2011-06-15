@@ -35,4 +35,5 @@ public class Currency extends NameDescAudited {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
 }
