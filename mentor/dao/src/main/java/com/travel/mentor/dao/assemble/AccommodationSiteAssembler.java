@@ -13,6 +13,4 @@ public interface AccommodationSiteAssembler {
 
     AccommodationSiteDTO assembleToAccommodationSiteDTO(AccommodationSite accommodationSite);
 
-    AccommodationSite instantiateAccommodationSiteDomainObject(AccommodationSiteDTO accommodationSiteDTO);
-
 }

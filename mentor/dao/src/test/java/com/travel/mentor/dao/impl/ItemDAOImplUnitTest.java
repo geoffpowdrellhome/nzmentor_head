@@ -45,6 +45,7 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
         ReferenceTypeDTO itemTypeDTO = itemTypeDTOList.get(0); // get the first one.
 
         SiteDTO siteDTO = new SiteDTO();
+        //@@TODO - must work on this - what type of site? Accommodation etc., The site stuff may take a bit of thinking and testing.
 
 
         ItemDTO itemDTO = new ItemDTO();
