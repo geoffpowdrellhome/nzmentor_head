@@ -3,6 +3,7 @@ package com.travel.mentor.model.impl;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.travel.mentor.model.base.BaseEntity;
 import com.travel.mentor.model.base.NameDescAudited;
 import com.travel.mentor.type.impl.LocationType;
 import org.hibernate.annotations.Cache;
@@ -20,11 +21,9 @@ import java.math.BigDecimal;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Location.findAll", query = "SELECT o FROM Location o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.location_id_seq", allocationSize = 1)
-public class Location extends NameDescAudited {
+public class Location extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+    public static final String FIND_ALL_LOCATIONS_NAMED_QUERY = "Location.findAll";
 
     @ManyToOne
     @JoinColumn(name = "location_type_id", referencedColumnName = "id")

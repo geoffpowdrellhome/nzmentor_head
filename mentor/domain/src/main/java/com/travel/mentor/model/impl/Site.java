@@ -1,14 +1,9 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.NameDescAudited;
-import com.travel.mentor.type.impl.LocationType;
+import com.travel.mentor.model.base.BaseEntity;
 import com.travel.mentor.type.impl.SiteType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,11 +14,9 @@ import java.math.BigDecimal;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
-public class Site extends NameDescAudited {
+public class Site extends BaseEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    protected Long id;
+    public static final String FIND_ALL_SITES_NAMED_QUERY = "Site.findAll";
 
     @ManyToOne
     @JoinColumn(name = "site_type_id", referencedColumnName = "id")

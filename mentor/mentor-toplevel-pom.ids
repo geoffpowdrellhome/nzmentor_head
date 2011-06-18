@@ -17,9 +17,9 @@
       <column name="accommodation_site_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="room_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="room_configuration_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_accommodation_site" columns="id" />
       <foreign-key name="fk_accommodation_site_site_type" columns="accommodation_site_type_id" ref-table="accommodation_site_type" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -33,9 +33,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('accommodation_site_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_accommodation_site_type" columns="id" />
       <index name="ix_accommodation_site_type_name" unique="true" columns="name" />
@@ -57,9 +57,9 @@
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="activity_site_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_activity_site" columns="id" />
       <foreign-key name="fk_activity_site_activity_site_type" columns="activity_site_type_id" ref-table="activity_site_type" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -83,9 +83,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('activity_site_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_activity_site_type" columns="id" />
       <index name="ix_activity_site_type_name" unique="true" columns="name" />
@@ -106,9 +106,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('airport_terminal_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_airport_terminal_site" columns="id" />
       <foreign-key name="fk_airport_terminal_site_transfer_site" columns="id" ref-table="transfer_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -131,9 +131,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('apartment_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_apartment_site" columns="id" />
       <foreign-key name="fk_apartment_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -155,9 +155,9 @@
     <table name="auth_role" schema="public" catalog="" type="TABLE">
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('auth_role_id_seq'::regclass)" />
       <column name="rolename" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_auth_role" columns="id" />
       <index name="ix_auth_role_rolename" unique="true" columns="rolename" />
@@ -179,9 +179,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('backpacker_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_backpacker_site" columns="id" />
       <foreign-key name="fk_backpacker_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -204,9 +204,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('bed_and_breakfast_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_bed_and_breakfast_site" columns="id" />
       <foreign-key name="fk_bed_and_breakfast_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -230,9 +230,9 @@
       <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="start_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
       <column name="end_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_bookline" columns="id" />
       <foreign-key name="fk_bookline_item" columns="item_id" ref-table="item" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -261,9 +261,9 @@
       <column name="suburb" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="postcode" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="city" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_bookline_pax" columns="id" />
       <foreign-key name="fk_bookline_pax" columns="bookline_id" ref-table="bookline" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -285,9 +285,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('bus_depot_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_bus_depot_site" columns="id" />
       <foreign-key name="fk_bus_depot_site_transfer_site" columns="id" ref-table="transfer_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -310,9 +310,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('climate_condition_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_climate_condition_type" columns="id" />
       <index name="ix_climate_condition_type_name" unique="true" columns="name" />
@@ -333,9 +333,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('climate_windfactor_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_climate_windfactor_type" columns="id" />
       <index name="ix_climate_windfactor_type_name" unique="true" columns="name" />
@@ -356,9 +356,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('clothing_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_clothing_type" columns="id" />
       <index name="ix_clothing_type_name" unique="true" columns="name" />
@@ -381,9 +381,9 @@
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="currency_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_country" columns="id" />
       <foreign-key name="fk_country_currency" columns="currency_id" ref-table="currency" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -406,9 +406,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('cruise_mooring_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_cruise_mooring_site" columns="id" />
       <foreign-key name="fk_cruise_mooring_site_transfer_site" columns="id" ref-table="transfer_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -433,9 +433,9 @@
       <column name="name" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="symbol" sqlType="varchar" length="10" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_currency" columns="id" />
       <index name="ix_currency_code" unique="true" columns="code" />
@@ -460,9 +460,9 @@
       <column name="site_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="starttime" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
       <column name="endtime" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_event" columns="id" />
       <foreign-key name="fk_event_event_type" columns="event_type_id" ref-table="event_type" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -481,9 +481,9 @@
       <column name="suitable_clothing_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="suitable_footwear_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="suitable_headwear_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_event_history" columns="id" />
       <foreign-key name="fk_event_history_climate_condition" columns="climate_condition_type_id" ref-table="climate_condition_type" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -523,9 +523,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('event_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_event_type" columns="id" />
       <index name="ix_event_type_name" unique="true" columns="name" />
@@ -558,9 +558,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('farm_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_farmstay_site" columns="id" />
       <foreign-key name="fk_farmstay_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -571,9 +571,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('ferry_terminal_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_ferry_terminal_site" columns="id" />
       <foreign-key name="fk_ferry_terminal_site_transfer_site" columns="id" ref-table="transfer_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -596,9 +596,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('footwear_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_footwear_type" columns="id" />
       <index name="ix_footwear_type_name" unique="true" columns="name" />
@@ -619,9 +619,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('headwear_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_headwear_type" columns="id" />
       <index name="ix_headwear_type_name" unique="true" columns="name" />
@@ -642,9 +642,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('holiday_park_cabin_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_holiday_park_cabin_site" columns="id" />
       <foreign-key name="fk_holiday_park_cabin_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -667,9 +667,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('homestay_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_homestay_site" columns="id" />
       <foreign-key name="fk_homestay_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -692,9 +692,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('hotel_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_hotel_site" columns="id" />
       <foreign-key name="fk_hotel_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -718,9 +718,9 @@
       <column name="name" sqlType="varchar" length="30" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="country_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_island" columns="id" />
       <foreign-key name="fk_island_country" columns="country_id" ref-table="country" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -742,18 +742,45 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('item_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
+      <column name="helpful_comments" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="item_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="site_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_item" columns="id" />
       <foreign-key name="fk_item_item_type" columns="item_type_id" ref-table="item_type" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <foreign-key name="fk_item_location" columns="site_id" ref-table="site" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fk_item_site" columns="site_id" ref-table="site" ref-schema="public" ref-catalog="" ref-columns="id" />
       <index name="ix_item_name" unique="true" columns="name" />
     </table>
     <table name="item_id_seq" schema="public" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="item_schedule_time" schema="public" catalog="" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('item_schedule_time_id_seq'::regclass)" />
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="start_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
+      <column name="end_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
+      <column name="helpful_comments" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
+      <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
+      <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
+      <primary-key name="pk_item_schedule_time" columns="id" />
+      <foreign-key name="fk_item_schedule_time_item" columns="item_id" ref-table="item" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <index name="ix_item_schedule_time" unique="true" columns="item_id,start_time" />
+    </table>
+    <table name="item_schedule_time_id_seq" schema="public" catalog="" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
@@ -769,9 +796,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('item_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_item_type" columns="id" />
       <index name="ix_type_name" unique="true" columns="name" />
@@ -792,9 +819,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('itinerary_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_itinerary" columns="id" />
       <index name="ix_itinerary_name" unique="true" columns="name" />
@@ -811,46 +838,23 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
     </table>
-    <table name="itinerary_location" schema="public" catalog="" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('itinerary_location_id_seq'::regclass)" />
+    <table name="itinerary_item" schema="public" catalog="" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('itinerary_item_id_seq'::regclass)" />
       <column name="itinerary_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="location_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="order_sequence" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="start_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
+      <column name="end_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <primary-key name="pk_itinerary_location" columns="id" />
-      <foreign-key name="fk_itinerary_location_itinerary" columns="itinerary_id" ref-table="itinerary" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <foreign-key name="fk_itinerary_location_location" columns="location_id" ref-table="location" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <index name="ix_itinerary_location" unique="true" columns="itinerary_id,location_id" />
+      <primary-key name="pk_itinerary_item" columns="id" />
+      <foreign-key name="fk_itinerary_item_item" columns="item_id" ref-table="item" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fk_itinerary_item_itinerary" columns="itinerary_id" ref-table="itinerary" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <index name="ix_itinerary_item" unique="true" columns="itinerary_id,item_id" />
     </table>
-    <table name="itinerary_location_bookline" schema="public" catalog="" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('itinerary_location_bookline_id_seq'::regclass)" />
-      <column name="itinerary_location_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="bookline_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
-      <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
-      <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <primary-key name="pk_itinerary_location_bookline" columns="id" />
-      <foreign-key name="fk_itinerary_location_bookline_bookline" columns="bookline_id" ref-table="bookline" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <foreign-key name="fk_itinerary_location_bookline_itinerary_location" columns="itinerary_location_id" ref-table="itinerary_location" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <index name="ix_itinerary_location_bookline_location_bookline" unique="true" columns="itinerary_location_id,bookline_id" />
-    </table>
-    <table name="itinerary_location_bookline_id_seq" schema="public" catalog="" type="SEQUENCE">
-      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
-      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
-      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
-      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
-    </table>
-    <table name="itinerary_location_id_seq" schema="public" catalog="" type="SEQUENCE">
+    <table name="itinerary_item_id_seq" schema="public" catalog="" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
@@ -870,9 +874,9 @@
       <column name="region_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="longitude" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
       <column name="latitude" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_location" columns="id" />
       <foreign-key name="fk_location_location_type" columns="location_type_id" ref-table="location_type" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -896,9 +900,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('location_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_location_type" columns="id" />
       <index name="ix_location_type_name" unique="true" columns="name" />
@@ -919,9 +923,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('lodge_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_lodge_site" columns="id" />
       <foreign-key name="fk_lodge_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -944,9 +948,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('motel_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_motel_site" columns="id" />
       <foreign-key name="fk_motel_site_accommodation_site" columns="id" ref-table="accommodation_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -969,9 +973,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('popularity_ranking_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_popularity_ranking_type" columns="id" />
       <index name="ix_popularity_ranking_type_name" unique="true" columns="name" />
@@ -992,9 +996,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('railway_station_site_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_railway_station_site" columns="id" />
       <foreign-key name="fk_railway_station_site_transfer_site" columns="id" ref-table="transfer_site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1021,9 +1025,9 @@
       <column name="area_in_square_kms" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
       <column name="population" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
       <column name="regional_council_name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_region" columns="id" />
       <foreign-key name="fk_region_island" columns="island_id" ref-table="island" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1046,9 +1050,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('room_configuration_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_room_configuration_type" columns="id" />
       <index name="ix_room_configuration_type_name" unique="true" columns="name" />
@@ -1069,9 +1073,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('room_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_room_type" columns="id" />
       <index name="ix_room_type_name" unique="true" columns="name" />
@@ -1097,9 +1101,9 @@
       <column name="longitude" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
       <column name="latitude" sqlType="numeric" length="10" precision="2" nullable="false" jdbcType="2" default="0" />
       <column name="site_entity_type" sqlType="varchar" length="20" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_site" columns="id" />
       <foreign-key name="fk_site_location" columns="location_id" ref-table="location" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1123,9 +1127,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('site_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_site_type" columns="id" />
       <index name="ix_site_type_name" unique="true" columns="name" />
@@ -1146,9 +1150,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('suggested_itinerary_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_suggested_itinerary" columns="id" />
       <index name="ix_suggested_itinerary_name" unique="true" columns="name" />
@@ -1165,21 +1169,23 @@
       <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
       <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
     </table>
-    <table name="suggested_itinerary_location" schema="public" catalog="" type="TABLE">
-      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('suggested_itinerary_location_id_seq'::regclass)" />
+    <table name="suggested_itinerary_item" schema="public" catalog="" type="TABLE">
+      <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('suggested_itinerary_item_id_seq'::regclass)" />
+      <column name="item_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="suggested_itinerary_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="location_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="order_sequence" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="start_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
+      <column name="end_date_time" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <primary-key name="pk_suggested_itinerary_location" columns="id" />
-      <foreign-key name="fk_suggested_itinerary_location_location" columns="location_id" ref-table="location" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <foreign-key name="fk_suggested_itinerary_location_suggested_itinerary" columns="suggested_itinerary_id" ref-table="suggested_itinerary" ref-schema="public" ref-catalog="" ref-columns="id" />
-      <index name="ix_suggested_itinerary_location" unique="true" columns="suggested_itinerary_id,location_id" />
+      <primary-key name="pk_suggested_itinerary_item" columns="id" />
+      <foreign-key name="fk_suggested_itinerary_item_item" columns="item_id" ref-table="item" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fk_suggested_itinerary_item_suggested_itinerary" columns="suggested_itinerary_id" ref-table="suggested_itinerary" ref-schema="public" ref-catalog="" ref-columns="id" />
+      <index name="ix_suggested_itinerary_item" unique="true" columns="suggested_itinerary_id,item_id" />
     </table>
-    <table name="suggested_itinerary_location_id_seq" schema="public" catalog="" type="SEQUENCE">
+    <table name="suggested_itinerary_item_id_seq" schema="public" catalog="" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
       <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
       <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
@@ -1197,9 +1203,9 @@
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="supplier_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="location_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_supplier" columns="id" />
       <foreign-key name="fk_supplier_location" columns="location_id" ref-table="location" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1222,9 +1228,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('supplier_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_supplier_type" columns="id" />
       <index name="ix_supplier_type_name" unique="true" columns="name" />
@@ -1246,9 +1252,9 @@
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="transfer_site_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_transfer_site" columns="id" />
       <foreign-key name="fk_transfer_site_site" columns="id" ref-table="site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1272,9 +1278,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('transfer_site_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_transfer_site_type" columns="id" />
       <index name="ix_transfer_site_type_name" unique="true" columns="name" />
@@ -1305,9 +1311,9 @@
       <column name="title" sqlType="varchar" length="10" precision="0" nullable="false" jdbcType="12" />
       <column name="firstname" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="lastname" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_users" columns="id" />
       <index name="ix_users_username" unique="true" columns="username" />
@@ -1330,9 +1336,9 @@
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
       <column name="vehicle_hire_site_type_id" sqlType="int4" length="10" precision="0" nullable="false" jdbcType="4" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_vehicle_hire_site" columns="id" />
       <foreign-key name="fk_vehicle_hire_site_site" columns="id" ref-table="site" ref-schema="public" ref-catalog="" ref-columns="id" />
@@ -1356,9 +1362,9 @@
       <column name="id" sqlType="serial" length="10" precision="0" nullable="false" jdbcType="4" default="nextval('vehicle_hire_site_type_id_seq'::regclass)" />
       <column name="name" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="description" sqlType="varchar" length="150" precision="0" nullable="false" jdbcType="12" />
-      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="created" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="created_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
-      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-12 17:19:48.437'" />
+      <column name="updated" sqlType="timestamp" length="29" precision="6" nullable="false" jdbcType="93" default="'2011-06-14 20:55:28.234'" />
       <column name="updated_by" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" default="'sysadm'" />
       <primary-key name="pk_vehicle_hire_site_type" columns="id" />
       <index name="ix_vehicle_hire_site_type_name" unique="true" columns="name" />
