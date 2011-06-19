@@ -7,7 +7,9 @@ import com.travel.mentor.dao.dto.LocationDTO;
 import com.travel.mentor.model.impl.Location;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -46,6 +48,20 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
     public LocationDTO findLocation(LocationDTO locationDTO) {
         Location location = em.find(Location.class, locationDTO.getId());
         return locationAssembler.assembleToLocationDTO(location);
+    }
+
+    @SuppressWarnings("unchecked")
+    @PostConstruct
+    public void cacheLocationDomainObjects() {
+        logger.debug("cacheLocationDomainObjects()");
+        StopWatch watch = new StopWatch();
+        watch.start("cacheLocationDomainObjects");
+        em.createNamedQuery(Location.FIND_ALL_LOCATIONS_NAMED_QUERY).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds LocationDAOImpl.cacheLocationDomainObjects() = " + watch.getTotalTimeSeconds());
+        }
     }
 
 }

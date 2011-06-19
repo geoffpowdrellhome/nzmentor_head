@@ -7,7 +7,9 @@ import com.travel.mentor.dao.dto.RegionDTO;
 import com.travel.mentor.model.impl.Region;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -41,4 +43,19 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
         Region region = em.find(Region.class, regionDTO.getId());
         em.remove(region);
     }
+
+    @SuppressWarnings("unchecked")
+    @PostConstruct
+    public void cacheRegionDomainObjects() {
+        logger.debug("cacheRegionDomainObjects()");
+        StopWatch watch = new StopWatch();
+        watch.start("cacheRegionDomainObjects");
+        em.createNamedQuery(Region.FIND_ALL_REGIONS_NAMED_QUERY).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds RegionDAOImpl.cacheRegionDomainObjects() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
+import com.travel.mentor.dao.LocationDAO;
+import com.travel.mentor.dao.RegionDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.LocationDTO;
@@ -15,6 +17,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
@@ -25,6 +28,11 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;
 
+    @Resource(name = "locationDAO")
+    private LocationDAO locationDAO;
+
+
+
     private void doPostRetrievalAssertsExpectingAccommodationSites(List<AccommodationSiteDTO> accommodationSiteDTOList) {
         Assert.assertNotNull(accommodationSiteDTOList);
         Assert.assertTrue(accommodationSiteDTOList.size() != 0);
@@ -34,6 +42,12 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         Assert.assertNotNull(referenceTypeDTOList);
         Assert.assertTrue(referenceTypeDTOList.size() != 0);
     }
+
+    private void doPostRetrievalAssertsExpectingLocations(List<LocationDTO> locationDTOList) {
+        Assert.assertNotNull(locationDTOList);
+        Assert.assertTrue(locationDTOList.size() != 0);
+    }
+
 
     @Test
     public void testGetAccommodationSite() {
@@ -47,7 +61,6 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         doPostRetrievalAssertsExpectingReferenceTypes(siteTypeDTOList);
         ReferenceTypeDTO siteTypeDTO = siteTypeDTOList.get(0); // get the first one.
 
-
         List<ReferenceTypeDTO> accommodationSiteTypeDTOList = referenceTypeDAO.findAllReferenceTypes(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
         doPostRetrievalAssertsExpectingReferenceTypes(accommodationSiteTypeDTOList);
         ReferenceTypeDTO accommodationSiteTypeDTO = accommodationSiteTypeDTOList.get(0); // get the first one.
@@ -60,38 +73,21 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         doPostRetrievalAssertsExpectingReferenceTypes(roomConfigurationTypeDTOList);
         ReferenceTypeDTO roomConfigurationTypeDTO = roomConfigurationTypeDTOList.get(0); // get the first one.
 
+        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
+        doPostRetrievalAssertsExpectingLocations(locationDTOList);
+        LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
 
-        RegionDTO regionDTO = new RegionDTO();
-        regionDTO.setId(1L);
+        AccommodationSiteDTO accommodationSiteDTO = new AccommodationSiteDTO();
+        accommodationSiteDTO.setAccommodationSiteTypeDTO(accommodationSiteTypeDTO);
+        accommodationSiteDTO.setRoomConfigurationTypeDTO(roomConfigurationTypeDTO);
+        accommodationSiteDTO.setRoomTypeDTO(roomTypeDTO);
+        accommodationSiteDTO.setDescription("Golden Circles Queenstown long description");
+        accommodationSiteDTO.setName("Golden Circles Queenstown");
+        accommodationSiteDTO.setSiteTypeDTO(siteTypeDTO);
+        accommodationSiteDTO.setLatitude(new BigDecimal(166.677));
+        accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
+        accommodationSiteDTO.setLocationDTO(locationDTO);
 
-        LocationDTO locationDTO = new LocationDTO();
-        locationDTO.setId(1L);
-        locationDTO.setRegionDTO(regionDTO);
-        locationDTO.setName("test location");
-        locationDTO.setDescription("test location");
-
-
-
-//        public AccommodationSiteDTO(Long _id,
-//                                String _name,
-//                                String _description,
-//                                ReferenceTypeDTO _siteTypeDTO,
-//                                ReferenceTypeDTO _accommodationSiteTypeDTO,
-//                                ReferenceTypeDTO _roomTypeDTO,
-//                                ReferenceTypeDTO _roomConfigurationTypeDTO,
-//                LocationDTO _locationDTO) {
-
-
-
-        AccommodationSiteDTO accommodationSiteDTO = new AccommodationSiteDTO(null,
-                "Golden Circles Queenstown",
-                "Golden Circles Queenstown long description",
-                siteTypeDTO,
-                accommodationSiteTypeDTO,
-                roomTypeDTO,
-                roomConfigurationTypeDTO,
-                locationDTO);
-//
         accommodationSiteDAO.addAccommodationSite(accommodationSiteDTO);
     }
 

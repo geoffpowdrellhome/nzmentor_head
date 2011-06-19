@@ -3,15 +3,8 @@ package com.travel.mentor.dao.impl;
 import com.travel.mentor.dao.IslandDAO;
 import com.travel.mentor.dao.RegionDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.IslandDTO;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.RegionDTO;
-import com.travel.mentor.dao.type.ReferenceTypeDAO;
-import com.travel.mentor.model.impl.Island;
-import com.travel.mentor.model.impl.Region;
-import com.travel.mentor.type.impl.RoomType;
-import com.travel.mentor.type.impl.SiteType;
 import junit.framework.Assert;
 import org.junit.Test;
 

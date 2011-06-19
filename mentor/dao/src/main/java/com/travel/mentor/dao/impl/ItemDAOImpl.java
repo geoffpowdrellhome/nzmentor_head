@@ -7,7 +7,9 @@ import com.travel.mentor.dao.dto.ItemDTO;
 import com.travel.mentor.model.impl.Item;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -47,5 +49,20 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
         Item item = em.find(Item.class, itemDTO.getId());
         return itemAssembler.assembleToItemDTO(item);
     }
+
+    @SuppressWarnings("unchecked")
+    @PostConstruct
+    public void cacheItemDomainObjects() {
+        logger.debug("cacheItemDomainObjects()");
+        StopWatch watch = new StopWatch();
+        watch.start("cacheItemDomainObjects");
+        em.createNamedQuery(Item.FIND_ALL_ITEMS_NAMED_QUERY).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds ItemDAOImpl.cacheIslandDomainObjects() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
 
 }

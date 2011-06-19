@@ -9,9 +9,12 @@ import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.RoomConfigurationType;
 import com.travel.mentor.type.impl.RoomType;
+import com.travel.mentor.type.impl.SiteType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     public void addAccommodationSite(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToAccommodationSiteDomainObject(accommodationSiteDTO);
         accommodationSite.setAccommodationSiteType( em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()) );
+        accommodationSite.setSiteType( em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()) );
         accommodationSite.setRoomConfigurationType( em.find(RoomConfigurationType.class, accommodationSiteDTO.getRoomConfigurationTypeDTO().getId()) );
         accommodationSite.setRoomType( em.find(RoomType.class, accommodationSiteDTO.getRoomTypeDTO().getId()) );
         accommodationSite.setLocation( em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()) );
@@ -48,7 +52,6 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
 
     @Override
     public void deleteAccommodationSite(AccommodationSiteDTO accommodationSiteDTO) {
-        //AccommodationSite accommodationSite = accommodationSiteAssembler.instantiateReferenceTypeDomainObject(accommodationSiteDTO);
         AccommodationSite accommodationSite = em.find(AccommodationSite.class, accommodationSiteDTO.getId());
         em.remove(accommodationSite);
     }
