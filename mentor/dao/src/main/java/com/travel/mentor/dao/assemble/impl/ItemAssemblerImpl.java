@@ -36,7 +36,7 @@ public class ItemAssemblerImpl extends BaseAssemblerImpl implements ItemAssemble
     public ItemDTO assembleToItemDTO(Item item) {
         ItemDTO itemDTO = (ItemDTO) shallowCopy(item, ItemDTO.class);
         itemDTO.setItemTypeDTO((ReferenceTypeDTO) shallowCopy(item.getItemType(), ReferenceTypeDTO.class));
-        itemDTO.setSiteDTO((SiteDTO) shallowCopy(item.getSite(), Site.class));
+        itemDTO.setSiteDTO((SiteDTO) shallowCopy(item.getSite(), SiteDTO.class));
         return itemDTO;
     }
 

@@ -453,55 +453,55 @@ CREATE INDEX event_history_search_1 ON event_history(startTime,endTime);
 
 
 
--- /* island_route_type table */
--- CREATE SEQUENCE island_route_type_id_seq INCREMENT 1;
--- CREATE TABLE island_route_type
--- (
--- 	id INTEGER NOT NULL DEFAULT nextval('island_route_type_id_seq'::regclass),
---     name VARCHAR(50) NOT NULL,
---     description VARCHAR(150) NOT NULL,
---     island_id INTEGER,
--- 	created TIMESTAMP NOT NULL DEFAULT 'now',
--- 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
--- 	updated TIMESTAMP NOT NULL DEFAULT 'now',
--- 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
--- );
---
--- ALTER TABLE island_route_type ADD CONSTRAINT pk_island_route_type PRIMARY KEY (id);
--- ALTER TABLE island_route_type ADD CONSTRAINT fk_island_route_type_island FOREIGN KEY (island_id) REFERENCES island(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
--- CREATE UNIQUE INDEX ix_island_route_type_name ON island_route_type(name);
---
--- INSERT INTO island_route_type(id, name, description)
--- VALUES( nextval('island_route_type_id_seq'), 'Both North and South Islands', 'Both North and South Islands');
--- INSERT INTO island_route_type(id, name, description)
--- VALUES( nextval('island_route_type_id_seq'), 'North Island only', 'North Island only');
--- INSERT INTO island_route_type(id, name, description)
--- VALUES( nextval('island_route_type_id_seq'), 'South Island only', 'South Island only');
+/* supplier_type table */
+CREATE SEQUENCE supplier_type_id_seq INCREMENT 1;
+CREATE TABLE supplier_type
+(
+	id INTEGER NOT NULL DEFAULT nextval('supplier_type_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
+
+ALTER TABLE supplier_type ADD CONSTRAINT pk_supplier_type PRIMARY KEY (id);
+CREATE UNIQUE INDEX ix_supplier_type_name ON supplier_type(name);
+
+INSERT INTO supplier_type(id, name, description)
+VALUES( nextval('supplier_type_id_seq'), 'Accommodation', 'Accommodation');
+INSERT INTO supplier_type(id, name, description)
+VALUES( nextval('supplier_type_id_seq'), 'Rental Vehicles', 'Rental Vehicles');
+INSERT INTO supplier_type(id, name, description)
+VALUES( nextval('supplier_type_id_seq'), 'Activities', 'Activities');
+INSERT INTO supplier_type(id, name, description)
+VALUES( nextval('supplier_type_id_seq'), 'Transfers', 'Transfers');
 
 
+/* supplier table  */
+CREATE SEQUENCE supplier_id_seq INCREMENT 1;
+CREATE TABLE supplier
+(
+    id INTEGER NOT NULL DEFAULT nextval('supplier_id_seq'::regclass),
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(150) NOT NULL,
+	supplier_type_id INTEGER NOT NULL,
+	location_id INTEGER NOT NULL,
+	created TIMESTAMP NOT NULL DEFAULT 'now',
+	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
+	updated TIMESTAMP NOT NULL DEFAULT 'now',
+	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
+);
 
+ALTER TABLE supplier ADD CONSTRAINT pk_supplier PRIMARY KEY (id);
+ALTER TABLE supplier ADD CONSTRAINT fk_supplier_supplier_type FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE supplier ADD CONSTRAINT fk_supplier_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-/* route table */
--- CREATE SEQUENCE route_id_seq INCREMENT 1;
--- CREATE TABLE route
--- (
--- 	id INTEGER NOT NULL DEFAULT nextval('route_id_seq'::regclass),
---     name VARCHAR(50) NOT NULL,
---     description VARCHAR(150) NOT NULL,
---     starting_location_id INTEGER NOT NULL,
---     ending_location_id INTEGER NOT NULL,
--- 	created TIMESTAMP NOT NULL DEFAULT 'now',
--- 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
--- 	updated TIMESTAMP NOT NULL DEFAULT 'now',
--- 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
--- );
---
--- ALTER TABLE route ADD CONSTRAINT pk_route PRIMARY KEY (id);
--- ALTER TABLE route ADD CONSTRAINT fk_route_location_start FOREIGN KEY (starting_location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
--- ALTER TABLE route ADD CONSTRAINT fk_route_location_end FOREIGN KEY (ending_location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
---
--- CREATE UNIQUE INDEX ix_route_name ON route(name);
--- CREATE UNIQUE INDEX ix_route_starting_and_ending ON route(starting_location_id,ending_location_id);
+CREATE UNIQUE INDEX ix_supplier_name ON supplier(name);
+
+INSERT INTO supplier(id, name, description, supplier_type_id, location_id)
+VALUES( nextval('supplier_id_seq'), 'Golden Circle Chain', 'Golden Circle Chain', (select id from supplier_type where name='Accommodation'), (select id from location where name='Downtown Queenstown'));
 
 
 
@@ -542,6 +542,7 @@ CREATE TABLE item
     helpful_comments VARCHAR(150) NOT NULL,
 	item_type_id INTEGER NOT NULL,
 	site_id INTEGER NOT NULL,
+	supplier_id INTEGER NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
@@ -551,7 +552,17 @@ CREATE TABLE item
 ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (id);
 ALTER TABLE item ADD CONSTRAINT fk_item_item_type FOREIGN KEY (item_type_id) REFERENCES item_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE item ADD CONSTRAINT fk_item_site FOREIGN KEY (site_id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item ADD CONSTRAINT fk_item_supplier FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_item_name ON item(name);
+
+
+INSERT INTO item(id, name, description, helpful_comments, item_type_id, site_id, supplier_id)
+VALUES( nextval('item_id_seq'), 'Sub-Penthouse', 'Sub-Penthouse with all the trimmings',
+'This room has beautiful harbour views',
+(select id from item_type where name='Accommodation'),
+(select id from site where name='Golden Circles Queenstown'),
+(select id from supplier where name='Golden Circle Chain'));
+
 
 
 /* item_schedule_time table  */
@@ -656,60 +667,6 @@ ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_itinerary FOREIGN KE
 ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_itinerary_item ON itinerary_item(itinerary_id,item_id);
-
-
-
-
-/* supplier_type table */
-CREATE SEQUENCE supplier_type_id_seq INCREMENT 1;
-CREATE TABLE supplier_type
-(
-	id INTEGER NOT NULL DEFAULT nextval('supplier_type_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE supplier_type ADD CONSTRAINT pk_supplier_type PRIMARY KEY (id);
-CREATE UNIQUE INDEX ix_supplier_type_name ON supplier_type(name);
-
-INSERT INTO supplier_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Accommodation', 'Accommodation');
-INSERT INTO supplier_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Rental Vehicles', 'Rental Vehicles');
-INSERT INTO supplier_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Activities', 'Activities');
-INSERT INTO supplier_type(id, name, description)
-VALUES( nextval('supplier_type_id_seq'), 'Transfers', 'Transfers');
-
-
-/* supplier table  */
-CREATE SEQUENCE supplier_id_seq INCREMENT 1;
-CREATE TABLE supplier
-(
-    id INTEGER NOT NULL DEFAULT nextval('supplier_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	supplier_type_id INTEGER NOT NULL,
-	location_id INTEGER NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE supplier ADD CONSTRAINT pk_supplier PRIMARY KEY (id);
-ALTER TABLE supplier ADD CONSTRAINT fk_supplier_supplier_type FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE supplier ADD CONSTRAINT fk_supplier_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_supplier_name ON supplier(name);
-
-
-
-
 
 
 /* bookline table  */
@@ -879,184 +836,6 @@ INSERT INTO accommodation_site(id, name, description, accommodation_site_type_id
 VALUES( 1, 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 1, 1);
 
 
-/* motel_site table */
-CREATE SEQUENCE motel_site_id_seq INCREMENT 1;
-CREATE TABLE motel_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('motel_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE motel_site ADD CONSTRAINT pk_motel_site PRIMARY KEY (id);
-ALTER TABLE motel_site ADD CONSTRAINT fk_motel_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_motel_site_name ON motel_site(name);
-CREATE INDEX motel_site_search_1 ON motel_site(name);
-
-
-/* hotel_site table */
-CREATE SEQUENCE hotel_site_id_seq INCREMENT 1;
-CREATE TABLE hotel_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('hotel_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE hotel_site ADD CONSTRAINT pk_hotel_site PRIMARY KEY (id);
-ALTER TABLE hotel_site ADD CONSTRAINT fk_hotel_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_hotel_site_name ON hotel_site(name);
-CREATE INDEX hotel_site_search_1 ON hotel_site(name);
-
-
-/* lodge_site table */
-CREATE SEQUENCE lodge_site_id_seq INCREMENT 1;
-CREATE TABLE lodge_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('lodge_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE lodge_site ADD CONSTRAINT pk_lodge_site PRIMARY KEY (id);
-ALTER TABLE lodge_site ADD CONSTRAINT fk_lodge_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_lodge_site_name ON lodge_site(name);
-CREATE INDEX lodge_site_search_1 ON lodge_site(name);
-
-
-/* homestay_site table */
-CREATE SEQUENCE homestay_site_id_seq INCREMENT 1;
-CREATE TABLE homestay_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('homestay_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE homestay_site ADD CONSTRAINT pk_homestay_site PRIMARY KEY (id);
-ALTER TABLE homestay_site ADD CONSTRAINT fk_homestay_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_homestay_site_name ON homestay_site(name);
-CREATE INDEX homestay_site_search_1 ON homestay_site(name);
-
-
-/* farmstay_site table */
-CREATE SEQUENCE farm_site_id_seq INCREMENT 1;
-CREATE TABLE farmstay_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('farm_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE farmstay_site ADD CONSTRAINT pk_farmstay_site PRIMARY KEY (id);
-ALTER TABLE farmstay_site ADD CONSTRAINT fk_farmstay_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_farmstay_site_name ON farmstay_site(name);
-CREATE INDEX farmstay_site_search_1 ON farmstay_site(name);
-
-
-/* backpacker_site table */
-CREATE SEQUENCE backpacker_site_id_seq INCREMENT 1;
-CREATE TABLE backpacker_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('backpacker_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE backpacker_site ADD CONSTRAINT pk_backpacker_site PRIMARY KEY (id);
-ALTER TABLE backpacker_site ADD CONSTRAINT fk_backpacker_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_backpacker_site_name ON backpacker_site(name);
-CREATE INDEX backpacker_site_search_1 ON backpacker_site(name);
-
-/* holiday_park_cabin_site table */
-CREATE SEQUENCE holiday_park_cabin_site_id_seq INCREMENT 1;
-CREATE TABLE holiday_park_cabin_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('holiday_park_cabin_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE holiday_park_cabin_site ADD CONSTRAINT pk_holiday_park_cabin_site PRIMARY KEY (id);
-ALTER TABLE holiday_park_cabin_site ADD CONSTRAINT fk_holiday_park_cabin_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_holiday_park_cabin_site_name ON holiday_park_cabin_site(name);
-CREATE INDEX holiday_park_cabin_site_search_1 ON holiday_park_cabin_site(name);
-
-
-/* apartment_site table */
-CREATE SEQUENCE apartment_site_id_seq INCREMENT 1;
-CREATE TABLE apartment_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('apartment_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE apartment_site ADD CONSTRAINT pk_apartment_site PRIMARY KEY (id);
-ALTER TABLE apartment_site ADD CONSTRAINT fk_apartment_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_apartment_site_name ON apartment_site(name);
-CREATE INDEX apartment_site_search_1 ON apartment_site(name);
-
-
-/* bed_and_breakfast_site table */
-CREATE SEQUENCE bed_and_breakfast_site_id_seq INCREMENT 1;
-CREATE TABLE bed_and_breakfast_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('bed_and_breakfast_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE bed_and_breakfast_site ADD CONSTRAINT pk_bed_and_breakfast_site PRIMARY KEY (id);
-ALTER TABLE bed_and_breakfast_site ADD CONSTRAINT fk_bed_and_breakfast_site_accommodation_site FOREIGN KEY (id) REFERENCES accommodation_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_bed_and_breakfast_site_name ON bed_and_breakfast_site(name);
-CREATE INDEX bed_and_breakfast_site_search_1 ON bed_and_breakfast_site(name);
-
 
 
 
@@ -1113,107 +892,6 @@ CREATE UNIQUE INDEX ix_transfer_site_name ON transfer_site(name);
 CREATE INDEX transfer_site_search_1 ON transfer_site(name);
 
 
-
-/* ferry_terminal_site table */
-CREATE SEQUENCE ferry_terminal_site_id_seq INCREMENT 1;
-CREATE TABLE ferry_terminal_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('ferry_terminal_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE ferry_terminal_site ADD CONSTRAINT pk_ferry_terminal_site PRIMARY KEY (id);
-ALTER TABLE ferry_terminal_site ADD CONSTRAINT fk_ferry_terminal_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_ferry_terminal_site_name ON ferry_terminal_site(name);
-CREATE INDEX ferry_terminal_site_search_1 ON ferry_terminal_site(name);
-
-
-/* bus_depot_site table */
-CREATE SEQUENCE bus_depot_site_id_seq INCREMENT 1;
-CREATE TABLE bus_depot_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('bus_depot_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE bus_depot_site ADD CONSTRAINT pk_bus_depot_site PRIMARY KEY (id);
-ALTER TABLE bus_depot_site ADD CONSTRAINT fk_bus_depot_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_bus_depot_site_name ON bus_depot_site(name);
-CREATE INDEX bus_depot_site_search_1 ON bus_depot_site(name);
-
-
-/* railway_station_site table */
-CREATE SEQUENCE railway_station_site_id_seq INCREMENT 1;
-CREATE TABLE railway_station_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('railway_station_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE railway_station_site ADD CONSTRAINT pk_railway_station_site PRIMARY KEY (id);
-ALTER TABLE railway_station_site ADD CONSTRAINT fk_railway_station_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_railway_station_site_name ON railway_station_site(name);
-CREATE INDEX railway_station_site_search_1 ON railway_station_site(name);
-
-
-
-/* airport_terminal_site table */
-CREATE SEQUENCE airport_terminal_site_id_seq INCREMENT 1;
-CREATE TABLE airport_terminal_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('airport_terminal_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE airport_terminal_site ADD CONSTRAINT pk_airport_terminal_site PRIMARY KEY (id);
-ALTER TABLE airport_terminal_site ADD CONSTRAINT fk_airport_terminal_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_airport_terminal_site_name ON airport_terminal_site(name);
-CREATE INDEX airport_terminal_site_search_1 ON airport_terminal_site(name);
-
-
-
-/* cruise_mooring_site table */
-CREATE SEQUENCE cruise_mooring_site_id_seq INCREMENT 1;
-CREATE TABLE cruise_mooring_site
-(
-	id INTEGER NOT NULL DEFAULT nextval('cruise_mooring_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE cruise_mooring_site ADD CONSTRAINT pk_cruise_mooring_site PRIMARY KEY (id);
-ALTER TABLE cruise_mooring_site ADD CONSTRAINT fk_cruise_mooring_site_transfer_site FOREIGN KEY (id) REFERENCES transfer_site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
-CREATE UNIQUE INDEX ix_cruise_mooring_site_name ON cruise_mooring_site(name);
-CREATE INDEX cruise_mooring_site_search_1 ON cruise_mooring_site(name);
 
 
 

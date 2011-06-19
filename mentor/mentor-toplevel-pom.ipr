@@ -191,6 +191,8 @@
             <element id="library" level="project" name="Maven: cglib:cglib:2.2" />
             <element id="library" level="project" name="Maven: asm:asm:3.3" />
             <element id="library" level="project" name="Maven: javassist:javassist:3.9.0.GA" />
+            <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.CR1" />
+            <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-ehcache:3.5.6-Final" />
             <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:1.5.0" />
             <element id="library" level="project" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" />
@@ -706,7 +708,9 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6.jar!/" />
       </CLASSES>
-      <JAVADOC />
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6-javadoc.jar!/" />
+      </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6-sources.jar!/" />
       </SOURCES>
@@ -737,8 +741,12 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0.jar!/" />
       </CLASSES>
-      <JAVADOC />
-      <SOURCES />
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/apache-lang/commons-lang/2.0/commons-lang-2.0-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Maven: asm:asm:3.1">
       <CLASSES>
@@ -799,7 +807,9 @@
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar!/" />
       </CLASSES>
-      <JAVADOC />
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-javadoc.jar!/" />
+      </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar!/" />
       </SOURCES>
@@ -912,6 +922,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/transaction/jta/1.1/jta-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: javax.validation:validation-api:1.0.0.GA">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.ws.rs:jsr311-api:1.1.1">
@@ -1484,6 +1505,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-entitymanager/3.5.4-Final/hibernate-entitymanager-3.5.4-Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.hibernate:hibernate-validator:4.2.0.CR1">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.CR1/hibernate-validator-4.2.0.CR1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.CR1/hibernate-validator-4.2.0.CR1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-validator/4.2.0.CR1/hibernate-validator-4.2.0.CR1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jmock:jmock-cglib:1.2.0">

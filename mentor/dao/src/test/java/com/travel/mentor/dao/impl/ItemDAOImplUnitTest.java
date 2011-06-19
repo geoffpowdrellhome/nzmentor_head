@@ -1,11 +1,14 @@
 package com.travel.mentor.dao.impl;
 
+import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.ItemDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.dto.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.ItemDTO;
 import com.travel.mentor.dao.dto.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.SiteDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
+import com.travel.mentor.model.impl.AccommodationSite;
 import com.travel.mentor.type.impl.ItemType;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -21,6 +24,9 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "referenceTypeDAO")
     private ReferenceTypeDAO referenceTypeDAO;
 
+    @Resource(name = "accommodationSiteDAO")
+    private AccommodationSiteDAO accommodationSiteDAO;
+
     private void doPostRetrievalAssertsExpectingRecords(List<ItemDTO> itemDTOList) {
         Assert.assertNotNull(itemDTOList);
         Assert.assertTrue(itemDTOList.size() != 0);
@@ -29,6 +35,11 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     private void doPostRetrievalAssertsExpectingReferenceTypes(List<ReferenceTypeDTO> referenceTypeDTOList) {
         Assert.assertNotNull(referenceTypeDTOList);
         Assert.assertTrue(referenceTypeDTOList.size() != 0);
+    }
+
+    private void doPostRetrievalAssertsExpectingSites(List<AccommodationSiteDTO> accommodationSiteDTOList) {
+        Assert.assertNotNull(accommodationSiteDTOList);
+        Assert.assertTrue(accommodationSiteDTOList.size() != 0);
     }
 
     @Test
@@ -44,9 +55,9 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
         doPostRetrievalAssertsExpectingReferenceTypes(itemTypeDTOList);
         ReferenceTypeDTO itemTypeDTO = itemTypeDTOList.get(0); // get the first one.
 
-        SiteDTO siteDTO = new SiteDTO();
-        //@@TODO - must work on this - what type of site? Accommodation etc., The site stuff may take a bit of thinking and testing.
-
+        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAllAccommodationSites();
+        doPostRetrievalAssertsExpectingSites(accommodationSiteDTOList);
+        AccommodationSiteDTO siteDTO = accommodationSiteDTOList.get(0); // get the first one.
 
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setItemTypeDTO(itemTypeDTO);
