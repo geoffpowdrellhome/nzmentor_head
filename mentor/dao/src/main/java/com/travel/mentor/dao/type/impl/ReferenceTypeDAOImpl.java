@@ -2,10 +2,11 @@ package com.travel.mentor.dao.type.impl;
 
 import com.travel.mentor.dao.assemble.ReferenceTypeAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.BaseReferenceType;
 import com.travel.mentor.type.impl.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -13,7 +14,6 @@ import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.lang.model.type.ReferenceType;
 import java.util.List;
 
 @Repository("referenceTypeDAO")
@@ -44,7 +44,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
     @Override
     public void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO) {
-        BaseReferenceType baseReferenceType = referenceTypeAssembler.instantiateReferenceTypeDomainObject(referenceTypeDTO);
+        BaseReferenceType baseReferenceType = (BaseReferenceType) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         baseReferenceType = em.find(baseReferenceType.getClass(), referenceTypeDTO.getId());
         em.remove(baseReferenceType);
     }

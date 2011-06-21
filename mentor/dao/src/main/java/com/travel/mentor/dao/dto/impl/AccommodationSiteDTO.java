@@ -1,4 +1,6 @@
-package com.travel.mentor.dao.dto;
+package com.travel.mentor.dao.dto.impl;
+
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
 public class AccommodationSiteDTO extends SiteDTO {
 
@@ -7,24 +9,6 @@ public class AccommodationSiteDTO extends SiteDTO {
     private ReferenceTypeDTO roomConfigurationTypeDTO;
 
     public AccommodationSiteDTO() {}
-
-    public AccommodationSiteDTO(Long _id,
-                                String _name,
-                                String _description,
-                                ReferenceTypeDTO _siteTypeDTO,
-                                ReferenceTypeDTO _accommodationSiteTypeDTO,
-                                ReferenceTypeDTO _roomTypeDTO,
-                                ReferenceTypeDTO _roomConfigurationTypeDTO,
-                                LocationDTO _locationDTO) {
-        this.id = _id;
-        this.name = _name;
-        this.description = _description;
-        this.siteTypeDTO = _siteTypeDTO;
-        this.accommodationSiteTypeDTO = _accommodationSiteTypeDTO;
-        this.roomTypeDTO = _roomTypeDTO;
-        this.roomConfigurationTypeDTO = _roomConfigurationTypeDTO;
-        this.locationDTO = _locationDTO;
-    }
 
     public Long getId() {
         return id;

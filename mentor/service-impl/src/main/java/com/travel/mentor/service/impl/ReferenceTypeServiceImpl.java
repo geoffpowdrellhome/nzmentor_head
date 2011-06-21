@@ -1,6 +1,6 @@
 package com.travel.mentor.service.impl;
 
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.service.ReferenceTypeService;
 import com.travel.mentor.type.impl.AccommodationSiteType;

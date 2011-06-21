@@ -1,17 +1,14 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.Audited;
+import com.travel.mentor.model.base.AuditedEntity;
 import com.travel.mentor.type.impl.ActivitySiteType;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 @Entity
 @Table(schema = "public", name = "activity_site")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "ActivitySite.findAll", query = "SELECT o FROM ActivitySite o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.activity_site_id_seq", allocationSize = 1)
-public class ActivitySite extends Audited {
+public class ActivitySite extends AuditedEntity {
 
     @Id
     @Column(name = "id", nullable = false)

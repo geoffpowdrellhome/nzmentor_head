@@ -1,6 +1,6 @@
 package com.travel.mentor.dao;
 
-import com.travel.mentor.dao.dto.ItemDTO;
+import com.travel.mentor.dao.dto.impl.ItemDTO;
 
 import java.util.List;
 

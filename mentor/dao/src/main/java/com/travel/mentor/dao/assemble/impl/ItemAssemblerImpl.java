@@ -1,9 +1,9 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.ItemAssembler;
-import com.travel.mentor.dao.dto.ItemDTO;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
-import com.travel.mentor.dao.dto.SiteDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.impl.ItemDTO;
+import com.travel.mentor.dao.dto.impl.SiteDTO;
 import com.travel.mentor.model.impl.Item;
 import com.travel.mentor.model.impl.Site;
 import com.travel.mentor.type.impl.ItemType;

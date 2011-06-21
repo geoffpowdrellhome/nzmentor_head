@@ -1,4 +1,7 @@
-package com.travel.mentor.dao.dto;
+package com.travel.mentor.dao.dto.impl;
+
+import com.travel.mentor.dao.dto.base.BaseDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
 public class ItemDTO extends BaseDTO {
     private ReferenceTypeDTO itemTypeDTO;

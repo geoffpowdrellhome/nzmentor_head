@@ -2,12 +2,10 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.LocationDAO;
-import com.travel.mentor.dao.RegionDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.AccommodationSiteDTO;
-import com.travel.mentor.dao.dto.LocationDTO;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
-import com.travel.mentor.dao.dto.RegionDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
+import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.RoomConfigurationType;
@@ -79,14 +77,13 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
 
         AccommodationSiteDTO accommodationSiteDTO = new AccommodationSiteDTO();
         accommodationSiteDTO.setAccommodationSiteTypeDTO(accommodationSiteTypeDTO);
-        accommodationSiteDTO.setRoomConfigurationTypeDTO(roomConfigurationTypeDTO);
-        accommodationSiteDTO.setRoomTypeDTO(roomTypeDTO);
-        accommodationSiteDTO.setDescription("Golden Circles Queenstown long description");
-        accommodationSiteDTO.setName("Golden Circles Queenstown");
+        accommodationSiteDTO.setDescription("Mercure Queenstown long description");
+        accommodationSiteDTO.setName("Mercure Queenstown");
         accommodationSiteDTO.setSiteTypeDTO(siteTypeDTO);
         accommodationSiteDTO.setLatitude(new BigDecimal(166.677));
         accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
         accommodationSiteDTO.setLocationDTO(locationDTO);
+        accommodationSiteDTO.getUserSessionCookie().setUserId(1L);
 
         accommodationSiteDAO.addAccommodationSite(accommodationSiteDTO);
     }

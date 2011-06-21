@@ -1,20 +1,10 @@
-package com.travel.mentor.model.base;
+package com.travel.mentor.dao.dto.base;
 
-import javax.persistence.*;
+public abstract class BaseDTO extends AuditedDTO {
 
-@MappedSuperclass
-public abstract class BaseEntity extends AuditedEntity {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
     protected Long id;
-
-    @Column(name = "name", nullable = false)
-    public String name="";
-
-    @Column(name = "description", nullable = false)
-    protected String description="";
+    protected String name;
+    protected String description;
 
     public Long getId() {
         return id;

@@ -1,7 +1,7 @@
 package com.travel.mentor.dao.type;
 
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.*;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
 
     @Test
     public void testAddAccommodationSiteType() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class.getName());
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class);
         referenceTypeDAO.addReferenceType(referenceTypeDTO);
     }
 
@@ -66,7 +66,7 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
 
     @Test
     public void testAddClimateConditionType() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class.getName());
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class);
         referenceTypeDAO.addReferenceType(referenceTypeDTO);
     }
 

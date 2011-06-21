@@ -3,19 +3,17 @@ package com.travel.mentor.dao.impl;
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.assemble.AccommodationSiteAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
-import com.travel.mentor.dao.dto.AccommodationSiteDTO;
+import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.model.impl.AccommodationSite;
 import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.type.impl.AccommodationSiteType;
-import com.travel.mentor.type.impl.RoomConfigurationType;
-import com.travel.mentor.type.impl.RoomType;
 import com.travel.mentor.type.impl.SiteType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Repository("accommodationSiteDAO")
@@ -34,12 +32,19 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     @Override
     public void addAccommodationSite(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToAccommodationSiteDomainObject(accommodationSiteDTO);
+
         accommodationSite.setAccommodationSiteType( em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()) );
         accommodationSite.setSiteType( em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()) );
-        accommodationSite.setRoomConfigurationType( em.find(RoomConfigurationType.class, accommodationSiteDTO.getRoomConfigurationTypeDTO().getId()) );
-        accommodationSite.setRoomType( em.find(RoomType.class, accommodationSiteDTO.getRoomTypeDTO().getId()) );
         accommodationSite.setLocation( em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()) );
-        accommodationSite.setId(5L);
+
+
+        //accommodationSiteDTO.getUserSessionCookie().getUserId()
+
+        //@TODO REMOVE THIS hardcoding once developed the User functionality
+        accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
+        accommodationSite.setCreateUser("boo");
+        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+        accommodationSite.setUpdateUser("boo2");
 
         em.persist(accommodationSite);
     }

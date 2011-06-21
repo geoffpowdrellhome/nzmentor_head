@@ -1,4 +1,6 @@
-package com.travel.mentor.dao.dto;
+package com.travel.mentor.dao.dto.impl;
+
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.travel.mentor.dao.dto;
+package com.travel.mentor.dao.dto.impl;
 
 import java.io.Serializable;
 

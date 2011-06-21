@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class NameDescAudited extends Audited {
+public class NameDescAudited extends AuditedEntity {
 
     @Column(name = "name")
     protected String name;

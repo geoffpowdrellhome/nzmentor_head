@@ -3,7 +3,7 @@ package com.travel.mentor.dao.impl;
 import com.travel.mentor.dao.IslandDAO;
 import com.travel.mentor.dao.assemble.IslandAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
-import com.travel.mentor.dao.dto.IslandDTO;
+import com.travel.mentor.dao.dto.impl.IslandDTO;
 import com.travel.mentor.model.impl.Island;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

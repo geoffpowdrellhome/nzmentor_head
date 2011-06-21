@@ -1,9 +1,9 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.LocationAssembler;
-import com.travel.mentor.dao.dto.LocationDTO;
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
-import com.travel.mentor.dao.dto.RegionDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.impl.LocationDTO;
+import com.travel.mentor.dao.dto.impl.RegionDTO;
 import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.model.impl.Region;
 import com.travel.mentor.type.impl.LocationType;

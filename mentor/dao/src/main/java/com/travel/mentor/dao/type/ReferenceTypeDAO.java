@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.type;
 
-import com.travel.mentor.dao.dto.ReferenceTypeDTO;
+import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
 import java.util.List;
 

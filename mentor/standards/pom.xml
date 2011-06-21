@@ -34,13 +34,13 @@
         <hamcrest.version>1.1</hamcrest.version>
 
         <!-- hibernate -->
-        <hibernate-annotations.version>3.5.4-Final</hibernate-annotations.version>
+        <hibernate-annotations.version>3.5.6-Final</hibernate-annotations.version>
         <hibernate-commons-annotations.version>3.2.0.Final</hibernate-commons-annotations.version>
-        <hibernate-core.version>3.5.4-Final</hibernate-core.version>
-        <hibernate-entitymanager.version>3.5.4-Final</hibernate-entitymanager.version>
-        <hibernate-validator.version>4.2.0.CR1</hibernate-validator.version>
-        <hibernate-ehcache.version>3.5.6-Final</hibernate-ehcache.version>                                 
-        <hibernate-javax-persistence.version>1.0.0.Final</hibernate-javax-persistence.version>
+        <hibernate-core.version>3.6.5.Final</hibernate-core.version>
+        <hibernate-entitymanager.version>3.6.5.Final</hibernate-entitymanager.version>
+        <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+        <hibernate-ehcache.version>3.6.5.Final</hibernate-ehcache.version>
+        <hibernate-javax-persistence.version>1.0.1.Final</hibernate-javax-persistence.version>
 
         <hsqldb.version>1.8.0.10</hsqldb.version>
 
@@ -66,7 +66,7 @@
          
         <mockito.version>1.8.5</mockito.version>
 
-        <playerglobal.version>10-3.3.0.4852</playerglobal.version>
+        <!--<playerglobal.version>10-3.3.0.4852</playerglobal.version>-->
 
         <postgresql.version>9.0-801.jdbc4</postgresql.version> <!-- postgresql jdbc driver -->
 

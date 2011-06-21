@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.assemble;
 
-import com.travel.mentor.dao.dto.AccommodationSiteDTO;
+import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.model.impl.AccommodationSite;
 
 import java.util.List;

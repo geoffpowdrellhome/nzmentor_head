@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.RegionAssembler;
-import com.travel.mentor.dao.dto.IslandDTO;
-import com.travel.mentor.dao.dto.RegionDTO;
+import com.travel.mentor.dao.dto.impl.IslandDTO;
+import com.travel.mentor.dao.dto.impl.RegionDTO;
 import com.travel.mentor.model.impl.Island;
 import com.travel.mentor.model.impl.Region;
 import org.springframework.stereotype.Component;

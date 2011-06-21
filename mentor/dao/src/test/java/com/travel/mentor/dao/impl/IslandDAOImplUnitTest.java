@@ -2,7 +2,7 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.IslandDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.IslandDTO;
+import com.travel.mentor.dao.dto.impl.IslandDTO;
 import junit.framework.Assert;
 import org.junit.Test;
 

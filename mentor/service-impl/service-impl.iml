@@ -906,9 +906,9 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:1.6.2" level="project" />
     <orderEntry type="module" module-name="domain" />
     <orderEntry type="library" name="Maven: joda-time:joda-time-hibernate:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-annotations:3.5.4-Final" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:3.5.4-Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-annotations:3.5.6-Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:3.5.6-Final" level="project" />
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.6" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.1" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
@@ -937,16 +937,13 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:3.0.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:3.5.4-Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-entitymanager:3.6.5.Final" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib:2.2" level="project" />
     <orderEntry type="library" name="Maven: asm:asm:3.3" level="project" />
-    <orderEntry type="library" name="Maven: javassist:javassist:3.9.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:4.2.0.CR1" level="project" />
+    <orderEntry type="library" name="Maven: javassist:javassist:3.12.0.GA" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:4.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-ehcache:3.5.6-Final" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" level="project" />
-    <orderEntry type="library" name="Maven: net.sf.jsr107cache:jsr107cache:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-ehcache:3.6.5.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-all:1.1" level="project" />
     <orderEntry type="module" module-name="service-api" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxrs:2.3.1" level="project" />
@@ -1003,6 +1000,7 @@
     <orderEntry type="library" name="Maven: apache-lang:commons-lang:2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.cxf:cxf-testutils:2.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.jra:jra:1.0-alpha-4" level="project" />
+    <orderEntry type="library" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
     <orderEntry type="library" name="Maven: org.mockito:mockito-all:1.8.5" level="project" />
     <orderEntry type="library" name="Maven: org.jmock:jmock-cglib:1.2.0" level="project" />

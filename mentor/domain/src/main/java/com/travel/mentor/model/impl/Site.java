@@ -2,43 +2,32 @@ package com.travel.mentor.model.impl;
 
 import com.travel.mentor.model.base.BaseEntity;
 import com.travel.mentor.type.impl.SiteType;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "public", name = "site")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="siteTypeId")
 @NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
-public class Site extends BaseEntity {
+public abstract class Site extends BaseEntity {
 
     public static final String FIND_ALL_SITES_NAMED_QUERY = "Site.findAll";
 
     @ManyToOne
     @JoinColumn(name = "site_type_id", referencedColumnName = "id")
-    private SiteType siteType;
+    protected SiteType siteType;
 
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private Location location;
+    protected Location location;
 
     @Column(name = "latitude")
-    private BigDecimal latitude;
+    protected BigDecimal latitude;
 
     @Column(name = "longitude")
-    private BigDecimal longitude;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    protected BigDecimal longitude;
 
     public SiteType getSiteType() {
         return siteType;

@@ -3,7 +3,7 @@ package com.travel.mentor.dao.impl;
 import com.travel.mentor.dao.LocationDAO;
 import com.travel.mentor.dao.assemble.LocationAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
-import com.travel.mentor.dao.dto.LocationDTO;
+import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.model.impl.Location;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

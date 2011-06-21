@@ -1,5 +1,8 @@
 package com.travel.mentor.model.base;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -8,7 +11,8 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 @MappedSuperclass
-public class Audited implements Serializable {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public abstract class AuditedEntity implements Serializable {
 
     @Column(name = "created_by")
     protected String createUser = "sysadm";

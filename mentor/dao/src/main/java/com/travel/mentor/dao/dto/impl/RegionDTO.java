@@ -1,4 +1,7 @@
-package com.travel.mentor.dao.dto;
+package com.travel.mentor.dao.dto.impl;
+
+import com.travel.mentor.dao.dto.base.BaseDTO;
+import com.travel.mentor.dao.dto.impl.IslandDTO;
 
 import java.math.BigDecimal;
 

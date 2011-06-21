@@ -226,7 +226,6 @@ CREATE TABLE site
 	site_type_id INTEGER NOT NULL,
 	longitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
 	latitude NUMERIC(10, 2) NOT NULL DEFAULT 0,
-	site_entity_type VARCHAR(20) NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
@@ -241,8 +240,8 @@ CREATE UNIQUE INDEX ix_site_name ON site(name);
 CREATE INDEX site_search_1 ON site(name);
 
 
-INSERT INTO site(id, name, description, location_id, site_type_id, longitude, latitude, site_entity_type)
-VALUES( nextval('site_id_seq'), 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 3, -3456.456, 4567.5551, 'AccommodationSite');
+INSERT INTO site(id, name, description, location_id, site_type_id, longitude, latitude)
+VALUES( nextval('site_id_seq'), 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 3, -3456.456, 4567.5551);
 
 
 /* event type table */
@@ -808,15 +807,10 @@ VALUES( nextval('room_configuration_type_id_seq'), 'Includes Kitchenette', 'Incl
 
 
 /* accommodation_site table */
---CREATE SEQUENCE accommodation_site_id_seq INCREMENT 1;
 CREATE TABLE accommodation_site
 (
-	id INTEGER NOT NULL, -- DEFAULT nextval('accommodation_site_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    description VARCHAR(150) NOT NULL,
-	accommodation_site_type_id INTEGER NOT NULL,
-	room_type_id INTEGER NOT NULL,
-    room_configuration_type_id INTEGER NOT NULL,
+	id INTEGER NOT NULL,
+	accommodation_site_type_id INTEGER NOT NULL,	
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
@@ -826,14 +820,11 @@ CREATE TABLE accommodation_site
 ALTER TABLE accommodation_site ADD CONSTRAINT pk_accommodation_site PRIMARY KEY (id);
 ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_site_type FOREIGN KEY (accommodation_site_type_id) REFERENCES accommodation_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_type FOREIGN KEY (room_type_id) REFERENCES room_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_configuration_type FOREIGN KEY (room_configuration_type_id) REFERENCES room_configuration_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+--ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_type FOREIGN KEY (room_type_id) REFERENCES room_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+--ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_room_configuration_type FOREIGN KEY (room_configuration_type_id) REFERENCES room_configuration_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
-CREATE UNIQUE INDEX ix_accomodation_site_name ON accommodation_site(name);
-CREATE INDEX accommodation_site_search_1 ON accommodation_site(name);
-
-INSERT INTO accommodation_site(id, name, description, accommodation_site_type_id, room_type_id, room_configuration_type_id)
-VALUES( 1, 'Golden Circles Queenstown', 'Golden Circles Queenstown', 1, 1, 1);
+INSERT INTO accommodation_site(id, accommodation_site_type_id)
+VALUES( 1, 1);
 
 
 
@@ -1032,11 +1023,11 @@ VALUES( nextval('users_id_seq'), 'supplier1', 'supplier1', 'Mr', 'Supplier', 'Nu
 
 
 
-/* auth_role table */
-CREATE SEQUENCE auth_role_id_seq INCREMENT 1;
-CREATE TABLE auth_role
+/* role table */
+CREATE SEQUENCE role_id_seq INCREMENT 1;
+CREATE TABLE role
 (
-	id INTEGER NOT NULL DEFAULT nextval('auth_role_id_seq'::regclass),
+	id INTEGER NOT NULL DEFAULT nextval('role_id_seq'::regclass),
     rolename VARCHAR(30) NOT NULL,
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
@@ -1044,21 +1035,20 @@ CREATE TABLE auth_role
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE auth_role ADD CONSTRAINT pk_auth_role PRIMARY KEY (id);
+ALTER TABLE role ADD CONSTRAINT pk_role PRIMARY KEY (id);
 
-CREATE UNIQUE INDEX ix_auth_role_rolename ON auth_role(rolename);
-CREATE INDEX auth_role_search_1 ON auth_role(rolename);
+CREATE UNIQUE INDEX ix_role_rolename ON role(rolename);
+CREATE INDEX role_search_1 ON role(rolename);
 
-INSERT INTO auth_role(id, rolename)
-VALUES( nextval('auth_role_id_seq'), 'MENTOR_ADMIN_ROLE');
-INSERT INTO auth_role(id, rolename)
-VALUES( nextval('auth_role_id_seq'), 'REGIONAL_MAINTENANCE_ROLE');
-INSERT INTO auth_role(id, rolename)
-VALUES( nextval('auth_role_id_seq'), 'SUPPLIER_MAINTENANCE_ROLE');
+INSERT INTO role(id, rolename)
+VALUES( nextval('role_id_seq'), 'MENTOR_ADMIN_ROLE');
+INSERT INTO role(id, rolename)
+VALUES( nextval('role_id_seq'), 'REGIONAL_MAINTENANCE_ROLE');
+INSERT INTO role(id, rolename)
+VALUES( nextval('role_id_seq'), 'SUPPLIER_MAINTENANCE_ROLE');
 
 
-
-CREATE TABLE user_auth
+CREATE TABLE user_role
 (
 	username VARCHAR(30) NOT NULL,
     rolename VARCHAR(30) NOT NULL
@@ -1066,15 +1056,15 @@ CREATE TABLE user_auth
 
 -- ALTER TABLE user_auth ADD CONSTRAINT pk_auth_role PRIMARY KEY (username, rolename);
 
-ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_users_username FOREIGN KEY (username) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE user_auth ADD CONSTRAINT fk_user_auth_auth_rolename FOREIGN KEY (rolename) REFERENCES auth_role(rolename) ON UPDATE NO ACTION ON DELETE NO ACTION;
-CREATE UNIQUE INDEX ix_user_auth ON user_auth(username, rolename);
+ALTER TABLE user_role ADD CONSTRAINT fk_user_role_users_username FOREIGN KEY (username) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE user_role ADD CONSTRAINT fk_user_role_role_rolename FOREIGN KEY (rolename) REFERENCES role(rolename) ON UPDATE NO ACTION ON DELETE NO ACTION;
+CREATE UNIQUE INDEX ix_user_role ON user_role(username, rolename);
 
-INSERT INTO user_auth(username, rolename)
+INSERT INTO user_role(username, rolename)
 VALUES('donr', 'MENTOR_ADMIN_ROLE');
-INSERT INTO user_auth(username, rolename)
+INSERT INTO user_role(username, rolename)
 VALUES('region1', 'REGIONAL_MAINTENANCE_ROLE');
-INSERT INTO user_auth(username, rolename)
+INSERT INTO user_role(username, rolename)
 VALUES('supplier1', 'SUPPLIER_MAINTENANCE_ROLE');
 
 
