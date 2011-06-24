@@ -4,6 +4,7 @@ import com.travel.mentor.dao.LocationDAO;
 import com.travel.mentor.dao.assemble.LocationAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
+import com.travel.mentor.model.impl.Island;
 import com.travel.mentor.model.impl.Location;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,12 +45,6 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         em.remove(location);
     }
 
-    @Override
-    public LocationDTO findLocation(LocationDTO locationDTO) {
-        Location location = em.find(Location.class, locationDTO.getId());
-        return locationAssembler.assembleToLocationDTO(location);
-    }
-
     @SuppressWarnings("unchecked")
     @PostConstruct
     public void cacheLocationDomainObjects() {
@@ -64,4 +59,9 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         }
     }
 
+    @Override
+    public LocationDTO findLocation(Long id) {
+        Location location = em.find(Location.class, id);
+        return locationAssembler.assembleToLocationDTO(location);
+    }
 }

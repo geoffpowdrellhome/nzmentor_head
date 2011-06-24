@@ -14,4 +14,6 @@ public interface AccommodationSiteDAO {
 
     void deleteAccommodationSite(AccommodationSiteDTO accommodationSiteDTO);
 
+    AccommodationSiteDTO findAccommodationSite(Long id);
+
 }

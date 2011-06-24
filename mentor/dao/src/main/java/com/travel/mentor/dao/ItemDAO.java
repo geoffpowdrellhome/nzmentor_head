@@ -14,6 +14,6 @@ public interface ItemDAO {
 
     void deleteItem(ItemDTO itemDTO);
 
-    ItemDTO findItem(ItemDTO itemDTO);
+    ItemDTO findItem(Long id);
 
 }

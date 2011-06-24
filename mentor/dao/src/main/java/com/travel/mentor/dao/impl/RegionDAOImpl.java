@@ -4,6 +4,7 @@ import com.travel.mentor.dao.RegionDAO;
 import com.travel.mentor.dao.assemble.RegionAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
+import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.model.impl.Region;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,4 +59,9 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
         }
     }
 
+    @Override
+    public RegionDTO findRegion(Long id) {
+        Region region = em.find(Region.class, id);
+        return regionAssembler.assembleToRegionDTO(region);
+    }
 }

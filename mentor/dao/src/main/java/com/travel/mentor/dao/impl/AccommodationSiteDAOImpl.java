@@ -5,6 +5,7 @@ import com.travel.mentor.dao.assemble.AccommodationSiteAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.model.impl.AccommodationSite;
+import com.travel.mentor.model.impl.Item;
 import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.SiteType;
@@ -61,7 +62,13 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         em.remove(accommodationSite);
     }
 
-//    @SuppressWarnings("unchecked")
+    @Override
+    public AccommodationSiteDTO findAccommodationSite(Long id) {
+        AccommodationSite accommodationSite = em.find(AccommodationSite.class, id);
+        return accommodationSiteAssembler.assembleToAccommodationSiteDTO(accommodationSite);
+    }
+
+    //    @SuppressWarnings("unchecked")
 //    @PostConstruct
 //    public void cacheAccommodationSiteDomainObjects() {
 //        logger.debug("cacheAccommodationSiteDomainObjects()");

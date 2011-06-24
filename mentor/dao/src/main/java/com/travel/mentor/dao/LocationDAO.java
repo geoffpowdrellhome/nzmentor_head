@@ -14,6 +14,6 @@ public interface LocationDAO {
 
     void deleteLocation(LocationDTO locationDTO);
 
-    LocationDTO findLocation(LocationDTO locationDTO);
+    LocationDTO findLocation(Long id);
 
 }

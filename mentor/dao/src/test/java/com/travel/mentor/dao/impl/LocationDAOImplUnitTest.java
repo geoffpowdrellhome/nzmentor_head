@@ -92,10 +92,9 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
     public void testFindLocation() {
         List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
         doPostRetrievalAssertsExpectingRecords(locationDTOList);
-        LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
 
-        LocationDTO locationDTOFound = locationDAO.findLocation(locationDTO);
-        Assert.assertNotNull(locationDTOFound);
+        LocationDTO locationDTO = locationDAO.findLocation(locationDTOList.get(0).getId());
+        Assert.assertNotNull(locationDTO);
     }
 
 }

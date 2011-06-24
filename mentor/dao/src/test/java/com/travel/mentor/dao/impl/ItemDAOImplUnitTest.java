@@ -6,6 +6,7 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.ItemDTO;
+import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.ItemType;
 import junit.framework.Assert;
@@ -89,10 +90,9 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     public void testFindItem() {
         List<ItemDTO> itemDTOList = itemDAO.findAllItems();
         doPostRetrievalAssertsExpectingRecords(itemDTOList);
-        ItemDTO itemDTO = itemDTOList.get(0); // get the first one.
-        itemDTO.setName("update name 2");
-        itemDTO.setDescription("update desc 2");
-        itemDAO.updateItem(itemDTO);
+
+        ItemDTO itemDTO = itemDAO.findItem(itemDTOList.get(0).getId());
+        Assert.assertNotNull(itemDTO);
     }
 
 }

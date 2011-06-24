@@ -65,8 +65,8 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
     }
 
     @Override
-    public UserDTO findUser(UserDTO userDTO) {
-        User user = em.find(User.class, userDTO.getId());
+    public UserDTO findUser(Long userId) {
+        User user = em.find(User.class, userId);
         return userAssembler.assembleToUserDTO(user);
     }
 

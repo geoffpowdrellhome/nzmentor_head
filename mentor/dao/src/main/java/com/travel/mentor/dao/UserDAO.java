@@ -17,6 +17,6 @@ public interface UserDAO {
 
     void updateUser(UserDTO userDTO);
 
-    UserDTO findUser(UserDTO userDTO);
+    UserDTO findUser(Long userId);
 
 }

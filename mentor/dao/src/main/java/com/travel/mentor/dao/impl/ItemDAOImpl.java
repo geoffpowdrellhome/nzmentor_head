@@ -45,8 +45,8 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
     }
 
     @Override
-    public ItemDTO findItem(ItemDTO itemDTO) {
-        Item item = em.find(Item.class, itemDTO.getId());
+    public ItemDTO findItem(Long id) {
+        Item item = em.find(Item.class, id);
         return itemAssembler.assembleToItemDTO(item);
     }
 

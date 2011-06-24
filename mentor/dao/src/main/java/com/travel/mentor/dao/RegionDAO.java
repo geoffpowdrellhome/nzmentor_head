@@ -14,4 +14,6 @@ public interface RegionDAO {
 
     void deleteRegion(RegionDTO regionDTO);
 
+    RegionDTO findRegion(Long id);
+
 }

@@ -8,4 +8,6 @@ public interface IslandDAO {
 
     List<IslandDTO> findAllIslands();
 
+    IslandDTO findIsland(Long id);
+
 }
