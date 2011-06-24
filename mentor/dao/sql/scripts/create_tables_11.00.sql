@@ -1002,11 +1002,16 @@ CREATE TABLE users
     title VARCHAR(10) NOT NULL,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(50) NOT NULL,
+    enabled BOOL NOT NULL DEFAULT 'true',
+    accountExpired BOOL NOT NULL DEFAULT 'false',
+    credentialsExpired BOOL NOT NULL DEFAULT 'false',
+    accountLocked BOOL NOT NULL DEFAULT 'false',
 	created TIMESTAMP NOT NULL DEFAULT 'now',
 	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
 	updated TIMESTAMP NOT NULL DEFAULT 'now',
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
+
 
 ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (id);
 

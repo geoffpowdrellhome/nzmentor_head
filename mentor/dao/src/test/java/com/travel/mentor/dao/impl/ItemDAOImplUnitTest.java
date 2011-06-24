@@ -95,6 +95,4 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
         itemDAO.updateItem(itemDTO);
     }
 
-
-
 }

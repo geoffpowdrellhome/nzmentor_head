@@ -1,6 +1,6 @@
 package com.travel.mentor.type.impl;
 
-import com.travel.mentor.type.BaseReferenceType;
+import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="ClimateWindfactorType.findAll", query="SELECT o FROM ClimateWindfactorType o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.climate_windfactor_type_id_seq", allocationSize = 1)
-public class ClimateWindfactorType extends BaseReferenceType {
+public class ClimateWindfactorType extends AbstractAuditedNameDescEntity {
 
     public static final String FIND_ALL_CLIMATE_WINDFACTOR_TYPES_NAMED_QUERY = "ClimateWindfactorType.findAll";
 

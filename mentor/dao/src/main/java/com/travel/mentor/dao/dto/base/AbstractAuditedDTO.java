@@ -5,13 +5,22 @@ import com.travel.mentor.dao.dto.impl.UserSessionCookieDTO;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public abstract class AuditedDTO implements Serializable {
+public abstract class AbstractAuditedDTO implements Serializable {
 
+    protected Long id;
     protected String createUser;
     protected Timestamp createDate;
     protected String updateUser;
     protected Timestamp updateDate;
-    protected UserSessionCookieDTO userSessionCookie = new UserSessionCookieDTO();
+    protected UserSessionCookieDTO userSessionCookieDTO = new UserSessionCookieDTO();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCreateUser() {
         return createUser;
@@ -45,11 +54,11 @@ public abstract class AuditedDTO implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public UserSessionCookieDTO getUserSessionCookie() {
-        return userSessionCookie;
+    public UserSessionCookieDTO getUserSessionCookieDTO() {
+        return userSessionCookieDTO;
     }
 
-    public void setUserSessionCookie(UserSessionCookieDTO userSessionCookie) {
-        this.userSessionCookie = userSessionCookie;
+    public void setUserSessionCookieDTO(UserSessionCookieDTO userSessionCookieDTO) {
+        this.userSessionCookieDTO = userSessionCookieDTO;
     }
 }

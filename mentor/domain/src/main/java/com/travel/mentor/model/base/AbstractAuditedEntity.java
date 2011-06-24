@@ -6,13 +6,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public abstract class AuditedEntity implements Serializable {
+public abstract class AbstractAuditedEntity implements Serializable {
+
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
+    protected Long id;
 
     @Column(name = "created_by")
     protected String createUser = "sysadm";
@@ -25,6 +29,14 @@ public abstract class AuditedEntity implements Serializable {
 
     @Column(name = "updated")
     protected Timestamp updateDate = new Timestamp(new Date().getTime());
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCreateUser() {
         return createUser;

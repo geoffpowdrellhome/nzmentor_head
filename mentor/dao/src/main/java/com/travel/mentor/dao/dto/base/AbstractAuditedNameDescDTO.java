@@ -1,18 +1,9 @@
 package com.travel.mentor.dao.dto.base;
 
-public abstract class BaseDTO extends AuditedDTO {
+public abstract class AbstractAuditedNameDescDTO extends AbstractAuditedDTO {
 
-    protected Long id;
     protected String name;
     protected String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

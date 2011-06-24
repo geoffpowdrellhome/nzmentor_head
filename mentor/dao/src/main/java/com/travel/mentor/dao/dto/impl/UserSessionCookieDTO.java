@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class UserSessionCookieDTO implements Serializable {
 
-    protected Long userId;
+    protected UserDTO userDTO;
     protected String sessionId;
 
     public UserSessionCookieDTO() {}
 
-    public Long getUserId() {
-        return userId;
+    public UserDTO getUserDTO() {
+        return userDTO;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
     }
 
     public String getSessionId() {

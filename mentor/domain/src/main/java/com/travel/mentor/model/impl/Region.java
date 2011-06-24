@@ -1,6 +1,6 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.BaseEntity;
+import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Table(schema = "public", name = "region")
 @NamedQuery(name = "Region.findAll", query = "SELECT o FROM Region o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.region_id_seq", allocationSize = 1)
-public class Region extends BaseEntity {
+public class Region extends AbstractAuditedNameDescEntity {
 
     public static final String FIND_ALL_REGIONS_NAMED_QUERY = "Region.findAll";
 

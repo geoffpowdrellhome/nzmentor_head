@@ -1,6 +1,6 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.BaseEntity;
+import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
 import com.travel.mentor.type.impl.ItemType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "Item.findAll", query = "SELECT o FROM Item o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.item_id_seq", allocationSize = 1)
-public class Item extends BaseEntity {
+public class Item extends AbstractAuditedNameDescEntity {
 
     public static final String FIND_ALL_ITEMS_NAMED_QUERY = "Item.findAll";
 

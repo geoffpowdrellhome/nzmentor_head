@@ -2,10 +2,12 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.LocationDAO;
+import com.travel.mentor.dao.UserDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
+import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.RoomConfigurationType;
@@ -29,7 +31,8 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "locationDAO")
     private LocationDAO locationDAO;
 
-
+    @Resource(name = "userDAO")
+    private UserDAO userDAO;
 
     private void doPostRetrievalAssertsExpectingAccommodationSites(List<AccommodationSiteDTO> accommodationSiteDTOList) {
         Assert.assertNotNull(accommodationSiteDTOList);
@@ -63,14 +66,6 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         doPostRetrievalAssertsExpectingReferenceTypes(accommodationSiteTypeDTOList);
         ReferenceTypeDTO accommodationSiteTypeDTO = accommodationSiteTypeDTOList.get(0); // get the first one.
 
-        List<ReferenceTypeDTO> roomTypeDTOList = referenceTypeDAO.findAllReferenceTypes(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(roomTypeDTOList);
-        ReferenceTypeDTO roomTypeDTO = roomTypeDTOList.get(0); // get the first one.
-
-        List<ReferenceTypeDTO> roomConfigurationTypeDTOList = referenceTypeDAO.findAllReferenceTypes(RoomConfigurationType.FIND_ALL_ROOM_CONFIGURATION_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(roomConfigurationTypeDTOList);
-        ReferenceTypeDTO roomConfigurationTypeDTO = roomConfigurationTypeDTOList.get(0); // get the first one.
-
         List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
         doPostRetrievalAssertsExpectingLocations(locationDTOList);
         LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
@@ -83,7 +78,10 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         accommodationSiteDTO.setLatitude(new BigDecimal(166.677));
         accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
         accommodationSiteDTO.setLocationDTO(locationDTO);
-        accommodationSiteDTO.getUserSessionCookie().setUserId(1L);
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO(userDTO);
 
         accommodationSiteDAO.addAccommodationSite(accommodationSiteDTO);
     }

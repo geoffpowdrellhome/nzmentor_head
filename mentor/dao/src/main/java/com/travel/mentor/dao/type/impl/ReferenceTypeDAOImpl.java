@@ -4,7 +4,7 @@ import com.travel.mentor.dao.assemble.ReferenceTypeAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
-import com.travel.mentor.type.BaseReferenceType;
+import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
 import com.travel.mentor.type.impl.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
@@ -26,27 +26,27 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     @Override
     public List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery) {
         Assert.notNull(findAllNamedQuery);
-        List<BaseReferenceType> accommodationSiteTypeList = em.createNamedQuery(findAllNamedQuery).getResultList();
-        return referenceTypeAssembler.assembleToReferenceTypeDTOList(accommodationSiteTypeList);
+        List<AbstractAuditedNameDescEntity> accommodationSiteTypeList = em.createNamedQuery(findAllNamedQuery).getResultList();
+        return referenceTypeAssembler.assembleToDTOList(accommodationSiteTypeList);
     }
 
     @Override
     public void addReferenceType(ReferenceTypeDTO referenceTypeDTO) {
-        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
-        em.persist(baseReferenceType);
+        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+        em.persist(abstractAuditedNameDescEntity);
     }
 
     @Override
     public void updateReferenceType(ReferenceTypeDTO referenceTypeDTO) {
-        BaseReferenceType baseReferenceType = referenceTypeAssembler.assembleToReferenceTypeDomainObject(referenceTypeDTO);
-        em.merge(baseReferenceType);
+        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+        em.merge(abstractAuditedNameDescEntity);
     }
 
     @Override
     public void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO) {
-        BaseReferenceType baseReferenceType = (BaseReferenceType) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
-        baseReferenceType = em.find(baseReferenceType.getClass(), referenceTypeDTO.getId());
-        em.remove(baseReferenceType);
+        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
+        abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
+        em.remove(abstractAuditedNameDescEntity);
     }
 
     @SuppressWarnings("unchecked")

@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.BaseDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
 
-public class IslandDTO extends BaseDTO {
+public class IslandDTO extends AbstractAuditedNameDescDTO {
 
     private CountryDTO countryDTO;
 

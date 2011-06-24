@@ -1,11 +1,10 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.BaseDTO;
-import com.travel.mentor.dao.dto.impl.IslandDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
 
 import java.math.BigDecimal;
 
-public class RegionDTO extends BaseDTO {
+public class RegionDTO extends AbstractAuditedNameDescDTO {
 
     private IslandDTO islandDTO;
     private BigDecimal areaInSquareKilometres;

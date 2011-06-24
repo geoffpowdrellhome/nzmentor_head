@@ -1,6 +1,6 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.AuditedEntity;
+import com.travel.mentor.model.base.AbstractAuditedEntity;
 import com.travel.mentor.type.impl.ActivitySiteType;
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(schema = "public", name = "activity_site")
 @NamedQuery(name = "ActivitySite.findAll", query = "SELECT o FROM ActivitySite o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.activity_site_id_seq", allocationSize = 1)
-public class ActivitySite extends AuditedEntity {
+public class ActivitySite extends AbstractAuditedEntity {
 
     @Id
     @Column(name = "id", nullable = false)

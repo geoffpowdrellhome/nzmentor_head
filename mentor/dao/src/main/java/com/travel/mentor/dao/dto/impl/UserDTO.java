@@ -1,30 +1,16 @@
 package com.travel.mentor.dao.dto.impl;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import com.travel.mentor.dao.dto.base.AbstractAuditedDTO;
 
-public class UserDTO implements Serializable {
+public class UserDTO extends AbstractAuditedDTO {
 
-    protected Long id;
     protected String username;
     protected String firstname;
     protected String lastname;
     protected String password;
     protected String title;
-    protected String createUser;
-    protected Timestamp createDate;
-    protected String updateUser;
-    protected Timestamp updateDate;
 
     public UserDTO() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -64,37 +50,5 @@ public class UserDTO implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-
-    public Timestamp getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Timestamp updateDate) {
-        this.updateDate = updateDate;
     }
 }
