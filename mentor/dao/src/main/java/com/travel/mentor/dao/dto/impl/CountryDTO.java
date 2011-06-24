@@ -1,30 +1,13 @@
 package com.travel.mentor.dao.dto.impl;
 
-import java.io.Serializable;
+import com.travel.mentor.dao.dto.base.BaseDTO;
 
-public class CountryDTO implements Serializable {
+public class CountryDTO extends BaseDTO {
 
-    private Long id;
     private CurrencyDTO currencyDTO;
     private String code;
-    private String name;
 
     public CountryDTO() {}
-
-    public CountryDTO(Long _id, CurrencyDTO _currencyDTO, String _code, String _name) {
-        this.id = _id;
-        this.currencyDTO = _currencyDTO;
-        this.code = _code;
-        this.name = _name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public CurrencyDTO getCurrencyDTO() {
         return currencyDTO;
@@ -40,13 +23,5 @@ public class CountryDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
