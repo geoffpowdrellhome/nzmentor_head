@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="siteTypeId")
 @NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
-public abstract class Site extends BaseEntity {
+public class Site extends BaseEntity {
 
     public static final String FIND_ALL_SITES_NAMED_QUERY = "Site.findAll";
 
