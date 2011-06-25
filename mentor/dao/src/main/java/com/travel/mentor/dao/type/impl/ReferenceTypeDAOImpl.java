@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StopWatch;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -24,34 +23,66 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     private ReferenceTypeAssembler referenceTypeAssembler;
 
     @Override
-    public List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery) {
+    public List<ReferenceTypeDTO> findAll(String findAllNamedQuery) {
         Assert.notNull(findAllNamedQuery);
-        List<AbstractAuditedNameDescEntity> accommodationSiteTypeList = em.createNamedQuery(findAllNamedQuery).getResultList();
-        return referenceTypeAssembler.assembleToDTOList(accommodationSiteTypeList);
+        List<AbstractAuditedNameDescEntity> referenceTypeDTOList = em.createNamedQuery(findAllNamedQuery).getResultList();
+        return referenceTypeAssembler.assembleToDTOList(referenceTypeDTOList);
     }
 
     @Override
-    public void addReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+    public ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
         em.persist(abstractAuditedNameDescEntity);
+        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 
     @Override
-    public void updateReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+    public ReferenceTypeDTO update(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
         em.merge(abstractAuditedNameDescEntity);
+        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 
     @Override
-    public void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO) {
+    public void delete(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
         em.remove(abstractAuditedNameDescEntity);
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheAccommodationSiteTypeDomainObjects() {
+    @Override
+    public ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO) {
+        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
+        abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
+        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
+    }
+
+    @Override
+    protected void cacheDomainObjects() {
+        cacheAccommodationSiteTypeDomainObjects();
+        cacheActivitySiteTypeDomainObjects();
+        cacheClimateConditionTypeDomainObjects();
+        cacheClimateWindfactorTypeDomainObjects();
+        cacheClothingTypeDomainObjects();
+        cacheEventTypeDomainObjects();
+        cacheFootwearTypeDomainObjects();
+        cacheHeadwearTypeDomainObjects();
+        cacheItemTypeDomainObjects();
+        cacheLocationTypeDomainObjects();
+        cachePopularityRankingTypeDomainObjects();
+        cacheRoomTypeDomainObjects();
+        cacheRoomConfigurationTypeDomainObjects();
+        cacheSiteTypeDomainObjects();
+        cacheSupplierTypeDomainObjects();
+        cacheTransferSiteTypeDomainObjects();
+        cacheVehicleHireSiteTypeDomainObjects();
+    }
+
+
+    /**
+     *  private methods - caching of all types of reference type domain objects
+     */
+    private void cacheAccommodationSiteTypeDomainObjects() {
         logger.debug("cacheAccommodationSiteTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheAccommodationSiteTypeDomainObjects");
@@ -63,9 +94,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheActivitySiteTypeDomainObjects() {
+    private void cacheActivitySiteTypeDomainObjects() {
         logger.debug("cacheActivitySiteTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheActivitySiteTypeDomainObjects");
@@ -77,9 +106,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheClimateConditionTypeDomainObjects() {
+    private void cacheClimateConditionTypeDomainObjects() {
         logger.debug("cacheClimateConditionTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheClimateConditionTypeDomainObjects");
@@ -91,9 +118,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheClimateWindfactorTypeDomainObjects() {
+    private void cacheClimateWindfactorTypeDomainObjects() {
         logger.debug("cacheClimateWindfactorTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheClimateWindfactorTypeDomainObjects");
@@ -105,9 +130,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheClothingTypeDomainObjects() {
+    private void cacheClothingTypeDomainObjects() {
         logger.debug("cacheClothingTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheClothingTypeDomainObjects");
@@ -119,9 +142,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheEventTypeDomainObjects() {
+    private void cacheEventTypeDomainObjects() {
         logger.debug("cacheEventTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheEventTypeDomainObjects");
@@ -133,9 +154,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheFootwearTypeDomainObjects() {
+    private void cacheFootwearTypeDomainObjects() {
         logger.debug("cacheFootwearTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheFootwearTypeDomainObjects");
@@ -147,9 +166,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheHeadwearTypeDomainObjects() {
+    private void cacheHeadwearTypeDomainObjects() {
         logger.debug("cacheHeadwearTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheHeadwearTypeDomainObjects");
@@ -161,9 +178,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheItemTypeDomainObjects() {
+    private void cacheItemTypeDomainObjects() {
         logger.debug("cacheItemTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheItemTypeDomainObjects");
@@ -175,9 +190,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheLocationTypeDomainObjects() {
+    private void cacheLocationTypeDomainObjects() {
         logger.debug("cacheLocationTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheLocationTypeDomainObjects");
@@ -189,9 +202,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cachePopularityRankingTypeDomainObjects() {
+    private void cachePopularityRankingTypeDomainObjects() {
         logger.debug("cachePopularityRankingTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cachePopularityRankingTypeDomainObjects");
@@ -203,9 +214,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheRoomTypeDomainObjects() {
+    private void cacheRoomTypeDomainObjects() {
         logger.debug("cacheRoomTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheRoomTypeDomainObjects");
@@ -217,9 +226,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheRoomConfigurationTypeDomainObjects() {
+    private void cacheRoomConfigurationTypeDomainObjects() {
         logger.debug("cacheRoomConfigurationTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheRoomConfigurationTypeDomainObjects");
@@ -231,9 +238,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheSiteTypeDomainObjects() {
+    private void cacheSiteTypeDomainObjects() {
         logger.debug("cacheSiteTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheSiteTypeDomainObjects");
@@ -245,9 +250,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheSupplierTypeDomainObjects() {
+    private void cacheSupplierTypeDomainObjects() {
         logger.debug("cacheSupplierTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheSupplierTypeDomainObjects");
@@ -259,9 +262,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheTransferSiteTypeDomainObjects() {
+    private void cacheTransferSiteTypeDomainObjects() {
         logger.debug("cacheTransferSiteTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheTransferSiteTypeDomainObjects");
@@ -273,9 +274,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheVehicleHireSiteTypeDomainObjects() {
+    private void cacheVehicleHireSiteTypeDomainObjects() {
         logger.debug("cacheVehicleHireSiteTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheVehicleHireSiteTypeDomainObjects");

@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface LocationDAO {
 
-    List<LocationDTO> findAllLocations();
+    List<LocationDTO> findAll();
 
-    void addLocation(LocationDTO locationDTO);
+    LocationDTO add(LocationDTO locationDTO);
 
-    void updateLocation(LocationDTO locationDTO);
+    LocationDTO update(LocationDTO locationDTO);
 
-    void deleteLocation(LocationDTO locationDTO);
+    void delete(LocationDTO locationDTO);
 
-    LocationDTO findLocation(Long id);
+    LocationDTO find(Long id);
 
 }

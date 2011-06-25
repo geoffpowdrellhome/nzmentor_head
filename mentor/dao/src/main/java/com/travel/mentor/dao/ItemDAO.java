@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface ItemDAO {
 
-    List<ItemDTO> findAllItems();
+    List<ItemDTO> findAll();
 
-    void addItem(ItemDTO itemDTO);
+    ItemDTO add(ItemDTO itemDTO);
 
-    void updateItem(ItemDTO itemDTO);
+    ItemDTO update(ItemDTO itemDTO);
 
-    void deleteItem(ItemDTO itemDTO);
+    void delete(ItemDTO itemDTO);
 
-    ItemDTO findItem(Long id);
+    ItemDTO find(Long id);
 
 }

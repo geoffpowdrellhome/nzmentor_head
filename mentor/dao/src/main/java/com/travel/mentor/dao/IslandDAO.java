@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IslandDAO {
 
-    List<IslandDTO> findAllIslands();
+    List<IslandDTO> findAll();
 
-    IslandDTO findIsland(Long id);
+    IslandDTO find(Long id);
 
 }

@@ -1,7 +1,9 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.UserAssembler;
+import com.travel.mentor.dao.dto.impl.RoleDTO;
 import com.travel.mentor.dao.dto.impl.UserDTO;
+import com.travel.mentor.model.impl.Role;
 import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Component;
 
@@ -22,17 +24,20 @@ public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssemble
 
     @Override
     public User assembleToUserDomainObject(UserDTO userDTO) {
-        User user = (User) shallowCopy(userDTO, User.class);
-        //region.setIsland( (Island) shallowCopy(regionDTO.getIslandDTO(), Island.class) );
-        return user;
+        return (User) shallowCopy(userDTO, User.class);
     }
 
     @Override
     public UserDTO assembleToUserDTO(User user) {
         UserDTO userDTO = (UserDTO) shallowCopy(user, UserDTO.class);
-        //regionDTO.setIslandDTO( (IslandDTO) shallowCopy(region.getIsland(), IslandDTO.class) );
+        for (Role role : user.getRoles()) {
+            userDTO.getRoleDTOList().add( assembleToRoleDTO(role) );
+        }
+
         return userDTO;
     }
 
-
+    private RoleDTO assembleToRoleDTO(Role role) {
+        return (RoleDTO) shallowCopy(role, RoleDTO.class);
+    }
 }

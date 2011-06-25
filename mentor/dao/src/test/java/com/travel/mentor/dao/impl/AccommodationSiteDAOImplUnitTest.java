@@ -10,8 +10,6 @@ import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.AccommodationSiteType;
-import com.travel.mentor.type.impl.RoomConfigurationType;
-import com.travel.mentor.type.impl.RoomType;
 import com.travel.mentor.type.impl.SiteType;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -22,52 +20,36 @@ import java.util.List;
 
 public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
 
-    @Resource(name = "referenceTypeDAO")
-    private ReferenceTypeDAO referenceTypeDAO;
-
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;
 
     @Resource(name = "locationDAO")
     private LocationDAO locationDAO;
 
-    @Resource(name = "userDAO")
-    private UserDAO userDAO;
-
-    private void doPostRetrievalAssertsExpectingAccommodationSites(List<AccommodationSiteDTO> accommodationSiteDTOList) {
-        Assert.assertNotNull(accommodationSiteDTOList);
-        Assert.assertTrue(accommodationSiteDTOList.size() != 0);
-    }
-
-    private void doPostRetrievalAssertsExpectingReferenceTypes(List<ReferenceTypeDTO> referenceTypeDTOList) {
-        Assert.assertNotNull(referenceTypeDTOList);
-        Assert.assertTrue(referenceTypeDTOList.size() != 0);
-    }
-
-    private void doPostRetrievalAssertsExpectingLocations(List<LocationDTO> locationDTOList) {
-        Assert.assertNotNull(locationDTOList);
-        Assert.assertTrue(locationDTOList.size() != 0);
-    }
-
-
     @Test
-    public void testGetAccommodationSite() {
-        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAllAccommodationSites();
-        doPostRetrievalAssertsExpectingAccommodationSites(accommodationSiteDTOList);
+    public void testFindAll() {
+        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAll();
+        doExpectingRecordsAssert(accommodationSiteDTOList);
     }
 
     @Test
-    public void testAddAccommodationSite() {
-        List<ReferenceTypeDTO> siteTypeDTOList = referenceTypeDAO.findAllReferenceTypes(SiteType.FIND_ALL_SITE_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(siteTypeDTOList);
+    public void testFind() {
+        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(accommodationSiteDTO);
+    }
+
+    @Test
+    public void testAdd() {
+        List<ReferenceTypeDTO> siteTypeDTOList = referenceTypeDAO.findAll(SiteType.FIND_ALL_SITE_TYPES_NAMED_QUERY);
+        doExpectingRecordsAssert(siteTypeDTOList);
         ReferenceTypeDTO siteTypeDTO = siteTypeDTOList.get(0); // get the first one.
 
-        List<ReferenceTypeDTO> accommodationSiteTypeDTOList = referenceTypeDAO.findAllReferenceTypes(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(accommodationSiteTypeDTOList);
+        List<ReferenceTypeDTO> accommodationSiteTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+        doExpectingRecordsAssert(accommodationSiteTypeDTOList);
         ReferenceTypeDTO accommodationSiteTypeDTO = accommodationSiteTypeDTOList.get(0); // get the first one.
 
-        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
-        doPostRetrievalAssertsExpectingLocations(locationDTOList);
+        List<LocationDTO> locationDTOList = locationDAO.findAll();
+        doExpectingRecordsAssert(locationDTOList);
         LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
 
         AccommodationSiteDTO accommodationSiteDTO = new AccommodationSiteDTO();
@@ -79,31 +61,24 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
         accommodationSiteDTO.setLocationDTO(locationDTO);
 
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(1L);
-        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO(userDTO);
+        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        accommodationSiteDAO.addAccommodationSite(accommodationSiteDTO);
+        accommodationSiteDAO.add(accommodationSiteDTO);
     }
 
     @Test
-    public void testDeleteAccommodationSiteType() {
-        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAllAccommodationSites();
-        doPostRetrievalAssertsExpectingAccommodationSites(accommodationSiteDTOList);
-
-        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDTOList.get(0); // get the first one.
-        accommodationSiteDAO.deleteAccommodationSite(accommodationSiteDTO);
+    public void testDelete() {
+        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(1L);
+        accommodationSiteDAO.delete(accommodationSiteDTO);
     }
 
     @Test
-    public void testUpdateAccommodationSiteType() {
-        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAllAccommodationSites();
-        doPostRetrievalAssertsExpectingAccommodationSites(accommodationSiteDTOList);
-
-        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDTOList.get(0); // get the first one.
+    public void testUpdate() {
+        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(1L);
         accommodationSiteDTO.setName("update2");
         accommodationSiteDTO.setDescription("update2");
-        accommodationSiteDAO.updateAccommodationSite(accommodationSiteDTO);
+        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+        accommodationSiteDAO.update(accommodationSiteDTO);
     }
 
 }

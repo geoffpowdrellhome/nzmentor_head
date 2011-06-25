@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface AccommodationSiteDAO {
 
-    List<AccommodationSiteDTO> findAllAccommodationSites();
+    List<AccommodationSiteDTO> findAll();
 
-    void addAccommodationSite(AccommodationSiteDTO accommodationSiteDTO);
+    AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO);
 
-    void updateAccommodationSite(AccommodationSiteDTO accommodationSiteDTO);
+    AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO);
 
-    void deleteAccommodationSite(AccommodationSiteDTO accommodationSiteDTO);
+    void delete(AccommodationSiteDTO accommodationSiteDTO);
 
-    AccommodationSiteDTO findAccommodationSite(Long id);
+    AccommodationSiteDTO find(Long id);
 
 }

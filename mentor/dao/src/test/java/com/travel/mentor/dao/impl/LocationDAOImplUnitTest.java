@@ -26,35 +26,29 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "regionDAO")
     private RegionDAO regionDAO;
 
-    private void doPostRetrievalAssertsExpectingRecords(List<LocationDTO> locationDTOList) {
-        Assert.assertNotNull(locationDTOList);
-        Assert.assertTrue(locationDTOList.size() != 0);
-    }
+    private static final Long EXISTING_ID_VALUE=1L;
+    private static final String EXISTING_USERNAME_VALUE="donr";
 
-    private void doPostRetrievalAssertsExpectingReferenceTypes(List<ReferenceTypeDTO> referenceTypeDTOList) {
-        Assert.assertNotNull(referenceTypeDTOList);
-        Assert.assertTrue(referenceTypeDTOList.size() != 0);
-    }
-
-    private void doPostRetrievalAssertsExpectingRegionRecords(List<RegionDTO> regionDTOList) {
-        Assert.assertNotNull(regionDTOList);
-        Assert.assertTrue(regionDTOList.size() != 0);
+    @Test
+    public void testFindAll() {
+        List<LocationDTO> locationDTOList = locationDAO.findAll();
+        doExpectingRecordsAssert(locationDTOList);
     }
 
     @Test
-    public void testGetAllLocations() {
-        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
-        doPostRetrievalAssertsExpectingRecords(locationDTOList);
+    public void testFind() {
+        LocationDTO locationDTO = locationDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(locationDTO);
     }
 
     @Test
-    public void testAddLocation() {
-        List<ReferenceTypeDTO> locationTypeDTOList = referenceTypeDAO.findAllReferenceTypes(LocationType.FIND_ALL_LOCATION_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(locationTypeDTOList);
+    public void testAdd() {
+        List<ReferenceTypeDTO> locationTypeDTOList = referenceTypeDAO.findAll(LocationType.FIND_ALL_LOCATION_TYPES_NAMED_QUERY);
+        doExpectingRecordsAssert(locationTypeDTOList);
         ReferenceTypeDTO locationTypeDTO = locationTypeDTOList.get(0); // get the first one.
 
-        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
-        doPostRetrievalAssertsExpectingRegionRecords(regionDTOList);
+        List<RegionDTO> regionDTOList = regionDAO.findAll();
+        doExpectingRecordsAssert(regionDTOList);
         RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
 
         LocationDTO locationDTO = new LocationDTO();
@@ -65,36 +59,24 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
         locationDTO.setLatitude(new BigDecimal(103.55));
         locationDTO.setLongitude(new BigDecimal(245.55));
 
-        locationDAO.addLocation(locationDTO);
+        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+
+        locationDAO.add(locationDTO);
     }
 
     @Test
-    public void testDeleteLocation() {
-        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
-        doPostRetrievalAssertsExpectingRecords(locationDTOList);
-        LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
-
-        locationDAO.deleteLocation(locationDTO);
+    public void testDelete() {
+        LocationDTO locationDTO = locationDAO.find(EXISTING_ID_VALUE);
+        locationDAO.delete(locationDTO);
     }
 
     @Test
-    public void testUpdateLocation() {
-        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
-        doPostRetrievalAssertsExpectingRecords(locationDTOList);
-        LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
+    public void testUpdate() {
+        LocationDTO locationDTO = locationDAO.find(EXISTING_ID_VALUE);
+        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         locationDTO.setName("update location name2");
         locationDTO.setDescription("update location desc 2");
-
-        locationDAO.updateLocation(locationDTO);
-    }
-
-    @Test
-    public void testFindLocation() {
-        List<LocationDTO> locationDTOList = locationDAO.findAllLocations();
-        doPostRetrievalAssertsExpectingRecords(locationDTOList);
-
-        LocationDTO locationDTO = locationDAO.findLocation(locationDTOList.get(0).getId());
-        Assert.assertNotNull(locationDTO);
+        locationDAO.update(locationDTO);
     }
 
 }

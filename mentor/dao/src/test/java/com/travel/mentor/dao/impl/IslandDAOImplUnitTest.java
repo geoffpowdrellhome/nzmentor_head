@@ -3,9 +3,8 @@ package com.travel.mentor.dao.impl;
 import com.travel.mentor.dao.IslandDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.impl.IslandDTO;
-import junit.framework.Assert;
 import org.junit.Test;
-
+import junit.framework.Assert;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -14,15 +13,18 @@ public class IslandDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "islandDAO")
     private IslandDAO islandDAO;
 
-    private void doPostRetrievalAssertsExpectingRecords(List<IslandDTO> islandDTOList) {
-        Assert.assertNotNull(islandDTOList);
-        Assert.assertTrue(islandDTOList.size() != 0);
+    private static final Long EXISTING_ID_VALUE=1L;
+
+    @Test
+    public void testFindAll() {
+        List<IslandDTO> islandDTOList = islandDAO.findAll();
+        doExpectingRecordsAssert(islandDTOList);
     }
 
     @Test
-    public void testGetAllIslands() {
-        List<IslandDTO> islandDTOList = islandDAO.findAllIslands();
-        doPostRetrievalAssertsExpectingRecords(islandDTOList);
+    public void testFind() {
+        IslandDTO islandDTO = islandDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(islandDTO);
     }
 
 }

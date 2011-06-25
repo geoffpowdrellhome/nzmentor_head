@@ -20,26 +20,25 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "islandDAO")
     private IslandDAO islandDAO;
 
-    private void doPostRetrievalAssertsExpectingIslandRecords(List<IslandDTO> islandDTOList) {
-        Assert.assertNotNull(islandDTOList);
-        Assert.assertTrue(islandDTOList.size() != 0);
-    }
+    private static final Long EXISTING_ID_VALUE=1L;
+    private static final String EXISTING_USERNAME_VALUE="donr";
 
-    private void doPostRetrievalAssertsExpectingRecords(List<RegionDTO> regionDTOList) {
-        Assert.assertNotNull(regionDTOList);
-        Assert.assertTrue(regionDTOList.size() != 0);
+    @Test
+    public void testFindAll() {
+        List<RegionDTO> regionDTOList = regionDAO.findAll();
+        doExpectingRecordsAssert(regionDTOList);
     }
 
     @Test
-    public void testGetAllRegions() {
-        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
-        doPostRetrievalAssertsExpectingRecords(regionDTOList);
+    public void testFind() {
+        RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(regionDTO);
     }
 
     @Test
-    public void testAddRegion() {
-        List<IslandDTO> islandDTOList = islandDAO.findAllIslands();
-        doPostRetrievalAssertsExpectingIslandRecords(islandDTOList);
+    public void testAdd() {
+        List<IslandDTO> islandDTOList = islandDAO.findAll();
+        doExpectingRecordsAssert(islandDTOList);
         IslandDTO islandDTO = islandDTOList.get(0); // get the first one.
 
         RegionDTO regionDTO = new RegionDTO();
@@ -50,28 +49,24 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
         regionDTO.setName("Taranaki");
         regionDTO.setPopulation(567333);
 
-        regionDAO.addRegion(regionDTO);
+        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+
+        regionDAO.add(regionDTO);
     }
 
     @Test
-    public void testDeleteRegion() {
-        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
-        doPostRetrievalAssertsExpectingRecords(regionDTOList);
-        RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
-
-        regionDAO.deleteRegion(regionDTO);
+    public void testDelete() {
+        RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
+        regionDAO.delete(regionDTO);
     }
 
     @Test
-    public void testUpdateRegion() {
-        List<RegionDTO> regionDTOList = regionDAO.findAllRegions();
-        doPostRetrievalAssertsExpectingRecords(regionDTOList);
-        RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
+    public void testUpdate() {
+        RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
+        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         regionDTO.setName("update name 2");
         regionDTO.setDescription("update desc 2");
-
-        regionDAO.updateRegion(regionDTO);
+        regionDAO.update(regionDTO);
     }
-
 
 }

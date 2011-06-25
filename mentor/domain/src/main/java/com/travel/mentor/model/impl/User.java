@@ -1,30 +1,31 @@
 package com.travel.mentor.model.impl;
 
-import com.travel.mentor.model.base.AbstractAuditedEntity;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "users")
 @NamedQueries({
-        @NamedQuery(name = "FindUserByUsername",
+        @NamedQuery(name = "User.findUserByUsername",
                 query = "SELECT o FROM User o WHERE o.username =:username ") ,
-        @NamedQuery(name = "FindUserByUsernamePassword",
+        @NamedQuery(name = "User.findUserByUsernamePassword",
                 query = "SELECT o FROM User o WHERE o.username =:username and o.password =:password ") ,
         @NamedQuery(name = "User.findAll", query = "SELECT o FROM User o order by o.username")
 })
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.users_id_seq", allocationSize = 1)
-public class User extends AbstractAuditedEntity {
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class User implements Serializable {
 
-    public static final String FIND_USER_BY_USERNAME = "FindUserByUsername";
-    public static final String FIND_USER_BY_USERNAME_PASSWORD = "FindUserByUsernamePassword";
-    public static final String FIND_ALL_USERS = "FindAllUsers";
+    public static final String FIND_USER_BY_USERNAME = "User.findUserByUsername";
+    public static final String FIND_USER_BY_USERNAME_PASSWORD = "User.findUserByUsernamePassword";
+    public static final String FIND_ALL_USERS = "User.findAll";
 
     @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
-
     @Column(name = "username", nullable = false)
     private String username;
 
@@ -52,6 +53,18 @@ public class User extends AbstractAuditedEntity {
     @Column(name = "accountLocked", nullable = false)
     private boolean accountLocked;
 
+    @Column(name = "created_by")
+    protected String createUser = "sysadm";
+
+    @Column(name = "created")
+    protected Timestamp createDate = new Timestamp(new Date().getTime());
+
+    @Column(name = "updated_by")
+    protected String updateUser = "sysadm";
+
+    @Column(name = "updated")
+    protected Timestamp updateDate = new Timestamp(new Date().getTime());
+
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="user_role",
@@ -61,15 +74,6 @@ public class User extends AbstractAuditedEntity {
                     @JoinColumn(name="rolename", referencedColumnName="rolename")
     )
     private List<Role> roles = new ArrayList<Role>();
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;

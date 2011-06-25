@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -21,38 +20,39 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
     private ItemAssembler itemAssembler;
 
     @Override
-    public List<ItemDTO> findAllItems() {
+    public List<ItemDTO> findAll() {
         List<Item> itemList = em.createNamedQuery(Item.FIND_ALL_ITEMS_NAMED_QUERY).getResultList();
         return itemAssembler.assembleToItemDTOList(itemList);
     }
 
     @Override
-    public void addItem(ItemDTO itemDTO) {
+    public ItemDTO add(ItemDTO itemDTO) {
         Item item = itemAssembler.assembleToItemDomainObject(itemDTO);
         em.persist(item);
+        return itemAssembler.assembleToItemDTO(item);
     }
 
     @Override
-    public void updateItem(ItemDTO itemDTO) {
+    public ItemDTO update(ItemDTO itemDTO) {
         Item item = itemAssembler.assembleToItemDomainObject(itemDTO);
         em.merge(item);
+        return itemAssembler.assembleToItemDTO(item);
     }
 
     @Override
-    public void deleteItem(ItemDTO itemDTO) {
+    public void delete(ItemDTO itemDTO) {
         Item item = em.find(Item.class, itemDTO.getId());
         em.remove(item);
     }
 
     @Override
-    public ItemDTO findItem(Long id) {
+    public ItemDTO find(Long id) {
         Item item = em.find(Item.class, id);
         return itemAssembler.assembleToItemDTO(item);
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheItemDomainObjects() {
+    @Override
+    protected void cacheDomainObjects() {
         logger.debug("cacheItemDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheItemDomainObjects");
@@ -63,6 +63,5 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
             logger.info("Total Time in Seconds ItemDAOImpl.cacheIslandDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
-
 
 }

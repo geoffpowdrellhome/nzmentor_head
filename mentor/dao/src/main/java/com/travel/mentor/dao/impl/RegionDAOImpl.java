@@ -4,13 +4,11 @@ import com.travel.mentor.dao.RegionDAO;
 import com.travel.mentor.dao.assemble.RegionAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
-import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.model.impl.Region;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -22,32 +20,39 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
     private RegionAssembler regionAssembler;
 
     @Override
-    public List<RegionDTO> findAllRegions() {
+    public List<RegionDTO> findAll() {
         List<Region> regionList = em.createNamedQuery(Region.FIND_ALL_REGIONS_NAMED_QUERY).getResultList();
         return regionAssembler.assembleToRegionDTOList(regionList);
     }
 
     @Override
-    public void addRegion(RegionDTO regionDTO) {
+    public RegionDTO add(RegionDTO regionDTO) {
         Region region = regionAssembler.assembleToRegionDomainObject(regionDTO);
         em.persist(region);
+        return regionAssembler.assembleToRegionDTO(region);
     }
 
     @Override
-    public void updateRegion(RegionDTO regionDTO) {
+    public RegionDTO update(RegionDTO regionDTO) {
         Region region = regionAssembler.assembleToRegionDomainObject(regionDTO);
         em.merge(region);
+        return regionAssembler.assembleToRegionDTO(region);
     }
 
     @Override
-    public void deleteRegion(RegionDTO regionDTO) {
+    public void delete(RegionDTO regionDTO) {
         Region region = em.find(Region.class, regionDTO.getId());
         em.remove(region);
     }
 
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    public void cacheRegionDomainObjects() {
+    @Override
+    public RegionDTO find(Long id) {
+        Region region = em.find(Region.class, id);
+        return regionAssembler.assembleToRegionDTO(region);
+    }
+
+    @Override
+    protected void cacheDomainObjects() {
         logger.debug("cacheRegionDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheRegionDomainObjects");
@@ -59,9 +64,4 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
         }
     }
 
-    @Override
-    public RegionDTO findRegion(Long id) {
-        Region region = em.find(Region.class, id);
-        return regionAssembler.assembleToRegionDTO(region);
-    }
 }

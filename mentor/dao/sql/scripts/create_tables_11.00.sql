@@ -993,10 +993,8 @@ CREATE INDEX activity_site_search_1 ON activity_site(name);
 
 
 /* user table */
-CREATE SEQUENCE users_id_seq INCREMENT 1;
 CREATE TABLE users
 (
-	id INTEGER NOT NULL DEFAULT nextval('users_id_seq'::regclass),
     username VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
     title VARCHAR(10) NOT NULL,
@@ -1013,17 +1011,16 @@ CREATE TABLE users
 );
 
 
-ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (id);
+ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (username);
 
-CREATE UNIQUE INDEX ix_users_username ON users(username);
 CREATE INDEX users_search_1 ON users(username);
 
-INSERT INTO users(id, username, password, title, firstname, lastname)
-VALUES( nextval('users_id_seq'), 'donr', 'mtalford', 'Mr', 'Don', 'Rea');
-INSERT INTO users(id, username, password, title, firstname, lastname)
-VALUES( nextval('users_id_seq'), 'region1', 'region1', 'Mr', 'Region', 'Number1');
-INSERT INTO users(id, username, password, title, firstname, lastname)
-VALUES( nextval('users_id_seq'), 'supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
+INSERT INTO users( username, password, title, firstname, lastname)
+VALUES('donr', 'mtalford', 'Mr', 'Don', 'Rea');
+INSERT INTO users(username, password, title, firstname, lastname)
+VALUES('region1', 'region1', 'Mr', 'Region', 'Number1');
+INSERT INTO users(username, password, title, firstname, lastname)
+VALUES('supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
 
 
 

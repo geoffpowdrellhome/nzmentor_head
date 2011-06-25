@@ -9,6 +9,7 @@ import com.travel.mentor.model.impl.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
@@ -26,7 +27,7 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
     private SpringSecurityUserAssembler springSecurityUserAssembler;
 
     @Override
-    public UserDetails findUserByUsername(String username) {
+    public UserDetails findByUsername(String username) {
         Query query = em.createNamedQuery(User.FIND_USER_BY_USERNAME);
         query.setParameter("username", username);
 
@@ -36,7 +37,7 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
     }
 
     @Override
-    public UserDetails authenticateUser(String username, String password) {
+    public UserDetails authenticate(String username, String password) {
         Query query = em.createNamedQuery(User.FIND_USER_BY_USERNAME_PASSWORD);
         query.setParameter("username", username);
         query.setParameter("password", password);
@@ -47,27 +48,42 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
     }
 
     @Override
-    public List<UserDTO> findAllUsers() {
+    public List<UserDTO> findAll() {
         List<User> userList = em.createNamedQuery(User.FIND_ALL_USERS).getResultList();
         return userAssembler.assembleToUserDTOList(userList);
     }
 
     @Override
-    public void addUser(UserDTO userDTO) {
+    public UserDTO add(UserDTO userDTO) {
         User user = userAssembler.assembleToUserDomainObject(userDTO);
         em.persist(user);
+        return userAssembler.assembleToUserDTO(user);
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
+    public UserDTO update(UserDTO userDTO) {
         User user = userAssembler.assembleToUserDomainObject(userDTO);
         em.merge(user);
+        return userAssembler.assembleToUserDTO(user);
     }
 
     @Override
-    public UserDTO findUser(Long userId) {
-        User user = em.find(User.class, userId);
+    public UserDTO find(String username) {
+        User user = em.find(User.class, username);
         return userAssembler.assembleToUserDTO(user);
+    }
+
+    @Override
+    protected void cacheDomainObjects() {
+        logger.debug("cacheUserDomainObjects()");
+        StopWatch watch = new StopWatch();
+        watch.start("cacheUserDomainObjects");
+        em.createNamedQuery(User.FIND_ALL_USERS).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds UserDAOImpl.cacheUserDomainObjects() = " + watch.getTotalTimeSeconds());
+        }
     }
 
 }

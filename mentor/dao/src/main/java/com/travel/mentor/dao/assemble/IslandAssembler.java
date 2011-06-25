@@ -9,6 +9,8 @@ public interface IslandAssembler {
 
     List<IslandDTO> assembleToIslandDTOList(List<Island> islandList);
 
+    Island assembleToIslandDomainObject(IslandDTO islandDTO);
+
     IslandDTO assembleToIslandDTO(Island island);
 
 }

@@ -34,6 +34,8 @@
         <class>com.travel.mentor.model.impl.Region</class>
         <class>com.travel.mentor.model.impl.Site</class>
         <class>com.travel.mentor.model.impl.Item</class>
+        <class>com.travel.mentor.model.impl.User</class>
+        <class>com.travel.mentor.model.impl.Role</class>
 
         <properties>
             <property name="hibernate.cache.use_second_level_cache" value="true"/>

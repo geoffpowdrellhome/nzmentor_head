@@ -6,7 +6,6 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.ItemDTO;
-import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.ItemType;
 import junit.framework.Assert;
@@ -26,36 +25,26 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;
 
-    private void doPostRetrievalAssertsExpectingRecords(List<ItemDTO> itemDTOList) {
-        Assert.assertNotNull(itemDTOList);
-        Assert.assertTrue(itemDTOList.size() != 0);
-    }
-
-    private void doPostRetrievalAssertsExpectingReferenceTypes(List<ReferenceTypeDTO> referenceTypeDTOList) {
-        Assert.assertNotNull(referenceTypeDTOList);
-        Assert.assertTrue(referenceTypeDTOList.size() != 0);
-    }
-
-    private void doPostRetrievalAssertsExpectingSites(List<AccommodationSiteDTO> accommodationSiteDTOList) {
-        Assert.assertNotNull(accommodationSiteDTOList);
-        Assert.assertTrue(accommodationSiteDTOList.size() != 0);
+    @Test
+    public void testFindAll() {
+        List<ItemDTO> itemDTOList = itemDAO.findAll();
+        doExpectingRecordsAssert(itemDTOList);
     }
 
     @Test
-    public void testGetAllItems() {
-        List<ItemDTO> itemDTOList = itemDAO.findAllItems();
-        doPostRetrievalAssertsExpectingRecords(itemDTOList);
+    public void testFind() {
+        ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(itemDTO);
     }
 
     @Test
-    public void testAddItem() {
-
-        List<ReferenceTypeDTO> itemTypeDTOList = referenceTypeDAO.findAllReferenceTypes(ItemType.FIND_ALL_ITEM_TYPES_NAMED_QUERY);
-        doPostRetrievalAssertsExpectingReferenceTypes(itemTypeDTOList);
+    public void testAdd() {
+        List<ReferenceTypeDTO> itemTypeDTOList = referenceTypeDAO.findAll(ItemType.FIND_ALL_ITEM_TYPES_NAMED_QUERY);
+        doExpectingRecordsAssert(itemTypeDTOList);
         ReferenceTypeDTO itemTypeDTO = itemTypeDTOList.get(0); // get the first one.
 
-        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAllAccommodationSites();
-        doPostRetrievalAssertsExpectingSites(accommodationSiteDTOList);
+        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAll();
+        doExpectingRecordsAssert(accommodationSiteDTOList);
         AccommodationSiteDTO siteDTO = accommodationSiteDTOList.get(0); // get the first one.
 
         ItemDTO itemDTO = new ItemDTO();
@@ -65,34 +54,24 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
         itemDTO.setName("my new item");
         itemDTO.setSiteDTO(siteDTO);
 
-        itemDAO.addItem(itemDTO);
+        itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+
+        itemDAO.add(itemDTO);
     }
 
     @Test
-    public void testDeleteItem() {
-        List<ItemDTO> itemDTOList = itemDAO.findAllItems();
-        doPostRetrievalAssertsExpectingRecords(itemDTOList);
-        ItemDTO itemDTO = itemDTOList.get(0); // get the first one.
-        itemDAO.deleteItem(itemDTO);
+    public void testDelete() {
+        ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
+        itemDAO.delete(itemDTO);
     }
 
     @Test
-    public void testUpdateItem() {
-        List<ItemDTO> itemDTOList = itemDAO.findAllItems();
-        doPostRetrievalAssertsExpectingRecords(itemDTOList);
-        ItemDTO itemDTO = itemDTOList.get(0); // get the first one.
+    public void testUpdate() {
+        ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
+        itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         itemDTO.setName("update name 2");
         itemDTO.setDescription("update desc 2");
-        itemDAO.updateItem(itemDTO);
-    }
-
-    @Test
-    public void testFindItem() {
-        List<ItemDTO> itemDTOList = itemDAO.findAllItems();
-        doPostRetrievalAssertsExpectingRecords(itemDTOList);
-
-        ItemDTO itemDTO = itemDAO.findItem(itemDTOList.get(0).getId());
-        Assert.assertNotNull(itemDTO);
+        itemDAO.update(itemDTO);
     }
 
 }

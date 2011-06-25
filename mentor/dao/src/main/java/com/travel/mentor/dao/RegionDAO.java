@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface RegionDAO {
 
-    List<RegionDTO> findAllRegions();
+    List<RegionDTO> findAll();
 
-    void addRegion(RegionDTO regionDTO);
+    RegionDTO add(RegionDTO regionDTO);
 
-    void updateRegion(RegionDTO regionDTO);
+    RegionDTO update(RegionDTO regionDTO);
 
-    void deleteRegion(RegionDTO regionDTO);
+    void delete(RegionDTO regionDTO);
 
-    RegionDTO findRegion(Long id);
+    RegionDTO find(Long id);
 
 }

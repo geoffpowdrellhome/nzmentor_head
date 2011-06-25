@@ -6,12 +6,14 @@ import java.util.List;
 
 public interface ReferenceTypeDAO {
 
-    List<ReferenceTypeDTO> findAllReferenceTypes(String findAllNamedQuery);
+    List<ReferenceTypeDTO> findAll(String findAllNamedQuery);
 
-    void addReferenceType(ReferenceTypeDTO referenceTypeDTO);
+    ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO);
 
-    void updateReferenceType(ReferenceTypeDTO referenceTypeDTO);
+    ReferenceTypeDTO update(ReferenceTypeDTO referenceTypeDTO);
 
-    void deleteReferenceType(ReferenceTypeDTO referenceTypeDTO);
+    void delete(ReferenceTypeDTO referenceTypeDTO);
+
+    ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO);
 
 }

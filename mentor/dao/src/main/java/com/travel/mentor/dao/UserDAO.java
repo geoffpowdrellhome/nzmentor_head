@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface UserDAO {
 
-    UserDetails findUserByUsername(String username);
+    UserDetails findByUsername(String username);
 
-    UserDetails authenticateUser(String username, String password);
+    UserDetails authenticate(String username, String password);
 
-    List<UserDTO> findAllUsers();
+    List<UserDTO> findAll();
 
-    void addUser(UserDTO userDTO);
+    UserDTO add(UserDTO userDTO);
 
-    void updateUser(UserDTO userDTO);
+    UserDTO update(UserDTO userDTO);
 
-    UserDTO findUser(Long userId);
+    UserDTO find(String username);
 
 }

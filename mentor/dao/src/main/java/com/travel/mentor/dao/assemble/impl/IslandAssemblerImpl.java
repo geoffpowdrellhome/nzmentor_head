@@ -2,6 +2,7 @@ package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.IslandAssembler;
 import com.travel.mentor.dao.dto.impl.IslandDTO;
+import com.travel.mentor.model.impl.Country;
 import com.travel.mentor.model.impl.Island;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,13 @@ public class IslandAssemblerImpl extends BaseAssemblerImpl implements IslandAsse
             islandDTOList.add( assembleToIslandDTO(island) );
         }
         return islandDTOList;
+    }
+
+    @Override
+    public Island assembleToIslandDomainObject(IslandDTO islandDTO) {
+        Island island = (Island) shallowCopy(islandDTO, Island.class);
+        island.setCountry( (Country) shallowCopy(islandDTO.getCountryDTO(), Country.class));
+        return island;
     }
 
     @Override
