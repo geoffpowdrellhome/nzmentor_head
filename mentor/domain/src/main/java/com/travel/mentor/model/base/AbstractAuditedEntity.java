@@ -1,5 +1,6 @@
 package com.travel.mentor.model.base;
 
+import com.travel.mentor.model.impl.User;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,14 +19,23 @@ public abstract class AbstractAuditedEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
     protected Long id;
 
-    @Column(name = "created_by")
-    protected String createUser = "sysadm";
+    @ManyToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "username")
+    private User createUser;
+
+
+//    @Column(name = "created_by")
+//    protected String createUser = "sysadm";
 
     @Column(name = "created")
     protected Timestamp createDate = new Timestamp(new Date().getTime());
 
-    @Column(name = "updated_by")
-    protected String updateUser = "sysadm";
+//    @Column(name = "updated_by")
+//    protected String updateUser = "sysadm";
+
+    @ManyToOne
+    @JoinColumn(name = "updated_by", referencedColumnName = "username")
+    private User updateUser;
 
     @Column(name = "updated")
     protected Timestamp updateDate = new Timestamp(new Date().getTime());
@@ -38,11 +48,11 @@ public abstract class AbstractAuditedEntity implements Serializable {
         this.id = id;
     }
 
-    public String getCreateUser() {
+    public User getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(String createUser) {
+    public void setCreateUser(User createUser) {
         this.createUser = createUser;
     }
 
@@ -54,11 +64,11 @@ public abstract class AbstractAuditedEntity implements Serializable {
         this.createDate = createDate;
     }
 
-    public String getUpdateUser() {
+    public User getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(String updateUser) {
+    public void setUpdateUser(User updateUser) {
         this.updateUser = updateUser;
     }
 

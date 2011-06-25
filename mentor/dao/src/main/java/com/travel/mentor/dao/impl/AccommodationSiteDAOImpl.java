@@ -6,6 +6,7 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.model.impl.AccommodationSite;
 import com.travel.mentor.model.impl.Location;
+import com.travel.mentor.model.impl.User;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.SiteType;
 import org.springframework.stereotype.Repository;
@@ -37,9 +38,10 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
         accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
         accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
-        accommodationSite.setCreateUser(accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+
+        accommodationSite.setCreateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
         //accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
-        accommodationSite.setUpdateUser(accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        accommodationSite.setUpdateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
         //accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.persist(accommodationSite);
@@ -51,7 +53,7 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     @Override
     public AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToAccommodationSiteDomainObject(accommodationSiteDTO);
-        accommodationSite.setUpdateUser(accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        accommodationSite.setUpdateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
         em.merge(accommodationSite);
         return accommodationSiteAssembler.assembleToAccommodationSiteDTO(accommodationSite);
     }

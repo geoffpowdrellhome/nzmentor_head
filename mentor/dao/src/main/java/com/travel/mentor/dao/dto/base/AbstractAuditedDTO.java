@@ -1,17 +1,19 @@
 package com.travel.mentor.dao.dto.base;
 
+import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.dao.dto.impl.UserSessionCookieDTO;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 public abstract class AbstractAuditedDTO implements Serializable {
 
     protected Long id;
-    protected String createUser;
-    protected Timestamp createDate;
-    protected String updateUser;
-    protected Timestamp updateDate;
+    protected UserDTO createUserDTO;
+    protected Timestamp createDate=new Timestamp(new Date().getTime());
+    protected UserDTO updateUserDTO;
+    protected Timestamp updateDate=new Timestamp(new Date().getTime());
     protected UserSessionCookieDTO userSessionCookieDTO = new UserSessionCookieDTO();
 
     public Long getId() {
@@ -22,12 +24,12 @@ public abstract class AbstractAuditedDTO implements Serializable {
         this.id = id;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public UserDTO getCreateUserDTO() {
+        return createUserDTO;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCreateUserDTO(UserDTO createUserDTO) {
+        this.createUserDTO = createUserDTO;
     }
 
     public Timestamp getCreateDate() {
@@ -38,12 +40,12 @@ public abstract class AbstractAuditedDTO implements Serializable {
         this.createDate = createDate;
     }
 
-    public String getUpdateUser() {
-        return updateUser;
+    public UserDTO getUpdateUserDTO() {
+        return updateUserDTO;
     }
 
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
+    public void setUpdateUserDTO(UserDTO updateUserDTO) {
+        this.updateUserDTO = updateUserDTO;
     }
 
     public Timestamp getUpdateDate() {

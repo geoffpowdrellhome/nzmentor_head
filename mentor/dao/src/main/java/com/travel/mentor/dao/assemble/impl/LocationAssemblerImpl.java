@@ -4,6 +4,7 @@ import com.travel.mentor.dao.assemble.LocationAssembler;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
+import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.model.impl.Location;
 import com.travel.mentor.model.impl.Region;
 import com.travel.mentor.type.impl.LocationType;
@@ -35,6 +36,8 @@ public class LocationAssemblerImpl extends BaseAssemblerImpl implements Location
     @Override
     public LocationDTO assembleToLocationDTO(Location location) {
         LocationDTO locationDTO = (LocationDTO) shallowCopy(location, LocationDTO.class);
+        locationDTO.setCreateUserDTO((UserDTO) shallowCopy(location.getCreateUser(), UserDTO.class) );
+        locationDTO.setUpdateUserDTO((UserDTO) shallowCopy(location.getUpdateUser(), UserDTO.class) );
         locationDTO.setLocationTypeDTO((ReferenceTypeDTO) shallowCopy(location.getLocationType(), ReferenceTypeDTO.class));
         locationDTO.setRegionDTO((RegionDTO) shallowCopy(location.getRegion(), RegionDTO.class));
         return locationDTO;
