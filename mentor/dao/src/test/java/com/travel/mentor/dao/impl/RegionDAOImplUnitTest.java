@@ -51,7 +51,8 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
 
         regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        regionDAO.add(regionDTO);
+        regionDTO = regionDAO.add(regionDTO);
+        Assert.assertNotNull(regionDTO);
     }
 
     @Test
@@ -66,7 +67,9 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
         regionDTO.setName("update name 2");
         regionDTO.setDescription("update desc 2");
         regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        regionDAO.update(regionDTO);
+
+        regionDTO = regionDAO.update(regionDTO);
+        Assert.assertNotNull(regionDTO);
     }
 
 }

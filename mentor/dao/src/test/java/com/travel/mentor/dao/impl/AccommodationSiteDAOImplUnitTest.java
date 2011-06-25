@@ -60,7 +60,8 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
 
         accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        accommodationSiteDAO.add(accommodationSiteDTO);
+        accommodationSiteDTO = accommodationSiteDAO.add(accommodationSiteDTO);
+        Assert.assertNotNull(accommodationSiteDTO);
     }
 
     @Test
@@ -75,7 +76,9 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
         accommodationSiteDTO.setName("update2");
         accommodationSiteDTO.setDescription("update2");
         accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        accommodationSiteDAO.update(accommodationSiteDTO);
+
+        accommodationSiteDTO = accommodationSiteDAO.update(accommodationSiteDTO);
+        Assert.assertNotNull(accommodationSiteDTO);
     }
 
 }

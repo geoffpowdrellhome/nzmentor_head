@@ -55,7 +55,8 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
 
         itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        itemDAO.add(itemDTO);
+        itemDTO = itemDAO.add(itemDTO);
+        Assert.assertNotNull(itemDTO);
     }
 
     @Test
@@ -70,7 +71,9 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
         itemDTO.setName("update name 2");
         itemDTO.setDescription("update desc 2");
         itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        itemDAO.update(itemDTO);
+
+        itemDTO = itemDAO.update(itemDTO);
+        Assert.assertNotNull(itemDTO);
     }
 
 }

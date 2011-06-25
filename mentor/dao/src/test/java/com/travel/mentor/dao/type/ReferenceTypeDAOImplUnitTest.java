@@ -3,6 +3,7 @@ package com.travel.mentor.dao.type;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.*;
+import junit.framework.Assert;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -23,7 +24,9 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
     public void testAddAccommodationSiteType() {
         ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        referenceTypeDAO.add(referenceTypeDTO);
+
+        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+        Assert.assertNotNull(referenceTypeDTO);
     }
 
     @Test
@@ -45,7 +48,8 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
         referenceTypeDTO.setDescription("update2");
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        referenceTypeDAO.update(referenceTypeDTO);
+        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
+        Assert.assertNotNull(referenceTypeDTO);
     }
 
 
@@ -65,7 +69,9 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
     public void testAddClimateConditionType() {
         ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        referenceTypeDAO.add(referenceTypeDTO);
+
+        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+        Assert.assertNotNull(referenceTypeDTO);
     }
 
     @Test
@@ -87,7 +93,8 @@ public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
         referenceTypeDTO.setDescription("update2");
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        referenceTypeDAO.update(referenceTypeDTO);
+        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
+        Assert.assertNotNull(referenceTypeDTO);
     }
 
 

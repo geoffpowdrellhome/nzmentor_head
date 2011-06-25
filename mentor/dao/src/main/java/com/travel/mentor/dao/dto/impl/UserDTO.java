@@ -13,10 +13,10 @@ public class UserDTO implements Serializable {
     protected String lastname;
     protected String password;
     protected String title;
-    protected boolean enabled;
-    protected boolean accountExpired;
-    protected boolean credentialsExpired;
-    protected boolean accountLocked;
+    protected boolean enabled=true;
+    protected boolean accountExpired=false;
+    protected boolean credentialsExpired=false;
+    protected boolean accountLocked=false;
     protected String createUser = "sysadm";
     protected Timestamp createDate = new Timestamp(new Date().getTime());
     protected String updateUser = "sysadm";

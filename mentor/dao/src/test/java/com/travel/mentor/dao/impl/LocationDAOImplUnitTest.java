@@ -60,7 +60,8 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
 
         locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        locationDAO.add(locationDTO);
+        locationDTO = locationDAO.add(locationDTO);
+        Assert.assertNotNull(locationDTO);
     }
 
     @Test
@@ -75,7 +76,9 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
         locationDTO.setName("update location name2");
         locationDTO.setDescription("update location desc 2");
         locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-        locationDAO.update(locationDTO);
+
+        locationDTO = locationDAO.update(locationDTO);
+        Assert.assertNotNull(locationDTO);
     }
 
 }
