@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface IslandAssembler {
 
-    List<IslandDTO> assembleToIslandDTOList(List<Island> islandList);
+    List<IslandDTO> assembleToDTOList(List<Island> islandList);
 
-    Island assembleToIslandDomainObject(IslandDTO islandDTO);
+    Island assembleToDomainObject(IslandDTO islandDTO);
 
-    IslandDTO assembleToIslandDTO(Island island);
+    IslandDTO assembleToDTO(Island island);
 
 }

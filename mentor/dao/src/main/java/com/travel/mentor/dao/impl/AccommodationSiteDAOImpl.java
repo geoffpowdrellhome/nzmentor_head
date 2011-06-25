@@ -28,34 +28,40 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     @Override
     public List<AccommodationSiteDTO> findAll() {
         List<AccommodationSite> accommodationSiteList = em.createNamedQuery(AccommodationSite.FIND_ALL_ACCOMMODATION_SITES_NAMED_QUERY).getResultList();
-        return accommodationSiteAssembler.assembleToAccommodationSiteDTOList(accommodationSiteList);
+        return accommodationSiteAssembler.assembleToDTOList(accommodationSiteList);
     }
 
     @Override
     public AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO) {
-        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToAccommodationSiteDomainObject(accommodationSiteDTO);
+        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
 
         accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
         accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
         accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
 
-        accommodationSite.setCreateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
-        //accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
-        accommodationSite.setUpdateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
-        //accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        accommodationSite.setCreateUser(sessionUser);
+        accommodationSite.setUpdateUser(sessionUser);
+        accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
+        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.persist(accommodationSite);
 
-        return accommodationSiteAssembler.assembleToAccommodationSiteDTO(accommodationSite);
+        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
 
     @Override
     public AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO) {
-        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToAccommodationSiteDomainObject(accommodationSiteDTO);
-        accommodationSite.setUpdateUser( em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername()) );
+        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
+
+        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        accommodationSite.setUpdateUser(sessionUser);
+        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.merge(accommodationSite);
-        return accommodationSiteAssembler.assembleToAccommodationSiteDTO(accommodationSite);
+
+        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
     @Override
@@ -67,7 +73,7 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     @Override
     public AccommodationSiteDTO find(Long id) {
         AccommodationSite accommodationSite = em.find(AccommodationSite.class, id);
-        return accommodationSiteAssembler.assembleToAccommodationSiteDTO(accommodationSite);
+        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
     @Override

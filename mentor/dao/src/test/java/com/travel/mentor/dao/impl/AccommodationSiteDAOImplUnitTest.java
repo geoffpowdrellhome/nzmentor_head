@@ -2,13 +2,10 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.LocationDAO;
-import com.travel.mentor.dao.UserDAO;
 import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
-import com.travel.mentor.dao.dto.impl.UserDTO;
-import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import com.travel.mentor.type.impl.SiteType;
 import junit.framework.Assert;
@@ -29,7 +26,7 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAll();
-        doExpectingRecordsAssert(accommodationSiteDTOList);
+        assertRecordsReturned(accommodationSiteDTOList);
     }
 
     @Test
@@ -41,15 +38,15 @@ public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testAdd() {
         List<ReferenceTypeDTO> siteTypeDTOList = referenceTypeDAO.findAll(SiteType.FIND_ALL_SITE_TYPES_NAMED_QUERY);
-        doExpectingRecordsAssert(siteTypeDTOList);
+        assertRecordsReturned(siteTypeDTOList);
         ReferenceTypeDTO siteTypeDTO = siteTypeDTOList.get(0); // get the first one.
 
         List<ReferenceTypeDTO> accommodationSiteTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        doExpectingRecordsAssert(accommodationSiteTypeDTOList);
+        assertRecordsReturned(accommodationSiteTypeDTOList);
         ReferenceTypeDTO accommodationSiteTypeDTO = accommodationSiteTypeDTOList.get(0); // get the first one.
 
         List<LocationDTO> locationDTOList = locationDAO.findAll();
-        doExpectingRecordsAssert(locationDTOList);
+        assertRecordsReturned(locationDTOList);
         LocationDTO locationDTO = locationDTOList.get(0); // get the first one.
 
         AccommodationSiteDTO accommodationSiteDTO = new AccommodationSiteDTO();

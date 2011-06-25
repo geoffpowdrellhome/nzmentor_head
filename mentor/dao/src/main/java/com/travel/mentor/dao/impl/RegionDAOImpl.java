@@ -5,11 +5,14 @@ import com.travel.mentor.dao.assemble.RegionAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
 import com.travel.mentor.model.impl.Region;
+import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Repository("regionDAO")
@@ -22,21 +25,35 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
     @Override
     public List<RegionDTO> findAll() {
         List<Region> regionList = em.createNamedQuery(Region.FIND_ALL_REGIONS_NAMED_QUERY).getResultList();
-        return regionAssembler.assembleToRegionDTOList(regionList);
+        return regionAssembler.assembleToDTOList(regionList);
     }
 
     @Override
     public RegionDTO add(RegionDTO regionDTO) {
-        Region region = regionAssembler.assembleToRegionDomainObject(regionDTO);
+        Region region = regionAssembler.assembleToDomainObject(regionDTO);
+
+        User sessionUser = em.find(User.class, regionDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        region.setCreateUser(sessionUser);
+        region.setUpdateUser(sessionUser);
+        region.setCreateDate(new Timestamp(new Date().getTime()));
+        region.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.persist(region);
-        return regionAssembler.assembleToRegionDTO(region);
+
+        return regionAssembler.assembleToDTO(region);
     }
 
     @Override
     public RegionDTO update(RegionDTO regionDTO) {
-        Region region = regionAssembler.assembleToRegionDomainObject(regionDTO);
+        Region region = regionAssembler.assembleToDomainObject(regionDTO);
+
+        User sessionUser = em.find(User.class, regionDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        region.setUpdateUser(sessionUser);
+        region.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.merge(region);
-        return regionAssembler.assembleToRegionDTO(region);
+
+        return regionAssembler.assembleToDTO(region);
     }
 
     @Override
@@ -48,7 +65,7 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
     @Override
     public RegionDTO find(Long id) {
         Region region = em.find(Region.class, id);
-        return regionAssembler.assembleToRegionDTO(region);
+        return regionAssembler.assembleToDTO(region);
     }
 
     @Override

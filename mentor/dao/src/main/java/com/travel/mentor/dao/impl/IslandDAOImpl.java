@@ -22,13 +22,13 @@ public class IslandDAOImpl extends AbstractMentorDAO implements IslandDAO {
     @Override
     public List<IslandDTO> findAll() {
         List<Island> islandList = em.createNamedQuery(Island.FIND_ALL_ISLANDS_NAMED_QUERY).getResultList();
-        return islandAssembler.assembleToIslandDTOList(islandList);
+        return islandAssembler.assembleToDTOList(islandList);
     }
 
     @Override
     public IslandDTO find(Long id) {
         Island island = em.find(Island.class, id);
-        return islandAssembler.assembleToIslandDTO(island);
+        return islandAssembler.assembleToDTO(island);
     }
 
     @Override

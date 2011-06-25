@@ -28,7 +28,7 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<ItemDTO> itemDTOList = itemDAO.findAll();
-        doExpectingRecordsAssert(itemDTOList);
+        assertRecordsReturned(itemDTOList);
     }
 
     @Test
@@ -40,19 +40,18 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testAdd() {
         List<ReferenceTypeDTO> itemTypeDTOList = referenceTypeDAO.findAll(ItemType.FIND_ALL_ITEM_TYPES_NAMED_QUERY);
-        doExpectingRecordsAssert(itemTypeDTOList);
+        assertRecordsReturned(itemTypeDTOList);
         ReferenceTypeDTO itemTypeDTO = itemTypeDTOList.get(0); // get the first one.
 
-        List<AccommodationSiteDTO> accommodationSiteDTOList = accommodationSiteDAO.findAll();
-        doExpectingRecordsAssert(accommodationSiteDTOList);
-        AccommodationSiteDTO siteDTO = accommodationSiteDTOList.get(0); // get the first one.
+        AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(accommodationSiteDTO);
 
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setItemTypeDTO(itemTypeDTO);
         itemDTO.setHelpfulComments("my helpful comments");
         itemDTO.setDescription("my new item desc");
         itemDTO.setName("my new item");
-        itemDTO.setSiteDTO(siteDTO);
+        itemDTO.setSiteDTO(accommodationSiteDTO);
 
         itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
@@ -68,9 +67,9 @@ public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testUpdate() {
         ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
-        itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         itemDTO.setName("update name 2");
         itemDTO.setDescription("update desc 2");
+        itemDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         itemDAO.update(itemDTO);
     }
 

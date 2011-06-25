@@ -32,7 +32,7 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<LocationDTO> locationDTOList = locationDAO.findAll();
-        doExpectingRecordsAssert(locationDTOList);
+        assertRecordsReturned(locationDTOList);
     }
 
     @Test
@@ -44,12 +44,11 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testAdd() {
         List<ReferenceTypeDTO> locationTypeDTOList = referenceTypeDAO.findAll(LocationType.FIND_ALL_LOCATION_TYPES_NAMED_QUERY);
-        doExpectingRecordsAssert(locationTypeDTOList);
+        assertRecordsReturned(locationTypeDTOList);
         ReferenceTypeDTO locationTypeDTO = locationTypeDTOList.get(0); // get the first one.
 
-        List<RegionDTO> regionDTOList = regionDAO.findAll();
-        doExpectingRecordsAssert(regionDTOList);
-        RegionDTO regionDTO = regionDTOList.get(0); // get the first one.
+        RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
+        Assert.assertNotNull(regionDTO);
 
         LocationDTO locationDTO = new LocationDTO();
         locationDTO.setLocationTypeDTO(locationTypeDTO);
@@ -73,9 +72,9 @@ public class LocationDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testUpdate() {
         LocationDTO locationDTO = locationDAO.find(EXISTING_ID_VALUE);
-        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         locationDTO.setName("update location name2");
         locationDTO.setDescription("update location desc 2");
+        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         locationDAO.update(locationDTO);
     }
 

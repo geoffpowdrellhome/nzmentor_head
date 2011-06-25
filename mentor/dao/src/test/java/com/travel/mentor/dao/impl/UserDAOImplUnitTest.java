@@ -19,14 +19,13 @@ public class UserDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<UserDTO> userDTOList = userDAO.findAll();
-        doExpectingRecordsAssert(userDTOList);
+        assertRecordsReturned(userDTOList);
     }
 
     @Test
     public void testFind() {
         UserDTO userDTO = userDAO.find(EXISTING_USERNAME_VALUE);
         Assert.assertNotNull(userDTO);
-        doExpectingRecordsAssert(userDTO.getRoleDTOList());
     }
 
     @Test
@@ -35,6 +34,8 @@ public class UserDAOImplUnitTest extends MentorDAOImplTestCase {
         userDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         userDTO.setFirstname("johny");
         userDTO.setLastname("begood");
+        userDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+
         userDAO.update(userDTO);
     }
 

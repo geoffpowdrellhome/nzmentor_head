@@ -26,7 +26,7 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<RegionDTO> regionDTOList = regionDAO.findAll();
-        doExpectingRecordsAssert(regionDTOList);
+        assertRecordsReturned(regionDTOList);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testAdd() {
         List<IslandDTO> islandDTOList = islandDAO.findAll();
-        doExpectingRecordsAssert(islandDTOList);
+        assertRecordsReturned(islandDTOList);
         IslandDTO islandDTO = islandDTOList.get(0); // get the first one.
 
         RegionDTO regionDTO = new RegionDTO();
@@ -63,9 +63,9 @@ public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testUpdate() {
         RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
-        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         regionDTO.setName("update name 2");
         regionDTO.setDescription("update desc 2");
+        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
         regionDAO.update(regionDTO);
     }
 

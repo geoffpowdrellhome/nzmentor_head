@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface RegionAssembler {
 
-    List<RegionDTO> assembleToRegionDTOList(List<Region> regionList);
+    List<RegionDTO> assembleToDTOList(List<Region> regionList);
 
-    Region assembleToRegionDomainObject(RegionDTO regionDTO);
+    Region assembleToDomainObject(RegionDTO regionDTO);
 
-    RegionDTO assembleToRegionDTO(Region region);
+    RegionDTO assembleToDTO(Region region);
 
 }

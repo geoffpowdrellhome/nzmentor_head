@@ -5,6 +5,7 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
+import com.travel.mentor.model.impl.User;
 import com.travel.mentor.type.impl.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,8 @@ import org.springframework.util.Assert;
 import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Repository("referenceTypeDAO")
@@ -32,14 +35,28 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     @Override
     public ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+
+        User sessionUser = em.find(User.class, referenceTypeDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        abstractAuditedNameDescEntity.setCreateUser(sessionUser);
+        abstractAuditedNameDescEntity.setUpdateUser(sessionUser);
+        abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
+        abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.persist(abstractAuditedNameDescEntity);
+
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 
     @Override
     public ReferenceTypeDTO update(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+
+        User sessionUser = em.find(User.class, referenceTypeDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        abstractAuditedNameDescEntity.setUpdateUser(sessionUser);
+        abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.merge(abstractAuditedNameDescEntity);
+
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 

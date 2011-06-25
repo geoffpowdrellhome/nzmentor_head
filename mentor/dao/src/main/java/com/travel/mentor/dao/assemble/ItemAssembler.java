@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ItemAssembler {
 
-    List<ItemDTO> assembleToItemDTOList(List<Item> itemList);
+    List<ItemDTO> assembleToDTOList(List<Item> itemList);
 
-    Item assembleToItemDomainObject(ItemDTO itemDTO);
+    Item assembleToDomainObject(ItemDTO itemDTO);
 
-    ItemDTO assembleToItemDTO(Item item);
+    ItemDTO assembleToDTO(Item item);
 
 }

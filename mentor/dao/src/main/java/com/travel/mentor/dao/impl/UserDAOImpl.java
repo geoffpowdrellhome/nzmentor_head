@@ -13,6 +13,8 @@ import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,27 +52,41 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
     @Override
     public List<UserDTO> findAll() {
         List<User> userList = em.createNamedQuery(User.FIND_ALL_USERS).getResultList();
-        return userAssembler.assembleToUserDTOList(userList);
+        return userAssembler.assembleToDTOList(userList);
     }
 
     @Override
     public UserDTO add(UserDTO userDTO) {
-        User user = userAssembler.assembleToUserDomainObject(userDTO);
+        User user = userAssembler.assembleToDomainObject(userDTO);
+
+        User sessionUser = em.find(User.class, userDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        user.setCreateUser( sessionUser.getUsername() );
+        user.setUpdateUser( sessionUser.getUsername() );
+        user.setCreateDate(new Timestamp(new Date().getTime()));
+        user.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.persist(user);
-        return userAssembler.assembleToUserDTO(user);
+
+        return userAssembler.assembleToDTO(user);
     }
 
     @Override
     public UserDTO update(UserDTO userDTO) {
-        User user = userAssembler.assembleToUserDomainObject(userDTO);
+        User user = userAssembler.assembleToDomainObject(userDTO);
+
+        User sessionUser = em.find(User.class, userDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        user.setUpdateUser( sessionUser.getUsername() );
+        user.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.merge(user);
-        return userAssembler.assembleToUserDTO(user);
+
+        return userAssembler.assembleToDTO(user);
     }
 
     @Override
     public UserDTO find(String username) {
         User user = em.find(User.class, username);
-        return userAssembler.assembleToUserDTO(user);
+        return userAssembler.assembleToDTO(user);
     }
 
     @Override

@@ -5,11 +5,14 @@ import com.travel.mentor.dao.assemble.ItemAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.ItemDTO;
 import com.travel.mentor.model.impl.Item;
+import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Repository("itemDAO")
@@ -22,21 +25,35 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
     @Override
     public List<ItemDTO> findAll() {
         List<Item> itemList = em.createNamedQuery(Item.FIND_ALL_ITEMS_NAMED_QUERY).getResultList();
-        return itemAssembler.assembleToItemDTOList(itemList);
+        return itemAssembler.assembleToDTOList(itemList);
     }
 
     @Override
     public ItemDTO add(ItemDTO itemDTO) {
-        Item item = itemAssembler.assembleToItemDomainObject(itemDTO);
+        Item item = itemAssembler.assembleToDomainObject(itemDTO);
+
+        User sessionUser = em.find(User.class, itemDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        item.setCreateUser(sessionUser);
+        item.setUpdateUser(sessionUser);
+        item.setCreateDate(new Timestamp(new Date().getTime()));
+        item.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.persist(item);
-        return itemAssembler.assembleToItemDTO(item);
+
+        return itemAssembler.assembleToDTO(item);
     }
 
     @Override
     public ItemDTO update(ItemDTO itemDTO) {
-        Item item = itemAssembler.assembleToItemDomainObject(itemDTO);
+        Item item = itemAssembler.assembleToDomainObject(itemDTO);
+
+        User sessionUser = em.find(User.class, itemDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+        item.setUpdateUser(sessionUser);
+        item.setUpdateDate(new Timestamp(new Date().getTime()));
+
         em.merge(item);
-        return itemAssembler.assembleToItemDTO(item);
+
+        return itemAssembler.assembleToDTO(item);
     }
 
     @Override
@@ -48,7 +65,7 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
     @Override
     public ItemDTO find(Long id) {
         Item item = em.find(Item.class, id);
-        return itemAssembler.assembleToItemDTO(item);
+        return itemAssembler.assembleToDTO(item);
     }
 
     @Override

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface UserAssembler {
 
-    List<UserDTO> assembleToUserDTOList(List<User> userList);
+    List<UserDTO> assembleToDTOList(List<User> userList);
 
-    User assembleToUserDomainObject(UserDTO userDTO);
+    User assembleToDomainObject(UserDTO userDTO);
 
-    UserDTO assembleToUserDTO(User user);
+    UserDTO assembleToDTO(User user);
 
 }

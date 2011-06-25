@@ -18,7 +18,7 @@ public class IslandDAOImplUnitTest extends MentorDAOImplTestCase {
     @Test
     public void testFindAll() {
         List<IslandDTO> islandDTOList = islandDAO.findAll();
-        doExpectingRecordsAssert(islandDTOList);
+        assertRecordsReturned(islandDTOList);
     }
 
     @Test

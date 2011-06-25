@@ -1,13 +1,21 @@
 package com.travel.mentor.dao.dto.base;
 
+import com.travel.mentor.dao.dto.impl.UserDTO;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
-public class ReferenceTypeDTO implements Serializable {
+public class ReferenceTypeDTO extends AbstractAuditedNameDescDTO {
 
-    private Long id;
-    private String name;
-    private String description;
-    private Class entityClass;
+//    protected Long id;
+//    protected String name;
+//    protected String description;
+    protected Class entityClass;
+//    protected UserDTO createUserDTO=new UserDTO();
+//    protected Timestamp createDate=new Timestamp(new Date().getTime());
+//    protected UserDTO updateUserDTO=new UserDTO();
+//    protected Timestamp updateDate=new Timestamp(new Date().getTime());
 
     public ReferenceTypeDTO() {}
 
@@ -15,30 +23,6 @@ public class ReferenceTypeDTO implements Serializable {
         this.name = _name;
         this.description = _description;
         this.entityClass = _entityClass;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Class getEntityClass() {

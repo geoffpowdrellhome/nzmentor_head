@@ -10,9 +10,9 @@ import java.util.Date;
 public abstract class AbstractAuditedDTO implements Serializable {
 
     protected Long id;
-    protected UserDTO createUserDTO;
+    protected UserDTO createUserDTO= new UserDTO();
     protected Timestamp createDate=new Timestamp(new Date().getTime());
-    protected UserDTO updateUserDTO;
+    protected UserDTO updateUserDTO= new UserDTO();
     protected Timestamp updateDate=new Timestamp(new Date().getTime());
     protected UserSessionCookieDTO userSessionCookieDTO = new UserSessionCookieDTO();
 

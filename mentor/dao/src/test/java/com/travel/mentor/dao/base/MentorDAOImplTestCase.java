@@ -13,7 +13,7 @@ import junit.framework.Assert;
  * Created by geoff
  * Purpose: 'Mentor' DAO Implementation Test case.
  */
-@TransactionConfiguration(transactionManager = "mentorTransactionManager", defaultRollback = false)
+@TransactionConfiguration(transactionManager = "mentorTransactionManager", defaultRollback = true)
 public class MentorDAOImplTestCase extends AbstractSpringDAOImplTestCase {
 
     protected static final Long EXISTING_ID_VALUE=1L;
@@ -32,7 +32,7 @@ public class MentorDAOImplTestCase extends AbstractSpringDAOImplTestCase {
        this.entityManager = entityManager;
     }
 
-    protected void doExpectingRecordsAssert(List list) {
+    protected void assertRecordsReturned(List list) {
         Assert.assertNotNull(list);
         Assert.assertTrue(list.size() != 0);
     }

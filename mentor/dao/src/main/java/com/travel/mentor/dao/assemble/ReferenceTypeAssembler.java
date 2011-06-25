@@ -9,8 +9,8 @@ public interface ReferenceTypeAssembler {
 
     List<ReferenceTypeDTO> assembleToDTOList(List<AbstractAuditedNameDescEntity> abstractAuditedNameDescEntityList);
 
-    ReferenceTypeDTO assembleToDTO(AbstractAuditedNameDescEntity abstractAuditedNameDescEntity);
-
     AbstractAuditedNameDescEntity assembleToDomainObject(ReferenceTypeDTO referenceTypeDTO);
+
+    ReferenceTypeDTO assembleToDTO(AbstractAuditedNameDescEntity abstractAuditedNameDescEntity);
 
 }

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface AccommodationSiteAssembler {
 
-    List<AccommodationSiteDTO> assembleToAccommodationSiteDTOList(List<AccommodationSite> accommodationSiteList);
+    List<AccommodationSiteDTO> assembleToDTOList(List<AccommodationSite> accommodationSiteList);
 
-    AccommodationSite assembleToAccommodationSiteDomainObject(AccommodationSiteDTO accommodationSiteDTO);
+    AccommodationSite assembleToDomainObject(AccommodationSiteDTO accommodationSiteDTO);
 
-    AccommodationSiteDTO assembleToAccommodationSiteDTO(AccommodationSite accommodationSite);
+    AccommodationSiteDTO assembleToDTO(AccommodationSite accommodationSite);
 
 }

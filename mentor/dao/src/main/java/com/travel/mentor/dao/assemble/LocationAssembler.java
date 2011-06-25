@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface LocationAssembler {
 
-    List<LocationDTO> assembleToLocationDTOList(List<Location> locationList);
+    List<LocationDTO> assembleToDTOList(List<Location> locationList);
 
-    Location assembleToLocationDomainObject(LocationDTO locationDTO);
+    Location assembleToDomainObject(LocationDTO locationDTO);
 
-    LocationDTO assembleToLocationDTO(Location location);
+    LocationDTO assembleToDTO(Location location);
 
 }

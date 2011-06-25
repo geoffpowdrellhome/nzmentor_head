@@ -14,21 +14,21 @@ import java.util.List;
 public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssembler {
 
     @Override
-    public List<UserDTO> assembleToUserDTOList(List<User> userList) {
+    public List<UserDTO> assembleToDTOList(List<User> userList) {
         List<UserDTO> userDTOList = new ArrayList<UserDTO>();
         for (User user : userList) {
-            userDTOList.add( assembleToUserDTO(user) );
+            userDTOList.add( assembleToDTO(user) );
         }
         return userDTOList;
     }
 
     @Override
-    public User assembleToUserDomainObject(UserDTO userDTO) {
+    public User assembleToDomainObject(UserDTO userDTO) {
         return (User) shallowCopy(userDTO, User.class);
     }
 
     @Override
-    public UserDTO assembleToUserDTO(User user) {
+    public UserDTO assembleToDTO(User user) {
         UserDTO userDTO = (UserDTO) shallowCopy(user, UserDTO.class);
         for (Role role : user.getRoles()) {
             userDTO.getRoleDTOList().add( assembleToRoleDTO(role) );
@@ -40,4 +40,5 @@ public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssemble
     private RoleDTO assembleToRoleDTO(Role role) {
         return (RoleDTO) shallowCopy(role, RoleDTO.class);
     }
+
 }
