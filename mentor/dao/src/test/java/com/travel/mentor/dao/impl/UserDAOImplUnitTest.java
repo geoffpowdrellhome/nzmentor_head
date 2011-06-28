@@ -1,20 +1,16 @@
 package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.UserDAO;
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.impl.RegionDTO;
-import com.travel.mentor.dao.dto.impl.RoleDTO;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.impl.UserDTO;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOImplUnitTest extends MentorDAOImplTestCase {
+public class UserDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "userDAO")
     private UserDAO userDAO;

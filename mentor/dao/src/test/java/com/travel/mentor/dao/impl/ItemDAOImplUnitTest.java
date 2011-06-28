@@ -2,7 +2,7 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.ItemDAO;
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.ItemDTO;
@@ -14,7 +14,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class ItemDAOImplUnitTest extends MentorDAOImplTestCase {
+public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "itemDAO")
     private ItemDAO itemDAO;

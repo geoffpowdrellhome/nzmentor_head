@@ -1,14 +1,14 @@
 package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.IslandDAO;
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.impl.IslandDTO;
 import org.junit.Test;
 import junit.framework.Assert;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class IslandDAOImplUnitTest extends MentorDAOImplTestCase {
+public class IslandDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "islandDAO")
     private IslandDAO islandDAO;

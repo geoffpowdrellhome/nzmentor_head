@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.type;
 
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.*;
 import junit.framework.Assert;
@@ -9,93 +9,93 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.List;
 
-public class ReferenceTypeDAOImplUnitTest extends MentorDAOImplTestCase {
+public class ReferenceTypeDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "referenceTypeDAO")
     private ReferenceTypeDAO referenceTypeDAO;
 
-    @Test
-    public void testGetAccommodationSiteTypes() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-    }
+//    @Test
+//    public void testGetAccommodationSiteTypes() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//    }
+//
+//    @Test
+//    public void testAddAccommodationSiteType() {
+//        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class);
+//        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+//
+//        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+//        Assert.assertNotNull(referenceTypeDTO);
+//    }
+//
+//    @Test
+//    public void testDeleteAccommodationSiteType() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//
+//        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+//        referenceTypeDAO.delete(referenceTypeDTO);
+//    }
+//
+//    @Test
+//    public void testUpdateAccommodationSiteType() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//
+//        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+//        referenceTypeDTO.setName("update2");
+//        referenceTypeDTO.setDescription("update2");
+//        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+//
+//        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
+//        Assert.assertNotNull(referenceTypeDTO);
+//    }
 
-    @Test
-    public void testAddAccommodationSiteType() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Dive-Hotel", "Dive-Hotel", AccommodationSiteType.class);
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
-        Assert.assertNotNull(referenceTypeDTO);
-    }
+//    @Test
+//    public void testGetActivitySiteTypes() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ActivitySiteType.FIND_ALL_ACTIVITY_SITE_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//    }
 
-    @Test
-    public void testDeleteAccommodationSiteType() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-
-        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
-        referenceTypeDAO.delete(referenceTypeDTO);
-    }
-
-    @Test
-    public void testUpdateAccommodationSiteType() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-
-        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
-        referenceTypeDTO.setName("update2");
-        referenceTypeDTO.setDescription("update2");
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
-        Assert.assertNotNull(referenceTypeDTO);
-    }
-
-
-    @Test
-    public void testGetActivitySiteTypes() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ActivitySiteType.FIND_ALL_ACTIVITY_SITE_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-    }
-
-    @Test
-    public void testGetClimateConditionTypes() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-    }
-
-    @Test
-    public void testAddClimateConditionType() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class);
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
-        Assert.assertNotNull(referenceTypeDTO);
-    }
-
-    @Test
-    public void testDeleteClimateConditionType() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-
-        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
-        referenceTypeDAO.delete(referenceTypeDTO);
-    }
-
-    @Test
-    public void testUpdateClimateConditionType() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
-
-        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
-        referenceTypeDTO.setName("update2");
-        referenceTypeDTO.setDescription("update2");
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
-        Assert.assertNotNull(referenceTypeDTO);
-    }
+//    @Test
+//    public void testGetClimateConditionTypes() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//    }
+//
+//    @Test
+//    public void testAddClimateConditionType() {
+//        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("Windy", "Windy", ClimateConditionType.class);
+//        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+//
+//        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+//        Assert.assertNotNull(referenceTypeDTO);
+//    }
+//
+//    @Test
+//    public void testDeleteClimateConditionType() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//
+//        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+//        referenceTypeDAO.delete(referenceTypeDTO);
+//    }
+//
+//    @Test
+//    public void testUpdateClimateConditionType() {
+//        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+//        assertRecordsReturned(referenceTypeDTOList);
+//
+//        ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
+//        referenceTypeDTO.setName("update2");
+//        referenceTypeDTO.setDescription("update2");
+//        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+//
+//        referenceTypeDTO = referenceTypeDAO.update(referenceTypeDTO);
+//        Assert.assertNotNull(referenceTypeDTO);
+//    }
 
 
     @Test

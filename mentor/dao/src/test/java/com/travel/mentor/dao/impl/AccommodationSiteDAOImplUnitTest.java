@@ -2,7 +2,7 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.LocationDAO;
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class AccommodationSiteDAOImplUnitTest extends MentorDAOImplTestCase {
+public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;

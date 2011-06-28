@@ -2,7 +2,7 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.IslandDAO;
 import com.travel.mentor.dao.RegionDAO;
-import com.travel.mentor.dao.base.MentorDAOImplTestCase;
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.impl.IslandDTO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
 import junit.framework.Assert;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class RegionDAOImplUnitTest extends MentorDAOImplTestCase {
+public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "regionDAO")
     private RegionDAO regionDAO;
