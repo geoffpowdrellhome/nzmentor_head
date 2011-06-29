@@ -6,10 +6,9 @@ public class ReferenceTypeDTO extends AbstractAuditedNameDescDTO {
 
     public ReferenceTypeDTO() {}
 
-    public ReferenceTypeDTO(String _name, String _description, Class _entityClass) {
+    public ReferenceTypeDTO(String _name, String _description) {
         this.name = _name;
         this.description = _description;
-        this.entityClass = _entityClass;
     }
 
     public Class getEntityClass() {

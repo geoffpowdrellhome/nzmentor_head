@@ -15,7 +15,8 @@ public class LocationTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCas
 
     @Test
     public void testAdd() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", LocationType.class);
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
+        referenceTypeDTO.setEntityClass(LocationType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);

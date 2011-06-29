@@ -15,7 +15,8 @@ public class PopularityRankingTypeDAOImplUnitTest extends AbstractReferenceTypeD
 
     @Test
     public void testAdd() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", PopularityRankingType.class);
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
+        referenceTypeDTO.setEntityClass(PopularityRankingType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);

@@ -18,4 +18,10 @@ public class AccommodationSiteTypeServiceImpl extends AbstractReferenceTypeServi
         return referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
     }
 
+    @Override
+    public ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO) {
+        referenceTypeDTO.setEntityClass(AccommodationSiteType.class);
+        return referenceTypeDAO.add(referenceTypeDTO);
+    }
+
 }

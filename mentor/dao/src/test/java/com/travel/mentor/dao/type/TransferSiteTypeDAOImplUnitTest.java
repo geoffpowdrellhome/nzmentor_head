@@ -15,7 +15,8 @@ public class TransferSiteTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTes
 
     @Test
     public void testAdd() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", TransferSiteType.class);
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
+        referenceTypeDTO.setEntityClass(TransferSiteType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);

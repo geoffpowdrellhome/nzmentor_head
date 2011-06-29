@@ -15,7 +15,8 @@ public class RoomTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase im
 
     @Test
     public void testAdd() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", RoomType.class);
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
+        referenceTypeDTO.setEntityClass(RoomType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);

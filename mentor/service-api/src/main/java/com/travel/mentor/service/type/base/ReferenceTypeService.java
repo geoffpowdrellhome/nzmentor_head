@@ -14,8 +14,6 @@ public interface ReferenceTypeService {
 
     void delete(ReferenceTypeDTO referenceTypeDTO);
 
-    ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO);
-
 
 //    List<ReferenceTypeDTO> findAllAccommodationSiteTypes();
 //    List<ReferenceTypeDTO> findAllActivitySiteTypes();

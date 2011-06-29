@@ -15,7 +15,8 @@ public class ClimateConditionTypeDAOImplUnitTest extends AbstractReferenceTypeDA
 
     @Test
     public void testAdd() {
-        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", ClimateConditionType.class);
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
+        referenceTypeDTO.setEntityClass(ClimateConditionType.class);
         referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);

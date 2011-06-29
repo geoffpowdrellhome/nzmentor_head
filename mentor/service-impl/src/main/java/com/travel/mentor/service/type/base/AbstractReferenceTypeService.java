@@ -11,10 +11,9 @@ public abstract class AbstractReferenceTypeService implements ReferenceTypeServi
     @Resource(name="referenceTypeDAO")
     protected ReferenceTypeDAO referenceTypeDAO;
 
-    @Override
-    public ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO) {
-        return referenceTypeDAO.add(referenceTypeDTO);
-    }
+    public abstract List<ReferenceTypeDTO> findAll();
+
+    public abstract ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO);
 
     @Override
     public ReferenceTypeDTO update(ReferenceTypeDTO referenceTypeDTO) {
@@ -25,12 +24,5 @@ public abstract class AbstractReferenceTypeService implements ReferenceTypeServi
     public void delete(ReferenceTypeDTO referenceTypeDTO) {
         referenceTypeDAO.delete(referenceTypeDTO);
     }
-
-    @Override
-    public ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO) {
-        return referenceTypeDAO.find(referenceTypeDTO);
-    }
-
-    public abstract List<ReferenceTypeDTO> findAll();
 
 }
