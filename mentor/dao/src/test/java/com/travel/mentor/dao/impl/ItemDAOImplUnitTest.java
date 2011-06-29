@@ -6,7 +6,6 @@ import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.impl.ItemDTO;
-import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import com.travel.mentor.type.impl.ItemType;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -18,9 +17,6 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "itemDAO")
     private ItemDAO itemDAO;
-
-    @Resource(name = "referenceTypeDAO")
-    private ReferenceTypeDAO referenceTypeDAO;
 
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;
