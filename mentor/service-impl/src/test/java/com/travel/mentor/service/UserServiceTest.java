@@ -67,6 +67,7 @@ public class UserServiceTest extends AbstractSpringServiceImplTestCase {
     @Test
     public void testFind() {
         UserDTO existingUserDTO = userService.find(EXISTING_USERNAME_VALUE);
+        Assert.assertNotNull(existingUserDTO);
     }
 
 }
