@@ -1,32 +1,25 @@
 package com.travel.mentor.dao.type;
 
 import com.travel.mentor.dao.base.AbstractReferenceTypeDAOTestCase;
+import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.HeadwearType;
+import junit.framework.Assert;
+import org.junit.Test;
 
-import java.util.List;
+public class HeadwearTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase implements MentorDAOImplTestCase {
 
-public class HeadwearTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase {
-
-    @Override
-    public void testFindAll() {
-        List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(HeadwearType.FIND_ALL_HEADWEAR_TYPES_NAMED_QUERY);
-        assertRecordsReturned(referenceTypeDTOList);
+    public HeadwearTypeDAOImplUnitTest() {
+        super.findAllNamedQuery = HeadwearType.FIND_ALL_HEADWEAR_TYPES_NAMED_QUERY;
     }
 
-    @Override
+    @Test
     public void testAdd() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+        ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc", HeadwearType.class);
+        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
 
-    @Override
-    public void testUpdate() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void testDelete() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+        Assert.assertNotNull(referenceTypeDTO);
     }
 
 }
