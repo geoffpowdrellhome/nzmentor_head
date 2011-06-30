@@ -5,13 +5,15 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.ClimateWindfactorType;
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ClimateWindfactorTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase implements MentorDAOImplTestCase {
 
-    public ClimateWindfactorTypeDAOImplUnitTest() {
+    @Before
+	public void setUp() {
         super.findAllNamedQuery = ClimateWindfactorType.FIND_ALL_CLIMATE_WINDFACTOR_TYPES_NAMED_QUERY;
-    }
+	}
 
     @Test
     public void testAdd() {

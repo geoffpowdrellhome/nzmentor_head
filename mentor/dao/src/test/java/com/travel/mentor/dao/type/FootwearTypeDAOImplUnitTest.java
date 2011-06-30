@@ -5,13 +5,15 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.FootwearType;
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FootwearTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase implements MentorDAOImplTestCase {
 
-    public FootwearTypeDAOImplUnitTest() {
+    @Before
+	public void setUp() {
         super.findAllNamedQuery = FootwearType.FIND_ALL_FOOTWEAR_TYPES_NAMED_QUERY;
-    }
+	}
 
     @Test
     public void testAdd() {

@@ -5,13 +5,15 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.TransferSiteType;
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransferSiteTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase implements MentorDAOImplTestCase {
 
-    public TransferSiteTypeDAOImplUnitTest() {
+    @Before
+	public void setUp() {
         super.findAllNamedQuery = TransferSiteType.FIND_ALL_TRANSFER_SITE_TYPES_NAMED_QUERY;
-    }
+	}
 
     @Test
     public void testAdd() {

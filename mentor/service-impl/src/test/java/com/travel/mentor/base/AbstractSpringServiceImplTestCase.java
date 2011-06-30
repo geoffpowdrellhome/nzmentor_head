@@ -16,10 +16,12 @@ import java.util.List;
 @ContextConfiguration(locations = {"classpath:service-context.xml"})
 @TransactionConfiguration(transactionManager = "mentorTransactionManager", defaultRollback = true)
 @Transactional
-public class AbstractSpringServiceImplTestCase {
+public abstract class AbstractSpringServiceImplTestCase {
+
+    protected static final String EXISTING_USERNAME_VALUE="donr";
+    protected static final String EXISTING_PASSWORD_VALUE="mtalford";
 
     protected static final Long EXISTING_ID_VALUE=1L;
-    protected static final String EXISTING_USERNAME_VALUE="donr";
 
     @Resource(name = "userService")
     protected UserService userService;

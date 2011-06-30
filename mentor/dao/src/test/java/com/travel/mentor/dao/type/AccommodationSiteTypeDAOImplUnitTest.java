@@ -5,13 +5,15 @@ import com.travel.mentor.dao.base.MentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.type.impl.AccommodationSiteType;
 import junit.framework.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class AccommodationSiteTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase implements MentorDAOImplTestCase {
 
-    public AccommodationSiteTypeDAOImplUnitTest() {
+    @Before
+	public void setUp() {
         super.findAllNamedQuery = AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY;
-    }
+	}
 
     @Test
     public void testAdd() {

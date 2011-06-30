@@ -6,16 +6,9 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 public class UserServiceTest extends AbstractSpringServiceImplTestCase {
-
-    private static final String EXISTING_USERNAME_VALUE="donr";
-    private static final String EXISTING_PASSWORD_VALUE="mtalford";
-
-    @Resource(name = "userService")
-    private UserService userService;
 
     @Test
     public void testFindByUsername() {
