@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
-public class UserServiceTest extends AbstractSpringServiceImplTestCase {
+public class UserServiceImplUnitTest extends AbstractSpringServiceImplTestCase {
 
     @Test
     public void testFindByUsername() {
