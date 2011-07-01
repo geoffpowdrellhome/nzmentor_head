@@ -9,6 +9,8 @@ import javax.persistence.*;
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.role_id_seq", allocationSize = 1)
 public class Role extends AbstractAuditedEntity {
 
+    public static final String FIND_ALL_ROLES = "Role.findAll";
+
     @Column(name = "rolename", nullable = false)
     private String rolename;
 

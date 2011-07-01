@@ -1037,12 +1037,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: apache-lang:commons-lang:2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-all:1.8.5" level="project" />
-    <orderEntry type="library" name="Maven: org.jmock:jmock-cglib:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.jmock:jmock-core:1.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: apache-httpclient:commons-httpclient:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-all:1.8.5" level="project" />
   </component>
 </module>
 

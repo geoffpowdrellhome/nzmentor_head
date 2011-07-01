@@ -16,6 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/test-annotations" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
       <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
@@ -1003,12 +1004,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jms:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: apache-lang:commons-lang:2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.cxf:cxf-testutils:2.3.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.jra:jra:1.0-alpha-4" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
-    <orderEntry type="library" name="Maven: org.mockito:mockito-all:1.8.5" level="project" />
-    <orderEntry type="library" name="Maven: org.jmock:jmock-cglib:1.2.0" level="project" />
-    <orderEntry type="library" name="Maven: org.jmock:jmock-core:1.2.0" level="project" />
   </component>
 </module>
 

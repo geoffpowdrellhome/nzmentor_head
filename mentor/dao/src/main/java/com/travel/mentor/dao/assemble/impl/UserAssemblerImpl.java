@@ -1,5 +1,6 @@
 package com.travel.mentor.dao.assemble.impl;
 
+import com.travel.mentor.dao.assemble.RoleAssembler;
 import com.travel.mentor.dao.assemble.UserAssembler;
 import com.travel.mentor.dao.dto.impl.RoleDTO;
 import com.travel.mentor.dao.dto.impl.UserDTO;
@@ -7,11 +8,15 @@ import com.travel.mentor.model.impl.Role;
 import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssembler {
+
+    @Resource
+    private RoleAssembler roleAssembler;
 
     @Override
     public List<UserDTO> assembleToDTOList(List<User> userList) {
@@ -31,7 +36,7 @@ public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssemble
     public UserDTO assembleToDTO(User user) {
         UserDTO userDTO = (UserDTO) shallowCopy(user, UserDTO.class);
         for (Role role : user.getRoles()) {
-            userDTO.getRoleDTOList().add( assembleToRoleDTO(role) );
+            userDTO.getRoleDTOList().add( roleAssembler.assembleToDTO(role) );
         }
 
         return userDTO;

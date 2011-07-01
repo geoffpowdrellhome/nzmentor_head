@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.dto.impl;
 
-import java.io.Serializable;
+import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
 
-public class RoleDTO implements Serializable {
+public class RoleDTO extends AbstractAuditedNameDescDTO {
 
     protected Long id;
     protected String rolename;
