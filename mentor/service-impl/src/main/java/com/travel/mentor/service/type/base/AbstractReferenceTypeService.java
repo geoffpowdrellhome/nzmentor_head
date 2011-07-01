@@ -25,4 +25,9 @@ public abstract class AbstractReferenceTypeService implements ReferenceTypeServi
         referenceTypeDAO.delete(referenceTypeDTO);
     }
 
+    @Override
+    public ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO) {
+        return referenceTypeDAO.find(referenceTypeDTO);
+    }
+
 }
