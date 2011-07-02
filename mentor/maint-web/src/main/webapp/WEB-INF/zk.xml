@@ -1,0 +1,18 @@
+<zk>
+	<system-config>
+		<disable-event-thread/>
+	</system-config>
+	<!--<listener>-->
+		<!--<description>ThreadLocal Synchronization Listener-->
+		<!--</description>-->
+		<!--<listener-class>org.zkoss.zkplus.util.ThreadLocalListener-->
+		<!--</listener-class>-->
+	<!--</listener>-->
+	<!--<preference>-->
+		<!--<name>ThreadLocal</name>-->
+		<!--<value>-->
+			<!--org.springframework.security.context.ThreadLocalSecurityContextHolderStrategy=contextHolder-->
+		<!--</value>-->
+	<!--</preference>-->
+</zk>
+

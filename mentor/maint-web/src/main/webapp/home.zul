@@ -1,0 +1,19 @@
+<?page id="main" title="Home Page ZK"?>
+<zk>
+    <window title="Home Page" border="normal" width="500px">
+        <grid>
+            <columns>
+                <column width="400px"/>
+                <column align="center"/>
+            </columns>
+            <rows>
+                <row>
+                    Any one can list accounts!!!!.
+                    <button label="Go!" href="listAccounts.html"/>
+                </row>
+            </rows>
+        </grid>
+    </window>
+    *Any one can view this page
+</zk>
+

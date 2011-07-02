@@ -1,27 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xmlns:jee="http://www.springframework.org/schema/jee"
-       xsi:schemaLocation="
-http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:zkc="http://www.zkoss.org/2008/zkspring/core"
+             xmlns:zksp="http://www.zkoss.org/2008/zkspring/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.zkoss.org/2008/zkspring/core http://www.zkoss.org/2008/zkspring/core/zkspring-core.xsd
+       http://www.zkoss.org/2008/zkspring/security http://www.zkoss.org/2008/zkspring/security/zkspring-security.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <!-- Load spring config from DAO layer -->
-    <import resource="classpath:datasource-context.xml"/>
+    <beans:import resource="classpath:service-context.xml"/>
 
-    <security:http auto-config='true'>
-        <security:intercept-url pattern="/faregate-admin/spring_security_login*" filters="none"/>
-        <security:intercept-url pattern="/faregate-admin/queues/index" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <security:intercept-url pattern="/faregate-admin/**" access="ROLE_USER,ROLE_ADMIN"/>
-    </security:http>
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="fareGateDataSource"
-                                        users-by-username-query="select username, password, decode(active,'Y',1,0) from users where username=?"
-                                        authorities-by-username-query="select users.username, authority from authorities inner join users on users.id=authorities.user_id where users.username=?"/>
-        </security:authentication-provider>
-    </security:authentication-manager>
+    <global-method-security pre-post-annotations="enabled">
+        <!-- AspectJ pointcut expression that locates our "post" method and applies security that way
+             <protect-pointcut expression="execution(* bigbank.*Service.post*(..))" access="ROLE_TELLER"/>  -->
+    </global-method-security>
 
-</beans>
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/secure/extreme/**" access="hasRole('ROLE_SUPERVISOR')"/>
+        <intercept-url pattern="/secure/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/**" access="permitAll"/>
+        <!--<intercept-url pattern="/**" access="isAuthenticated()"/>-->
+        <!--  Use a custom login page -->
+        <form-login login-page="/login.zul" authentication-failure-url="/login.zul?login_error=1"/>
+    </http>
+
+    <!--<http auto-config="true">-->
+    <!--&lt;!&ndash; Following is list of ZK Spring Security custom filters. They needs to be exactly in the same order as shown below in order to work.  &ndash;&gt;-->
+    <!--<custom-filter ref="zkDesktopReuseFilter" position="FIRST"/>-->
+    <!--<custom-filter ref="zkDisableSessionInvalidateFilter" before="FORM_LOGIN_FILTER"/>-->
+    <!--<custom-filter ref="zkEnableSessionInvalidateFilter" before="FILTER_SECURITY_INTERCEPTOR"/>-->
+    <!--<custom-filter ref="zkLoginOKFilter" after="FILTER_SECURITY_INTERCEPTOR"/>-->
+    <!--<custom-filter ref="zkError403Filter" after="LOGOUT_FILTER"/>-->
+    <!--</http>-->
+
+    <!--<zksp:zk-event login-template-close-delay="5">-->
+    <!--<zksp:intercept-event event="onClick" path="//**/btn_*" access="ROLE_TELLER"/>-->
+    <!--<zksp:intercept-event path="/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>-->
+    <!--</zksp:zk-event>-->
+
+
+    <!-- Usernames/Passwords are rod/koala, dianne/emu, scott/wombat, peter/opal -->
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder hash="md5"/>
+            <user-service>
+                <user name="rod" password="a564de63c2d0da68cf47586ee05984d7"
+                      authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER"/>
+                <user name="dianne" password="65d15fe9156f9c4bbffd98085992a44e" authorities="ROLE_USER,ROLE_TELLER"/>
+                <user name="scott" password="2b58af6dddbd072ed27ffc86725d7d3a" authorities="ROLE_USER"/>
+                <user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+    <!--<beans:bean id="authenticationFailureHandler"-->
+                <!--class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">-->
+        <!--<beans:property name="defaultFailureUrl" value="/login.zul?login_error=1"/>-->
+    <!--</beans:bean>-->
+
+    <!--<beans:bean id="authenticationSuccessHandler"-->
+                <!--class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">-->
+        <!--<beans:property name="defaultTargetUrl" value="/home.html"/>-->
+    <!--</beans:bean>-->
+
+    <!--<beans:bean id="adminAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">-->
+        <!--<beans:property name="decisionVoters">-->
+            <!--<beans:list>-->
+                <!--<beans:bean class="org.springframework.security.access.vote.RoleVoter"/>-->
+            <!--</beans:list>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>-->
+
+
+    <!--<form-login login-page="/login.zul" authentication-failure-url="/login.zul?login_error=1"/>-->
+    <!--<logout logout-success-url="/home.zul"/>-->
+
+
+</beans:beans>
+
+        <!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+        <!--xmlns:security="http://www.springframework.org/schema/security"-->
+        <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+        <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+        <!--http://www.springframework.org/schema/beans/spring-beans-3.0.xsd-->
+        <!--http://www.springframework.org/schema/security-->
+        <!--http://www.springframework.org/schema/security/spring-security-3.0.xsd">-->
+
+
+        <!--<bean id="securityFilterChain" class="org.springframework.security.web.FilterChainProxy">-->
+        <!--<security:filter-chain-map path-type="ant">-->
+        <!--<security:filter-chain pattern="/secure/**"-->
+        <!--filters="adminHttpSessionContextIntegrationFilter,adminFormAuthenticationProcessingFilter,-->
+        <!--adminSecurityContextHolderAwareRequestFilter,adminAnonymousProcessingFilter,-->
+        <!--adminExceptionTranslationFilter,adminFilterSecurityInterceptor"/>-->
+        <!--</security:filter-chain-map>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminHttpSessionContextIntegrationFilter"-->
+        <!--class="org.springframework.security.web.context.HttpSessionContextIntegrationFilter"/>-->
+
+        <!--<bean id="adminSecurityContextHolderAwareRequestFilter"-->
+        <!--class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter"/>-->
+
+        <!--<bean id="adminFormAuthenticationProcessingFilter"-->
+        <!--class="org.springframework.security.web.authentication.AuthenticationProcessingFilter">-->
+        <!--<property name="filterProcessesUrl" value="/secure/admin/j_security_check"/>-->
+        <!--<property name="authenticationFailureHandler" ref="authenticationFailureHandler"/>-->
+        <!--<property name="authenticationSuccessHandler" ref="authenticationSuccessHandler"/>-->
+        <!--<property name="authenticationManager" ref="adminAuthenticationManager"/>-->
+        <!--</bean>-->
+
+
+        <!--<bean id="authenticationSuccessHandler"-->
+        <!--class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">-->
+        <!--<property name="defaultTargetUrl" value="/secure/admin/home.html"/>-->
+        <!--</bean>-->
+
+        <!--<bean id="authenticationFailureHandler"-->
+        <!--class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">-->
+        <!--<property name="defaultFailureUrl" value="/secure/admin/login.html?login_error=1"/>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminAnonymousProcessingFilter"-->
+        <!--class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">-->
+        <!--<property name="key" value="anonymous"/>-->
+        <!--<property name="userAttribute" value="anonymous,ROLE_ANONYMOUS"/>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminExceptionTranslationFilter"-->
+        <!--class="org.springframework.security.web.access.ExceptionTranslationFilter">-->
+        <!--<property name="authenticationEntryPoint">-->
+        <!--<ref local="adminFormLoginAuthenticationProcessingFilterEntryPoint"/>-->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminFilterSecurityInterceptor"-->
+        <!--class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">-->
+        <!--<property name="authenticationManager" ref="adminAuthenticationManager"/>-->
+        <!--<property name="accessDecisionManager" ref="adminAccessDecisionManager"/>-->
+        <!--<property name="securityMetadataSource">-->
+        <!--<security:filter-invocation-definition-source>-->
+        <!--<security:intercept-url pattern='/secure/admin/home.html' access='ROLE_REPORTING_ADMIN'/>-->
+        <!--<security:intercept-url pattern='/secure/admin/availableReports.html' access='ROLE_REPORTING_ADMIN'/>-->
+        <!--<security:intercept-url pattern='/secure/admin/supplierStatisticsReport.html' access='ROLE_REPORTING_ADMIN'/>-->
+        <!--<security:intercept-url pattern='/secure/admin/incentiveStatisticsReport.html' access='ROLE_REPORTING_ADMIN'/>-->
+        <!--</security:filter-invocation-definition-source>-->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminFormLoginAuthenticationProcessingFilterEntryPoint"-->
+        <!--class="org.springframework.security.web.authentication.AuthenticationProcessingFilterEntryPoint">-->
+        <!--<property name="loginFormUrl">-->
+        <!--<value>/secure/admin/login.html</value>-->
+        <!--</property>-->
+        <!--<property name="forceHttps">-->
+        <!--<value>false</value>-->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">-->
+        <!--<property name="providers">-->
+        <!--<list>-->
+        <!--<ref bean="daoAuthenticationProvider"/>-->
+        <!--</list>-->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="daoAuthenticationProvider"-->
+        <!--class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">-->
+        <!--<property name="userDetailsService">-->
+        <!--<ref bean="userService"/>            -->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--<bean id="adminAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">-->
+        <!--<property name="decisionVoters">-->
+        <!--<list>-->
+        <!--<bean class="org.springframework.security.access.vote.RoleVoter"/>-->
+        <!--</list>-->
+        <!--</property>-->
+        <!--</bean>-->
+
+        <!--</beans>-->

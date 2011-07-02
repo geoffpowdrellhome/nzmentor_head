@@ -31,7 +31,7 @@
             <version>1.0</version>
             <type>jar</type>
             <scope>compile</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>com.travel.mentor</groupId>
             <artifactId>dao</artifactId>
@@ -53,9 +53,109 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        
+
 
         <!-- other maven repo dependencies -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${commons-logging.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zk</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkplus</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zul</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zhtml</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkspring-core</artifactId>
+            <version>${zkspring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkspring-security</artifactId>
+            <version>${zkspring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkspring-webflow</artifactId>
+            <version>${zkspring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zcommon</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zweb</artifactId>
+            <version>${zk.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zkforge.el</groupId>
+            <artifactId>zcommons-el</artifactId>
+            <version>${zkel.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>apache-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
@@ -69,16 +169,17 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
             <type>jar</type>
             <scope>compile</scope>
@@ -111,13 +212,13 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-jdbc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-            <!--<type>jar</type>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -136,6 +237,8 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -143,12 +246,31 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>${springmodules-validation.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${javax-servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>apache-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>${apache-commons-lang.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -163,9 +285,16 @@
             <type>jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${apache-log4j.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
-    <build>        
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -185,7 +314,7 @@
                         <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
                         <manifestEntries>
                             <Bundle-Name>${project.name}</Bundle-Name>
-                            <Bundle-Version>${project.version}</Bundle-Version>                            
+                            <Bundle-Version>${project.version}</Bundle-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
