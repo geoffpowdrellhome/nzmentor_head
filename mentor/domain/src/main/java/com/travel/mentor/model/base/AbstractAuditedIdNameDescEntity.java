@@ -3,21 +3,13 @@ package com.travel.mentor.model.base;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class AbstractAuditedNameDescEntity extends AbstractAuditedEntity {
+public abstract class AbstractAuditedIdNameDescEntity extends AbstractAuditedIdEntity {
 
     @Column(name = "name", nullable = false)
-    public String name="";
+    protected String name="";
 
     @Column(name = "description", nullable = false)
     protected String description="";
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

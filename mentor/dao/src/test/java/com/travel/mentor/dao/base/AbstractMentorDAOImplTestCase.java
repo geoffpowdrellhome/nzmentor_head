@@ -1,6 +1,8 @@
 package com.travel.mentor.dao.base;
 
 import com.travel.mentor.dao.UserDAO;
+import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
+import com.travel.mentor.dao.security.SecurityDAO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
@@ -17,13 +19,16 @@ import junit.framework.Assert;
 public class AbstractMentorDAOImplTestCase extends AbstractSpringDAOImplTestCase {
 
     protected static final Long EXISTING_ID_VALUE=1L;
-    protected static final String EXISTING_USERNAME_VALUE="donr";
+    protected static final String EXISTING_USERNAME_VALUE="user1";
 
     @Resource(name = "referenceTypeDAO")
     protected ReferenceTypeDAO referenceTypeDAO;
 
-    @Resource(name = "userDAO")
-    protected UserDAO userDAO;
+    @Resource(name = "securityDAO")
+    protected SecurityDAO securityDAO;
+
+    @Resource
+    protected SecureUserAssembler secureUserAssembler;
 
     @Resource(name = "mentorEntityManagerFactory")
     protected EntityManagerFactory entityManager;

@@ -5,7 +5,6 @@ import com.travel.mentor.dao.assemble.RegionAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.RegionDTO;
 import com.travel.mentor.model.impl.Region;
-import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
@@ -29,26 +28,15 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
     }
 
     @Override
-    public RegionDTO add(RegionDTO regionDTO) {
+    public RegionDTO saveOrUpdate(RegionDTO regionDTO) {
         Region region = regionAssembler.assembleToDomainObject(regionDTO);
 
-        User sessionUser = em.find(User.class, regionDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        region.setCreateUser(sessionUser);
-        region.setUpdateUser(sessionUser);
-        region.setCreateDate(new Timestamp(new Date().getTime()));
-        region.setUpdateDate(new Timestamp(new Date().getTime()));
+        if (regionDTO.getId() == null || em.find(Region.class, regionDTO.getId()) == null) {
+            region.setCreateUser( secureUserAssembler.assembleToDomainObject(regionDTO.getLoggedInUser()) );
+            region.setCreateDate(new Timestamp(new Date().getTime()));
+        }
 
-        em.persist(region);
-
-        return regionAssembler.assembleToDTO(region);
-    }
-
-    @Override
-    public RegionDTO update(RegionDTO regionDTO) {
-        Region region = regionAssembler.assembleToDomainObject(regionDTO);
-
-        User sessionUser = em.find(User.class, regionDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        region.setUpdateUser(sessionUser);
+        region.setUpdateUser( secureUserAssembler.assembleToDomainObject(regionDTO.getLoggedInUser()) );
         region.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(region);
@@ -70,14 +58,14 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
 
     @Override
     protected void cacheDomainObjects() {
-        logger.debug("cacheRegionDomainObjects()");
+        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
-        watch.start("cacheRegionDomainObjects");
+        watch.start(this.getClass().getName() +".cacheDomainObjects()");
         em.createNamedQuery(Region.FIND_ALL_REGIONS_NAMED_QUERY).getResultList();
         watch.stop();
         if (logger.isDebugEnabled()) {
             logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds RegionDAOImpl.cacheRegionDomainObjects() = " + watch.getTotalTimeSeconds());
+            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
 

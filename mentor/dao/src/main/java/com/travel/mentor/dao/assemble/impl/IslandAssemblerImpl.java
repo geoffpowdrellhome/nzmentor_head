@@ -1,11 +1,12 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.IslandAssembler;
+import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.dto.impl.IslandDTO;
-import com.travel.mentor.dao.dto.impl.UserDTO;
+import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.model.impl.Country;
 import com.travel.mentor.model.impl.Island;
-import com.travel.mentor.model.impl.User;
+import com.travel.mentor.model.security.SecureUser;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class IslandAssemblerImpl extends BaseAssemblerImpl implements IslandAsse
     public Island assembleToDomainObject(IslandDTO islandDTO) {
         Island island = (Island) shallowCopy(islandDTO, Island.class);
 
-        island.setCreateUser((User) shallowCopy(islandDTO.getCreateUserDTO(), User.class));
-        island.setUpdateUser((User) shallowCopy(islandDTO.getUpdateUserDTO(), User.class));
+        island.setCreateUser((SecureUser) shallowCopy(islandDTO.getCreateUserDTO(), SecureUser.class));
+        island.setUpdateUser((SecureUser) shallowCopy(islandDTO.getUpdateUserDTO(), SecureUser.class));
 
         island.setCountry( (Country) shallowCopy(islandDTO.getCountryDTO(), Country.class));
 
@@ -39,8 +40,8 @@ public class IslandAssemblerImpl extends BaseAssemblerImpl implements IslandAsse
     public IslandDTO assembleToDTO(Island island) {
         IslandDTO islandDTO = (IslandDTO) shallowCopy(island, IslandDTO.class);
 
-        islandDTO.setCreateUserDTO((UserDTO) shallowCopy(island.getCreateUser(), UserDTO.class));
-        islandDTO.setUpdateUserDTO((UserDTO) shallowCopy(island.getUpdateUser(), UserDTO.class));
+        islandDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(island.getCreateUser(), SecureUserDTO.class));
+        islandDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(island.getUpdateUser(), SecureUserDTO.class));
 
         return islandDTO;
     }

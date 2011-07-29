@@ -19,4 +19,6 @@ public interface UserDAO {
 
     UserDTO find(String username);
 
+    void delete(UserDTO userDTO);
+
 }

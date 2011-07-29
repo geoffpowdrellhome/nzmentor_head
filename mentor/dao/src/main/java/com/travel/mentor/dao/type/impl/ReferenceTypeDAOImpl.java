@@ -1,11 +1,10 @@
 package com.travel.mentor.dao.type.impl;
 
-import com.travel.mentor.dao.assemble.ReferenceTypeAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import com.travel.mentor.dao.type.ReferenceTypeDAO;
-import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
-import com.travel.mentor.model.impl.User;
+import com.travel.mentor.dao.type.assemble.ReferenceTypeAssembler;
+import com.travel.mentor.model.base.AbstractAuditedIdNameDescEntity;
 import com.travel.mentor.type.impl.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
@@ -28,31 +27,20 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     @Override
     public List<ReferenceTypeDTO> findAll(String findAllNamedQuery) {
         Assert.notNull(findAllNamedQuery);
-        List<AbstractAuditedNameDescEntity> referenceTypeDTOList = em.createNamedQuery(findAllNamedQuery).getResultList();
+        List<AbstractAuditedIdNameDescEntity> referenceTypeDTOList = em.createNamedQuery(findAllNamedQuery).getResultList();
         return referenceTypeAssembler.assembleToDTOList(referenceTypeDTOList);
     }
 
     @Override
-    public ReferenceTypeDTO add(ReferenceTypeDTO referenceTypeDTO) {
-        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+    public ReferenceTypeDTO saveOrUpdate(ReferenceTypeDTO referenceTypeDTO) {
+        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
 
-        User sessionUser = em.find(User.class, referenceTypeDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        abstractAuditedNameDescEntity.setCreateUser(sessionUser);
-        abstractAuditedNameDescEntity.setUpdateUser(sessionUser);
-        abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
-        abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+        if (referenceTypeDTO.getId() == null || em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId()) == null) {
+            abstractAuditedNameDescEntity.setCreateUser( secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()) );
+            abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
+        }
 
-        em.persist(abstractAuditedNameDescEntity);
-
-        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
-    }
-
-    @Override
-    public ReferenceTypeDTO update(ReferenceTypeDTO referenceTypeDTO) {
-        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
-
-        User sessionUser = em.find(User.class, referenceTypeDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        abstractAuditedNameDescEntity.setUpdateUser(sessionUser);
+        abstractAuditedNameDescEntity.setUpdateUser( secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()) );
         abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(abstractAuditedNameDescEntity);
@@ -62,14 +50,14 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
     @Override
     public void delete(ReferenceTypeDTO referenceTypeDTO) {
-        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
+        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
         em.remove(abstractAuditedNameDescEntity);
     }
 
     @Override
     public ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO) {
-        AbstractAuditedNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
+        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }

@@ -1,6 +1,6 @@
-package com.travel.mentor.dao.assemble.impl;
+package com.travel.mentor.dao.assemble.base.impl;
 
-import com.travel.mentor.dao.assemble.BaseAssembler;
+import com.travel.mentor.dao.assemble.base.BaseAssembler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 

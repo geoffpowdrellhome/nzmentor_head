@@ -1,11 +1,11 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdNameDescDTO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
 import java.math.BigDecimal;
 
-public class SiteDTO extends AbstractAuditedNameDescDTO {
+public class SiteDTO extends AbstractAuditedIdNameDescDTO {
 
     protected LocationDTO locationDTO;
     private BigDecimal latitude;

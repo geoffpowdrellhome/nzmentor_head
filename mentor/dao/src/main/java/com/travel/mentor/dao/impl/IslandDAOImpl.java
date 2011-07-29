@@ -33,14 +33,14 @@ public class IslandDAOImpl extends AbstractMentorDAO implements IslandDAO {
 
     @Override
     protected void cacheDomainObjects() {
-        logger.debug("cacheIslandDomainObjects()");
+        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
-        watch.start("cacheIslandDomainObjects");
+        watch.start(this.getClass().getName() +".cacheDomainObjects()");
         em.createNamedQuery(Island.FIND_ALL_ISLANDS_NAMED_QUERY).getResultList();
         watch.stop();
         if (logger.isDebugEnabled()) {
             logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds IslandDAOImpl.cacheIslandDomainObjects() = " + watch.getTotalTimeSeconds());
+            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
 

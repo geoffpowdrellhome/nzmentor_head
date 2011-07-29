@@ -8,9 +8,7 @@ public interface ItemDAO {
 
     List<ItemDTO> findAll();
 
-    ItemDTO add(ItemDTO itemDTO);
-
-    ItemDTO update(ItemDTO itemDTO);
+    ItemDTO saveOrUpdate(ItemDTO itemDTO);
 
     void delete(ItemDTO itemDTO);
 

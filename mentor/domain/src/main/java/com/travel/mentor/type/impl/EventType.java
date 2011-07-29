@@ -1,6 +1,6 @@
 package com.travel.mentor.type.impl;
 
-import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
+import com.travel.mentor.model.base.AbstractAuditedIdNameDescEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="EventType.findAll", query="SELECT o FROM EventType o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.event_type_id_seq", allocationSize = 1)
-public class EventType extends AbstractAuditedNameDescEntity {
+public class EventType extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_EVENT_TYPES_NAMED_QUERY = "EventType.findAll";
 

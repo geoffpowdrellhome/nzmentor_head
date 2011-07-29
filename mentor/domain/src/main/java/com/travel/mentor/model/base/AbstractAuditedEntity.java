@@ -1,58 +1,40 @@
 package com.travel.mentor.model.base;
 
-import com.travel.mentor.model.impl.User;
+import com.travel.mentor.model.security.SecureUser;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public abstract class AbstractAuditedEntity implements Serializable {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_STORE")
-    protected Long id;
-
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "username")
-    private User createUser;
-
-
-//    @Column(name = "created_by")
-//    protected String createUser = "sysadm";
+    protected SecureUser createUser;
 
     @Column(name = "created")
     protected Timestamp createDate = new Timestamp(new Date().getTime());
 
-//    @Column(name = "updated_by")
-//    protected String updateUser = "sysadm";
-
     @ManyToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "username")
-    private User updateUser;
+    protected SecureUser updateUser;
 
     @Column(name = "updated")
     protected Timestamp updateDate = new Timestamp(new Date().getTime());
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getCreateUser() {
+    public SecureUser getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(User createUser) {
+    public void setCreateUser(SecureUser createUser) {
         this.createUser = createUser;
     }
 
@@ -64,11 +46,11 @@ public abstract class AbstractAuditedEntity implements Serializable {
         this.createDate = createDate;
     }
 
-    public User getUpdateUser() {
+    public SecureUser getUpdateUser() {
         return updateUser;
     }
 
-    public void setUpdateUser(User updateUser) {
+    public void setUpdateUser(SecureUser updateUser) {
         this.updateUser = updateUser;
     }
 
@@ -79,4 +61,5 @@ public abstract class AbstractAuditedEntity implements Serializable {
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
+
 }

@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.SpringSecurityUserAssembler;
-import com.travel.mentor.dao.dto.security.MentorGrantedAuthority;
-import com.travel.mentor.dao.dto.security.impl.MentorGrantedAuthorityImpl;
+//import com.travel.mentor.dao.dto.security.MentorGrantedAuthority;
+//import com.travel.mentor.dao.dto.security.impl.MentorGrantedAuthorityImpl;
 import com.travel.mentor.model.impl.Role;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
@@ -23,15 +23,15 @@ public class SpringSecurityUserAssemblerImpl implements SpringSecurityUserAssemb
         boolean credentialsNonExpired = userEntity.isCredentialsExpired() ? false : true;
         boolean accountNonLocked = userEntity.isAccountLocked() ? false : true;
 
-        Collection<MentorGrantedAuthority> authorities = new ArrayList<MentorGrantedAuthority>();
-        for (Role role : userEntity.getRoles()) {
-            authorities.add(new MentorGrantedAuthorityImpl(role.getRolename()));
-        }
+//        Collection<MentorGrantedAuthority> authorities = new ArrayList<MentorGrantedAuthority>();
+//        for (Role role : userEntity.getRoles()) {
+//            authorities.add(new MentorGrantedAuthorityImpl(role.getRolename()));
+//        }
+//
+//        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(username, password, enabled,
+//                accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 
-        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(username, password, enabled,
-                accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-
-        return userDetails;
+        return null; //userDetails;
     }
 
 }

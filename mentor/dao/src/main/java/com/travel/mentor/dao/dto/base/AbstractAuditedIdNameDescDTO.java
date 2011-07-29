@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.dto.base;
 
-public abstract class AbstractAuditedNameDescDTO extends AbstractAuditedDTO {
+public abstract class AbstractAuditedIdNameDescDTO extends AbstractAuditedIdDTO {
 
     protected String name;
     protected String description;

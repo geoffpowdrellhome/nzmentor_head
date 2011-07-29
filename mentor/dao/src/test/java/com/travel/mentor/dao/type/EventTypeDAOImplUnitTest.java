@@ -19,9 +19,9 @@ public class EventTypeDAOImplUnitTest extends AbstractReferenceTypeDAOTestCase i
     public void testAdd() {
         ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
         referenceTypeDTO.setEntityClass(EventType.class);
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+        referenceTypeDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+        referenceTypeDTO = referenceTypeDAO.saveOrUpdate(referenceTypeDTO);
         Assert.assertNotNull(referenceTypeDTO);
     }
 

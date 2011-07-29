@@ -19,9 +19,9 @@ public class AccommodationSiteTypeDAOImplUnitTest extends AbstractReferenceTypeD
     public void testAdd() {
         ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
         referenceTypeDTO.setEntityClass(AccommodationSiteType.class);
-        referenceTypeDTO.getUserSessionCookieDTO().setUserDTO(userDAO.find(EXISTING_USERNAME_VALUE));
+        referenceTypeDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        referenceTypeDTO = referenceTypeDAO.add(referenceTypeDTO);
+        referenceTypeDTO = referenceTypeDAO.saveOrUpdate(referenceTypeDTO);
         Assert.assertNotNull(referenceTypeDTO);
     }
 

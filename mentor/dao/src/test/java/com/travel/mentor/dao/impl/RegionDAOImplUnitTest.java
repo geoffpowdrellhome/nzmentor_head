@@ -21,7 +21,6 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
     private IslandDAO islandDAO;
 
     private static final Long EXISTING_ID_VALUE=1L;
-    private static final String EXISTING_USERNAME_VALUE="donr";
 
     @Test
     public void testFindAll() {
@@ -48,10 +47,9 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         regionDTO.setDescription("Taranaki");
         regionDTO.setName("Taranaki");
         regionDTO.setPopulation(567333);
+        regionDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        regionDTO = regionDAO.add(regionDTO);
+        regionDTO = regionDAO.saveOrUpdate(regionDTO);
         Assert.assertNotNull(regionDTO);
     }
 
@@ -66,9 +64,9 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
         regionDTO.setName("update name 2");
         regionDTO.setDescription("update desc 2");
-        regionDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+        regionDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        regionDTO = regionDAO.update(regionDTO);
+        regionDTO = regionDAO.saveOrUpdate(regionDTO);
         Assert.assertNotNull(regionDTO);
     }
 

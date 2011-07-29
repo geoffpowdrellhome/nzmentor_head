@@ -1,8 +1,6 @@
 package com.travel.mentor.model.impl;
 
 import com.travel.mentor.type.impl.AccommodationSiteType;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 

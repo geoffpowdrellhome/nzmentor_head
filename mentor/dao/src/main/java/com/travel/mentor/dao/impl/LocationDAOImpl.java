@@ -5,7 +5,6 @@ import com.travel.mentor.dao.assemble.LocationAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.LocationDTO;
 import com.travel.mentor.model.impl.Location;
-import com.travel.mentor.model.impl.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
@@ -29,26 +28,15 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
     }
 
     @Override
-    public LocationDTO add(LocationDTO locationDTO) {
+    public LocationDTO saveOrUpdate(LocationDTO locationDTO) {
         Location location = locationAssembler.assembleToDomainObject(locationDTO);
 
-        User sessionUser = em.find(User.class, locationDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        location.setCreateUser(sessionUser);
-        location.setUpdateUser(sessionUser);
-        location.setCreateDate(new Timestamp(new Date().getTime()));
-        location.setUpdateDate(new Timestamp(new Date().getTime()));
+        if (locationDTO.getId() == null || em.find(Location.class, locationDTO.getId()) == null) {
+            location.setCreateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setCreateDate(new Timestamp(new Date().getTime()));
+        }
 
-        em.persist(location);
-
-        return locationAssembler.assembleToDTO(location);
-    }
-
-    @Override
-    public LocationDTO update(LocationDTO locationDTO) {
-        Location location = locationAssembler.assembleToDomainObject(locationDTO);
-
-        User sessionUser = em.find(User.class, locationDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        location.setUpdateUser(sessionUser);
+        location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
         location.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(location);
@@ -70,14 +58,14 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
 
     @Override
     protected void cacheDomainObjects() {
-        logger.debug("cacheLocationDomainObjects()");
+        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
-        watch.start("cacheLocationDomainObjects");
+        watch.start(this.getClass().getName() +".cacheDomainObjects()");
         em.createNamedQuery(Location.FIND_ALL_LOCATIONS_NAMED_QUERY).getResultList();
         watch.stop();
         if (logger.isDebugEnabled()) {
             logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds LocationDAOImpl.cacheLocationDomainObjects() = " + watch.getTotalTimeSeconds());
+            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
 

@@ -1,6 +1,6 @@
 package com.travel.mentor.type.impl;
 
-import com.travel.mentor.model.base.AbstractAuditedNameDescEntity;
+import com.travel.mentor.model.base.AbstractAuditedIdNameDescEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="RoomType.findAll", query="SELECT o FROM RoomType o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.room_type_id_seq", allocationSize = 1)
-public class RoomType extends AbstractAuditedNameDescEntity {
+public class RoomType extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_ROOM_TYPES_NAMED_QUERY = "RoomType.findAll";
 

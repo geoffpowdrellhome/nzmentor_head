@@ -8,9 +8,7 @@ public interface RegionDAO {
 
     List<RegionDTO> findAll();
 
-    RegionDTO add(RegionDTO regionDTO);
-
-    RegionDTO update(RegionDTO regionDTO);
+    RegionDTO saveOrUpdate(RegionDTO regionDTO);
 
     void delete(RegionDTO regionDTO);
 

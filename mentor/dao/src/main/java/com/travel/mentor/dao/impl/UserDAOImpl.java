@@ -102,4 +102,10 @@ public class UserDAOImpl extends AbstractMentorDAO implements UserDAO {
         }
     }
 
+    @Override
+    public void delete(UserDTO userDTO) {
+        User user = em.find(User.class, userDTO.getUsername());
+        em.remove(user);
+    }
+
 }

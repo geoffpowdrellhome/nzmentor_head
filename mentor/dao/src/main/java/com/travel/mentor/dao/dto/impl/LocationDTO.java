@@ -1,10 +1,10 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdNameDescDTO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 import java.math.BigDecimal;
 
-public class LocationDTO extends AbstractAuditedNameDescDTO {
+public class LocationDTO extends AbstractAuditedIdNameDescDTO {
 
     private ReferenceTypeDTO locationTypeDTO;
     private RegionDTO regionDTO;

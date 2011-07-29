@@ -57,10 +57,9 @@ public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestC
         accommodationSiteDTO.setLatitude(new BigDecimal(166.677));
         accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
         accommodationSiteDTO.setLocationDTO(locationDTO);
+        accommodationSiteDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        accommodationSiteDTO = accommodationSiteDAO.add(accommodationSiteDTO);
+        accommodationSiteDTO = accommodationSiteDAO.saveOrUpdate(accommodationSiteDTO);
         Assert.assertNotNull(accommodationSiteDTO);
     }
 
@@ -75,9 +74,9 @@ public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestC
         AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(1L);
         accommodationSiteDTO.setName("update2");
         accommodationSiteDTO.setDescription("update2");
-        accommodationSiteDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+        accommodationSiteDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        accommodationSiteDTO = accommodationSiteDAO.update(accommodationSiteDTO);
+        accommodationSiteDTO = accommodationSiteDAO.saveOrUpdate(accommodationSiteDTO);
         Assert.assertNotNull(accommodationSiteDTO);
     }
 

@@ -27,7 +27,6 @@ public class LocationDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
     private RegionDAO regionDAO;
 
     private static final Long EXISTING_ID_VALUE=1L;
-    private static final String EXISTING_USERNAME_VALUE="donr";
 
     @Test
     public void testFindAll() {
@@ -57,10 +56,9 @@ public class LocationDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         locationDTO.setName("Wanaka");
         locationDTO.setLatitude(new BigDecimal(103.55));
         locationDTO.setLongitude(new BigDecimal(245.55));
+        locationDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
-
-        locationDTO = locationDAO.add(locationDTO);
+        locationDTO = locationDAO.saveOrUpdate(locationDTO);
         Assert.assertNotNull(locationDTO);
     }
 
@@ -75,9 +73,9 @@ public class LocationDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         LocationDTO locationDTO = locationDAO.find(EXISTING_ID_VALUE);
         locationDTO.setName("update location name2");
         locationDTO.setDescription("update location desc 2");
-        locationDTO.getUserSessionCookieDTO().setUserDTO( userDAO.find(EXISTING_USERNAME_VALUE));
+        locationDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
-        locationDTO = locationDAO.update(locationDTO);
+        locationDTO = locationDAO.saveOrUpdate(locationDTO);
         Assert.assertNotNull(locationDTO);
     }
 

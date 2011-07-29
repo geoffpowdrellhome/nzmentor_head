@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdNameDescDTO;
 
-public class RoleDTO extends AbstractAuditedNameDescDTO {
+public class RoleDTO extends AbstractAuditedIdNameDescDTO {
 
     protected Long id;
     protected String rolename;

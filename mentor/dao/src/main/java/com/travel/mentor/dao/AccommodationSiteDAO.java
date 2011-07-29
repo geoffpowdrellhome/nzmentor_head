@@ -8,9 +8,7 @@ public interface AccommodationSiteDAO {
 
     List<AccommodationSiteDTO> findAll();
 
-    AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO);
-
-    AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO);
+    AccommodationSiteDTO saveOrUpdate(AccommodationSiteDTO accommodationSiteDTO);
 
     void delete(AccommodationSiteDTO accommodationSiteDTO);
 

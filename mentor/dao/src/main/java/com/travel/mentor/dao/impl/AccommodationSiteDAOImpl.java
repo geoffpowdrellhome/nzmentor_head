@@ -2,6 +2,7 @@ package com.travel.mentor.dao.impl;
 
 import com.travel.mentor.dao.AccommodationSiteDAO;
 import com.travel.mentor.dao.assemble.AccommodationSiteAssembler;
+import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
 import com.travel.mentor.model.impl.AccommodationSite;
@@ -32,37 +33,58 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     }
 
     @Override
-    public AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO) {
+    public AccommodationSiteDTO saveOrUpdate(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
+
+        if (accommodationSiteDTO.getId() == null || em.find(AccommodationSite.class, accommodationSiteDTO.getId()) == null) {
+            accommodationSite.setCreateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
+        }
 
         accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
         accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
         accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
 
-        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        accommodationSite.setCreateUser(sessionUser);
-        accommodationSite.setUpdateUser(sessionUser);
-        accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
-        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.persist(accommodationSite);
-
-        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
-    }
-
-
-    @Override
-    public AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO) {
-        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
-
-        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-        accommodationSite.setUpdateUser(sessionUser);
+        accommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
         accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(accommodationSite);
 
         return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
+
+//    @Override
+//    public AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO) {
+//        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
+//
+//        accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
+//        accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
+//        accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
+//
+//        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+//        accommodationSite.setCreateUser(sessionUser);
+//        accommodationSite.setUpdateUser(sessionUser);
+//        accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
+//        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+//
+//        em.persist(accommodationSite);
+//
+//        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
+//    }
+//
+//
+//    @Override
+//    public AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO) {
+//        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
+//
+//        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
+//        accommodationSite.setUpdateUser(sessionUser);
+//        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+//
+//        em.merge(accommodationSite);
+//
+//        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
+//    }
 
     @Override
     public void delete(AccommodationSiteDTO accommodationSiteDTO) {
@@ -78,14 +100,14 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
 
     @Override
     protected void cacheDomainObjects() {
-        logger.debug("cacheAccommodationSiteDomainObjects()");
+        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
-        watch.start("cacheAccommodationSiteDomainObjects");
+        watch.start(this.getClass().getName() +".cacheDomainObjects()");
         em.createNamedQuery(AccommodationSite.FIND_ALL_ACCOMMODATION_SITES_NAMED_QUERY).getResultList();
         watch.stop();
         if (logger.isDebugEnabled()) {
             logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds AccommodationSiteDAOImpl.cacheAccommodationSiteDomainObjects() = " + watch.getTotalTimeSeconds());
+            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
 

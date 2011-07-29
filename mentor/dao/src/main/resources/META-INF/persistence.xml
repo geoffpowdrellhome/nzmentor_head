@@ -34,8 +34,16 @@
         <class>com.travel.mentor.model.impl.Region</class>
         <class>com.travel.mentor.model.impl.Site</class>
         <class>com.travel.mentor.model.impl.Item</class>
-        <class>com.travel.mentor.model.impl.User</class>
-        <class>com.travel.mentor.model.impl.Role</class>
+        <!--<class>com.travel.mentor.model.impl.User</class>-->
+
+        <!-- security tables -->
+        <class>com.travel.mentor.model.security.SecureUser</class>
+        <class>com.travel.mentor.model.security.SecurityGroup</class>
+        <class>com.travel.mentor.model.security.SecurityGroupRight</class>
+        <class>com.travel.mentor.model.security.SecurityRight</class>
+        <class>com.travel.mentor.model.security.SecurityRightType</class>
+        <class>com.travel.mentor.model.security.SecurityRole</class>
+        <class>com.travel.mentor.model.security.SecurityRoleGroup</class>
 
         <properties>
             <property name="hibernate.cache.use_second_level_cache" value="true"/>

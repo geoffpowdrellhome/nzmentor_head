@@ -1,4 +1,4 @@
-package com.travel.mentor.dao.assemble;
+package com.travel.mentor.dao.assemble.base;
 
 public interface BaseAssembler {
 

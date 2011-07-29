@@ -8,9 +8,7 @@ public interface LocationDAO {
 
     List<LocationDTO> findAll();
 
-    LocationDTO add(LocationDTO locationDTO);
-
-    LocationDTO update(LocationDTO locationDTO);
+    LocationDTO saveOrUpdate(LocationDTO locationDTO);
 
     void delete(LocationDTO locationDTO);
 

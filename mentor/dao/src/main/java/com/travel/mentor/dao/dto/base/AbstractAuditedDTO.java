@@ -1,7 +1,7 @@
 package com.travel.mentor.dao.dto.base;
 
-import com.travel.mentor.dao.dto.impl.UserDTO;
-import com.travel.mentor.dao.dto.impl.UserSessionCookieDTO;
+import com.travel.mentor.dao.dto.security.SecureUserDTO;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -9,26 +9,18 @@ import java.util.Date;
 
 public abstract class AbstractAuditedDTO implements Serializable {
 
-    protected Long id;
-    protected UserDTO createUserDTO= new UserDTO();
+    protected SecureUserDTO createUserDTO= new SecureUserDTO();
     protected Timestamp createDate=new Timestamp(new Date().getTime());
-    protected UserDTO updateUserDTO= new UserDTO();
+    protected SecureUserDTO updateUserDTO= new SecureUserDTO();
     protected Timestamp updateDate=new Timestamp(new Date().getTime());
-    protected UserSessionCookieDTO userSessionCookieDTO = new UserSessionCookieDTO();
 
-    public Long getId() {
-        return id;
-    }
+    protected SecureUserDTO loggedInUser = new SecureUserDTO();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UserDTO getCreateUserDTO() {
+    public SecureUserDTO getCreateUserDTO() {
         return createUserDTO;
     }
 
-    public void setCreateUserDTO(UserDTO createUserDTO) {
+    public void setCreateUserDTO(SecureUserDTO createUserDTO) {
         this.createUserDTO = createUserDTO;
     }
 
@@ -40,11 +32,11 @@ public abstract class AbstractAuditedDTO implements Serializable {
         this.createDate = createDate;
     }
 
-    public UserDTO getUpdateUserDTO() {
+    public SecureUserDTO getUpdateUserDTO() {
         return updateUserDTO;
     }
 
-    public void setUpdateUserDTO(UserDTO updateUserDTO) {
+    public void setUpdateUserDTO(SecureUserDTO updateUserDTO) {
         this.updateUserDTO = updateUserDTO;
     }
 
@@ -56,11 +48,11 @@ public abstract class AbstractAuditedDTO implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public UserSessionCookieDTO getUserSessionCookieDTO() {
-        return userSessionCookieDTO;
+    public SecureUserDTO getLoggedInUser() {
+        return loggedInUser;
     }
 
-    public void setUserSessionCookieDTO(UserSessionCookieDTO userSessionCookieDTO) {
-        this.userSessionCookieDTO = userSessionCookieDTO;
+    public void setLoggedInUser(SecureUserDTO loggedInUser) {
+        this.loggedInUser = loggedInUser;
     }
 }

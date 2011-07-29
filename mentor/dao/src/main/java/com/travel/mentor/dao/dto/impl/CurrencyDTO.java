@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdNameDescDTO;
 
-public class CurrencyDTO extends AbstractAuditedNameDescDTO {
+public class CurrencyDTO extends AbstractAuditedIdNameDescDTO {
 
     private String code;
     private String symbol;

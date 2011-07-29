@@ -8,7 +8,7 @@ public interface RoleDAO {
 
     List<RoleDTO> findAll();
 
-    RoleDTO add(RoleDTO roleDTO);
+    //RoleDTO add(RoleDTO roleDTO);
 
     void delete(RoleDTO roleDTO);
 

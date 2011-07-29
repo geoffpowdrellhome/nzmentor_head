@@ -65,15 +65,15 @@ public class User implements Serializable {
     @Column(name = "updated")
     protected Timestamp updateDate = new Timestamp(new Date().getTime());
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(
-            name="user_role",
-            joinColumns=
-                    @JoinColumn(name="username", referencedColumnName="username"),
-            inverseJoinColumns=
-                    @JoinColumn(name="rolename", referencedColumnName="rolename")
-    )
-    private List<Role> roles = new ArrayList<Role>();
+//    @ManyToMany(fetch=FetchType.EAGER)
+//    @JoinTable(
+//            name="user_role",
+//            joinColumns=
+//                    @JoinColumn(name="username", referencedColumnName="username"),
+//            inverseJoinColumns=
+//                    @JoinColumn(name="rolename", referencedColumnName="rolename")
+//    )
+//    private List<Role> roles = new ArrayList<Role>();
 
     public String getUsername() {
         return username;
@@ -179,11 +179,11 @@ public class User implements Serializable {
         this.updateDate = updateDate;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
+//    public List<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(List<Role> roles) {
+//        this.roles = roles;
+//    }
 }

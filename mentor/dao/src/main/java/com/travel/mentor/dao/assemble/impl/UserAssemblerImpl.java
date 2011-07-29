@@ -2,6 +2,7 @@ package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.RoleAssembler;
 import com.travel.mentor.dao.assemble.UserAssembler;
+import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.dto.impl.RoleDTO;
 import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.model.impl.Role;
@@ -35,9 +36,9 @@ public class UserAssemblerImpl extends BaseAssemblerImpl implements UserAssemble
     @Override
     public UserDTO assembleToDTO(User user) {
         UserDTO userDTO = (UserDTO) shallowCopy(user, UserDTO.class);
-        for (Role role : user.getRoles()) {
-            userDTO.getRoleDTOList().add( roleAssembler.assembleToDTO(role) );
-        }
+//        for (Role role : user.getRoles()) {
+//            userDTO.getRoleDTOList().add( roleAssembler.assembleToDTO(role) );
+//        }
 
         return userDTO;
     }

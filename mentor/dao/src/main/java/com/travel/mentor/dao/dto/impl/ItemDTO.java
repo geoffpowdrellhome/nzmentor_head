@@ -1,9 +1,9 @@
 package com.travel.mentor.dao.dto.impl;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedNameDescDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdNameDescDTO;
 import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
 
-public class ItemDTO extends AbstractAuditedNameDescDTO {
+public class ItemDTO extends AbstractAuditedIdNameDescDTO {
     private ReferenceTypeDTO itemTypeDTO;
     private SiteDTO siteDTO;
     private String helpfulComments;

@@ -1,6 +1,7 @@
 package com.travel.mentor.dao.assemble.impl;
 
 import com.travel.mentor.dao.assemble.RoleAssembler;
+import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.dto.impl.RoleDTO;
 import com.travel.mentor.model.impl.Role;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class RoleAssemblerImpl extends BaseAssemblerImpl  implements RoleAssembler {
+public class RoleAssemblerImpl extends BaseAssemblerImpl implements RoleAssembler {
 
     @Override
     public List<RoleDTO> assembleToDTOList(List<Role> roleList) {

@@ -4,10 +4,8 @@ BEGIN;
 /* security tables */
 
 /* SEC_USER table */
-CREATE SEQUENCE secure_user_id_seq INCREMENT 1;
 CREATE TABLE SECURE_USER
 (
-    id INTEGER NOT NULL DEFAULT nextval('secure_user_id_seq'::regclass),
     username VARCHAR(30) NOT NULL,
     password VARCHAR(30) NOT NULL,
     title VARCHAR(10) NOT NULL,
@@ -16,25 +14,24 @@ CREATE TABLE SECURE_USER
     email VARCHAR(50) NULL,
     locale VARCHAR(40) NULL,
     enabled BOOL NOT NULL DEFAULT 'true',
-    accountNonExpired BOOL NOT NULL DEFAULT 'true',
-    credentialsNonExpired BOOL NOT NULL DEFAULT 'true',
-    accountNonLocked BOOL NOT NULL DEFAULT 'true',
+    account_non_expired BOOL NOT NULL DEFAULT 'true',
+    credentials_non_expired BOOL NOT NULL DEFAULT 'true',
+    account_non_locked BOOL NOT NULL DEFAULT 'true',
     created TIMESTAMP NOT NULL DEFAULT 'now',
     created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
     updated TIMESTAMP NOT NULL DEFAULT 'now',
     updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 
-ALTER TABLE secure_user ADD CONSTRAINT pk_secure_user PRIMARY KEY (id);
-CREATE UNIQUE INDEX ix_secure_user_username ON secure_user(username);
+ALTER TABLE secure_user ADD CONSTRAINT pk_secure_user PRIMARY KEY (username);
 
-INSERT INTO SECURE_USER (id, username, password, title, firstname, lastname, email, locale, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked) VALUES
-( nextval('secure_user_id_seq'), 'sysadm', 'sysadm', 'Mr', 'systemFirstname', 'adminlastname', 'sysadmin@travelmentor.com', NULL, true, true, true, true),
-( nextval('secure_user_id_seq'), 'guest', 'guest', 'Mr', 'guestFirstname', 'guestlastname', 'guest@travelmentor.com', NULL, true, true, true, true),
-( nextval('secure_user_id_seq'), 'admin', 'admin', 'Mr', 'Visor', 'Super', 'admin@travelmentor.com', NULL, true, true, true, true),
-( nextval('secure_user_id_seq'), 'user1', 'user1',  'Mr', 'Kingsley', 'Ben', 'B.Kingsley@travelmentor.com', NULL, true, true, true, true),
-( nextval('secure_user_id_seq'), 'headoffice', 'headoffice', 'Mr', 'Willis', 'Bruce', 'B.Willis@travelmentor.com', NULL, true, true, true, true),
-( nextval('secure_user_id_seq'), 'user2', 'user2', 'Mr', 'Kingdom', 'Marta', 'M.Kingdom@travelmentor.com', NULL, true, true, true, true);
+INSERT INTO SECURE_USER (username, password, title, firstname, lastname, email, locale, enabled, account_non_expired, credentials_non_expired, account_non_locked) VALUES
+( 'sysadm', 'sysadm', 'Mr', 'systemFirstname', 'adminlastname', 'sysadmin@travelmentor.com', NULL, true, true, true, true),
+( 'guest', 'guest', 'Mr', 'guestFirstname', 'guestlastname', 'guest@travelmentor.com', NULL, true, true, true, true),
+( 'admin', 'admin', 'Mr', 'Visor', 'Super', 'admin@travelmentor.com', NULL, true, true, true, true),
+( 'user1', 'user1',  'Mr', 'Kingsley', 'Ben', 'B.Kingsley@travelmentor.com', NULL, true, true, true, true),
+( 'headoffice', 'headoffice', 'Mr', 'Willis', 'Bruce', 'B.Willis@travelmentor.com', NULL, true, true, true, true),
+( 'user2', 'user2', 'Mr', 'Kingdom', 'Marta', 'M.Kingdom@travelmentor.com', NULL, true, true, true, true);
 
 
 
@@ -73,32 +70,32 @@ INSERT INTO SECURITY_ROLE (id, rolename, description) VALUES
 CREATE SEQUENCE security_userrole_id_seq INCREMENT 1;
 CREATE TABLE SECURITY_USERROLE
 (    
-    secure_user_id INTEGER NOT NULL,
+    secure_user_username VARCHAR(30) NOT NULL,
     security_role_id INTEGER NOT NULL
 );
 
-ALTER TABLE SECURITY_USERROLE ADD CONSTRAINT fk_security_userrole_username FOREIGN KEY (secure_user_id) REFERENCES secure_user(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE SECURITY_USERROLE ADD CONSTRAINT fk_security_userrole_username FOREIGN KEY (secure_user_username) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE SECURITY_USERROLE ADD CONSTRAINT fk_security_userrole_rolename FOREIGN KEY (security_role_id) REFERENCES security_role(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-CREATE UNIQUE INDEX ix_security_userrole ON security_userrole(secure_user_id, security_role_id);
+CREATE UNIQUE INDEX ix_security_userrole ON security_userrole(secure_user_username, security_role_id);
 
 
 
 /******************** Security: USER-ROLES ********************/  
 /* Guest account authorities */
-INSERT INTO SECURITY_USERROLE (secure_user_id, security_role_id) VALUES
-( (select id from secure_user where username='guest'), (select id from security_role where rolename='ROLE_GUEST') ),
-( (select id from secure_user where username='user1'), (select id from security_role where rolename='ROLE_OFFICE_ALL_RIGHTS') ),
-( (select id from secure_user where username='headoffice'), (select id from security_role where rolename='ROLE_HEADOFFICE_USER') );
+INSERT INTO SECURITY_USERROLE (secure_user_username, security_role_id) VALUES
+( 'guest', (select id from security_role where rolename='ROLE_GUEST') ),
+( 'user1', (select id from security_role where rolename='ROLE_OFFICE_ALL_RIGHTS') ),
+( 'headoffice', (select id from security_role where rolename='ROLE_HEADOFFICE_USER') );
 
 
 /* Admin Usr-ID: 11 */
-INSERT INTO SECURITY_USERROLE (secure_user_id, security_role_id) VALUES
-( (select id from secure_user where username='admin'), (select id from security_role where rolename='ROLE_ADMIN') ),
-( (select id from secure_user where username='admin'), (select id from security_role where rolename='ROLE_OFFICE_ALL_RIGHTS') ),
-( (select id from secure_user where username='admin'), (select id from security_role where rolename='ROLE_GUEST') ),
-( (select id from secure_user where username='admin'), (select id from security_role where rolename='ROLE_OFFICE_ONLY_VIEW') ),
-( (select id from secure_user where username='admin'), (select id from security_role where rolename='ROLE_HEADOFFICE_USER') ),
-( (select id from secure_user where username='user2'), (select id from security_role where rolename='ROLE_OFFICE_ONLY_VIEW'));
+INSERT INTO SECURITY_USERROLE (secure_user_username, security_role_id) VALUES
+( 'admin', (select id from security_role where rolename='ROLE_ADMIN') ),
+( 'admin', (select id from security_role where rolename='ROLE_OFFICE_ALL_RIGHTS') ),
+( 'admin', (select id from security_role where rolename='ROLE_GUEST') ),
+( 'admin', (select id from security_role where rolename='ROLE_OFFICE_ONLY_VIEW') ),
+( 'admin', (select id from security_role where rolename='ROLE_HEADOFFICE_USER') ),
+( 'user2', (select id from security_role where rolename='ROLE_OFFICE_ONLY_VIEW'));
 
 
 
