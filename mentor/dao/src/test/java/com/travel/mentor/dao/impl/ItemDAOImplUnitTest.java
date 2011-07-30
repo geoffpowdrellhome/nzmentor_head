@@ -1,12 +1,12 @@
 package com.travel.mentor.dao.impl;
 
-import com.travel.mentor.dao.AccommodationSiteDAO;
-import com.travel.mentor.dao.ItemDAO;
+import com.travel.mentor.dao.dto.general.AccommodationSiteDTO;
+import com.travel.mentor.dao.dto.general.ItemDTO;
+import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
+import com.travel.mentor.dao.general.AccommodationSiteDAO;
+import com.travel.mentor.dao.general.ItemDAO;
 import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
-import com.travel.mentor.dao.dto.impl.AccommodationSiteDTO;
-import com.travel.mentor.dao.dto.impl.ItemDTO;
-import com.travel.mentor.type.impl.ItemType;
+import com.travel.mentor.domain.reference.ItemType;
 import junit.framework.Assert;
 import org.junit.Test;
 

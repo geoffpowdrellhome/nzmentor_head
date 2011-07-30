@@ -2,7 +2,6 @@ package com.travel.mentor.dao.base;
 
 import com.travel.mentor.core.MentorObject;
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
-import com.travel.mentor.model.security.SecureUser;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

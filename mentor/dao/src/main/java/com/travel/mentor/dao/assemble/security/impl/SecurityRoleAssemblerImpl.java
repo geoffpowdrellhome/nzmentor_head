@@ -3,7 +3,7 @@ package com.travel.mentor.dao.assemble.security.impl;
 import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.assemble.security.SecurityRoleAssembler;
 import com.travel.mentor.dao.dto.security.SecurityRoleDTO;
-import com.travel.mentor.model.security.SecurityRole;
+import com.travel.mentor.domain.security.SecurityRole;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

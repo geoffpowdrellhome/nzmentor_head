@@ -23,19 +23,19 @@
         maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
     
     <!-- Cache for HIBERNATE -->
-    <cache name="com.travel.mentor.type.impl.AccommodationSiteType"
+    <cache name="com.travel.mentor.domain.reference.AccommodationSiteType"
         maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
     
     <!-- Cache for HIBERNATE -->
-    <cache name="com.travel.mentor.type.impl.ActivitySiteType"
+    <cache name="com.travel.mentor.domain.reference.ActivitySiteType"
         maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
 
     <!-- Cache for HIBERNATE -->
-    <cache name="com.travel.mentor.type.impl.RoomConfigurationType"
+    <cache name="com.travel.mentor.domain.reference.RoomConfigurationType"
         maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
 
      <!-- Cache for HIBERNATE -->
-    <cache name="com.travel.mentor.type.impl.RoomType"
+    <cache name="com.travel.mentor.domain.reference.RoomType"
         maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
 
 

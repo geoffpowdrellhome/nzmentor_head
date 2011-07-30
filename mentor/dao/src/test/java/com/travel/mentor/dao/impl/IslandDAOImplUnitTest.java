@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.impl;
 
-import com.travel.mentor.dao.IslandDAO;
+import com.travel.mentor.dao.dto.general.IslandDTO;
+import com.travel.mentor.dao.general.IslandDAO;
 import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.impl.IslandDTO;
 import org.junit.Test;
 import junit.framework.Assert;
 import javax.annotation.Resource;

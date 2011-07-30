@@ -3,7 +3,7 @@ package com.travel.mentor.dao.assemble.security.impl;
 import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.assemble.security.SecurityRightAssembler;
 import com.travel.mentor.dao.dto.security.SecurityRightDTO;
-import com.travel.mentor.model.security.SecurityRight;
+import com.travel.mentor.domain.security.SecurityRight;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

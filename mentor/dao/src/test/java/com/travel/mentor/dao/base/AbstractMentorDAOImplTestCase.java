@@ -1,9 +1,8 @@
 package com.travel.mentor.dao.base;
 
-import com.travel.mentor.dao.UserDAO;
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
+import com.travel.mentor.dao.reference.ReferenceTypeDAO;
 import com.travel.mentor.dao.security.SecurityDAO;
-import com.travel.mentor.dao.type.ReferenceTypeDAO;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.annotation.Resource;

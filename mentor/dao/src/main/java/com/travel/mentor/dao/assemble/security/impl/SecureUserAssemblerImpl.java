@@ -3,10 +3,9 @@ package com.travel.mentor.dao.assemble.security.impl;
 import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
 import com.travel.mentor.dao.assemble.security.SecurityRoleAssembler;
-import com.travel.mentor.dao.dto.impl.UserDTO;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
-import com.travel.mentor.model.security.SecureUser;
-import com.travel.mentor.model.security.SecurityRole;
+import com.travel.mentor.domain.security.SecureUser;
+import com.travel.mentor.domain.security.SecurityRole;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -1,7 +1,6 @@
 package com.travel.mentor.dao.security;
 
 import com.travel.mentor.dao.dto.security.*;
-import com.travel.mentor.model.security.*;
 
 import java.util.List;
 

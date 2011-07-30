@@ -154,7 +154,6 @@
             <element id="archive" name="domain-1.0.jar">
               <element id="module-output" name="domain" />
             </element>
-            <element id="library" level="project" name="Maven: joda-time:joda-time-hibernate:1.2" />
             <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-annotations:3.5.4-Final" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.5.4-Final" />
@@ -1164,17 +1163,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/jfree/jfreechart/1.0.12/jfreechart-1.0.12-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: joda-time:joda-time-hibernate:1.2">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time-hibernate/1.2/joda-time-hibernate-1.2.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time-hibernate/1.2/joda-time-hibernate-1.2-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time-hibernate/1.2/joda-time-hibernate-1.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: joda-time:joda-time:1.6.2">

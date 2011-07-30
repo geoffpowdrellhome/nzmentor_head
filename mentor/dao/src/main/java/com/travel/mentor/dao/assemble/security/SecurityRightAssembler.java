@@ -1,7 +1,7 @@
 package com.travel.mentor.dao.assemble.security;
 
 import com.travel.mentor.dao.dto.security.SecurityRightDTO;
-import com.travel.mentor.model.security.SecurityRight;
+import com.travel.mentor.domain.security.SecurityRight;
 
 import java.util.List;
 

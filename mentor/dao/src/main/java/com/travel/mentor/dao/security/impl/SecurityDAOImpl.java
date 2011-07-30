@@ -4,10 +4,8 @@ import com.travel.mentor.dao.assemble.security.*;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.security.*;
 import com.travel.mentor.dao.security.SecurityDAO;
-import com.travel.mentor.model.impl.User;
-import com.travel.mentor.model.security.*;
+import com.travel.mentor.domain.security.*;
 import org.apache.commons.lang.StringUtils;
-import org.hsqldb.lib.StringUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

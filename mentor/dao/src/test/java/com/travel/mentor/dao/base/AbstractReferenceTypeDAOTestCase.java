@@ -1,7 +1,7 @@
 package com.travel.mentor.dao.base;
 
-import com.travel.mentor.dao.dto.base.ReferenceTypeDTO;
-import com.travel.mentor.dao.type.ReferenceTypeDAO;
+import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
+import com.travel.mentor.dao.reference.ReferenceTypeDAO;
 import junit.framework.Assert;
 import org.junit.Test;
 
