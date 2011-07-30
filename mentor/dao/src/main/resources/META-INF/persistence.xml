@@ -6,6 +6,18 @@
     <persistence-unit name="mentorPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+        <!-- general system tables -->
+        <class>com.travel.mentor.model.impl.AccommodationSite</class>
+        <class>com.travel.mentor.model.impl.Country</class>
+        <class>com.travel.mentor.model.impl.Currency</class>
+        <class>com.travel.mentor.model.impl.Island</class>
+        <class>com.travel.mentor.model.impl.Item</class>
+        <class>com.travel.mentor.model.impl.Location</class>
+        <class>com.travel.mentor.model.impl.Region</class>
+        <class>com.travel.mentor.model.impl.Site</class>
+
+
+        <!-- reference lookup tables -->
         <class>com.travel.mentor.type.impl.AccommodationSiteType</class>
         <class>com.travel.mentor.type.impl.ActivitySiteType</class>
         <class>com.travel.mentor.type.impl.ClimateConditionType</class>
@@ -24,19 +36,8 @@
         <class>com.travel.mentor.type.impl.TransferSiteType</class>
         <class>com.travel.mentor.type.impl.VehicleHireSiteType</class>
 
-        <class>com.travel.mentor.model.impl.AccommodationSite</class>
-        <class>com.travel.mentor.model.impl.Country</class>
-        <class>com.travel.mentor.model.impl.Currency</class>
-        <class>com.travel.mentor.model.impl.Island</class>
 
-
-        <class>com.travel.mentor.model.impl.Location</class>
-        <class>com.travel.mentor.model.impl.Region</class>
-        <class>com.travel.mentor.model.impl.Site</class>
-        <class>com.travel.mentor.model.impl.Item</class>
-        <!--<class>com.travel.mentor.model.impl.User</class>-->
-
-        <!-- security tables -->
+        <!-- security specific tables -->
         <class>com.travel.mentor.model.security.SecureUser</class>
         <class>com.travel.mentor.model.security.SecurityGroup</class>
         <class>com.travel.mentor.model.security.SecurityGroupRight</class>
