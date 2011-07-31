@@ -51,39 +51,6 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
-//    @Override
-//    public AccommodationSiteDTO add(AccommodationSiteDTO accommodationSiteDTO) {
-//        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
-//
-//        accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
-//        accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
-//        accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
-//
-//        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-//        accommodationSite.setCreateUser(sessionUser);
-//        accommodationSite.setUpdateUser(sessionUser);
-//        accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
-//        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
-//
-//        em.persist(accommodationSite);
-//
-//        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
-//    }
-//
-//
-//    @Override
-//    public AccommodationSiteDTO update(AccommodationSiteDTO accommodationSiteDTO) {
-//        AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
-//
-//        User sessionUser = em.find(User.class, accommodationSiteDTO.getUserSessionCookieDTO().getUserDTO().getUsername());
-//        accommodationSite.setUpdateUser(sessionUser);
-//        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
-//
-//        em.merge(accommodationSite);
-//
-//        return accommodationSiteAssembler.assembleToDTO(accommodationSite);
-//    }
-
     @Override
     public void delete(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = em.find(AccommodationSite.class, accommodationSiteDTO.getId());
