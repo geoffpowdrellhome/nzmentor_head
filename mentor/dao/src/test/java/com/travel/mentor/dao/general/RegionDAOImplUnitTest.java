@@ -1,10 +1,8 @@
-package com.travel.mentor.dao.impl;
+package com.travel.mentor.dao.general;
 
+import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.general.IslandDTO;
 import com.travel.mentor.dao.dto.general.RegionDTO;
-import com.travel.mentor.dao.general.IslandDAO;
-import com.travel.mentor.dao.general.RegionDAO;
-import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import junit.framework.Assert;
 import org.junit.Test;
 
