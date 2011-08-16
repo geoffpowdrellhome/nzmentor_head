@@ -1,14 +1,22 @@
 package com.travel.mentor.domain.general;
 
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "public", name = "region")
-@NamedQuery(name = "Region.findAll", query = "SELECT o FROM Region o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.region_id_seq", allocationSize = 1)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQueries(value = {
+        @NamedQuery(name = Region.FIND_ALL_REGIONS_NAMED_QUERY,
+                query = "SELECT o FROM Region o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findRegions")})
+})
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.region_id_seq", allocationSize = 1)
 public class Region extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_REGIONS_NAMED_QUERY = "Region.findAll";

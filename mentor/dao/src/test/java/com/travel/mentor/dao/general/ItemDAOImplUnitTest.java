@@ -3,10 +3,12 @@ package com.travel.mentor.dao.general;
 import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
 import com.travel.mentor.dao.dto.general.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.general.ItemDTO;
+import com.travel.mentor.dao.dto.general.SupplierDTO;
 import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.domain.reference.ItemType;
 import junit.framework.Assert;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +17,9 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Resource(name = "itemDAO")
     private ItemDAO itemDAO;
+
+    @Resource(name = "supplierDAO")
+    private SupplierDAO supplierDAO;
 
     @Resource(name = "accommodationSiteDAO")
     private AccommodationSiteDAO accommodationSiteDAO;
@@ -54,8 +59,19 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Test
     public void testDelete() {
-        ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
-        itemDAO.delete(itemDTO);
+        ItemDTO existingItemDTO = itemDAO.find(EXISTING_ID_VALUE);
+
+        ItemDTO addItemDTO = new ItemDTO();
+        BeanUtils.copyProperties(existingItemDTO, addItemDTO);
+
+        addItemDTO.setId(null);
+        addItemDTO.setDescription("temp-add");
+        addItemDTO.setName("temp-add");
+        addItemDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        addItemDTO.setSupplierDTO( supplierDAO.find(1L) );
+        addItemDTO = itemDAO.saveOrUpdate(addItemDTO);
+
+        itemDAO.delete(addItemDTO);
     }
 
     @Test

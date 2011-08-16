@@ -11,6 +11,7 @@ import com.travel.mentor.domain.reference.SiteType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
+import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -37,16 +38,21 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         if (accommodationSiteDTO.getId() == null || em.find(AccommodationSite.class, accommodationSiteDTO.getId()) == null) {
             accommodationSite.setCreateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
             accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
+            accommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(accommodationSite);
         }
+        else {
+            AccommodationSite existingAccommodationSite = em.find(accommodationSite.getClass(), accommodationSiteDTO.getId());
+            BeanUtils.copyProperties(accommodationSite, existingAccommodationSite);
 
-        accommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
-        accommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
-        accommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
-
-        accommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
-        accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(accommodationSite);
+            existingAccommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
+            existingAccommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
+            existingAccommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
+            existingAccommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            existingAccommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(existingAccommodationSite);
+        }
 
         return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
@@ -55,6 +61,8 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
     public void delete(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = em.find(AccommodationSite.class, accommodationSiteDTO.getId());
         em.remove(accommodationSite);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(accommodationSite.getClass(), accommodationSite.getId());
     }
 
     @Override

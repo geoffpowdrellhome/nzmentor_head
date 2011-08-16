@@ -7,8 +7,17 @@ public class ItemDTO extends AbstractAuditedIdNameDescDTO {
     private ReferenceTypeDTO itemTypeDTO;
     private SiteDTO siteDTO;
     private String helpfulComments;
+    private SupplierDTO supplierDTO;
 
     public ItemDTO() {}
+
+    public SupplierDTO getSupplierDTO() {
+        return supplierDTO;
+    }
+
+    public void setSupplierDTO(SupplierDTO supplierDTO) {
+        this.supplierDTO = supplierDTO;
+    }
 
     public ReferenceTypeDTO getItemTypeDTO() {
         return itemTypeDTO;

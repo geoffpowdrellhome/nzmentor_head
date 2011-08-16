@@ -9,8 +9,14 @@ import javax.persistence.*;
 @Entity
 @Table(schema = "public", name = "security_role_group")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@NamedQuery(name="SecurityRoleGroup.findAll", query="SELECT o FROM SecurityRoleGroup o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_role_group_id_seq", allocationSize = 1)
+@NamedQueries(value = {
+        @NamedQuery(name = SecurityRoleGroup.FIND_ALL_SECURITY_ROLE_GROUPS,
+                query = "SELECT o FROM SecurityRoleGroup o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecurityRoleGroups")})
+})
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_role_group_id_seq", allocationSize = 1)
 public class SecurityRoleGroup extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_SECURITY_ROLE_GROUPS = "SecurityRoleGroup.findAll";

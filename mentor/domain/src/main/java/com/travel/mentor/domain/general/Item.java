@@ -9,9 +9,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "public", name = "item")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-@NamedQuery(name = "Item.findAll", query = "SELECT o FROM Item o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.item_id_seq", allocationSize = 1)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQueries(value = {
+        @NamedQuery(name = Item.FIND_ALL_ITEMS_NAMED_QUERY,
+                query = "SELECT o FROM Item o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findItems")})
+})
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.item_id_seq", allocationSize = 1)
 public class Item extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_ITEMS_NAMED_QUERY = "Item.findAll";
@@ -24,8 +30,20 @@ public class Item extends AbstractAuditedIdNameDescEntity {
     @JoinColumn(name = "site_id", referencedColumnName = "id")
     private Site site;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
+    private Supplier supplier;
+
     @Column(name = "helpful_comments")
     private String helpfulComments;
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 
     public ItemType getItemType() {
         return itemType;

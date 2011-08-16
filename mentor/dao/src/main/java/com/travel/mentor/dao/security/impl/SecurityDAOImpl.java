@@ -5,9 +5,9 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.security.*;
 import com.travel.mentor.dao.security.SecurityDAO;
 import com.travel.mentor.domain.security.*;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Repository("securityDAO")
 @Transactional
@@ -49,14 +50,6 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser) {
         SecureUser secureUser = secureUserAssembler.assembleToDomainObject(secureUserDTO);
 
-        if (secureUserDTO.getUsername() == null || StringUtils.isEmpty(secureUserDTO.getUsername()) || em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
-            secureUser.setCreateUser( secureUserAssembler.assembleToDomainObject(loggedOnUser) );
-            secureUser.setCreateDate(new Timestamp(new Date().getTime()));
-        }
-
-        secureUser.setUpdateUser( secureUserAssembler.assembleToDomainObject(loggedOnUser) );
-        secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
-
         em.merge(secureUser);
 
         return secureUserAssembler.assembleToDTO(secureUser);
@@ -73,11 +66,11 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         SecurityRole securityRole = securityRoleAssembler.assembleToDomainObject(securityRoleDTO);
 
         if (securityRoleDTO.getId() == null || em.find(SecurityRole.class, securityRoleDTO.getId()) == null) {
-            securityRole.setCreateUser( secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()) );
+            securityRole.setCreateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
             securityRole.setCreateDate(new Timestamp(new Date().getTime()));
         }
 
-        securityRole.setUpdateUser( secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()) );
+        securityRole.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
         securityRole.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(securityRole);
@@ -89,6 +82,8 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public void delete(SecurityRoleDTO securityRoleDTO) {
         SecurityRole securityRole = em.find(SecurityRole.class, securityRoleDTO.getId());
         em.remove(securityRole);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(securityRole.getClass(), securityRole.getId());
     }
 
     @Override
@@ -102,11 +97,11 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         SecurityGroup securityGroup = securityGroupAssembler.assembleToDomainObject(securityGroupDTO);
 
         if (securityGroupDTO.getId() == null || em.find(SecurityRole.class, securityGroupDTO.getId()) == null) {
-            securityGroup.setCreateUser( secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()) );
+            securityGroup.setCreateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
             securityGroup.setCreateDate(new Timestamp(new Date().getTime()));
         }
 
-        securityGroup.setUpdateUser( secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()) );
+        securityGroup.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
         securityGroup.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(securityGroup);
@@ -118,12 +113,16 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public void delete(SecurityGroupDTO securityGroupDTO) {
         SecurityGroup securityGroup = em.find(SecurityGroup.class, securityGroupDTO.getId());
         em.remove(securityGroup);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(securityGroup.getClass(), securityGroup.getId());
     }
 
     @Override
     public void delete(SecurityRightDTO securityRightDTO) {
         SecurityRight securityRight = em.find(SecurityRight.class, securityRightDTO.getId());
         em.remove(securityRight);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(securityRight.getClass(), securityRight.getId());
     }
 
     @Override
@@ -131,11 +130,11 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         SecurityRight securityRight = securityRightAssembler.assembleToDomainObject(securityRightDTO);
 
         if (securityRightDTO.getId() == null || em.find(SecurityRole.class, securityRightDTO.getId()) == null) {
-            securityRight.setCreateUser( secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()) );
+            securityRight.setCreateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
             securityRight.setCreateDate(new Timestamp(new Date().getTime()));
         }
 
-        securityRight.setUpdateUser( secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()) );
+        securityRight.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
         securityRight.setUpdateDate(new Timestamp(new Date().getTime()));
 
         em.merge(securityRight);
@@ -173,7 +172,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     @Override
     public List<SecurityRightDTO> getSecurityRightsLikeRightName(String value) {
         Query query = em.createNamedQuery(SecurityRight.FIND_SECURITY_RIGHTS_BY_LIKE_RIGHT_NAME);
-        query.setParameter("rightname", "%" +value + "%");
+        query.setParameter("rightname", "%" + value + "%");
         List<SecurityRight> securityRightList = query.getResultList();
 
         return securityRightAssembler.assembleToDTOList(securityRightList);
@@ -237,66 +236,79 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
 
     @Override
     protected void cacheDomainObjects() {
-//        logger.debug("SecurityUserDAOImpl.cacheDomainObjects()");
-//
-//        StopWatch watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - secureUsers");
-//        em.createNamedQuery(SecureUser.FIND_ALL_SECURE_USERS).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - secureUsers = " + watch.getTotalTimeSeconds());
-//        }
-//
-//
-//        watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - secureGroups");
-//        em.createNamedQuery(SecurityGroup.FIND_ALL_SECURITY_GROUPS).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - secureGroups = " + watch.getTotalTimeSeconds());
-//        }
-//
-//        watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - securityGroupRights");
-//        em.createNamedQuery(SecurityGroupRight.FIND_ALL_SECURITY_GROUP_RIGHTS).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - securityGroupRights = " + watch.getTotalTimeSeconds());
-//        }
-//
-//
-//        watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - securityRights");
-//        em.createNamedQuery(SecurityRight.FIND_ALL_SECURITY_RIGHTS).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - securityRights = " + watch.getTotalTimeSeconds());
-//        }
-//
-//
-//        watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - securityRightTypes");
-//        em.createNamedQuery(SecurityRightType.FIND_ALL_SECURITY_RIGHT_TYPES_NAMED_QUERY).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - securityRightTypes = " + watch.getTotalTimeSeconds());
-//        }
-//
-//
-//        watch = new StopWatch();
-//        watch.start("SecurityUserDAOImpl.cacheDomainObjects - securityRoles");
-//        em.createNamedQuery(SecurityRole.FIND_ALL_SECURITY_ROLES).getResultList();
-//        watch.stop();
-//        if (logger.isDebugEnabled()) {
-//            logger.debug(watch.prettyPrint());
-//            logger.info("Total Time in Seconds SecurityUserDAOImpl.cacheDomainObjects() - securityRoles = " + watch.getTotalTimeSeconds());
-//        }
-
+        cacheSecureUsers();
+        cacheSecureGroups();
+        cacheSecureGroupRights();
+        cacheSecurityRights();
+        cacheSecurityRightTypes();
+        cacheSecurityRoles();
     }
+
+    private void cacheSecureUsers() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecureUsers()");
+        em.createNamedQuery(SecureUser.FIND_ALL_SECURE_USERS).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecureUsers() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
+    private void cacheSecureGroups() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecureGroups()");
+        em.createNamedQuery(SecurityGroup.FIND_ALL_SECURITY_GROUPS).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecureGroups() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
+    private void cacheSecureGroupRights() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecureGroupRights()");
+        em.createNamedQuery(SecurityGroupRight.FIND_ALL_SECURITY_GROUP_RIGHTS).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecureGroupRights() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
+    private void cacheSecurityRights() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecurityRights()");
+        em.createNamedQuery(SecurityRight.FIND_ALL_SECURITY_RIGHTS).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecurityRights() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
+    private void cacheSecurityRightTypes() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecurityRightTypes()");
+        em.createNamedQuery(SecurityRightType.FIND_ALL_SECURITY_RIGHT_TYPES_NAMED_QUERY).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecurityRightTypes() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
+    private void cacheSecurityRoles() {
+        StopWatch watch = new StopWatch();
+        watch.start("SecurityDAOImpl.cacheSecurityRoles()");
+        em.createNamedQuery(SecurityRole.FIND_ALL_SECURITY_ROLES).setHint("org.hibernate.cacheable", true).getResultList();
+        watch.stop();
+        if (logger.isDebugEnabled()) {
+            logger.debug(watch.prettyPrint());
+            logger.info("Total Time in Seconds SecurityDAOImpl.cacheSecurityRoles() = " + watch.getTotalTimeSeconds());
+        }
+    }
+
 
 }

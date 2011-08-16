@@ -1,86 +1,5 @@
 ﻿BEGIN;
 
-/* security tables */
-
-/* user table */
-CREATE TABLE users
-(
-    username VARCHAR(30) NOT NULL,
-    password VARCHAR(30) NOT NULL,
-    title VARCHAR(10) NOT NULL,
-    firstname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    enabled BOOL NOT NULL DEFAULT 'true',
-    accountExpired BOOL NOT NULL DEFAULT 'false',
-    credentialsExpired BOOL NOT NULL DEFAULT 'false',
-    accountLocked BOOL NOT NULL DEFAULT 'false',
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-
-ALTER TABLE users ADD CONSTRAINT pk_users PRIMARY KEY (username);
-CREATE INDEX users_search_1 ON users(username);
-
-INSERT INTO users( username, password, title, firstname, lastname)
-VALUES('sysadm', 'sysadm', 'Mr', 'Systems', 'Administrator');
-INSERT INTO users( username, password, title, firstname, lastname)
-VALUES('donr', 'mtalford', 'Mr', 'Don', 'Rea');
-INSERT INTO users(username, password, title, firstname, lastname)
-VALUES('region1', 'region1', 'Mr', 'Region', 'Number1');
-INSERT INTO users(username, password, title, firstname, lastname)
-VALUES('supplier1', 'supplier1', 'Mr', 'Supplier', 'Number1');
-
-
-/* role table */
-CREATE SEQUENCE role_id_seq INCREMENT 1;
-CREATE TABLE role
-(
-	id INTEGER NOT NULL DEFAULT nextval('role_id_seq'::regclass),
-    rolename VARCHAR(30) NOT NULL,
-	created TIMESTAMP NOT NULL DEFAULT 'now',
-	created_by VARCHAR(50) NOT NULL DEFAULT 'sysadm',
-	updated TIMESTAMP NOT NULL DEFAULT 'now',
-	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
-);
-
-ALTER TABLE role ADD CONSTRAINT pk_role PRIMARY KEY (id);
-
-CREATE UNIQUE INDEX ix_role_rolename ON role(rolename);
-CREATE INDEX role_search_1 ON role(rolename);
-
-INSERT INTO role(id, rolename)
-VALUES( nextval('role_id_seq'), 'MENTOR_ADMIN_ROLE');
-INSERT INTO role(id, rolename)
-VALUES( nextval('role_id_seq'), 'REGIONAL_MAINTENANCE_ROLE');
-INSERT INTO role(id, rolename)
-VALUES( nextval('role_id_seq'), 'SUPPLIER_MAINTENANCE_ROLE');
-
-
-CREATE TABLE user_role
-(
-	username VARCHAR(30) NOT NULL,
-    rolename VARCHAR(30) NOT NULL
-);
-
--- ALTER TABLE user_auth ADD CONSTRAINT pk_auth_role PRIMARY KEY (username, rolename);
-
-ALTER TABLE user_role ADD CONSTRAINT fk_user_role_users_username FOREIGN KEY (username) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE user_role ADD CONSTRAINT fk_user_role_role_rolename FOREIGN KEY (rolename) REFERENCES role(rolename) ON UPDATE NO ACTION ON DELETE NO ACTION;
-CREATE UNIQUE INDEX ix_user_role ON user_role(username, rolename);
-
-INSERT INTO user_role(username, rolename)
-VALUES('donr', 'MENTOR_ADMIN_ROLE');
-INSERT INTO user_role(username, rolename)
-VALUES('region1', 'REGIONAL_MAINTENANCE_ROLE');
-INSERT INTO user_role(username, rolename)
-VALUES('supplier1', 'SUPPLIER_MAINTENANCE_ROLE');
-
-
-
-
 /* currency table */
 CREATE SEQUENCE currency_id_seq INCREMENT 1;
 CREATE TABLE currency
@@ -97,8 +16,8 @@ CREATE TABLE currency
 );
 
 ALTER TABLE currency ADD CONSTRAINT pk_currency PRIMARY KEY (id);
-ALTER TABLE currency ADD CONSTRAINT fk_currency_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE currency ADD CONSTRAINT fk_currency_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE currency ADD CONSTRAINT fk_currency_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE currency ADD CONSTRAINT fk_currency_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_currency_code ON currency(code);
 
 INSERT INTO currency(id, code, name, symbol, description)
@@ -122,8 +41,8 @@ CREATE TABLE country
 
 ALTER TABLE country ADD CONSTRAINT pk_country PRIMARY KEY (id);
 ALTER TABLE country ADD CONSTRAINT fk_country_currency FOREIGN KEY (currency_id) REFERENCES currency (id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE country ADD CONSTRAINT fk_country_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE country ADD CONSTRAINT fk_country_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE country ADD CONSTRAINT fk_country_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE country ADD CONSTRAINT fk_country_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 CREATE UNIQUE INDEX ix_country_code ON country(code);
 CREATE UNIQUE INDEX ix_country_name ON country(name);
 
@@ -147,8 +66,8 @@ CREATE TABLE island
 
 ALTER TABLE island ADD CONSTRAINT pk_island PRIMARY KEY (id);
 ALTER TABLE island ADD CONSTRAINT fk_island_country FOREIGN KEY (country_id) REFERENCES country(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE island ADD CONSTRAINT fk_island_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE island ADD CONSTRAINT fk_island_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE island ADD CONSTRAINT fk_island_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE island ADD CONSTRAINT fk_island_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_island_name ON island(name);
 
@@ -177,8 +96,8 @@ CREATE TABLE region
 
 ALTER TABLE region ADD CONSTRAINT pk_region PRIMARY KEY (id);
 ALTER TABLE region ADD CONSTRAINT fk_region_island FOREIGN KEY (island_id) REFERENCES island(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE region ADD CONSTRAINT fk_region_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE region ADD CONSTRAINT fk_region_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE region ADD CONSTRAINT fk_region_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE region ADD CONSTRAINT fk_region_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_region_name ON region(name);
 CREATE INDEX region_search_1 ON region(name);
@@ -200,8 +119,8 @@ CREATE TABLE popularity_ranking_type
 	updated_by VARCHAR(50) NOT NULL DEFAULT 'sysadm'
 );
 ALTER TABLE popularity_ranking_type ADD CONSTRAINT pk_popularity_ranking_type PRIMARY KEY (id);
-ALTER TABLE popularity_ranking_type ADD CONSTRAINT fk_popularity_ranking_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE popularity_ranking_type ADD CONSTRAINT fk_popularity_ranking_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE popularity_ranking_type ADD CONSTRAINT fk_popularity_ranking_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE popularity_ranking_type ADD CONSTRAINT fk_popularity_ranking_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_popularity_ranking_type_name ON popularity_ranking_type(name);
@@ -239,8 +158,8 @@ CREATE TABLE location_type
 );
 
 ALTER TABLE location_type ADD CONSTRAINT pk_location_type PRIMARY KEY (id);
-ALTER TABLE location_type ADD CONSTRAINT fk_location_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE location_type ADD CONSTRAINT fk_location_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE location_type ADD CONSTRAINT fk_location_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE location_type ADD CONSTRAINT fk_location_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_location_type_name ON location_type(name);
 
@@ -277,8 +196,8 @@ CREATE TABLE location
 ALTER TABLE location ADD CONSTRAINT pk_location PRIMARY KEY (id);
 ALTER TABLE location ADD CONSTRAINT fk_location_location_type FOREIGN KEY (location_type_id) REFERENCES location_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE location ADD CONSTRAINT fk_location_region FOREIGN KEY (region_id) REFERENCES region(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE location ADD CONSTRAINT fk_location_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE location ADD CONSTRAINT fk_location_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE location ADD CONSTRAINT fk_location_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE location ADD CONSTRAINT fk_location_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_location_name ON location(name);
@@ -302,8 +221,8 @@ CREATE TABLE site_type
 );
 
 ALTER TABLE site_type ADD CONSTRAINT pk_site_type PRIMARY KEY (id);
-ALTER TABLE site_type ADD CONSTRAINT fk_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE site_type ADD CONSTRAINT fk_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE site_type ADD CONSTRAINT fk_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE site_type ADD CONSTRAINT fk_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_site_type_name ON site_type(name);
 
@@ -339,8 +258,8 @@ CREATE TABLE site
 ALTER TABLE site ADD CONSTRAINT pk_site PRIMARY KEY (id);
 ALTER TABLE site ADD CONSTRAINT fk_site_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE site ADD CONSTRAINT fk_site_site_type FOREIGN KEY (site_type_id) REFERENCES site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE site ADD CONSTRAINT fk_site_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE site ADD CONSTRAINT fk_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE site ADD CONSTRAINT fk_site_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE site ADD CONSTRAINT fk_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_site_name ON site(name);
@@ -365,8 +284,8 @@ CREATE TABLE event_type
 );
 
 ALTER TABLE event_type ADD CONSTRAINT pk_event_type PRIMARY KEY (id);
-ALTER TABLE event_type ADD CONSTRAINT fk_event_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE event_type ADD CONSTRAINT fk_event_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event_type ADD CONSTRAINT fk_event_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event_type ADD CONSTRAINT fk_event_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_event_type_name ON event_type(name);
 
@@ -397,8 +316,8 @@ CREATE TABLE event
 ALTER TABLE event ADD CONSTRAINT pk_event PRIMARY KEY (id);
 ALTER TABLE event ADD CONSTRAINT fk_event_site FOREIGN KEY (site_id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE event ADD CONSTRAINT fk_event_event_type FOREIGN KEY (event_type_id) REFERENCES event_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE event ADD CONSTRAINT fk_event_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE event ADD CONSTRAINT fk_event_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event ADD CONSTRAINT fk_event_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event ADD CONSTRAINT fk_event_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_event_name ON event(name);
@@ -420,8 +339,8 @@ CREATE TABLE clothing_type
 );
 
 ALTER TABLE clothing_type ADD CONSTRAINT pk_clothing_type PRIMARY KEY (id);
-ALTER TABLE clothing_type ADD CONSTRAINT fk_clothing_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE clothing_type ADD CONSTRAINT fk_clothing_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE clothing_type ADD CONSTRAINT fk_clothing_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE clothing_type ADD CONSTRAINT fk_clothing_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_clothing_type_name ON clothing_type(name);
 
@@ -446,8 +365,8 @@ CREATE TABLE footwear_type
 );
 
 ALTER TABLE footwear_type ADD CONSTRAINT pk_footwear_type PRIMARY KEY (id);
-ALTER TABLE footwear_type ADD CONSTRAINT fk_footwear_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE footwear_type ADD CONSTRAINT fk_footwear_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE footwear_type ADD CONSTRAINT fk_footwear_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE footwear_type ADD CONSTRAINT fk_footwear_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_footwear_type_name ON footwear_type(name);
 
@@ -472,8 +391,8 @@ CREATE TABLE headwear_type
 );
 
 ALTER TABLE headwear_type ADD CONSTRAINT pk_headwear_type PRIMARY KEY (id);
-ALTER TABLE headwear_type ADD CONSTRAINT fk_headwear_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE headwear_type ADD CONSTRAINT fk_headwear_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE headwear_type ADD CONSTRAINT fk_headwear_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE headwear_type ADD CONSTRAINT fk_headwear_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_headwear_type_name ON headwear_type(name);
@@ -498,8 +417,8 @@ CREATE TABLE climate_condition_type
 );
 
 ALTER TABLE climate_condition_type ADD CONSTRAINT pk_climate_condition_type PRIMARY KEY (id);
-ALTER TABLE climate_condition_type ADD CONSTRAINT fk_climate_condition_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE climate_condition_type ADD CONSTRAINT fk_climate_condition_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE climate_condition_type ADD CONSTRAINT fk_climate_condition_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE climate_condition_type ADD CONSTRAINT fk_climate_condition_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_climate_condition_type_name ON climate_condition_type(name);
 
@@ -530,8 +449,8 @@ CREATE TABLE climate_windfactor_type
 );
 
 ALTER TABLE climate_windfactor_type ADD CONSTRAINT pk_climate_windfactor_type PRIMARY KEY (id);
-ALTER TABLE climate_windfactor_type ADD CONSTRAINT fk_climate_windfactor_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE climate_windfactor_type ADD CONSTRAINT fk_climate_windfactor_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE climate_windfactor_type ADD CONSTRAINT fk_climate_windfactor_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE climate_windfactor_type ADD CONSTRAINT fk_climate_windfactor_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_climate_windfactor_type_name ON climate_windfactor_type(name);
 
@@ -576,8 +495,8 @@ ALTER TABLE event_history ADD CONSTRAINT fk_event_history_climate_windfactor FOR
 ALTER TABLE event_history ADD CONSTRAINT fk_event_history_suitable_clothing FOREIGN KEY (suitable_clothing_type_id) REFERENCES clothing_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE event_history ADD CONSTRAINT fk_event_history_suitable_footwear FOREIGN KEY (suitable_footwear_type_id) REFERENCES footwear_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE event_history ADD CONSTRAINT fk_event_history_suitable_headwear FOREIGN KEY (suitable_headwear_type_id) REFERENCES headwear_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE event_history ADD CONSTRAINT fk_event_history_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE event_history ADD CONSTRAINT fk_event_history_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event_history ADD CONSTRAINT fk_event_history_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE event_history ADD CONSTRAINT fk_event_history_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 
@@ -599,8 +518,8 @@ CREATE TABLE supplier_type
 );
 
 ALTER TABLE supplier_type ADD CONSTRAINT pk_supplier_type PRIMARY KEY (id);
-ALTER TABLE supplier_type ADD CONSTRAINT fk_supplier_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE supplier_type ADD CONSTRAINT fk_supplier_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE supplier_type ADD CONSTRAINT fk_supplier_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE supplier_type ADD CONSTRAINT fk_supplier_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_supplier_type_name ON supplier_type(name);
 
@@ -632,8 +551,8 @@ CREATE TABLE supplier
 ALTER TABLE supplier ADD CONSTRAINT pk_supplier PRIMARY KEY (id);
 ALTER TABLE supplier ADD CONSTRAINT fk_supplier_supplier_type FOREIGN KEY (supplier_type_id) REFERENCES supplier_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE supplier ADD CONSTRAINT fk_supplier_location FOREIGN KEY (location_id) REFERENCES location(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE supplier ADD CONSTRAINT fk_supplier_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE supplier ADD CONSTRAINT fk_supplier_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE supplier ADD CONSTRAINT fk_supplier_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE supplier ADD CONSTRAINT fk_supplier_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_supplier_name ON supplier(name);
@@ -657,8 +576,8 @@ CREATE TABLE item_type
 );
 
 ALTER TABLE item_type ADD CONSTRAINT pk_item_type PRIMARY KEY (id);
-ALTER TABLE item_type ADD CONSTRAINT fk_item_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item_type ADD CONSTRAINT fk_item_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item_type ADD CONSTRAINT fk_item_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item_type ADD CONSTRAINT fk_item_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_type_name ON item_type(name);
 
@@ -694,8 +613,8 @@ ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (id);
 ALTER TABLE item ADD CONSTRAINT fk_item_item_type FOREIGN KEY (item_type_id) REFERENCES item_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE item ADD CONSTRAINT fk_item_site FOREIGN KEY (site_id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE item ADD CONSTRAINT fk_item_supplier FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item ADD CONSTRAINT fk_item_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item ADD CONSTRAINT fk_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item ADD CONSTRAINT fk_item_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item ADD CONSTRAINT fk_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_item_name ON item(name);
 
@@ -726,8 +645,8 @@ CREATE TABLE item_schedule_time
 
 ALTER TABLE item_schedule_time ADD CONSTRAINT pk_item_schedule_time PRIMARY KEY (id);
 ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE item_schedule_time ADD CONSTRAINT fk_item_schedule_time_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_item_schedule_time ON item_schedule_time(item_id, start_time);
@@ -748,8 +667,8 @@ CREATE TABLE suggested_itinerary
 );
 
 ALTER TABLE suggested_itinerary ADD CONSTRAINT pk_suggested_itinerary PRIMARY KEY (id);
-ALTER TABLE suggested_itinerary ADD CONSTRAINT fk_suggested_itinerary_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE suggested_itinerary ADD CONSTRAINT fk_suggested_itinerary_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary ADD CONSTRAINT fk_suggested_itinerary_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary ADD CONSTRAINT fk_suggested_itinerary_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_suggested_itinerary_name ON suggested_itinerary(name);
 
@@ -775,8 +694,8 @@ CREATE TABLE suggested_itinerary_item
 ALTER TABLE suggested_itinerary_item ADD CONSTRAINT pk_suggested_itinerary_item PRIMARY KEY (id);
 ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_suggested_itinerary FOREIGN KEY (suggested_itinerary_id) REFERENCES suggested_itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE suggested_itinerary_item ADD CONSTRAINT fk_suggested_itinerary_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_suggested_itinerary_item ON suggested_itinerary_item(suggested_itinerary_id, item_id);
@@ -797,8 +716,8 @@ CREATE TABLE itinerary
 );
 
 ALTER TABLE itinerary ADD CONSTRAINT pk_itinerary PRIMARY KEY (id);
-ALTER TABLE itinerary ADD CONSTRAINT fk_itinerary_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE itinerary ADD CONSTRAINT fk_itinerary_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary ADD CONSTRAINT fk_itinerary_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary ADD CONSTRAINT fk_itinerary_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_itinerary_name ON itinerary(name);
 
@@ -822,8 +741,8 @@ CREATE TABLE itinerary_item
 ALTER TABLE itinerary_item ADD CONSTRAINT pk_itinerary_item PRIMARY KEY (id);
 ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_itinerary FOREIGN KEY (itinerary_id) REFERENCES itinerary(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE itinerary_item ADD CONSTRAINT fk_itinerary_item_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_itinerary_item ON itinerary_item(itinerary_id,item_id);
@@ -845,8 +764,8 @@ CREATE TABLE bookline
 
 ALTER TABLE bookline ADD CONSTRAINT pk_bookline PRIMARY KEY (id);
 ALTER TABLE bookline ADD CONSTRAINT fk_bookline_item FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE bookline ADD CONSTRAINT fk_bookline_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE bookline ADD CONSTRAINT fk_bookline_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE bookline ADD CONSTRAINT fk_bookline_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE bookline ADD CONSTRAINT fk_bookline_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_bookline_item_startdatetime_enddatetime ON bookline(item_id, start_date_time, end_date_time);
@@ -876,8 +795,8 @@ CREATE TABLE bookline_pax
 
 ALTER TABLE bookline_pax ADD CONSTRAINT pk_bookline_pax PRIMARY KEY (id);
 ALTER TABLE bookline_pax ADD CONSTRAINT fk_bookline_pax FOREIGN KEY (bookline_id) REFERENCES bookline(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE bookline_pax ADD CONSTRAINT fk_bookline_pax_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE bookline_pax ADD CONSTRAINT fk_bookline_pax_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE bookline_pax ADD CONSTRAINT fk_bookline_pax_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE bookline_pax ADD CONSTRAINT fk_bookline_pax_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_bookline_pax_bookline_firstname ON bookline_pax(bookline_id, first_name, last_name);
 
@@ -897,8 +816,8 @@ CREATE TABLE accommodation_site_type
 );
 
 ALTER TABLE accommodation_site_type ADD CONSTRAINT pk_accommodation_site_type PRIMARY KEY (id);
-ALTER TABLE accommodation_site_type ADD CONSTRAINT fk_accommodation_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE accommodation_site_type ADD CONSTRAINT fk_accommodation_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE accommodation_site_type ADD CONSTRAINT fk_accommodation_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE accommodation_site_type ADD CONSTRAINT fk_accommodation_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_accommodation_site_type_name ON accommodation_site_type(name);
 
@@ -938,8 +857,8 @@ CREATE TABLE room_type
 );
 
 ALTER TABLE room_type ADD CONSTRAINT pk_room_type PRIMARY KEY (id);
-ALTER TABLE room_type ADD CONSTRAINT fk_room_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE room_type ADD CONSTRAINT fk_room_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE room_type ADD CONSTRAINT fk_room_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE room_type ADD CONSTRAINT fk_room_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_room_type_name ON room_type(name);
 
@@ -970,8 +889,8 @@ CREATE TABLE room_configuration_type
 );
 
 ALTER TABLE room_configuration_type ADD CONSTRAINT pk_room_configuration_type PRIMARY KEY (id);
-ALTER TABLE room_configuration_type ADD CONSTRAINT fk_room_configuration_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE room_configuration_type ADD CONSTRAINT fk_room_configuration_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE room_configuration_type ADD CONSTRAINT fk_room_configuration_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE room_configuration_type ADD CONSTRAINT fk_room_configuration_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_room_configuration_type_name ON room_configuration_type(name);
 
@@ -995,8 +914,8 @@ CREATE TABLE accommodation_site
 ALTER TABLE accommodation_site ADD CONSTRAINT pk_accommodation_site PRIMARY KEY (id);
 ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_site_type FOREIGN KEY (accommodation_site_type_id) REFERENCES accommodation_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE accommodation_site ADD CONSTRAINT fk_accommodation_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 INSERT INTO accommodation_site(id, accommodation_site_type_id)
 VALUES( 1, 1);
@@ -1019,8 +938,8 @@ CREATE TABLE transfer_site_type
 );
 
 ALTER TABLE transfer_site_type ADD CONSTRAINT pk_transfer_site_type PRIMARY KEY (id);
-ALTER TABLE transfer_site_type ADD CONSTRAINT fk_transfer_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE transfer_site_type ADD CONSTRAINT fk_transfer_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE transfer_site_type ADD CONSTRAINT fk_transfer_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE transfer_site_type ADD CONSTRAINT fk_transfer_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_transfer_site_type_name ON transfer_site_type(name);
 
@@ -1056,8 +975,8 @@ CREATE TABLE transfer_site
 ALTER TABLE transfer_site ADD CONSTRAINT pk_transfer_site PRIMARY KEY (id);
 ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_transfer_site_type FOREIGN KEY (transfer_site_type_id) REFERENCES transfer_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE transfer_site ADD CONSTRAINT fk_transfer_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 
@@ -1083,8 +1002,8 @@ CREATE TABLE activity_site_type
 
 
 ALTER TABLE activity_site_type ADD CONSTRAINT pk_activity_site_type PRIMARY KEY (id);
-ALTER TABLE activity_site_type ADD CONSTRAINT fk_activity_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE activity_site_type ADD CONSTRAINT fk_activity_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activity_site_type ADD CONSTRAINT fk_activity_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activity_site_type ADD CONSTRAINT fk_activity_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_activity_site_type_name ON activity_site_type(name);
 
@@ -1117,8 +1036,8 @@ CREATE TABLE vehicle_hire_site_type
 
 
 ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT pk_vehicle_hire_site_type PRIMARY KEY (id);
-ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT fk_vehicle_hire_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT fk_vehicle_hire_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT fk_vehicle_hire_site_type_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE vehicle_hire_site_type ADD CONSTRAINT fk_vehicle_hire_site_type_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 CREATE UNIQUE INDEX ix_vehicle_hire_site_type_name ON vehicle_hire_site_type(name);
 
@@ -1151,9 +1070,8 @@ CREATE TABLE vehicle_hire_site
 ALTER TABLE vehicle_hire_site ADD CONSTRAINT pk_vehicle_hire_site PRIMARY KEY (id);
 ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_vehicle_hire_site_type FOREIGN KEY (vehicle_hire_site_type_id) REFERENCES vehicle_hire_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-
+ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE vehicle_hire_site ADD CONSTRAINT fk_vehicle_hire_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_vehicle_hire_site_name ON vehicle_hire_site(name);
@@ -1178,8 +1096,8 @@ CREATE TABLE activity_site
 ALTER TABLE activity_site ADD CONSTRAINT pk_activity_site PRIMARY KEY (id);
 ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_site FOREIGN KEY (id) REFERENCES site(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
 ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_activity_site_type FOREIGN KEY (activity_site_type_id) REFERENCES activity_site_type(id) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_user_created_by FOREIGN KEY (created_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
-ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES users(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_user_created_by FOREIGN KEY (created_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE activity_site ADD CONSTRAINT fk_activity_site_user_updated_by FOREIGN KEY (updated_by) REFERENCES secure_user(username) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 
 CREATE UNIQUE INDEX ix_activity_site_name ON activity_site(name);

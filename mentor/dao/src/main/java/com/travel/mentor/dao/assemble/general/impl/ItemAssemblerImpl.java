@@ -8,6 +8,7 @@ import com.travel.mentor.dao.dto.general.SiteDTO;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.domain.general.Item;
 import com.travel.mentor.domain.general.Site;
+import com.travel.mentor.domain.general.Supplier;
 import com.travel.mentor.domain.reference.ItemType;
 import com.travel.mentor.domain.security.SecureUser;
 import org.springframework.stereotype.Component;
@@ -34,8 +35,10 @@ public class ItemAssemblerImpl extends BaseAssemblerImpl implements ItemAssemble
         item.setCreateUser((SecureUser) shallowCopy(itemDTO.getCreateUserDTO(), SecureUser.class));
         item.setUpdateUser((SecureUser) shallowCopy(itemDTO.getUpdateUserDTO(), SecureUser.class));
 
+        item.setSupplier((Supplier) shallowCopy(itemDTO.getSupplierDTO(), Supplier.class));
         item.setItemType((ItemType) shallowCopy(itemDTO.getItemTypeDTO(), ItemType.class));
         item.setSite((Site) shallowCopy(itemDTO.getSiteDTO(), Site.class));
+
         return item;
     }
 

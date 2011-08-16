@@ -9,12 +9,16 @@ import javax.persistence.*;
 @Entity
 @Table(schema = "public", name = "security_role")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@NamedQueries({
-        @NamedQuery(name = "SecurityRole.findAll", query = "SELECT o FROM SecurityRole o order by o.rolename"),
-        @NamedQuery(name = "SecurityRole.findSecurityRolesByLikeRoleName",
-                query = "SELECT o FROM SecurityRole o WHERE o.rolename like :rolename ")
+@NamedQueries(value = {
+        @NamedQuery(name = SecurityRole.FIND_ALL_SECURITY_ROLES, query = "SELECT o FROM SecurityRole o order by o.rolename", hints = {
+                @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecurityRoles")}),
+        @NamedQuery(name = SecurityRole.FIND_SECURITY_ROLES_BY_LIKE_ROLE_NAME,
+                query = "SELECT o FROM SecurityRole o WHERE o.rolename like :rolename ", hints = {
+                @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecurityRolesByLikeRoleName")})
 })
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_role_id_seq", allocationSize = 1)
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_role_id_seq", allocationSize = 1)
 public class SecurityRole extends AbstractAuditedIdEntity {
 
     public static final String FIND_ALL_SECURITY_ROLES = "SecurityRole.findAll";

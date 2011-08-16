@@ -8,10 +8,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "public", name = "country")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-@NamedQuery(name = "Country.findAll", query = "SELECT o FROM Country o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.country_id_seq", allocationSize = 1)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQueries(value = {
+        @NamedQuery(name = Country.FIND_ALL_COUNTRIES,
+                query = "SELECT o FROM Country o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllCountries")})
+})
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.country_id_seq", allocationSize = 1)
 public class Country extends AbstractAuditedIdNameDescEntity {
+
+    public static final String FIND_ALL_COUNTRIES = "Country.findAll";
 
     @Column(name = "code")
     private String code;

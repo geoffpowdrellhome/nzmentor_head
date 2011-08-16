@@ -8,6 +8,7 @@ import com.travel.mentor.domain.general.Location;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
+import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -34,12 +35,17 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         if (locationDTO.getId() == null || em.find(Location.class, locationDTO.getId()) == null) {
             location.setCreateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
             location.setCreateDate(new Timestamp(new Date().getTime()));
+            location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(location);
         }
-
-        location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
-        location.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(location);
+        else {
+            Location existingLocation = em.find(location.getClass(), locationDTO.getId());
+            BeanUtils.copyProperties(location, existingLocation);
+            location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(location);
+        }
 
         return locationAssembler.assembleToDTO(location);
     }
@@ -48,6 +54,8 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
     public void delete(LocationDTO locationDTO) {
         Location location = em.find(Location.class, locationDTO.getId());
         em.remove(location);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(location.getClass(), location.getId());
     }
 
     @Override

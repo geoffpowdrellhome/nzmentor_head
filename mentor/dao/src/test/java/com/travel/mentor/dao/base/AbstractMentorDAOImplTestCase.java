@@ -14,7 +14,7 @@ import junit.framework.Assert;
  * Created by geoff
  * Purpose: 'Mentor' DAO Implementation Test case.
  */
-@TransactionConfiguration(transactionManager = "mentorTransactionManager", defaultRollback = true)
+@TransactionConfiguration(transactionManager = "mentorTransactionManager", defaultRollback=true)
 public class AbstractMentorDAOImplTestCase extends AbstractSpringDAOImplTestCase {
 
     protected static final Long EXISTING_ID_VALUE=1L;

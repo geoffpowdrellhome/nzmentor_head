@@ -28,8 +28,8 @@ public class ReferenceTypeAssemblerImpl extends BaseAssemblerImpl implements Ref
     public AbstractAuditedIdNameDescEntity assembleToDomainObject(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) shallowCopy(referenceTypeDTO, referenceTypeDTO.getEntityClass());
 
-        abstractAuditedNameDescEntity.setCreateUser((SecureUser) shallowCopy(referenceTypeDTO.getCreateUserDTO(), SecureUser.class));
-        abstractAuditedNameDescEntity.setUpdateUser((SecureUser) shallowCopy(referenceTypeDTO.getUpdateUserDTO(), SecureUser.class));
+        abstractAuditedNameDescEntity.setCreateUser((SecureUser) shallowCopy(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
+        abstractAuditedNameDescEntity.setUpdateUser((SecureUser) shallowCopy(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
 
         return abstractAuditedNameDescEntity;
     }

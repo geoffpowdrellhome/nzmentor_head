@@ -1,49 +1,166 @@
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../lib/ehcache/ehcache.xsd">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
     <diskStore path="java.io.tmpdir"/>
-  
-	<!--
-		Mandatory Default Cache configuration. The defaultCache has an
-		implicit name "default" which is a reserved cache name.
-	-->
-	<defaultCache
+
+
+     <!-- Explanation on the the ehcache properties/settings
+         maxElementsInMemory = The default maximum number of elements stored in the memory data store
+            0 translates to no-limit.
+
+         eternal = Sets whether elements are eternal.
+            If eternal, timeouts are ignored and the element is never expired.
+
+         timeToIdleSeconds = the time to idle for an element before it expires.
+            Is only used if the element is not eternal.A value of 0 means do not check for idling.
+
+         timeToLiveSeconds = Sets the time to idle for an element before it expires.
+            Is only used if the element is not eternal.
+            This attribute is optional in the configuration. A value of 0 means do not check time to live.
+
+         overflowToDisk = whether elements can overflow to disk when the in-memory cache has reached the set limit.
+
+         diskSpoolBufferSizeMB = The size of the disk spool used to buffer writes
+
+         maxElementsOnDisk = the maximum objects to be held in the DiskStore.
+            0 translates to no-limit.
+
+         diskPersistent = For caches that overflow to disk, whether the disk cache persists between CacheManager instances.
+
+         statistics = display statistics
+
+         diskExpiryThreadIntervalSeconds = The interval in seconds between runs of the disk expiry thread
+            The interval in seconds between runs of the disk expiry thread.
+            2 minutes is the default. This is not the same thing as time to live or time to idle.
+            When the thread runs it checks these things. So this value is how often we check for expiry.
+
+         memoryStoreEvictionPolicy = The policy used to evict elements from the MemoryStore.
+            1.LRU - least recently used
+            2.LFU - Less frequently used
+            3.FIFO - first in first out, the oldest element by creation time
+            The default value is LRU
+     -->
+
+
+
+    <!--
+         Mandatory Default Cache configuration. The defaultCache has an
+         implicit name "default" which is a reserved cache name.
+    -->
+    <defaultCache
             maxElementsInMemory="10000"
             eternal="false"
-		    timeToIdleSeconds="120"
+            timeToIdleSeconds="120"
             timeToLiveSeconds="120"
             overflowToDisk="true"
-		    diskSpoolBufferSizeMB="30"
-            maxElementsOnDisk="1"
-            diskPersistent="false"
-		    diskExpiryThreadIntervalSeconds="120"
-            memoryStoreEvictionPolicy="LRU" />
+            diskSpoolBufferSizeMB="30"
+            maxElementsOnDisk="10"
+            diskPersistent="true"
+            statistics="true"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LFU"/>
 
-    
-    <!-- Cache for HIBERNATE -->
-    <cache name="com.nz.travel.mentor.model.impl.User"
-        maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
-    
-    <!-- Cache for HIBERNATE -->
+    <!-- Class level caches that JPA/Hibernate uses to store records in -->
     <cache name="com.travel.mentor.domain.reference.AccommodationSiteType"
-        maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
-    
-    <!-- Cache for HIBERNATE -->
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
     <cache name="com.travel.mentor.domain.reference.ActivitySiteType"
-        maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
 
-    <!-- Cache for HIBERNATE -->
     <cache name="com.travel.mentor.domain.reference.RoomConfigurationType"
-        maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
 
-     <!-- Cache for HIBERNATE -->
     <cache name="com.travel.mentor.domain.reference.RoomType"
-        maxElementsInMemory="50" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="600" />
+           eternal="true"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
+    <cache name="com.travel.mentor.domain.general.Region"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
+    <cache name="com.travel.mentor.domain.security.SecureUser"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityRole"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityRoleGroup"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="100"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityRight"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="500"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityGroup"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="100"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityGroupRight"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="500"/>
+
+    <cache name="com.travel.mentor.domain.security.SecurityRightType"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
+
+    <cache name="com.travel.mentor.domain.security.SecureRoleGroup"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           maxElementsInMemory="50"/>
 
 
+    <cache name="query.findAllRegions"
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="false"
+           maxElementsInMemory="50" />
 
-	<!-- Currency -->
-	<!-- 30 min idle; 1 hour TTL -->
-    <cache name="currencyConversion"
-        maxElementsInMemory="100" timeToIdleSeconds="1800" timeToLiveSeconds="3600"
-        eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.RoomTypes"
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="false"
+           maxElementsInMemory="50" />
+
+    <cache name="query.findAllSecurityRoles"
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="false"
+           maxElementsInMemory="50" />
+
+    <cache name="query.findSecurityRolesByLikeRoleName"
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="false"
+           maxElementsInMemory="50" />
+
 
 </ehcache>

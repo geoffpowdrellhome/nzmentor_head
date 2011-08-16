@@ -9,6 +9,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 
 public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
@@ -53,8 +54,18 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Test
     public void testDelete() {
-        RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
-        regionDAO.delete(regionDTO);
+        RegionDTO existingregionDTO = regionDAO.find(EXISTING_ID_VALUE);
+
+        RegionDTO addRegionDTO = new RegionDTO();
+        BeanUtils.copyProperties(existingregionDTO, addRegionDTO);
+
+        addRegionDTO.setId(null);
+        addRegionDTO.setDescription("temp-add");
+        addRegionDTO.setName("temp-add");
+        addRegionDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        addRegionDTO = regionDAO.saveOrUpdate(addRegionDTO);
+
+        regionDAO.delete(addRegionDTO);
     }
 
     @Test

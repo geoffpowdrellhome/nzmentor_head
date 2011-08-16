@@ -1,8 +1,6 @@
 package com.travel.mentor.domain.base;
 
 import com.travel.mentor.domain.security.SecureUser;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -13,7 +11,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @MappedSuperclass
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public abstract class AbstractAuditedEntity implements Serializable {
 
     @ManyToOne

@@ -1,23 +1,34 @@
 package com.travel.mentor.domain.security;
 
-import com.travel.mentor.domain.base.AbstractAuditedEntity;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "secure_user")
-@NamedQueries({
-        @NamedQuery(name = "SecureUser.findUserByUsername",
-                query = "SELECT o FROM SecureUser o WHERE o.username =:username ") ,
-        @NamedQuery(name = "User.findUserByUsernamePassword",
-                query = "SELECT o FROM SecureUser o WHERE o.username =:username and o.password =:password ") ,
-        @NamedQuery(name = "User.findAll", query = "SELECT o FROM SecureUser o order by o.username")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQueries(value = {
+        @NamedQuery(name = SecureUser.FIND_ALL_SECURE_USERS,
+                query = "SELECT o FROM SecureUser o order by o.username",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecurityUsers")}),
+        @NamedQuery(name = SecureUser.FIND_SECURE_USER_BY_USERNAME,
+                query = "SELECT o FROM SecureUser o WHERE o.username =:username",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecureUserByUsername")}),
+        @NamedQuery(name = SecureUser.FIND_SECURE_USER_BY_USERNAME_PASSWORD,
+                query = "SELECT o FROM SecureUser o WHERE o.username =:username and o.password =:password",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecureUserByUsernameAndPassword")})
 })
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class SecureUser extends AbstractAuditedEntity {
+public class SecureUser implements Serializable {
 
     public static final String FIND_SECURE_USER_BY_USERNAME = "SecureUser.findUserByUsername";
     public static final String FIND_SECURE_USER_BY_USERNAME_PASSWORD = "SecureUser.findUserByUsernamePassword";
@@ -57,13 +68,13 @@ public class SecureUser extends AbstractAuditedEntity {
     @Column(name = "account_non_locked", nullable = false)
     private boolean accountNonLocked;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY) // was EAGER
     @JoinTable(
-            name="security_userrole",
-            joinColumns=
-                    @JoinColumn(name="secure_user_username", referencedColumnName="username"),
-            inverseJoinColumns=
-                    @JoinColumn(name="security_role_id", referencedColumnName="id")
+            name = "security_userrole",
+            joinColumns =
+            @JoinColumn(name = "secure_user_username", referencedColumnName = "username"),
+            inverseJoinColumns =
+            @JoinColumn(name = "security_role_id", referencedColumnName = "id")
     )
     private List<SecurityRole> securityRoleList = new ArrayList<SecurityRole>();
 

@@ -6,6 +6,7 @@ import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.dao.reference.ReferenceTypeDAO;
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
 import com.travel.mentor.domain.reference.*;
+import net.sf.ehcache.CacheManager;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+
 @Repository("referenceTypeDAO")
 @Transactional
 public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements ReferenceTypeDAO {
@@ -24,26 +26,37 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     @Resource
     private ReferenceTypeAssembler referenceTypeAssembler;
 
+    @Resource
+    private CacheManager cacheManager;
+
+
     @Override
     public List<ReferenceTypeDTO> findAll(String findAllNamedQuery) {
         Assert.notNull(findAllNamedQuery);
-        List<AbstractAuditedIdNameDescEntity> referenceTypeDTOList = em.createNamedQuery(findAllNamedQuery).getResultList();
+        List<AbstractAuditedIdNameDescEntity> referenceTypeDTOList = em.createNamedQuery(findAllNamedQuery).setHint("org.hibernate.cacheable", true).getResultList();
         return referenceTypeAssembler.assembleToDTOList(referenceTypeDTOList);
     }
 
+
     @Override
     public ReferenceTypeDTO saveOrUpdate(ReferenceTypeDTO referenceTypeDTO) {
+
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
 
         if (referenceTypeDTO.getId() == null || em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId()) == null) {
-            abstractAuditedNameDescEntity.setCreateUser( secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()) );
+            abstractAuditedNameDescEntity.setCreateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
             abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
+            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(abstractAuditedNameDescEntity);
+        } else {
+            AbstractAuditedIdNameDescEntity existingEntityRecord = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
+            BeanUtils.copyProperties(abstractAuditedNameDescEntity, existingEntityRecord);
+            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+
+            em.merge(existingEntityRecord);
         }
-
-        abstractAuditedNameDescEntity.setUpdateUser( secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()) );
-        abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(abstractAuditedNameDescEntity);
 
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
@@ -53,6 +66,8 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
         em.remove(abstractAuditedNameDescEntity);
+        em.flush();
+        em.getEntityManagerFactory().getCache().evict(abstractAuditedNameDescEntity.getClass(), abstractAuditedNameDescEntity.getId());
     }
 
     @Override
@@ -85,7 +100,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
 
     /**
-     *  private methods - caching of all types of reference type domain objects
+     * private methods - caching of all types of reference type domain objects
      */
     private void cacheAccommodationSiteTypeDomainObjects() {
         logger.debug("cacheAccommodationSiteTypeDomainObjects()");
@@ -219,11 +234,17 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         }
     }
 
+    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "findAllRoomTypes")
+
+    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY)
     private void cacheRoomTypeDomainObjects() {
         logger.debug("cacheRoomTypeDomainObjects()");
         StopWatch watch = new StopWatch();
         watch.start("cacheRoomTypeDomainObjects");
-        em.createNamedQuery(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY).getResultList();
+        //em.createNamedQuery(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY).getResultList();
+
+        findAll(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY);
+
         watch.stop();
         if (logger.isDebugEnabled()) {
             logger.debug(watch.prettyPrint());

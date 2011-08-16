@@ -196,9 +196,6 @@
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.CR1" />
             <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-ehcache:3.5.6-Final" />
-            <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:1.5.0" />
-            <element id="library" level="project" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" />
-            <element id="library" level="project" name="Maven: net.sf.jsr107cache:jsr107cache:1.0" />
             <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-all:1.1" />
             <element id="archive" name="service-api-1.0.jar">
               <element id="module-output" name="service-api" />
@@ -833,17 +830,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.3/asm-3.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: backport-util-concurrent:backport-util-concurrent:3.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: bouncycastle:bcmail-jdk14:136">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/bouncycastle/bcmail-jdk14/136/bcmail-jdk14-136.jar!/" />
@@ -1207,28 +1193,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache-core/2.1.0/ehcache-core-2.1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: net.sf.ehcache:ehcache:1.5.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.5.0/ehcache-1.5.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.5.0/ehcache-1.5.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.5.0/ehcache-1.5.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: net.sf.jsr107cache:jsr107cache:1.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/jsr107cache/jsr107cache/1.0/jsr107cache-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/jsr107cache/jsr107cache/1.0/jsr107cache-1.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/sf/jsr107cache/jsr107cache/1.0/jsr107cache-1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.apache.commons:commons-io:1.3.2">

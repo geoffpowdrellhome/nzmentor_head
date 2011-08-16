@@ -2,14 +2,26 @@ package com.travel.mentor.domain.general;
 
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
 import com.travel.mentor.domain.reference.LocationType;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "public", name = "location")
-@NamedQuery(name = "Location.findAll", query = "SELECT o FROM Location o order by o.name")
-@javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.location_id_seq", allocationSize = 1)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@NamedQueries(value = {
+        @NamedQuery(name = Location.FIND_ALL_LOCATIONS_NAMED_QUERY,
+                query = "SELECT o FROM Location o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findLocations")})
+})
+@SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.location_id_seq", allocationSize = 1)
 public class Location extends AbstractAuditedIdNameDescEntity {
 
     public static final String FIND_ALL_LOCATIONS_NAMED_QUERY = "Location.findAll";

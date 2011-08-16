@@ -2,14 +2,18 @@ package com.travel.mentor.domain.general;
 
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
 import com.travel.mentor.domain.reference.SiteType;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+
 
 @Entity
 @Table(schema = "public", name = "site")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="siteTypeId")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
 public class Site extends AbstractAuditedIdNameDescEntity {

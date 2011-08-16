@@ -1,6 +1,7 @@
 package com.travel.mentor.domain.base;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class AbstractAuditedIdNameDescEntity extends AbstractAuditedIdEntity {
