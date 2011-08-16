@@ -5,7 +5,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -67,6 +69,19 @@ public class SecureUser implements Serializable {
 
     @Column(name = "account_non_locked", nullable = false)
     private boolean accountNonLocked;
+
+    @Column(name = "created_by")
+    protected String createUser;
+
+    @Column(name = "created")
+    protected Timestamp createDate = new Timestamp(new Date().getTime());
+
+    @Column(name = "updated_by")
+    protected String updateUser;
+
+    @Column(name = "updated")
+    protected Timestamp updateDate = new Timestamp(new Date().getTime());
+
 
     @ManyToMany(fetch = FetchType.LAZY) // was EAGER
     @JoinTable(
@@ -172,5 +187,37 @@ public class SecureUser implements Serializable {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 }

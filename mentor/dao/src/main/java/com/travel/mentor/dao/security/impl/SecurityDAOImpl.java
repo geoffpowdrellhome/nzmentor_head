@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 
 
 @Repository("securityDAO")
@@ -50,7 +51,20 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser) {
         SecureUser secureUser = secureUserAssembler.assembleToDomainObject(secureUserDTO);
 
-        em.merge(secureUser);
+        if (secureUserDTO.getUsername() == null || em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
+            secureUser.setCreateUser(loggedOnUser.getUsername());
+            secureUser.setCreateDate(new Timestamp(new Date().getTime()));
+            secureUser.setUpdateUser(loggedOnUser.getUsername());
+            secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(secureUser);
+        }
+        else {
+            SecureUser existingSecureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
+            BeanUtils.copyProperties(secureUser, existingSecureUser);
+            secureUser.setUpdateUser(loggedOnUser.getUsername());
+            secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(secureUser);
+        }
 
         return secureUserAssembler.assembleToDTO(secureUser);
     }
@@ -68,12 +82,17 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         if (securityRoleDTO.getId() == null || em.find(SecurityRole.class, securityRoleDTO.getId()) == null) {
             securityRole.setCreateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
             securityRole.setCreateDate(new Timestamp(new Date().getTime()));
+            securityRole.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
+            securityRole.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(securityRole);
         }
-
-        securityRole.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
-        securityRole.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(securityRole);
+        else {
+            SecurityRole existingSecurityRole = em.find(securityRole.getClass(), securityRoleDTO.getId());
+            BeanUtils.copyProperties(securityRole, existingSecurityRole);
+            securityRole.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRoleDTO.getLoggedInUser()));
+            securityRole.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(securityRole);
+        }
 
         return securityRoleAssembler.assembleToDTO(securityRole);
     }
@@ -99,12 +118,17 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         if (securityGroupDTO.getId() == null || em.find(SecurityRole.class, securityGroupDTO.getId()) == null) {
             securityGroup.setCreateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
             securityGroup.setCreateDate(new Timestamp(new Date().getTime()));
+            securityGroup.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
+            securityGroup.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(securityGroup);
         }
-
-        securityGroup.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
-        securityGroup.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(securityGroup);
+        else {
+            SecurityGroup existingSecurityGroup = em.find(securityGroup.getClass(), securityGroupDTO.getId());
+            BeanUtils.copyProperties(securityGroup, existingSecurityGroup);
+            securityGroup.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
+            securityGroup.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(securityGroup);
+        }
 
         return securityGroupAssembler.assembleToDTO(securityGroup);
     }
@@ -132,12 +156,17 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         if (securityRightDTO.getId() == null || em.find(SecurityRole.class, securityRightDTO.getId()) == null) {
             securityRight.setCreateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
             securityRight.setCreateDate(new Timestamp(new Date().getTime()));
+            securityRight.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
+            securityRight.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.persist(securityRight);
         }
-
-        securityRight.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
-        securityRight.setUpdateDate(new Timestamp(new Date().getTime()));
-
-        em.merge(securityRight);
+        else {
+            SecurityRight existingSecurityRight = em.find(securityRight.getClass(), securityRightDTO.getId());
+            BeanUtils.copyProperties(securityRight, existingSecurityRight);
+            securityRight.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
+            securityRight.setUpdateDate(new Timestamp(new Date().getTime()));
+            em.merge(securityRight);
+        }
 
         return securityRightAssembler.assembleToDTO(securityRight);
     }

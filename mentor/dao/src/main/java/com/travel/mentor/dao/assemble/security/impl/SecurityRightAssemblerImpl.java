@@ -2,7 +2,9 @@ package com.travel.mentor.dao.assemble.security.impl;
 
 import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.assemble.security.SecurityRightAssembler;
+import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityRightDTO;
+import com.travel.mentor.domain.security.SecureUser;
 import com.travel.mentor.domain.security.SecurityRight;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +25,22 @@ public class SecurityRightAssemblerImpl extends BaseAssemblerImpl implements Sec
 
     @Override
     public SecurityRight assembleToDomainObject(SecurityRightDTO securityRightDTO) {
-        return (SecurityRight) shallowCopy(securityRightDTO, SecurityRight.class);
+        SecurityRight securityRight = (SecurityRight) shallowCopy(securityRightDTO, SecurityRight.class);
+
+        securityRight.setCreateUser((SecureUser) shallowCopy(securityRightDTO.getCreateUserDTO(), SecureUser.class));
+        securityRight.setUpdateUser((SecureUser) shallowCopy(securityRightDTO.getUpdateUserDTO(), SecureUser.class));
+
+        return securityRight;
     }
 
     @Override
     public SecurityRightDTO assembleToDTO(SecurityRight securityRight) {
-        return (SecurityRightDTO) shallowCopy(securityRight, SecurityRightDTO.class);
+        SecurityRightDTO securityGroupDTO = (SecurityRightDTO) shallowCopy(securityRight, SecurityRightDTO.class);
+
+        securityGroupDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityRight.getCreateUser(), SecureUserDTO.class));
+        securityGroupDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityRight.getUpdateUser(), SecureUserDTO.class));
+
+        return securityGroupDTO;
     }
 
 }

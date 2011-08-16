@@ -156,8 +156,14 @@ public class SecurityDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Test
     public void testDeleteSecurityGroup() {
-        List<SecurityGroupDTO> securityGroupDTOList = securityDAO.findAllSecurityGroups();
-        SecurityGroupDTO securityGroupDTO = securityGroupDTOList.get(3);
+        SecurityGroupDTO securityGroupDTO = new SecurityGroupDTO();
+        securityGroupDTO.setName("security group new");
+        securityGroupDTO.setDescription("security group new--");
+        securityGroupDTO.setLoggedInUser(securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+
+        securityGroupDTO = securityDAO.saveOrUpdate(securityGroupDTO);
+
+
         securityDAO.delete(securityGroupDTO);
     }
 
