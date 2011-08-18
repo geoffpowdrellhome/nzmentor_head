@@ -4,8 +4,10 @@ import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.assemble.security.SecurityRightAssembler;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityRightDTO;
+import com.travel.mentor.dao.dto.security.SecurityRightTypeDTO;
 import com.travel.mentor.domain.security.SecureUser;
 import com.travel.mentor.domain.security.SecurityRight;
+import com.travel.mentor.domain.security.SecurityRightType;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -30,17 +32,21 @@ public class SecurityRightAssemblerImpl extends BaseAssemblerImpl implements Sec
         securityRight.setCreateUser((SecureUser) shallowCopy(securityRightDTO.getCreateUserDTO(), SecureUser.class));
         securityRight.setUpdateUser((SecureUser) shallowCopy(securityRightDTO.getUpdateUserDTO(), SecureUser.class));
 
+        securityRight.setSecurityRightType((SecurityRightType) shallowCopy(securityRightDTO.getSecurityRightTypeDTO(), SecurityRightType.class));
+
         return securityRight;
     }
 
     @Override
     public SecurityRightDTO assembleToDTO(SecurityRight securityRight) {
-        SecurityRightDTO securityGroupDTO = (SecurityRightDTO) shallowCopy(securityRight, SecurityRightDTO.class);
+        SecurityRightDTO securityRightDTO = (SecurityRightDTO) shallowCopy(securityRight, SecurityRightDTO.class);
 
-        securityGroupDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityRight.getCreateUser(), SecureUserDTO.class));
-        securityGroupDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityRight.getUpdateUser(), SecureUserDTO.class));
+        securityRightDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityRight.getCreateUser(), SecureUserDTO.class));
+        securityRightDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityRight.getUpdateUser(), SecureUserDTO.class));
 
-        return securityGroupDTO;
+        securityRightDTO.setSecurityRightTypeDTO((SecurityRightTypeDTO) shallowCopy(securityRight.getSecurityRightType(), SecurityRightTypeDTO.class));
+
+        return securityRightDTO;
     }
 
 }

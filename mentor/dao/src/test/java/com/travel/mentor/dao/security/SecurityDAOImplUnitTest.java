@@ -169,9 +169,17 @@ public class SecurityDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
 
     @Test
     public void testDeleteSecurityRight() {
-        List<SecurityRightDTO> securityRightDTOList = securityDAO.findAllSecurityRights();
-        SecurityRightDTO securityRightDTO = securityRightDTOList.get(3);
-        securityDAO.delete(securityRightDTO);
+        SecurityRightDTO addSecurityRightDTO = new SecurityRightDTO();
+        addSecurityRightDTO.setName("button_RegionDialog_btnHelp");
+        addSecurityRightDTO.setDescription("button_RegionDialog_btnHelp");
+        addSecurityRightDTO.setLoggedInUser(securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+
+        List<SecurityRightTypeDTO> securityRightTypeDTOList = securityDAO.findAllSecurityRightTypes();
+        addSecurityRightDTO.setSecurityRightTypeDTO( securityRightTypeDTOList.get(0));
+
+        addSecurityRightDTO = securityDAO.saveOrUpdate(addSecurityRightDTO);
+
+        securityDAO.delete(addSecurityRightDTO);
     }
 
     @Test
@@ -180,6 +188,9 @@ public class SecurityDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         securityRightDTO.setName("button_RegionDialog_btnHelp");
         securityRightDTO.setDescription("button_RegionDialog_btnHelp");
         securityRightDTO.setLoggedInUser(securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+
+        List<SecurityRightTypeDTO> securityRightTypeDTOList = securityDAO.findAllSecurityRightTypes();
+        securityRightDTO.setSecurityRightTypeDTO( securityRightTypeDTOList.get(0));
 
         securityRightDTO = securityDAO.saveOrUpdate(securityRightDTO);
 

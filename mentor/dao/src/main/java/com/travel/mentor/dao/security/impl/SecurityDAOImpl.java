@@ -115,7 +115,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public SecurityGroupDTO saveOrUpdate(SecurityGroupDTO securityGroupDTO) {
         SecurityGroup securityGroup = securityGroupAssembler.assembleToDomainObject(securityGroupDTO);
 
-        if (securityGroupDTO.getId() == null || em.find(SecurityRole.class, securityGroupDTO.getId()) == null) {
+        if (securityGroupDTO.getId() == null || em.find(SecurityGroup.class, securityGroupDTO.getId()) == null) {
             securityGroup.setCreateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
             securityGroup.setCreateDate(new Timestamp(new Date().getTime()));
             securityGroup.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityGroupDTO.getLoggedInUser()));
@@ -153,7 +153,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public SecurityRightDTO saveOrUpdate(SecurityRightDTO securityRightDTO) {
         SecurityRight securityRight = securityRightAssembler.assembleToDomainObject(securityRightDTO);
 
-        if (securityRightDTO.getId() == null || em.find(SecurityRole.class, securityRightDTO.getId()) == null) {
+        if (securityRightDTO.getId() == null || em.find(SecurityRight.class, securityRightDTO.getId()) == null) {
             securityRight.setCreateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
             securityRight.setCreateDate(new Timestamp(new Date().getTime()));
             securityRight.setUpdateUser(secureUserAssembler.assembleToDomainObject(securityRightDTO.getLoggedInUser()));
