@@ -1,17 +1,18 @@
 package com.travel.mentor.dao.general.impl;
 
 import com.travel.mentor.dao.assemble.general.LocationAssembler;
+import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.LocationDTO;
 import com.travel.mentor.dao.general.LocationDAO;
-import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.domain.general.Location;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
-import org.springframework.beans.BeanUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,16 +65,11 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         return locationAssembler.assembleToDTO(location);
     }
 
+    @PostConstruct
     protected void cacheDomainObjects() {
-        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start(this.getClass().getName() +".cacheDomainObjects()");
-        em.createNamedQuery(Location.FIND_ALL_LOCATIONS_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
+        List<String> namedQueries = new ArrayList<String>();
+        namedQueries.add(Location.FIND_ALL_LOCATIONS_NAMED_QUERY);
+        super.cacheDomainObjects(namedQueries);
     }
 
 }

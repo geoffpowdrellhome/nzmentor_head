@@ -39,7 +39,10 @@ public abstract class AbstractMentorDAO extends MentorObject {
 
     @SuppressWarnings("unchecked")
     protected void cacheDomainObjects(List<String> namedQueries) {
-        if (dev) return;
+        if (dev) {
+            System.out.println("Currently in development mode .:. query caching disabled");
+            return;
+        }
 
         for (String namedQuery : namedQueries) {
             StopWatch watch = new StopWatch();

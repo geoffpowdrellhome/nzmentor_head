@@ -1,21 +1,21 @@
 package com.travel.mentor.dao.general.impl;
 
 import com.travel.mentor.dao.assemble.general.AccommodationSiteAssembler;
+import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.AccommodationSiteDTO;
 import com.travel.mentor.dao.general.AccommodationSiteDAO;
-import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.domain.general.AccommodationSite;
 import com.travel.mentor.domain.general.Location;
 import com.travel.mentor.domain.reference.AccommodationSiteType;
 import com.travel.mentor.domain.reference.SiteType;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,18 +72,11 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
+    @PostConstruct
     protected void cacheDomainObjects() {
-        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start(this.getClass().getName() +".cacheDomainObjects()");
-        em.createNamedQuery(AccommodationSite.FIND_ALL_ACCOMMODATION_SITES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
+        List<String> namedQueries = new ArrayList<String>();
+        namedQueries.add(AccommodationSite.FIND_ALL_ACCOMMODATION_SITES_NAMED_QUERY);
+        super.cacheDomainObjects(namedQueries);
     }
-
-
 
 }

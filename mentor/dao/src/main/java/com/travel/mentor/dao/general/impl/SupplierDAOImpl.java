@@ -5,11 +5,14 @@ import com.travel.mentor.dao.assemble.general.SupplierAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.SupplierDTO;
 import com.travel.mentor.dao.general.SupplierDAO;
+import com.travel.mentor.domain.general.Region;
 import com.travel.mentor.domain.general.Supplier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -77,7 +80,11 @@ public class SupplierDAOImpl extends AbstractMentorDAO implements SupplierDAO {
         return supplierAssembler.assembleToDTO(supplier);
     }
 
+    @PostConstruct
     protected void cacheDomainObjects() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        List<String> namedQueries = new ArrayList<String>();
+        namedQueries.add(Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY);
+        super.cacheDomainObjects(namedQueries);
     }
+
 }

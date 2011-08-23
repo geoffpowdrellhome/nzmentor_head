@@ -11,10 +11,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.StopWatch;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -77,238 +78,29 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 
+    @PostConstruct
     protected void cacheDomainObjects() {
-        cacheAccommodationSiteTypeDomainObjects();
-        cacheActivitySiteTypeDomainObjects();
-        cacheClimateConditionTypeDomainObjects();
-        cacheClimateWindfactorTypeDomainObjects();
-        cacheClothingTypeDomainObjects();
-        cacheEventTypeDomainObjects();
-        cacheFootwearTypeDomainObjects();
-        cacheHeadwearTypeDomainObjects();
-        cacheItemTypeDomainObjects();
-        cacheLocationTypeDomainObjects();
-        cachePopularityRankingTypeDomainObjects();
-        cacheRoomTypeDomainObjects();
-        cacheRoomConfigurationTypeDomainObjects();
-        cacheSiteTypeDomainObjects();
-        cacheSupplierTypeDomainObjects();
-        cacheTransferSiteTypeDomainObjects();
-        cacheVehicleHireSiteTypeDomainObjects();
-    }
+        List<String> namedQueries = new ArrayList<String>();
 
+        namedQueries.add(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
+        namedQueries.add(ActivitySiteType.FIND_ALL_ACTIVITY_SITE_TYPES_NAMED_QUERY);
+        namedQueries.add(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY);
+        namedQueries.add(ClimateWindfactorType.FIND_ALL_CLIMATE_WINDFACTOR_TYPES_NAMED_QUERY);
+        namedQueries.add(ClothingType.FIND_ALL_CLOTHING_TYPES_NAMED_QUERY);
+        namedQueries.add(EventType.FIND_ALL_EVENT_TYPES_NAMED_QUERY);
+        namedQueries.add(FootwearType.FIND_ALL_FOOTWEAR_TYPES_NAMED_QUERY);
+        namedQueries.add(HeadwearType.FIND_ALL_HEADWEAR_TYPES_NAMED_QUERY);
+        namedQueries.add(ItemType.FIND_ALL_ITEM_TYPES_NAMED_QUERY);
+        namedQueries.add(LocationType.FIND_ALL_LOCATION_TYPES_NAMED_QUERY);
+        namedQueries.add(PopularityRankingType.FIND_ALL_POPULARITY_RANKING_TYPES_NAMED_QUERY);
+        namedQueries.add(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY);
+        namedQueries.add(RoomConfigurationType.FIND_ALL_ROOM_CONFIGURATION_TYPES_NAMED_QUERY);
+        namedQueries.add(SiteType.FIND_ALL_SITE_TYPES_NAMED_QUERY);
+        namedQueries.add(SupplierType.FIND_ALL_SITE_TYPES_NAMED_QUERY);
+        namedQueries.add(TransferSiteType.FIND_ALL_TRANSFER_SITE_TYPES_NAMED_QUERY);
+        namedQueries.add(VehicleHireSiteType.FIND_ALL_VEHICLE_SITE_TYPES_NAMED_QUERY);
 
-    /**
-     * private methods - caching of all types of reference type domain objects
-     */
-    private void cacheAccommodationSiteTypeDomainObjects() {
-        logger.debug("cacheAccommodationSiteTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheAccommodationSiteTypeDomainObjects");
-        em.createNamedQuery(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheAccommodationSiteTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheActivitySiteTypeDomainObjects() {
-        logger.debug("cacheActivitySiteTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheActivitySiteTypeDomainObjects");
-        em.createNamedQuery(ActivitySiteType.FIND_ALL_ACTIVITY_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheActivitySiteTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheClimateConditionTypeDomainObjects() {
-        logger.debug("cacheClimateConditionTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheClimateConditionTypeDomainObjects");
-        em.createNamedQuery(ClimateConditionType.FIND_ALL_CLIMATE_CONDITION_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheClimateConditionTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheClimateWindfactorTypeDomainObjects() {
-        logger.debug("cacheClimateWindfactorTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheClimateWindfactorTypeDomainObjects");
-        em.createNamedQuery(ClimateWindfactorType.FIND_ALL_CLIMATE_WINDFACTOR_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheClimateWindfactorTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheClothingTypeDomainObjects() {
-        logger.debug("cacheClothingTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheClothingTypeDomainObjects");
-        em.createNamedQuery(ClothingType.FIND_ALL_CLOTHING_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheClothingTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheEventTypeDomainObjects() {
-        logger.debug("cacheEventTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheEventTypeDomainObjects");
-        em.createNamedQuery(EventType.FIND_ALL_EVENT_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheEventTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheFootwearTypeDomainObjects() {
-        logger.debug("cacheFootwearTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheFootwearTypeDomainObjects");
-        em.createNamedQuery(FootwearType.FIND_ALL_FOOTWEAR_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheFootwearTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheHeadwearTypeDomainObjects() {
-        logger.debug("cacheHeadwearTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheHeadwearTypeDomainObjects");
-        em.createNamedQuery(HeadwearType.FIND_ALL_HEADWEAR_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheHeadwearTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheItemTypeDomainObjects() {
-        logger.debug("cacheItemTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheItemTypeDomainObjects");
-        em.createNamedQuery(ItemType.FIND_ALL_ITEM_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheItemTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheLocationTypeDomainObjects() {
-        logger.debug("cacheLocationTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheLocationTypeDomainObjects");
-        em.createNamedQuery(LocationType.FIND_ALL_LOCATION_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheLocationTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cachePopularityRankingTypeDomainObjects() {
-        logger.debug("cachePopularityRankingTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cachePopularityRankingTypeDomainObjects");
-        em.createNamedQuery(PopularityRankingType.FIND_ALL_POPULARITY_RANKING_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cachePopularityRankingTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "findAllRoomTypes")
-
-    //@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY)
-    private void cacheRoomTypeDomainObjects() {
-        logger.debug("cacheRoomTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheRoomTypeDomainObjects");
-        //em.createNamedQuery(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY).getResultList();
-
-        findAll(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY);
-
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheRoomTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheRoomConfigurationTypeDomainObjects() {
-        logger.debug("cacheRoomConfigurationTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheRoomConfigurationTypeDomainObjects");
-        em.createNamedQuery(RoomConfigurationType.FIND_ALL_ROOM_CONFIGURATION_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheRoomConfigurationTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheSiteTypeDomainObjects() {
-        logger.debug("cacheSiteTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheSiteTypeDomainObjects");
-        em.createNamedQuery(SiteType.FIND_ALL_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheSiteTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheSupplierTypeDomainObjects() {
-        logger.debug("cacheSupplierTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheSupplierTypeDomainObjects");
-        em.createNamedQuery(SupplierType.FIND_ALL_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheSupplierTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheTransferSiteTypeDomainObjects() {
-        logger.debug("cacheTransferSiteTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheTransferSiteTypeDomainObjects");
-        em.createNamedQuery(TransferSiteType.FIND_ALL_TRANSFER_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheTransferSiteTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
-    }
-
-    private void cacheVehicleHireSiteTypeDomainObjects() {
-        logger.debug("cacheVehicleHireSiteTypeDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start("cacheVehicleHireSiteTypeDomainObjects");
-        em.createNamedQuery(VehicleHireSiteType.FIND_ALL_VEHICLE_SITE_TYPES_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds ReferenceTypeDAOImpl.cacheVehicleHireSiteTypeDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
+        super.cacheDomainObjects(namedQueries);
     }
 
 }
