@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 import org.springframework.beans.BeanUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -71,7 +72,6 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         return accommodationSiteAssembler.assembleToDTO(accommodationSite);
     }
 
-    @Override
     protected void cacheDomainObjects() {
         logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
@@ -83,5 +83,7 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
             logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
         }
     }
+
+
 
 }

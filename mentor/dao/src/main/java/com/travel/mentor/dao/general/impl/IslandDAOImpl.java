@@ -32,7 +32,6 @@ public class IslandDAOImpl extends AbstractMentorDAO implements IslandDAO {
         return islandAssembler.assembleToDTO(island);
     }
 
-    @Override
     protected void cacheDomainObjects() {
         logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();

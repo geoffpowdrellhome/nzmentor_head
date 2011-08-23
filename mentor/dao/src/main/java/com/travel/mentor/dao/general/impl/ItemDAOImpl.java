@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 import org.springframework.beans.BeanUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,17 +67,21 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
         return itemAssembler.assembleToDTO(item);
     }
 
-    @Override
+    @PostConstruct
     protected void cacheDomainObjects() {
-        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
-        StopWatch watch = new StopWatch();
-        watch.start(this.getClass().getName() +".cacheDomainObjects()");
-        em.createNamedQuery(Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY).getResultList();
-        watch.stop();
-        if (logger.isDebugEnabled()) {
-            logger.debug(watch.prettyPrint());
-            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
-        }
+        List<String> namedQueries = new ArrayList<String>();
+        namedQueries.add(Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY);
+        super.cacheDomainObjects(namedQueries);
+//
+//        logger.debug(this.getClass().getName() +".cacheDomainObjects()");
+//        StopWatch watch = new StopWatch();
+//        watch.start(this.getClass().getName() +".cacheDomainObjects()");
+//        em.createNamedQuery(Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY).getResultList();
+//        watch.stop();
+//        if (logger.isDebugEnabled()) {
+//            logger.debug(watch.prettyPrint());
+//            logger.info("Total Time in Seconds "+this.getClass().getName() +".cacheDomainObjects() = " + watch.getTotalTimeSeconds());
+//        }
     }
 
 }

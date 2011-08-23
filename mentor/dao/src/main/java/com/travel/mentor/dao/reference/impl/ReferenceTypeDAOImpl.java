@@ -77,7 +77,6 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
     }
 
-    @Override
     protected void cacheDomainObjects() {
         cacheAccommodationSiteTypeDomainObjects();
         cacheActivitySiteTypeDomainObjects();

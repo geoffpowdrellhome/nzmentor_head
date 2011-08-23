@@ -22,6 +22,10 @@
         </property>
     </bean>
 
+    <bean id="dev" class="java.lang.Boolean">
+        <constructor-arg value="${dev.env}" />
+    </bean>
+
     <bean id="mentorDataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${mentor.jdbc.driverclassname}"/>
@@ -68,12 +72,12 @@
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <!--<ehcache:annotation-driven cache-manager="cacheManager"/>-->
+
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation">
             <value>classpath:ehcache.xml</value>
         </property>
     </bean>
-
+    <!--<ehcache:annotation-driven cache-manager="cacheManager"/>-->
 
 </beans>

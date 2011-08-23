@@ -77,7 +77,6 @@ public class SupplierDAOImpl extends AbstractMentorDAO implements SupplierDAO {
         return supplierAssembler.assembleToDTO(supplier);
     }
 
-    @Override
     protected void cacheDomainObjects() {
         //To change body of implemented methods use File | Settings | File Templates.
     }

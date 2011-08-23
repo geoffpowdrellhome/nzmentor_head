@@ -262,8 +262,6 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
         return securityRightDTOList;
     }
 
-
-    @Override
     protected void cacheDomainObjects() {
         cacheSecureUsers();
         cacheSecureGroups();

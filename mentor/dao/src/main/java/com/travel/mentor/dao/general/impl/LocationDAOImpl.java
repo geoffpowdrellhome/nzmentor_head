@@ -64,7 +64,6 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         return locationAssembler.assembleToDTO(location);
     }
 
-    @Override
     protected void cacheDomainObjects() {
         logger.debug(this.getClass().getName() +".cacheDomainObjects()");
         StopWatch watch = new StopWatch();
