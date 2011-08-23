@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.assemble.security.impl;
 
-import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
+import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.security.SecurityGroupRightAssembler;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityGroupDTO;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SecurityGroupRightAssemblerImpl extends BaseAssemblerImpl implements SecurityGroupRightAssembler {
+public class SecurityGroupRightAssemblerImpl extends AbstractAssembler implements SecurityGroupRightAssembler {
 
     @Override
     public List<SecurityGroupRightDTO> assembleToDTOList(List<SecurityGroupRight> securityGroupRightList) {
@@ -29,26 +29,26 @@ public class SecurityGroupRightAssemblerImpl extends BaseAssemblerImpl implement
 
     @Override
     public SecurityGroupRight assembleToDomainObject(SecurityGroupRightDTO securityGroupRightDTO) {
-        SecurityGroupRight securityGroupRight = (SecurityGroupRight) shallowCopy(securityGroupRightDTO, SecurityGroupRight.class);
+        SecurityGroupRight securityGroupRight = (SecurityGroupRight) assembleUtil.shallowCopy(securityGroupRightDTO, SecurityGroupRight.class);
 
-        securityGroupRight.setCreateUser((SecureUser) shallowCopy(securityGroupRightDTO.getCreateUserDTO(), SecureUser.class));
-        securityGroupRight.setUpdateUser((SecureUser) shallowCopy(securityGroupRightDTO.getUpdateUserDTO(), SecureUser.class));
+        securityGroupRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityGroupRightDTO.getCreateUserDTO(), SecureUser.class));
+        securityGroupRight.setUpdateUser((SecureUser) assembleUtil.shallowCopy(securityGroupRightDTO.getUpdateUserDTO(), SecureUser.class));
 
-        securityGroupRight.setSecurityGroup((SecurityGroup) shallowCopy(securityGroupRightDTO.getSecurityGroupDTO(), SecurityGroup.class));
-        securityGroupRight.setSecurityRight((SecurityRight) shallowCopy(securityGroupRightDTO.getSecurityRightDTO(), SecurityRight.class));
+        securityGroupRight.setSecurityGroup((SecurityGroup) assembleUtil.shallowCopy(securityGroupRightDTO.getSecurityGroupDTO(), SecurityGroup.class));
+        securityGroupRight.setSecurityRight((SecurityRight) assembleUtil.shallowCopy(securityGroupRightDTO.getSecurityRightDTO(), SecurityRight.class));
 
         return securityGroupRight;
     }
 
     @Override
     public SecurityGroupRightDTO assembleToDTO(SecurityGroupRight securityGroupRight) {
-        SecurityGroupRightDTO securityGroupRightDTO = (SecurityGroupRightDTO) shallowCopy(securityGroupRight, SecurityGroupRightDTO.class);
+        SecurityGroupRightDTO securityGroupRightDTO = (SecurityGroupRightDTO) assembleUtil.shallowCopy(securityGroupRight, SecurityGroupRightDTO.class);
 
-        securityGroupRightDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityGroupRight.getCreateUser(), SecureUserDTO.class));
-        securityGroupRightDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityGroupRight.getUpdateUser(), SecureUserDTO.class));
+        securityGroupRightDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroupRight.getCreateUser(), SecureUserDTO.class));
+        securityGroupRightDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroupRight.getUpdateUser(), SecureUserDTO.class));
 
-        securityGroupRightDTO.setSecurityGroupDTO((SecurityGroupDTO) shallowCopy(securityGroupRight.getSecurityGroup(), SecurityGroupDTO.class));
-        securityGroupRightDTO.setSecurityRightDTO((SecurityRightDTO) shallowCopy(securityGroupRight.getSecurityRight(), SecurityRightDTO.class));
+        securityGroupRightDTO.setSecurityGroupDTO((SecurityGroupDTO) assembleUtil.shallowCopy(securityGroupRight.getSecurityGroup(), SecurityGroupDTO.class));
+        securityGroupRightDTO.setSecurityRightDTO((SecurityRightDTO) assembleUtil.shallowCopy(securityGroupRight.getSecurityRight(), SecurityRightDTO.class));
 
         return securityGroupRightDTO;
     }

@@ -50,7 +50,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.ehcache-spring-annotations</groupId> <!-- michaels currency conversion stuff -->
+            <groupId>com.googlecode.ehcache-spring-annotations</groupId>
             <artifactId>ehcache-spring-annotations</artifactId>
             <version>${ehcache-spring-annotations.version}</version>
             <scope>compile</scope>

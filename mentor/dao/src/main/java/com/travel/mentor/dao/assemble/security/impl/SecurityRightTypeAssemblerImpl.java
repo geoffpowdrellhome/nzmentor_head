@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.assemble.security.impl;
 
-import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
+import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.security.SecurityRightTypeAssembler;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityRightTypeDTO;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SecurityRightTypeAssemblerImpl extends BaseAssemblerImpl implements SecurityRightTypeAssembler {
+public class SecurityRightTypeAssemblerImpl extends AbstractAssembler implements SecurityRightTypeAssembler {
 
     @Override
     public List<SecurityRightTypeDTO> assembleToDTOList(List<SecurityRightType> securityRightTypeList) {
@@ -25,20 +25,20 @@ public class SecurityRightTypeAssemblerImpl extends BaseAssemblerImpl implements
 
     @Override
     public SecurityRightType assembleToDomainObject(SecurityRightTypeDTO securityRightTypeDTO) {
-        SecurityRightType securityRight = (SecurityRightType) shallowCopy(securityRightTypeDTO, SecurityRightType.class);
+        SecurityRightType securityRight = (SecurityRightType) assembleUtil.shallowCopy(securityRightTypeDTO, SecurityRightType.class);
 
-        securityRight.setCreateUser((SecureUser) shallowCopy(securityRightTypeDTO.getCreateUserDTO(), SecureUser.class));
-        securityRight.setUpdateUser((SecureUser) shallowCopy(securityRightTypeDTO.getUpdateUserDTO(), SecureUser.class));
+        securityRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityRightTypeDTO.getCreateUserDTO(), SecureUser.class));
+        securityRight.setUpdateUser((SecureUser) assembleUtil.shallowCopy(securityRightTypeDTO.getUpdateUserDTO(), SecureUser.class));
 
         return securityRight;
     }
 
     @Override
     public SecurityRightTypeDTO assembleToDTO(SecurityRightType securityRightType) {
-        SecurityRightTypeDTO securityRightTypeDTO = (SecurityRightTypeDTO) shallowCopy(securityRightType, SecurityRightTypeDTO.class);
+        SecurityRightTypeDTO securityRightTypeDTO = (SecurityRightTypeDTO) assembleUtil.shallowCopy(securityRightType, SecurityRightTypeDTO.class);
 
-        securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityRightType.getCreateUser(), SecureUserDTO.class));
-        securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityRightType.getUpdateUser(), SecureUserDTO.class));
+        securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRightType.getCreateUser(), SecureUserDTO.class));
+        securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRightType.getUpdateUser(), SecureUserDTO.class));
 
         return securityRightTypeDTO;
     }

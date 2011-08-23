@@ -1,7 +1,7 @@
 package com.travel.mentor.dao.assemble.general.impl;
 
+import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.general.LocationAssembler;
-import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
 import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.general.LocationDTO;
 import com.travel.mentor.dao.dto.general.RegionDTO;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class LocationAssemblerImpl extends BaseAssemblerImpl implements LocationAssembler {
+public class LocationAssemblerImpl extends AbstractAssembler implements LocationAssembler {
 
     @Override
     public List<LocationDTO> assembleToDTOList(List<Location> locationList) {
@@ -29,26 +29,26 @@ public class LocationAssemblerImpl extends BaseAssemblerImpl implements Location
 
     @Override
     public Location assembleToDomainObject(LocationDTO locationDTO) {
-        Location location = (Location) shallowCopy(locationDTO, Location.class);
+        Location location = (Location) assembleUtil.shallowCopy(locationDTO, Location.class);
 
-        location.setCreateUser((SecureUser) shallowCopy(locationDTO.getCreateUserDTO(), SecureUser.class));
-        location.setUpdateUser((SecureUser) shallowCopy(locationDTO.getUpdateUserDTO(), SecureUser.class));
+        location.setCreateUser((SecureUser) assembleUtil.shallowCopy(locationDTO.getCreateUserDTO(), SecureUser.class));
+        location.setUpdateUser((SecureUser) assembleUtil.shallowCopy(locationDTO.getUpdateUserDTO(), SecureUser.class));
 
-        location.setLocationType((LocationType) shallowCopy(locationDTO.getLocationTypeDTO(), LocationType.class));
-        location.setRegion((Region) shallowCopy(locationDTO.getRegionDTO(), Region.class));
+        location.setLocationType((LocationType) assembleUtil.shallowCopy(locationDTO.getLocationTypeDTO(), LocationType.class));
+        location.setRegion((Region) assembleUtil.shallowCopy(locationDTO.getRegionDTO(), Region.class));
 
         return location;
     }
 
     @Override
     public LocationDTO assembleToDTO(Location location) {
-        LocationDTO locationDTO = (LocationDTO) shallowCopy(location, LocationDTO.class);
+        LocationDTO locationDTO = (LocationDTO) assembleUtil.shallowCopy(location, LocationDTO.class);
 
-        locationDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(location.getCreateUser(), SecureUserDTO.class));
-        locationDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(location.getUpdateUser(), SecureUserDTO.class));
+        locationDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(location.getCreateUser(), SecureUserDTO.class));
+        locationDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(location.getUpdateUser(), SecureUserDTO.class));
 
-        locationDTO.setLocationTypeDTO((ReferenceTypeDTO) shallowCopy(location.getLocationType(), ReferenceTypeDTO.class));
-        locationDTO.setRegionDTO((RegionDTO) shallowCopy(location.getRegion(), RegionDTO.class));
+        locationDTO.setLocationTypeDTO((ReferenceTypeDTO) assembleUtil.shallowCopy(location.getLocationType(), ReferenceTypeDTO.class));
+        locationDTO.setRegionDTO((RegionDTO) assembleUtil.shallowCopy(location.getRegion(), RegionDTO.class));
 
         return locationDTO;
     }

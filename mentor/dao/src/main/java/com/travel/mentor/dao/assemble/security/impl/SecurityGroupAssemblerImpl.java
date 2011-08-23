@@ -1,6 +1,6 @@
 package com.travel.mentor.dao.assemble.security.impl;
 
-import com.travel.mentor.dao.assemble.base.impl.BaseAssemblerImpl;
+import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.security.SecurityGroupAssembler;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityGroupDTO;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SecurityGroupAssemblerImpl extends BaseAssemblerImpl implements SecurityGroupAssembler {
+public class SecurityGroupAssemblerImpl extends AbstractAssembler implements SecurityGroupAssembler {
 
     @Override
     public List<SecurityGroupDTO> assembleToDTOList(List<SecurityGroup> securityGroupList) {
@@ -25,20 +25,20 @@ public class SecurityGroupAssemblerImpl extends BaseAssemblerImpl implements Sec
 
     @Override
     public SecurityGroup assembleToDomainObject(SecurityGroupDTO securityGroupDTO) {
-        SecurityGroup securityGroup = (SecurityGroup) shallowCopy(securityGroupDTO, SecurityGroup.class);
+        SecurityGroup securityGroup = (SecurityGroup) assembleUtil.shallowCopy(securityGroupDTO, SecurityGroup.class);
 
-        securityGroup.setCreateUser((SecureUser) shallowCopy(securityGroupDTO.getCreateUserDTO(), SecureUser.class));
-        securityGroup.setUpdateUser((SecureUser) shallowCopy(securityGroupDTO.getUpdateUserDTO(), SecureUser.class));
+        securityGroup.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityGroupDTO.getCreateUserDTO(), SecureUser.class));
+        securityGroup.setUpdateUser((SecureUser) assembleUtil.shallowCopy(securityGroupDTO.getUpdateUserDTO(), SecureUser.class));
 
         return securityGroup;
     }
 
     @Override
     public SecurityGroupDTO assembleToDTO(SecurityGroup securityGroup) {
-        SecurityGroupDTO securityGroupDTO = (SecurityGroupDTO) shallowCopy(securityGroup, SecurityGroupDTO.class);
+        SecurityGroupDTO securityGroupDTO = (SecurityGroupDTO) assembleUtil.shallowCopy(securityGroup, SecurityGroupDTO.class);
 
-        securityGroupDTO.setCreateUserDTO((SecureUserDTO) shallowCopy(securityGroup.getCreateUser(), SecureUserDTO.class));
-        securityGroupDTO.setUpdateUserDTO((SecureUserDTO) shallowCopy(securityGroup.getUpdateUser(), SecureUserDTO.class));
+        securityGroupDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroup.getCreateUser(), SecureUserDTO.class));
+        securityGroupDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroup.getUpdateUser(), SecureUserDTO.class));
 
         return securityGroupDTO;
     }
