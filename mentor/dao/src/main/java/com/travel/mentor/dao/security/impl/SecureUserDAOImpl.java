@@ -27,12 +27,12 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
     @Override
     public SecureUserDTO findByUsername(String username) {
         SecureUser secureUser = em.find(SecureUser.class, username);
-        return secureUserAssembler.assembleToDTO(secureUser);
+        return secureUserAssembler.assembleToDTOInstance(secureUser);
     }
 
     @Override
     public SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser) {
-        SecureUser secureUser = secureUserAssembler.assembleToDomainObject(secureUserDTO);
+        SecureUser secureUser = secureUserAssembler.assembleToEntityInstance(secureUserDTO);
 
         if (secureUserDTO.getUsername() == null || em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
             secureUser.setCreateUser(loggedOnUser.getUsername());
@@ -49,7 +49,7 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
             em.merge(secureUser);
         }
 
-        return secureUserAssembler.assembleToDTO(secureUser);
+        return secureUserAssembler.assembleToDTOInstance(secureUser);
     }
 
 }

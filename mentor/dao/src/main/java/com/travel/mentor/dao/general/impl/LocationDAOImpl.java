@@ -34,16 +34,16 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
         Location location = locationAssembler.assembleToDomainObject(locationDTO);
 
         if (locationDTO.getId() == null || em.find(Location.class, locationDTO.getId()) == null) {
-            location.setCreateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setCreateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
             location.setCreateDate(new Timestamp(new Date().getTime()));
-            location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setUpdateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
             location.setUpdateDate(new Timestamp(new Date().getTime()));
             em.persist(location);
         }
         else {
             Location existingLocation = em.find(location.getClass(), locationDTO.getId());
             BeanUtils.copyProperties(location, existingLocation);
-            location.setUpdateUser( secureUserAssembler.assembleToDomainObject(locationDTO.getLoggedInUser()) );
+            location.setUpdateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
             location.setUpdateDate(new Timestamp(new Date().getTime()));
             em.merge(location);
         }

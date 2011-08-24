@@ -45,15 +45,15 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
 
         if (referenceTypeDTO.getId() == null || em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId()) == null) {
-            abstractAuditedNameDescEntity.setCreateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity.setCreateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
             abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
-            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
             abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
             em.persist(abstractAuditedNameDescEntity);
         } else {
             AbstractAuditedIdNameDescEntity existingEntityRecord = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
             BeanUtils.copyProperties(abstractAuditedNameDescEntity, existingEntityRecord);
-            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToDomainObject(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
             abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
 
             em.merge(existingEntityRecord);

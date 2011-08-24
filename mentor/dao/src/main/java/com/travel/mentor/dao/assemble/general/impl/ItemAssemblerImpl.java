@@ -1,6 +1,5 @@
 package com.travel.mentor.dao.assemble.general.impl;
 
-import com.travel.mentor.core.util.AssembleUtil;
 import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.general.ItemAssembler;
 import com.travel.mentor.dao.dto.general.ItemDTO;
@@ -11,10 +10,8 @@ import com.travel.mentor.domain.general.Item;
 import com.travel.mentor.domain.general.Site;
 import com.travel.mentor.domain.general.Supplier;
 import com.travel.mentor.domain.reference.ItemType;
-import com.travel.mentor.domain.security.SecureUser;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +22,14 @@ public class ItemAssemblerImpl extends AbstractAssembler implements ItemAssemble
     public List<ItemDTO> assembleToDTOList(List<Item> itemList) {
         List<ItemDTO> itemDTOList = new ArrayList<ItemDTO>();
         for (Item item : itemList) {
-            itemDTOList.add( assembleToDTO(item) );
+            itemDTOList.add( assembleToDTOInstance(item) );
         }
         return itemDTOList;
     }
 
     @Override
-    public Item assembleToDomainObject(ItemDTO itemDTO) {
+    public Item assembleToEntityInstance(ItemDTO itemDTO) {
         Item item = (Item) assembleUtil.shallowCopy(itemDTO, Item.class);
-
-        item.setCreateUser((SecureUser) assembleUtil.shallowCopy(itemDTO.getCreateUserDTO(), SecureUser.class));
-        item.setUpdateUser((SecureUser) assembleUtil.shallowCopy(itemDTO.getUpdateUserDTO(), SecureUser.class));
 
         item.setSupplier((Supplier) assembleUtil.shallowCopy(itemDTO.getSupplierDTO(), Supplier.class));
         item.setItemType((ItemType) assembleUtil.shallowCopy(itemDTO.getItemTypeDTO(), ItemType.class));
@@ -45,7 +39,7 @@ public class ItemAssemblerImpl extends AbstractAssembler implements ItemAssemble
     }
 
     @Override
-    public ItemDTO assembleToDTO(Item item) {
+    public ItemDTO assembleToDTOInstance(Item item) {
         ItemDTO itemDTO = (ItemDTO) assembleUtil.shallowCopy(item, ItemDTO.class);
 
         itemDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(item.getCreateUser(), SecureUserDTO.class));
@@ -55,6 +49,20 @@ public class ItemAssemblerImpl extends AbstractAssembler implements ItemAssemble
         itemDTO.setSiteDTO((SiteDTO) assembleUtil.shallowCopy(item.getSite(), SiteDTO.class));
 
         return itemDTO;
+    }
+
+    @Override
+    public Item deepCopy(ItemDTO itemDTO, Item item) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(itemDTO, item, ignoreProperties);
+
+        assembleUtil.shallowCopy(itemDTO.getCreateUserDTO(), item.getCreateUser());
+        assembleUtil.shallowCopy(itemDTO.getUpdateUserDTO(), item.getUpdateUser());
+        assembleUtil.shallowCopy(itemDTO.getSupplierDTO(), item.getSupplier());
+        assembleUtil.shallowCopy(itemDTO.getItemTypeDTO(), item.getItemType());
+        assembleUtil.shallowCopy(itemDTO.getSiteDTO(), item.getSite());
+
+        return item;
     }
 
 }

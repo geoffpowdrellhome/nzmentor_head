@@ -4,6 +4,7 @@ import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
 import com.travel.mentor.dao.assemble.security.SecurityRoleAssembler;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
+import com.travel.mentor.dao.dto.security.SecurityRoleDTO;
 import com.travel.mentor.domain.security.SecureUser;
 import com.travel.mentor.domain.security.SecurityRole;
 import org.springframework.stereotype.Component;
@@ -21,23 +22,35 @@ public class SecureUserAssemblerImpl extends AbstractAssembler implements Secure
     public List<SecureUserDTO> assembleToDTOList(List<SecureUser> secureUserList) {
         List<SecureUserDTO> secureUserDTOList = new ArrayList<SecureUserDTO>();
         for (SecureUser secureUser : secureUserList) {
-            secureUserDTOList.add( assembleToDTO(secureUser) );
+            secureUserDTOList.add( assembleToDTOInstance(secureUser) );
         }
         return secureUserDTOList;
     }
 
     @Override
-    public SecureUser assembleToDomainObject(SecureUserDTO secureUserDTO) {
+    public SecureUser assembleToEntityInstance(SecureUserDTO secureUserDTO) {
         return (SecureUser) assembleUtil.shallowCopy(secureUserDTO, SecureUser.class);
     }
 
     @Override
-    public SecureUserDTO assembleToDTO(SecureUser secureUser) {
+    public SecureUserDTO assembleToDTOInstance(SecureUser secureUser) {
         SecureUserDTO secureUserDTO = (SecureUserDTO) assembleUtil.shallowCopy(secureUser, SecureUserDTO.class);
         for (SecurityRole securityRole : secureUser.getSecurityRoleList()) {
             secureUserDTO.getSecurityRoleDTOList().add( securityRoleAssembler.assembleToDTO(securityRole) );
         }
         return secureUserDTO;
+    }
+
+    @Override
+    public SecureUser deepCopy(SecureUserDTO secureUserDTO, SecureUser secureUser) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(secureUserDTO, secureUser, ignoreProperties);
+
+        for (SecurityRoleDTO securityRoleDTO : secureUserDTO.getSecurityRoleDTOList()) {
+            secureUser.getSecurityRoleList().add( securityRoleAssembler.assembleToDomainObject(securityRoleDTO));
+        }
+
+        return secureUser;
     }
 
 }

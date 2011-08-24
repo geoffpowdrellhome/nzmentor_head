@@ -49,16 +49,16 @@ public class SupplierDAOImpl extends AbstractMentorDAO implements SupplierDAO {
         Supplier item = supplierAssembler.assembleToDomainObject(supplierDTO);
 
         if (supplierDTO.getId() == null || em.find(Item.class, supplierDTO.getId()) == null) {
-            item.setCreateUser( secureUserAssembler.assembleToDomainObject(supplierDTO.getLoggedInUser()) );
+            item.setCreateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
             item.setCreateDate(new Timestamp(new Date().getTime()));
-            item.setUpdateUser( secureUserAssembler.assembleToDomainObject(supplierDTO.getLoggedInUser()) );
+            item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
             item.setUpdateDate(new Timestamp(new Date().getTime()));
             em.persist(item);
         }
         else {
             Supplier existingItem = em.find(item.getClass(), supplierDTO.getId());
             BeanUtils.copyProperties(item, existingItem);
-            item.setUpdateUser( secureUserAssembler.assembleToDomainObject(supplierDTO.getLoggedInUser()) );
+            item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
             item.setUpdateDate(new Timestamp(new Date().getTime()));
             em.merge(item);
         }

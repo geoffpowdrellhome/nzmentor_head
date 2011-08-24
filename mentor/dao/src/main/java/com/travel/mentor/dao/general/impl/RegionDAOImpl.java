@@ -4,12 +4,10 @@ import com.travel.mentor.dao.assemble.general.RegionAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.RegionDTO;
 import com.travel.mentor.dao.general.RegionDAO;
-import com.travel.mentor.domain.general.Location;
 import com.travel.mentor.domain.general.Region;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -36,15 +34,15 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
         Region region = regionAssembler.assembleToDomainObject(regionDTO);
 
         if (regionDTO.getId() == null || em.find(Region.class, regionDTO.getId()) == null) {
-            region.setCreateUser(secureUserAssembler.assembleToDomainObject(regionDTO.getLoggedInUser()));
+            region.setCreateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
             region.setCreateDate(new Timestamp(new Date().getTime()));
-            region.setUpdateUser(secureUserAssembler.assembleToDomainObject(regionDTO.getLoggedInUser()));
+            region.setUpdateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
             region.setUpdateDate(new Timestamp(new Date().getTime()));
             em.persist(region);
         } else {
             Region existingRegion = em.find(region.getClass(), regionDTO.getId());
             BeanUtils.copyProperties(region, existingRegion);
-            region.setUpdateUser(secureUserAssembler.assembleToDomainObject(regionDTO.getLoggedInUser()));
+            region.setUpdateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
             region.setUpdateDate(new Timestamp(new Date().getTime()));
             em.merge(region);
         }

@@ -9,8 +9,10 @@ public interface SecureUserAssembler {
 
     List<SecureUserDTO> assembleToDTOList(List<SecureUser> secureUserList);
 
-    SecureUser assembleToDomainObject(SecureUserDTO secureUserDTO);
+    SecureUser assembleToEntityInstance(SecureUserDTO secureUserDTO);
 
-    SecureUserDTO assembleToDTO(SecureUser secureUser);
+    SecureUserDTO assembleToDTOInstance(SecureUser secureUser);
+
+    SecureUser deepCopy(SecureUserDTO secureUserDTO, SecureUser secureUser);
 
 }

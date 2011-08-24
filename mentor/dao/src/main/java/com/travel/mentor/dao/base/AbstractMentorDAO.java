@@ -1,6 +1,7 @@
 package com.travel.mentor.dao.base;
 
 import com.travel.mentor.core.MentorObject;
+import com.travel.mentor.core.util.AssembleUtil;
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
 import org.springframework.util.StopWatch;
 
@@ -26,6 +27,9 @@ public abstract class AbstractMentorDAO extends MentorObject {
 
     @Resource(name = "dev")
     protected Boolean dev;
+
+    @Resource
+    protected AssembleUtil assembleUtil;
 
     public void setEm(EntityManager em) {
         this.em = em;

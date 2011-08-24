@@ -37,9 +37,9 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
         AccommodationSite accommodationSite = accommodationSiteAssembler.assembleToDomainObject(accommodationSiteDTO);
 
         if (accommodationSiteDTO.getId() == null || em.find(AccommodationSite.class, accommodationSiteDTO.getId()) == null) {
-            accommodationSite.setCreateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            accommodationSite.setCreateUser( secureUserAssembler.assembleToEntityInstance(accommodationSiteDTO.getLoggedInUser()) );
             accommodationSite.setCreateDate(new Timestamp(new Date().getTime()));
-            accommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            accommodationSite.setUpdateUser( secureUserAssembler.assembleToEntityInstance(accommodationSiteDTO.getLoggedInUser()) );
             accommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
             em.persist(accommodationSite);
         }
@@ -50,7 +50,7 @@ public class AccommodationSiteDAOImpl extends AbstractMentorDAO implements Accom
             existingAccommodationSite.setAccommodationSiteType(em.find(AccommodationSiteType.class, accommodationSiteDTO.getAccommodationSiteTypeDTO().getId()));
             existingAccommodationSite.setSiteType(em.find(SiteType.class, accommodationSiteDTO.getSiteTypeDTO().getId()));
             existingAccommodationSite.setLocation(em.find(Location.class, accommodationSiteDTO.getLocationDTO().getId()));
-            existingAccommodationSite.setUpdateUser( secureUserAssembler.assembleToDomainObject(accommodationSiteDTO.getLoggedInUser()) );
+            existingAccommodationSite.setUpdateUser( secureUserAssembler.assembleToEntityInstance(accommodationSiteDTO.getLoggedInUser()) );
             existingAccommodationSite.setUpdateDate(new Timestamp(new Date().getTime()));
             em.merge(existingAccommodationSite);
         }

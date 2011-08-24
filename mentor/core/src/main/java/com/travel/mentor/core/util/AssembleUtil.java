@@ -22,4 +22,11 @@ public class AssembleUtil {
         return copyTo;
     }
 
+    public Object shallowCopy(Object copyFrom, Object copyTo, String[] ignoreProperties) {
+        Assert.notNull(copyFrom);
+        Assert.notNull(copyTo);
+        BeanUtils.copyProperties(copyFrom, copyTo, ignoreProperties);
+        return copyTo;
+    }
+
 }

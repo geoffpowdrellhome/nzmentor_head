@@ -60,18 +60,7 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
     @Test
     public void testDelete() {
         ItemDTO existingItemDTO = itemDAO.find(EXISTING_ID_VALUE);
-
-        ItemDTO addItemDTO = new ItemDTO();
-        BeanUtils.copyProperties(existingItemDTO, addItemDTO);
-
-        addItemDTO.setId(null);
-        addItemDTO.setDescription("temp-add");
-        addItemDTO.setName("temp-add");
-        addItemDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
-        addItemDTO.setSupplierDTO( supplierDAO.find(1L) );
-        addItemDTO = itemDAO.saveOrUpdate(addItemDTO);
-
-        itemDAO.delete(addItemDTO);
+        itemDAO.delete(existingItemDTO);
     }
 
     @Test

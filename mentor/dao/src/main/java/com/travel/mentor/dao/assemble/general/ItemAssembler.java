@@ -9,8 +9,10 @@ public interface ItemAssembler {
 
     List<ItemDTO> assembleToDTOList(List<Item> itemList);
 
-    Item assembleToDomainObject(ItemDTO itemDTO);
+    Item assembleToEntityInstance(ItemDTO itemDTO);
 
-    ItemDTO assembleToDTO(Item item);
+    ItemDTO assembleToDTOInstance(Item item);
+
+    Item deepCopy(ItemDTO itemDTO, Item item);
 
 }

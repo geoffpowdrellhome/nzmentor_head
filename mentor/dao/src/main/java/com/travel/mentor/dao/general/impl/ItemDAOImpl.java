@@ -1,15 +1,14 @@
 package com.travel.mentor.dao.general.impl;
 
 import com.travel.mentor.dao.assemble.general.ItemAssembler;
+import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.ItemDTO;
 import com.travel.mentor.dao.general.ItemDAO;
-import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.domain.general.Item;
 import com.travel.mentor.domain.general.Supplier;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -33,38 +32,37 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
 
     @Override
     public ItemDTO saveOrUpdate(ItemDTO itemDTO) {
-        Item item = itemAssembler.assembleToDomainObject(itemDTO);
+
+        Item item = BeanUtils.instantiateClass(Item.class);
 
         if (itemDTO.getId() == null || em.find(Item.class, itemDTO.getId()) == null) {
-            item.setCreateUser( secureUserAssembler.assembleToDomainObject(itemDTO.getLoggedInUser()) );
+            item = itemAssembler.assembleToEntityInstance(itemDTO);
+            item.setCreateUser( secureUserAssembler.assembleToEntityInstance(itemDTO.getLoggedInUser()) );
             item.setCreateDate(new Timestamp(new Date().getTime()));
-            item.setUpdateUser( secureUserAssembler.assembleToDomainObject(itemDTO.getLoggedInUser()) );
-            item.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(item);
         }
         else {
-            Item existingItem = em.find(item.getClass(), itemDTO.getId());
-            BeanUtils.copyProperties(item, existingItem);
-            item.setUpdateUser( secureUserAssembler.assembleToDomainObject(itemDTO.getLoggedInUser()) );
-            item.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.merge(item);
+            item = em.find(item.getClass(), itemDTO.getId());
+            itemAssembler.deepCopy(itemDTO, item);
         }
 
-        return itemAssembler.assembleToDTO(item);
+        item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(itemDTO.getLoggedInUser()) );
+        item.setUpdateDate(new Timestamp(new Date().getTime()));
+
+        em.merge(item);
+
+        return itemAssembler.assembleToDTOInstance(item);
     }
 
     @Override
     public void delete(ItemDTO itemDTO) {
         Item item = em.find(Item.class, itemDTO.getId());
         em.remove(item);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(item.getClass(), item.getId());
     }
 
     @Override
     public ItemDTO find(Long id) {
-        Item item = em.find(Item.class, id);
-        return itemAssembler.assembleToDTO(item);
+        return itemAssembler.assembleToDTOInstance(em.find(Item.class, id));
     }
 
     @PostConstruct
