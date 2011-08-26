@@ -5,7 +5,6 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.LocationDTO;
 import com.travel.mentor.dao.general.LocationDAO;
 import com.travel.mentor.domain.general.Location;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,38 +30,34 @@ public class LocationDAOImpl extends AbstractMentorDAO implements LocationDAO {
 
     @Override
     public LocationDTO saveOrUpdate(LocationDTO locationDTO) {
-        Location location = locationAssembler.assembleToDomainObject(locationDTO);
-
+        Location location;
         if (locationDTO.getId() == null || em.find(Location.class, locationDTO.getId()) == null) {
+            location = locationAssembler.assembleToEntityInstance(locationDTO);
             location.setCreateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
             location.setCreateDate(new Timestamp(new Date().getTime()));
-            location.setUpdateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
-            location.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(location);
         }
         else {
-            Location existingLocation = em.find(location.getClass(), locationDTO.getId());
-            BeanUtils.copyProperties(location, existingLocation);
-            location.setUpdateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
-            location.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.merge(location);
+            location = em.find(Location.class, locationDTO.getId());
+            locationAssembler.deepCopy(locationDTO, location);
         }
 
-        return locationAssembler.assembleToDTO(location);
+        location.setUpdateUser( secureUserAssembler.assembleToEntityInstance(locationDTO.getLoggedInUser()) );
+        location.setUpdateDate(new Timestamp(new Date().getTime()));
+        em.merge(location);
+
+        return locationAssembler.assembleToDTOInstance(location);
     }
 
     @Override
     public void delete(LocationDTO locationDTO) {
         Location location = em.find(Location.class, locationDTO.getId());
         em.remove(location);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(location.getClass(), location.getId());
     }
 
     @Override
     public LocationDTO find(Long id) {
-        Location location = em.find(Location.class, id);
-        return locationAssembler.assembleToDTO(location);
+        return locationAssembler.assembleToDTOInstance(em.find(Location.class, id));
     }
 
     @PostConstruct

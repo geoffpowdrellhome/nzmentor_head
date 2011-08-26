@@ -4,7 +4,6 @@ import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.dao.reference.ReferenceTypeDAO;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,19 +39,8 @@ public abstract class AbstractReferenceTypeDAOTestCase extends AbstractMentorDAO
     public void testDelete() {
         List<ReferenceTypeDTO> referenceTypeDTOList = referenceTypeDAO.findAll(findAllNamedQuery);
         assertRecordsReturned(referenceTypeDTOList);
-
         ReferenceTypeDTO existingReferenceTypeDTO = referenceTypeDTOList.get(0);
-
-        ReferenceTypeDTO addReferenceTypeDTO = new ReferenceTypeDTO();
-        BeanUtils.copyProperties(existingReferenceTypeDTO, addReferenceTypeDTO);
-
-        addReferenceTypeDTO.setId(null);
-        addReferenceTypeDTO.setDescription("temp-add");
-        addReferenceTypeDTO.setName("temp-add");
-        addReferenceTypeDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
-        addReferenceTypeDTO = referenceTypeDAO.saveOrUpdate(addReferenceTypeDTO);
-
-        referenceTypeDAO.delete(addReferenceTypeDTO);
+        referenceTypeDAO.delete(existingReferenceTypeDTO);
     }
 
 }

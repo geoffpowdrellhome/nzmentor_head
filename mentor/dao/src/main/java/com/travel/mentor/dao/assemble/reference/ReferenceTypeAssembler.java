@@ -9,8 +9,10 @@ public interface ReferenceTypeAssembler {
 
     List<ReferenceTypeDTO> assembleToDTOList(List<AbstractAuditedIdNameDescEntity> abstractAuditedNameDescEntityList);
 
-    AbstractAuditedIdNameDescEntity assembleToDomainObject(ReferenceTypeDTO referenceTypeDTO);
+    AbstractAuditedIdNameDescEntity assembleToEntityInstance(ReferenceTypeDTO referenceTypeDTO);
 
-    ReferenceTypeDTO assembleToDTO(AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity);
+    ReferenceTypeDTO assembleToDTOInstance(AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity);
+
+    AbstractAuditedIdNameDescEntity deepCopy(ReferenceTypeDTO referenceTypeDTO, AbstractAuditedIdNameDescEntity abstractAuditedIdNameDescEntity);
 
 }

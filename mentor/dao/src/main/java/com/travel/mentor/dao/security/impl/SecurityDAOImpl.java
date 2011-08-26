@@ -76,7 +76,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
 
     @Override
     public SecurityRoleDTO saveOrUpdate(SecurityRoleDTO securityRoleDTO) {
-        SecurityRole securityRole = securityRoleAssembler.assembleToDomainObject(securityRoleDTO);
+        SecurityRole securityRole = securityRoleAssembler.assembleToEntityInstance(securityRoleDTO);
 
         if (securityRoleDTO.getId() == null || em.find(SecurityRole.class, securityRoleDTO.getId()) == null) {
             securityRole.setCreateUser(secureUserAssembler.assembleToEntityInstance(securityRoleDTO.getLoggedInUser()));
@@ -93,7 +93,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
             em.merge(securityRole);
         }
 
-        return securityRoleAssembler.assembleToDTO(securityRole);
+        return securityRoleAssembler.assembleToDTOInstance(securityRole);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
 
     @Override
     public SecurityGroupDTO saveOrUpdate(SecurityGroupDTO securityGroupDTO) {
-        SecurityGroup securityGroup = securityGroupAssembler.assembleToDomainObject(securityGroupDTO);
+        SecurityGroup securityGroup = securityGroupAssembler.assembleToEntityInstance(securityGroupDTO);
 
         if (securityGroupDTO.getId() == null || em.find(SecurityGroup.class, securityGroupDTO.getId()) == null) {
             securityGroup.setCreateUser(secureUserAssembler.assembleToEntityInstance(securityGroupDTO.getLoggedInUser()));
@@ -129,7 +129,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
             em.merge(securityGroup);
         }
 
-        return securityGroupAssembler.assembleToDTO(securityGroup);
+        return securityGroupAssembler.assembleToDTOInstance(securityGroup);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
 
     @Override
     public SecurityRightDTO saveOrUpdate(SecurityRightDTO securityRightDTO) {
-        SecurityRight securityRight = securityRightAssembler.assembleToDomainObject(securityRightDTO);
+        SecurityRight securityRight = securityRightAssembler.assembleToEntityInstance(securityRightDTO);
 
         if (securityRightDTO.getId() == null || em.find(SecurityRight.class, securityRightDTO.getId()) == null) {
             securityRight.setCreateUser(secureUserAssembler.assembleToEntityInstance(securityRightDTO.getLoggedInUser()));
@@ -167,7 +167,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
             em.merge(securityRight);
         }
 
-        return securityRightAssembler.assembleToDTO(securityRight);
+        return securityRightAssembler.assembleToDTOInstance(securityRight);
     }
 
     @Override
@@ -194,7 +194,7 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     @Override
     public SecurityRightTypeDTO getSecurityRightTypeById(Long id) {
         SecurityRightType securityRightType = em.find(SecurityRightType.class, id);
-        return securityRightTypeAssembler.assembleToDTO(securityRightType);
+        return securityRightTypeAssembler.assembleToDTOInstance(securityRightType);
     }
 
     @Override

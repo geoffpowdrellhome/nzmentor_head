@@ -5,8 +5,6 @@ import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 public class AccommodationSiteDTO extends SiteDTO {
 
     private ReferenceTypeDTO accommodationSiteTypeDTO;
-    private ReferenceTypeDTO roomTypeDTO;
-    private ReferenceTypeDTO roomConfigurationTypeDTO;
 
     public AccommodationSiteDTO() {}
 
@@ -40,22 +38,6 @@ public class AccommodationSiteDTO extends SiteDTO {
 
     public void setAccommodationSiteTypeDTO(ReferenceTypeDTO accommodationSiteTypeDTO) {
         this.accommodationSiteTypeDTO = accommodationSiteTypeDTO;
-    }
-
-    public ReferenceTypeDTO getRoomTypeDTO() {
-        return roomTypeDTO;
-    }
-
-    public void setRoomTypeDTO(ReferenceTypeDTO roomTypeDTO) {
-        this.roomTypeDTO = roomTypeDTO;
-    }
-
-    public ReferenceTypeDTO getRoomConfigurationTypeDTO() {
-        return roomConfigurationTypeDTO;
-    }
-
-    public void setRoomConfigurationTypeDTO(ReferenceTypeDTO roomConfigurationTypeDTO) {
-        this.roomConfigurationTypeDTO = roomConfigurationTypeDTO;
     }
 
     public LocationDTO getLocationDTO() {

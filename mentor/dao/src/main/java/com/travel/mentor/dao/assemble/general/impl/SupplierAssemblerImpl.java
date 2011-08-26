@@ -1,6 +1,5 @@
 package com.travel.mentor.dao.assemble.general.impl;
 
-import com.travel.mentor.core.util.AssembleUtil;
 import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.general.SupplierAssembler;
 import com.travel.mentor.dao.dto.general.LocationDTO;
@@ -13,7 +12,6 @@ import com.travel.mentor.domain.reference.SupplierType;
 import com.travel.mentor.domain.security.SecureUser;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +22,13 @@ public class SupplierAssemblerImpl extends AbstractAssembler implements Supplier
     public List<SupplierDTO> assembleToDTOList(List<Supplier> supplierList) {
         List<SupplierDTO> supplierDTOList = new ArrayList<SupplierDTO>();
         for (Supplier supplier : supplierList) {
-            supplierDTOList.add( assembleToDTO(supplier) );
+            supplierDTOList.add( assembleToDTOInstance(supplier) );
         }
         return supplierDTOList;
     }
 
     @Override
-    public Supplier assembleToDomainObject(SupplierDTO supplierDTO) {
+    public Supplier assembleToEntityInstance(SupplierDTO supplierDTO) {
         Supplier supplier = (Supplier) assembleUtil.shallowCopy(supplierDTO, Supplier.class);
 
         supplier.setCreateUser((SecureUser) assembleUtil.shallowCopy(supplierDTO.getCreateUserDTO(), SecureUser.class));
@@ -43,7 +41,7 @@ public class SupplierAssemblerImpl extends AbstractAssembler implements Supplier
     }
 
     @Override
-    public SupplierDTO assembleToDTO(Supplier supplier) {
+    public SupplierDTO assembleToDTOInstance(Supplier supplier) {
         SupplierDTO itemDTO = (SupplierDTO) assembleUtil.shallowCopy(supplier, SupplierDTO.class);
 
         itemDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(supplier.getCreateUser(), SecureUserDTO.class));
@@ -53,6 +51,19 @@ public class SupplierAssemblerImpl extends AbstractAssembler implements Supplier
         itemDTO.setLocationDTO((LocationDTO) assembleUtil.shallowCopy(supplier.getLocation(), LocationDTO.class));
 
         return itemDTO;
+    }
+
+    @Override
+    public Supplier deepCopy(SupplierDTO supplierDTO, Supplier supplier) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(supplierDTO, supplier, ignoreProperties);
+
+        assembleUtil.shallowCopy(supplierDTO.getCreateUserDTO(), supplier.getCreateUser());
+        assembleUtil.shallowCopy(supplierDTO.getUpdateUserDTO(), supplier.getUpdateUser());
+        assembleUtil.shallowCopy(supplierDTO.getSupplierTypeDTO(), supplier.getSupplierType());
+        assembleUtil.shallowCopy(supplierDTO.getLocationDTO(), supplier.getLocation());
+
+        return supplier;
     }
 
 }

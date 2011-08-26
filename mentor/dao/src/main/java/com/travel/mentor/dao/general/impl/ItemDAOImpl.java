@@ -32,22 +32,19 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
 
     @Override
     public ItemDTO saveOrUpdate(ItemDTO itemDTO) {
-
-        Item item = BeanUtils.instantiateClass(Item.class);
-
+        Item item;
         if (itemDTO.getId() == null || em.find(Item.class, itemDTO.getId()) == null) {
             item = itemAssembler.assembleToEntityInstance(itemDTO);
             item.setCreateUser( secureUserAssembler.assembleToEntityInstance(itemDTO.getLoggedInUser()) );
             item.setCreateDate(new Timestamp(new Date().getTime()));
         }
         else {
-            item = em.find(item.getClass(), itemDTO.getId());
+            item = em.find(Item.class, itemDTO.getId());
             itemAssembler.deepCopy(itemDTO, item);
         }
 
         item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(itemDTO.getLoggedInUser()) );
         item.setUpdateDate(new Timestamp(new Date().getTime()));
-
         em.merge(item);
 
         return itemAssembler.assembleToDTOInstance(item);
@@ -56,7 +53,6 @@ public class ItemDAOImpl extends AbstractMentorDAO implements ItemDAO {
     @Override
     public void delete(ItemDTO itemDTO) {
         Item item = em.find(Item.class, itemDTO.getId());
-        em.remove(item);
         em.getEntityManagerFactory().getCache().evict(item.getClass(), item.getId());
     }
 

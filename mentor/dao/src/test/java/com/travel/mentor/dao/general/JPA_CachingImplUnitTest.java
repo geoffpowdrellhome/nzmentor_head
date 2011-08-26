@@ -1,22 +1,13 @@
 package com.travel.mentor.dao.general;
 
 import com.travel.mentor.dao.base.AbstractMentorDAOImplTestCase;
-import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.dao.reference.ReferenceTypeDAO;
-import com.travel.mentor.domain.reference.RoomConfigurationType;
-import com.travel.mentor.domain.reference.RoomType;
-import junit.framework.Assert;
-import net.sf.ehcache.Cache;
-import org.hibernate.cache.EhCache;
 import org.hibernate.ejb.EntityManagerFactoryImpl;
 import org.junit.Before;
-import org.springframework.beans.BeanUtils;
 import org.junit.Test;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 
 import javax.annotation.Resource;
-
-import java.util.List;
 
 public class JPA_CachingImplUnitTest extends AbstractMentorDAOImplTestCase {
 

@@ -9,8 +9,10 @@ public interface IslandAssembler {
 
     List<IslandDTO> assembleToDTOList(List<Island> islandList);
 
-    Island assembleToDomainObject(IslandDTO islandDTO);
+    Island assembleToEntityInstance(IslandDTO islandDTO);
 
-    IslandDTO assembleToDTO(Island island);
+    IslandDTO assembleToDTOInstance(Island island);
+
+    Island deepCopy(IslandDTO islandDTO, Island island);
 
 }

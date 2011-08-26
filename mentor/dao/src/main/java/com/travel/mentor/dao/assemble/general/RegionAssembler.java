@@ -9,8 +9,10 @@ public interface RegionAssembler {
 
     List<RegionDTO> assembleToDTOList(List<Region> regionList);
 
-    Region assembleToDomainObject(RegionDTO regionDTO);
+    Region assembleToEntityInstance(RegionDTO regionDTO);
 
-    RegionDTO assembleToDTO(Region region);
+    RegionDTO assembleToDTOInstance(Region region);
+
+    Region deepCopy(RegionDTO regionDTO, Region region);
 
 }

@@ -22,13 +22,13 @@ public class SecurityGroupRightAssemblerImpl extends AbstractAssembler implement
     public List<SecurityGroupRightDTO> assembleToDTOList(List<SecurityGroupRight> securityGroupRightList) {
         List<SecurityGroupRightDTO> securityGroupRightDTOList = new ArrayList<SecurityGroupRightDTO>();
         for (SecurityGroupRight securityGroupRight : securityGroupRightList) {
-            securityGroupRightDTOList.add( assembleToDTO(securityGroupRight) );
+            securityGroupRightDTOList.add( assembleToDTOInstance(securityGroupRight) );
         }
         return securityGroupRightDTOList;
     }
 
     @Override
-    public SecurityGroupRight assembleToDomainObject(SecurityGroupRightDTO securityGroupRightDTO) {
+    public SecurityGroupRight assembleToEntityInstance(SecurityGroupRightDTO securityGroupRightDTO) {
         SecurityGroupRight securityGroupRight = (SecurityGroupRight) assembleUtil.shallowCopy(securityGroupRightDTO, SecurityGroupRight.class);
 
         securityGroupRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityGroupRightDTO.getCreateUserDTO(), SecureUser.class));
@@ -41,7 +41,7 @@ public class SecurityGroupRightAssemblerImpl extends AbstractAssembler implement
     }
 
     @Override
-    public SecurityGroupRightDTO assembleToDTO(SecurityGroupRight securityGroupRight) {
+    public SecurityGroupRightDTO assembleToDTOInstance(SecurityGroupRight securityGroupRight) {
         SecurityGroupRightDTO securityGroupRightDTO = (SecurityGroupRightDTO) assembleUtil.shallowCopy(securityGroupRight, SecurityGroupRightDTO.class);
 
         securityGroupRightDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroupRight.getCreateUser(), SecureUserDTO.class));
@@ -51,6 +51,19 @@ public class SecurityGroupRightAssemblerImpl extends AbstractAssembler implement
         securityGroupRightDTO.setSecurityRightDTO((SecurityRightDTO) assembleUtil.shallowCopy(securityGroupRight.getSecurityRight(), SecurityRightDTO.class));
 
         return securityGroupRightDTO;
+    }
+
+    @Override
+    public SecurityGroupRight deepCopy(SecurityGroupRightDTO securityGroupRightDTO, SecurityGroupRight securityGroupRight) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(securityGroupRightDTO, securityGroupRight, ignoreProperties);
+
+        assembleUtil.shallowCopy(securityGroupRightDTO.getCreateUserDTO(), securityGroupRight.getCreateUser());
+        assembleUtil.shallowCopy(securityGroupRightDTO.getUpdateUserDTO(), securityGroupRight.getUpdateUser());
+        assembleUtil.shallowCopy(securityGroupRightDTO.getSecurityRightDTO(), securityGroupRight.getSecurityRight());
+        assembleUtil.shallowCopy(securityGroupRightDTO.getSecurityGroupDTO(), securityGroupRight.getSecurityGroup());
+
+        return securityGroupRight;
     }
 
 }

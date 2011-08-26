@@ -1,33 +1,17 @@
 package com.travel.mentor.dao.general.impl;
 
-
 import com.travel.mentor.dao.assemble.general.SupplierAssembler;
 import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.SupplierDTO;
 import com.travel.mentor.dao.general.SupplierDAO;
-import com.travel.mentor.domain.general.Region;
 import com.travel.mentor.domain.general.Supplier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import com.travel.mentor.dao.assemble.general.ItemAssembler;
-import com.travel.mentor.dao.dto.general.ItemDTO;
-import com.travel.mentor.dao.general.ItemDAO;
-import com.travel.mentor.dao.base.AbstractMentorDAO;
-import com.travel.mentor.domain.general.Item;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StopWatch;
-import org.springframework.beans.BeanUtils;
-
-import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,38 +30,34 @@ public class SupplierDAOImpl extends AbstractMentorDAO implements SupplierDAO {
 
     @Override
     public SupplierDTO saveOrUpdate(SupplierDTO supplierDTO) {
-        Supplier item = supplierAssembler.assembleToDomainObject(supplierDTO);
-
-        if (supplierDTO.getId() == null || em.find(Item.class, supplierDTO.getId()) == null) {
-            item.setCreateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
-            item.setCreateDate(new Timestamp(new Date().getTime()));
-            item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
-            item.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(item);
+        Supplier supplier;
+        if (supplierDTO.getId() == null || em.find(Supplier.class, supplierDTO.getId()) == null) {
+            supplier = supplierAssembler.assembleToEntityInstance(supplierDTO);
+            supplier.setCreateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
+            supplier.setCreateDate(new Timestamp(new Date().getTime()));
         }
         else {
-            Supplier existingItem = em.find(item.getClass(), supplierDTO.getId());
-            BeanUtils.copyProperties(item, existingItem);
-            item.setUpdateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
-            item.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.merge(item);
+            supplier = em.find(Supplier.class, supplierDTO.getId());
+            supplierAssembler.deepCopy(supplierDTO, supplier);
         }
 
-        return supplierAssembler.assembleToDTO(item);
+        supplier.setUpdateUser( secureUserAssembler.assembleToEntityInstance(supplierDTO.getLoggedInUser()) );
+        supplier.setUpdateDate(new Timestamp(new Date().getTime()));
+        em.merge(supplier);
+
+        return supplierAssembler.assembleToDTOInstance(supplier);
     }
 
     @Override
     public void delete(SupplierDTO supplierDTO) {
         Supplier supplier = em.find(Supplier.class, supplierDTO.getId());
         em.remove(supplier);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(supplier.getClass(), supplier.getId());
     }
 
     @Override
     public SupplierDTO find(Long id) {
-        Supplier supplier = em.find(Supplier.class, id);
-        return supplierAssembler.assembleToDTO(supplier);
+        return supplierAssembler.assembleToDTOInstance(em.find(Supplier.class, id));
     }
 
     @PostConstruct

@@ -1,6 +1,5 @@
 package com.travel.mentor.dao.assemble.general.impl;
 
-import com.travel.mentor.core.util.AssembleUtil;
 import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.general.RegionAssembler;
 import com.travel.mentor.dao.dto.general.IslandDTO;
@@ -11,7 +10,6 @@ import com.travel.mentor.domain.general.Region;
 import com.travel.mentor.domain.security.SecureUser;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +20,13 @@ public class RegionAssemblerImpl extends AbstractAssembler implements RegionAsse
     public List<RegionDTO> assembleToDTOList(List<Region> regionList) {
         List<RegionDTO> regionDTOList = new ArrayList<RegionDTO>();
         for (Region region : regionList) {
-            regionDTOList.add(assembleToDTO(region));
+            regionDTOList.add(assembleToDTOInstance(region));
         }
         return regionDTOList;
     }
 
     @Override
-    public Region assembleToDomainObject(RegionDTO regionDTO) {
+    public Region assembleToEntityInstance(RegionDTO regionDTO) {
         Region region = (Region) assembleUtil.shallowCopy(regionDTO, Region.class);
 
         region.setCreateUser((SecureUser) assembleUtil.shallowCopy(regionDTO.getCreateUserDTO(), SecureUser.class));
@@ -40,7 +38,7 @@ public class RegionAssemblerImpl extends AbstractAssembler implements RegionAsse
     }
 
     @Override
-    public RegionDTO assembleToDTO(Region region) {
+    public RegionDTO assembleToDTOInstance(Region region) {
         RegionDTO regionDTO = (RegionDTO) assembleUtil.shallowCopy(region, RegionDTO.class);
 
         regionDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(region.getCreateUser(), SecureUserDTO.class));
@@ -49,6 +47,18 @@ public class RegionAssemblerImpl extends AbstractAssembler implements RegionAsse
         regionDTO.setIslandDTO((IslandDTO) assembleUtil.shallowCopy(region.getIsland(), IslandDTO.class));
 
         return regionDTO;
+    }
+
+    @Override
+    public Region deepCopy(RegionDTO regionDTO, Region region) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(regionDTO, region, ignoreProperties);
+
+        assembleUtil.shallowCopy(regionDTO.getCreateUserDTO(), region.getCreateUser());
+        assembleUtil.shallowCopy(regionDTO.getUpdateUserDTO(), region.getUpdateUser());
+        assembleUtil.shallowCopy(regionDTO.getIslandDTO(), region.getIsland());
+
+        return region;
     }
 
 }

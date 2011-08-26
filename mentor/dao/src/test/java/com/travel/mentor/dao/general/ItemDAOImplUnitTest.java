@@ -7,7 +7,6 @@ import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.domain.reference.ItemType;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.util.List;

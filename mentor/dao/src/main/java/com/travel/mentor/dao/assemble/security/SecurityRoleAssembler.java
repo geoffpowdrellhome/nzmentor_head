@@ -9,8 +9,10 @@ public interface SecurityRoleAssembler {
 
     List<SecurityRoleDTO> assembleToDTOList(List<SecurityRole> securityRoleList);
 
-    SecurityRole assembleToDomainObject(SecurityRoleDTO securityRoleDTO);
+    SecurityRole assembleToEntityInstance(SecurityRoleDTO securityRoleDTO);
 
-    SecurityRoleDTO assembleToDTO(SecurityRole securityRole);
+    SecurityRoleDTO assembleToDTOInstance(SecurityRole securityRole);
+
+    SecurityRole deepCopy(SecurityRoleDTO securityRoleDTO, SecurityRole securityRole);
 
 }

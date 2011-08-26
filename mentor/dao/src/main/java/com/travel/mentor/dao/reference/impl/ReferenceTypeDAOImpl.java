@@ -41,25 +41,23 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
 
     @Override
     public ReferenceTypeDTO saveOrUpdate(ReferenceTypeDTO referenceTypeDTO) {
-
-        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToDomainObject(referenceTypeDTO);
+        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToEntityInstance(referenceTypeDTO);
 
         if (referenceTypeDTO.getId() == null || em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId()) == null) {
-            abstractAuditedNameDescEntity.setCreateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
+            abstractAuditedNameDescEntity = referenceTypeAssembler.assembleToEntityInstance(referenceTypeDTO);
+            abstractAuditedNameDescEntity.setCreateUser( secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()) );
             abstractAuditedNameDescEntity.setCreateDate(new Timestamp(new Date().getTime()));
-            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
-            abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(abstractAuditedNameDescEntity);
-        } else {
-            AbstractAuditedIdNameDescEntity existingEntityRecord = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
-            BeanUtils.copyProperties(abstractAuditedNameDescEntity, existingEntityRecord);
-            abstractAuditedNameDescEntity.setUpdateUser(secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()));
-            abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
-
-            em.merge(existingEntityRecord);
+        }
+        else {
+            abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
+            referenceTypeAssembler.deepCopy(referenceTypeDTO, abstractAuditedNameDescEntity);
         }
 
-        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
+        abstractAuditedNameDescEntity.setUpdateUser( secureUserAssembler.assembleToEntityInstance(referenceTypeDTO.getLoggedInUser()) );
+        abstractAuditedNameDescEntity.setUpdateDate(new Timestamp(new Date().getTime()));
+        em.merge(abstractAuditedNameDescEntity);
+
+        return referenceTypeAssembler.assembleToDTOInstance(abstractAuditedNameDescEntity);
     }
 
     @Override
@@ -67,7 +65,6 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
         em.remove(abstractAuditedNameDescEntity);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(abstractAuditedNameDescEntity.getClass(), abstractAuditedNameDescEntity.getId());
     }
 
@@ -75,7 +72,7 @@ public class ReferenceTypeDAOImpl extends AbstractMentorDAO implements Reference
     public ReferenceTypeDTO find(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) BeanUtils.instantiateClass(referenceTypeDTO.getEntityClass());
         abstractAuditedNameDescEntity = em.find(abstractAuditedNameDescEntity.getClass(), referenceTypeDTO.getId());
-        return referenceTypeAssembler.assembleToDTO(abstractAuditedNameDescEntity);
+        return referenceTypeAssembler.assembleToDTOInstance(abstractAuditedNameDescEntity);
     }
 
     @PostConstruct

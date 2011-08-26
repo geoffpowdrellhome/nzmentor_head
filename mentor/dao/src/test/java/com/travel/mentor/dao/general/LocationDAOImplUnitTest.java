@@ -8,7 +8,6 @@ import com.travel.mentor.dao.reference.ReferenceTypeDAO;
 import com.travel.mentor.domain.reference.LocationType;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -64,17 +63,7 @@ public class LocationDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
     @Test
     public void testDelete() {
         LocationDTO existingLocationDTO = locationDAO.find(EXISTING_ID_VALUE);
-
-        LocationDTO addLocationDTO = new LocationDTO();
-        BeanUtils.copyProperties(existingLocationDTO, addLocationDTO);
-
-        addLocationDTO.setId(null);
-        addLocationDTO.setDescription("temp-add");
-        addLocationDTO.setName("temp-add");
-        addLocationDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
-        addLocationDTO = locationDAO.saveOrUpdate(addLocationDTO);
-
-        locationDAO.delete(addLocationDTO);
+        locationDAO.delete(existingLocationDTO);
     }
 
     @Test

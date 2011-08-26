@@ -9,8 +9,10 @@ public interface LocationAssembler {
 
     List<LocationDTO> assembleToDTOList(List<Location> locationList);
 
-    Location assembleToDomainObject(LocationDTO locationDTO);
+    Location assembleToEntityInstance(LocationDTO locationDTO);
 
-    LocationDTO assembleToDTO(Location location);
+    LocationDTO assembleToDTOInstance(Location location);
+
+    Location deepCopy(LocationDTO locationDTO, Location location);
 
 }

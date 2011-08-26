@@ -36,7 +36,7 @@ public class SecureUserAssemblerImpl extends AbstractAssembler implements Secure
     public SecureUserDTO assembleToDTOInstance(SecureUser secureUser) {
         SecureUserDTO secureUserDTO = (SecureUserDTO) assembleUtil.shallowCopy(secureUser, SecureUserDTO.class);
         for (SecurityRole securityRole : secureUser.getSecurityRoleList()) {
-            secureUserDTO.getSecurityRoleDTOList().add( securityRoleAssembler.assembleToDTO(securityRole) );
+            secureUserDTO.getSecurityRoleDTOList().add( securityRoleAssembler.assembleToDTOInstance(securityRole) );
         }
         return secureUserDTO;
     }
@@ -47,7 +47,7 @@ public class SecureUserAssemblerImpl extends AbstractAssembler implements Secure
         assembleUtil.shallowCopy(secureUserDTO, secureUser, ignoreProperties);
 
         for (SecurityRoleDTO securityRoleDTO : secureUserDTO.getSecurityRoleDTOList()) {
-            secureUser.getSecurityRoleList().add( securityRoleAssembler.assembleToDomainObject(securityRoleDTO));
+            secureUser.getSecurityRoleList().add( securityRoleAssembler.assembleToEntityInstance(securityRoleDTO));
         }
 
         return secureUser;

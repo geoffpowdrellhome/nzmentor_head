@@ -20,13 +20,13 @@ public class SecurityRightAssemblerImpl extends AbstractAssembler implements Sec
     public List<SecurityRightDTO> assembleToDTOList(List<SecurityRight> securityRightList) {
         List<SecurityRightDTO> securityRightDTOList = new ArrayList<SecurityRightDTO>();
         for (SecurityRight securityRight : securityRightList) {
-            securityRightDTOList.add( assembleToDTO(securityRight) );
+            securityRightDTOList.add(assembleToDTOInstance(securityRight));
         }
         return securityRightDTOList;
     }
 
     @Override
-    public SecurityRight assembleToDomainObject(SecurityRightDTO securityRightDTO) {
+    public SecurityRight assembleToEntityInstance(SecurityRightDTO securityRightDTO) {
         SecurityRight securityRight = (SecurityRight) assembleUtil.shallowCopy(securityRightDTO, SecurityRight.class);
 
         securityRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityRightDTO.getCreateUserDTO(), SecureUser.class));
@@ -38,7 +38,7 @@ public class SecurityRightAssemblerImpl extends AbstractAssembler implements Sec
     }
 
     @Override
-    public SecurityRightDTO assembleToDTO(SecurityRight securityRight) {
+    public SecurityRightDTO assembleToDTOInstance(SecurityRight securityRight) {
         SecurityRightDTO securityRightDTO = (SecurityRightDTO) assembleUtil.shallowCopy(securityRight, SecurityRightDTO.class);
 
         securityRightDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRight.getCreateUser(), SecureUserDTO.class));
@@ -47,6 +47,18 @@ public class SecurityRightAssemblerImpl extends AbstractAssembler implements Sec
         securityRightDTO.setSecurityRightTypeDTO((SecurityRightTypeDTO) assembleUtil.shallowCopy(securityRight.getSecurityRightType(), SecurityRightTypeDTO.class));
 
         return securityRightDTO;
+    }
+
+    @Override
+    public SecurityRight deepCopy(SecurityRightDTO securityRightDTO, SecurityRight securityRight) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(securityRightDTO, securityRight, ignoreProperties);
+
+        assembleUtil.shallowCopy(securityRightDTO.getCreateUserDTO(), securityRight.getCreateUser());
+        assembleUtil.shallowCopy(securityRightDTO.getUpdateUserDTO(), securityRight.getUpdateUser());
+        assembleUtil.shallowCopy(securityRightDTO.getSecurityRightTypeDTO(), securityRight.getSecurityRightType());
+
+        return securityRight;
     }
 
 }

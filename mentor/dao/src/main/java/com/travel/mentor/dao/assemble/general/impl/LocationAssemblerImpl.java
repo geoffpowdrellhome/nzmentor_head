@@ -22,13 +22,13 @@ public class LocationAssemblerImpl extends AbstractAssembler implements Location
     public List<LocationDTO> assembleToDTOList(List<Location> locationList) {
         List<LocationDTO> locationDTOList = new ArrayList<LocationDTO>();
         for (Location location : locationList) {
-            locationDTOList.add(assembleToDTO(location));
+            locationDTOList.add(assembleToDTOInstance(location));
         }
         return locationDTOList;
     }
 
     @Override
-    public Location assembleToDomainObject(LocationDTO locationDTO) {
+    public Location assembleToEntityInstance(LocationDTO locationDTO) {
         Location location = (Location) assembleUtil.shallowCopy(locationDTO, Location.class);
 
         location.setCreateUser((SecureUser) assembleUtil.shallowCopy(locationDTO.getCreateUserDTO(), SecureUser.class));
@@ -41,7 +41,7 @@ public class LocationAssemblerImpl extends AbstractAssembler implements Location
     }
 
     @Override
-    public LocationDTO assembleToDTO(Location location) {
+    public LocationDTO assembleToDTOInstance(Location location) {
         LocationDTO locationDTO = (LocationDTO) assembleUtil.shallowCopy(location, LocationDTO.class);
 
         locationDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(location.getCreateUser(), SecureUserDTO.class));
@@ -51,6 +51,19 @@ public class LocationAssemblerImpl extends AbstractAssembler implements Location
         locationDTO.setRegionDTO((RegionDTO) assembleUtil.shallowCopy(location.getRegion(), RegionDTO.class));
 
         return locationDTO;
+    }
+
+    @Override
+    public Location deepCopy(LocationDTO locationDTO, Location location) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(locationDTO, location, ignoreProperties);
+
+        assembleUtil.shallowCopy(locationDTO.getCreateUserDTO(), location.getCreateUser());
+        assembleUtil.shallowCopy(locationDTO.getUpdateUserDTO(), location.getUpdateUser());
+        assembleUtil.shallowCopy(locationDTO.getLocationTypeDTO(), location.getLocationType());
+        assembleUtil.shallowCopy(locationDTO.getRegionDTO(), location.getRegion());
+
+        return location;
     }
 
 }

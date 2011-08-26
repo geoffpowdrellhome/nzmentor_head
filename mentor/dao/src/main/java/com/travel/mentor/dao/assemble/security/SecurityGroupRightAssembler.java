@@ -9,8 +9,10 @@ public interface SecurityGroupRightAssembler {
 
     List<SecurityGroupRightDTO> assembleToDTOList(List<SecurityGroupRight> securityGroupRightList);
 
-    SecurityGroupRight assembleToDomainObject(SecurityGroupRightDTO securityGroupRightDTO);
+    SecurityGroupRight assembleToEntityInstance(SecurityGroupRightDTO securityGroupRightDTO);
 
-    SecurityGroupRightDTO assembleToDTO(SecurityGroupRight securityGroupRight);
+    SecurityGroupRightDTO assembleToDTOInstance(SecurityGroupRight securityGroupRight);
+
+    SecurityGroupRight deepCopy(SecurityGroupRightDTO securityGroupRightDTO, SecurityGroupRight securityGroupRight);
 
 }

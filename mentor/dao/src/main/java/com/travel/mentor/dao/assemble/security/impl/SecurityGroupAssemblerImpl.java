@@ -18,13 +18,13 @@ public class SecurityGroupAssemblerImpl extends AbstractAssembler implements Sec
     public List<SecurityGroupDTO> assembleToDTOList(List<SecurityGroup> securityGroupList) {
         List<SecurityGroupDTO> securityGroupDTOList = new ArrayList<SecurityGroupDTO>();
         for (SecurityGroup securityGroup : securityGroupList) {
-            securityGroupDTOList.add( assembleToDTO(securityGroup) );
+            securityGroupDTOList.add(assembleToDTOInstance(securityGroup));
         }
         return securityGroupDTOList;
     }
 
     @Override
-    public SecurityGroup assembleToDomainObject(SecurityGroupDTO securityGroupDTO) {
+    public SecurityGroup assembleToEntityInstance(SecurityGroupDTO securityGroupDTO) {
         SecurityGroup securityGroup = (SecurityGroup) assembleUtil.shallowCopy(securityGroupDTO, SecurityGroup.class);
 
         securityGroup.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityGroupDTO.getCreateUserDTO(), SecureUser.class));
@@ -34,7 +34,7 @@ public class SecurityGroupAssemblerImpl extends AbstractAssembler implements Sec
     }
 
     @Override
-    public SecurityGroupDTO assembleToDTO(SecurityGroup securityGroup) {
+    public SecurityGroupDTO assembleToDTOInstance(SecurityGroup securityGroup) {
         SecurityGroupDTO securityGroupDTO = (SecurityGroupDTO) assembleUtil.shallowCopy(securityGroup, SecurityGroupDTO.class);
 
         securityGroupDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityGroup.getCreateUser(), SecureUserDTO.class));
@@ -43,4 +43,13 @@ public class SecurityGroupAssemblerImpl extends AbstractAssembler implements Sec
         return securityGroupDTO;
     }
 
+    @Override
+    public SecurityGroup deepCopy(SecurityGroupDTO securityGroupDTO, SecurityGroup securityGroup) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(securityGroupDTO, securityGroup, ignoreProperties);
+        assembleUtil.shallowCopy(securityGroupDTO.getCreateUserDTO(), securityGroup.getCreateUser());
+        assembleUtil.shallowCopy(securityGroupDTO.getUpdateUserDTO(), securityGroup.getUpdateUser());
+
+        return securityGroup;
+    }
 }

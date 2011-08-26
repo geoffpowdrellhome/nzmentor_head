@@ -9,8 +9,10 @@ public interface SupplierAssembler {
 
     List<SupplierDTO> assembleToDTOList(List<Supplier> supplierList);
 
-    Supplier assembleToDomainObject(SupplierDTO supplierDTO);
+    Supplier assembleToEntityInstance(SupplierDTO supplierDTO);
 
-    SupplierDTO assembleToDTO(Supplier supplier);
+    SupplierDTO assembleToDTOInstance(Supplier supplier);
+
+    Supplier deepCopy(SupplierDTO supplierDTO, Supplier supplier);
 
 }

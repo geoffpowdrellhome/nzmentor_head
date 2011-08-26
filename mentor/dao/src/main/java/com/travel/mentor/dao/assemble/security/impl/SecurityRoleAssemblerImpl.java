@@ -18,13 +18,13 @@ public class SecurityRoleAssemblerImpl extends AbstractAssembler implements Secu
     public List<SecurityRoleDTO> assembleToDTOList(List<SecurityRole> securityRoleList) {
         List<SecurityRoleDTO> securityRoleDTOList = new ArrayList<SecurityRoleDTO>();
         for (SecurityRole securityRole : securityRoleList) {
-            securityRoleDTOList.add( assembleToDTO(securityRole) );
+            securityRoleDTOList.add(assembleToDTOInstance(securityRole));
         }
         return securityRoleDTOList;
     }
 
     @Override
-    public SecurityRole assembleToDomainObject(SecurityRoleDTO securityRoleDTO) {
+    public SecurityRole assembleToEntityInstance(SecurityRoleDTO securityRoleDTO) {
         SecurityRole securityRight = (SecurityRole) assembleUtil.shallowCopy(securityRoleDTO, SecurityRole.class);
 
         securityRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityRoleDTO.getCreateUserDTO(), SecureUser.class));
@@ -34,13 +34,24 @@ public class SecurityRoleAssemblerImpl extends AbstractAssembler implements Secu
     }
 
     @Override
-    public SecurityRoleDTO assembleToDTO(SecurityRole securityRole) {
+    public SecurityRoleDTO assembleToDTOInstance(SecurityRole securityRole) {
         SecurityRoleDTO securityRightTypeDTO = (SecurityRoleDTO) assembleUtil.shallowCopy(securityRole, SecurityRoleDTO.class);
 
         securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRole.getCreateUser(), SecureUserDTO.class));
         securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRole.getUpdateUser(), SecureUserDTO.class));
 
         return securityRightTypeDTO;
+    }
+
+    @Override
+    public SecurityRole deepCopy(SecurityRoleDTO securityRoleDTO, SecurityRole securityRole) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(securityRoleDTO, securityRole, ignoreProperties);
+
+        assembleUtil.shallowCopy(securityRoleDTO.getCreateUserDTO(), securityRole.getCreateUser());
+        assembleUtil.shallowCopy(securityRoleDTO.getUpdateUserDTO(), securityRole.getUpdateUser());
+
+        return securityRole;
     }
 
 }

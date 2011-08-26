@@ -18,13 +18,13 @@ public class SecurityRightTypeAssemblerImpl extends AbstractAssembler implements
     public List<SecurityRightTypeDTO> assembleToDTOList(List<SecurityRightType> securityRightTypeList) {
         List<SecurityRightTypeDTO> securityRightTypeDTOList = new ArrayList<SecurityRightTypeDTO>();
         for (SecurityRightType securityRightType : securityRightTypeList) {
-            securityRightTypeDTOList.add( assembleToDTO(securityRightType) );
+            securityRightTypeDTOList.add(assembleToDTOInstance(securityRightType));
         }
         return securityRightTypeDTOList;
     }
 
     @Override
-    public SecurityRightType assembleToDomainObject(SecurityRightTypeDTO securityRightTypeDTO) {
+    public SecurityRightType assembleToEntityInstance(SecurityRightTypeDTO securityRightTypeDTO) {
         SecurityRightType securityRight = (SecurityRightType) assembleUtil.shallowCopy(securityRightTypeDTO, SecurityRightType.class);
 
         securityRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityRightTypeDTO.getCreateUserDTO(), SecureUser.class));
@@ -34,13 +34,24 @@ public class SecurityRightTypeAssemblerImpl extends AbstractAssembler implements
     }
 
     @Override
-    public SecurityRightTypeDTO assembleToDTO(SecurityRightType securityRightType) {
+    public SecurityRightTypeDTO assembleToDTOInstance(SecurityRightType securityRightType) {
         SecurityRightTypeDTO securityRightTypeDTO = (SecurityRightTypeDTO) assembleUtil.shallowCopy(securityRightType, SecurityRightTypeDTO.class);
 
         securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRightType.getCreateUser(), SecureUserDTO.class));
         securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRightType.getUpdateUser(), SecureUserDTO.class));
 
         return securityRightTypeDTO;
+    }
+
+    @Override
+    public SecurityRightType deepCopy(SecurityRightTypeDTO securityRightTypeDTO, SecurityRightType securityRightType) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(securityRightTypeDTO, securityRightType, ignoreProperties);
+
+        assembleUtil.shallowCopy(securityRightTypeDTO.getCreateUserDTO(), securityRightType.getCreateUser());
+        assembleUtil.shallowCopy(securityRightTypeDTO.getUpdateUserDTO(), securityRightType.getUpdateUser());
+
+        return securityRightType;
     }
 
 }

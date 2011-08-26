@@ -1,7 +1,6 @@
 package com.travel.mentor.dao.dto.base;
 
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

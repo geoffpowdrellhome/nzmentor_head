@@ -28,8 +28,7 @@ public class IslandDAOImpl extends AbstractMentorDAO implements IslandDAO {
 
     @Override
     public IslandDTO find(Long id) {
-        Island island = em.find(Island.class, id);
-        return islandAssembler.assembleToDTO(island);
+        return islandAssembler.assembleToDTOInstance( em.find(Island.class, id) );
     }
 
     @PostConstruct

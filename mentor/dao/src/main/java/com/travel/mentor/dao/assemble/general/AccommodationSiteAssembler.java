@@ -9,8 +9,10 @@ public interface AccommodationSiteAssembler {
 
     List<AccommodationSiteDTO> assembleToDTOList(List<AccommodationSite> accommodationSiteList);
 
-    AccommodationSite assembleToDomainObject(AccommodationSiteDTO accommodationSiteDTO);
+    AccommodationSite assembleToEntityInstance(AccommodationSiteDTO accommodationSiteDTO);
 
-    AccommodationSiteDTO assembleToDTO(AccommodationSite accommodationSite);
+    AccommodationSiteDTO assembleToDTOInstance(AccommodationSite accommodationSite);
+
+    AccommodationSite deepCopy(AccommodationSiteDTO accommodationSiteDTO, AccommodationSite accommodationSite);
 
 }

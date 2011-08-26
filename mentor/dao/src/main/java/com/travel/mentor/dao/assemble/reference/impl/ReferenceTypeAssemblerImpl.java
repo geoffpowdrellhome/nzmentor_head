@@ -18,13 +18,13 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
     public List<ReferenceTypeDTO> assembleToDTOList(List<AbstractAuditedIdNameDescEntity> abstractAuditedNameDescEntityList) {
         List<ReferenceTypeDTO> referenceTypeDTOList = new ArrayList<ReferenceTypeDTO>();
         for (AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity : abstractAuditedNameDescEntityList) {
-            referenceTypeDTOList.add(assembleToDTO(abstractAuditedNameDescEntity));
+            referenceTypeDTOList.add(assembleToDTOInstance(abstractAuditedNameDescEntity));
         }
         return referenceTypeDTOList;
     }
 
     @Override
-    public AbstractAuditedIdNameDescEntity assembleToDomainObject(ReferenceTypeDTO referenceTypeDTO) {
+    public AbstractAuditedIdNameDescEntity assembleToEntityInstance(ReferenceTypeDTO referenceTypeDTO) {
         AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) assembleUtil.shallowCopy(referenceTypeDTO, referenceTypeDTO.getEntityClass());
 
         abstractAuditedNameDescEntity.setCreateUser((SecureUser) assembleUtil.shallowCopy(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
@@ -35,7 +35,7 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
 
 
     @Override
-    public ReferenceTypeDTO assembleToDTO(AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity) {
+    public ReferenceTypeDTO assembleToDTOInstance(AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity) {
         ReferenceTypeDTO referenceTypeDTO = (ReferenceTypeDTO) assembleUtil.shallowCopy(abstractAuditedNameDescEntity, ReferenceTypeDTO.class);
         referenceTypeDTO.setEntityClass(abstractAuditedNameDescEntity.getClass());
 
@@ -43,6 +43,17 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
         referenceTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(abstractAuditedNameDescEntity.getUpdateUser(), SecureUserDTO.class));
 
         return referenceTypeDTO;
+    }
+
+    @Override
+    public AbstractAuditedIdNameDescEntity deepCopy(ReferenceTypeDTO referenceTypeDTO, AbstractAuditedIdNameDescEntity abstractAuditedIdNameDescEntity) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(referenceTypeDTO, abstractAuditedIdNameDescEntity, ignoreProperties);
+
+        assembleUtil.shallowCopy(referenceTypeDTO.getCreateUserDTO(), abstractAuditedIdNameDescEntity.getCreateUser());
+        assembleUtil.shallowCopy(referenceTypeDTO.getUpdateUserDTO(), abstractAuditedIdNameDescEntity.getUpdateUser());
+
+        return abstractAuditedIdNameDescEntity;
     }
 
 }

@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.List;
-import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

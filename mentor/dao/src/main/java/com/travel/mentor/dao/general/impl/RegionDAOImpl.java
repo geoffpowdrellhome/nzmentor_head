@@ -5,7 +5,6 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.general.RegionDTO;
 import com.travel.mentor.dao.general.RegionDAO;
 import com.travel.mentor.domain.general.Region;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,37 +30,35 @@ public class RegionDAOImpl extends AbstractMentorDAO implements RegionDAO {
 
     @Override
     public RegionDTO saveOrUpdate(RegionDTO regionDTO) {
-        Region region = regionAssembler.assembleToDomainObject(regionDTO);
-
+        Region region;
         if (regionDTO.getId() == null || em.find(Region.class, regionDTO.getId()) == null) {
-            region.setCreateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
+            region = regionAssembler.assembleToEntityInstance(regionDTO);
+            region.setCreateUser( secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()) );
             region.setCreateDate(new Timestamp(new Date().getTime()));
-            region.setUpdateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
-            region.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(region);
-        } else {
-            Region existingRegion = em.find(region.getClass(), regionDTO.getId());
-            BeanUtils.copyProperties(region, existingRegion);
-            region.setUpdateUser(secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()));
-            region.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.merge(region);
+        }
+        else {
+            region = em.find(Region.class, regionDTO.getId());
+            regionAssembler.deepCopy(regionDTO, region);
         }
 
-        return regionAssembler.assembleToDTO(region);
+        region.setUpdateUser( secureUserAssembler.assembleToEntityInstance(regionDTO.getLoggedInUser()) );
+        region.setUpdateDate(new Timestamp(new Date().getTime()));
+        em.merge(region);
+
+        return regionAssembler.assembleToDTOInstance(region);
     }
 
     @Override
     public void delete(RegionDTO regionDTO) {
         Region region = em.find(Region.class, regionDTO.getId());
         em.remove(region);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(region.getClass(), region.getId());
     }
 
     @Override
     public RegionDTO find(Long id) {
         Region region = em.find(Region.class, id);
-        return regionAssembler.assembleToDTO(region);
+        return regionAssembler.assembleToDTOInstance(region);
     }
 
     @PostConstruct

@@ -1,6 +1,5 @@
 package com.travel.mentor.dao.assemble.general.impl;
 
-import com.travel.mentor.core.util.AssembleUtil;
 import com.travel.mentor.dao.assemble.base.AbstractAssembler;
 import com.travel.mentor.dao.assemble.general.AccommodationSiteAssembler;
 import com.travel.mentor.dao.dto.general.AccommodationSiteDTO;
@@ -14,7 +13,6 @@ import com.travel.mentor.domain.reference.SiteType;
 import com.travel.mentor.domain.security.SecureUser;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +23,13 @@ public class AccommodationSiteAssemblerImpl extends AbstractAssembler implements
     public List<AccommodationSiteDTO> assembleToDTOList(List<AccommodationSite> accommodationSiteList) {
         List<AccommodationSiteDTO> accommodationSiteDTOList = new ArrayList<AccommodationSiteDTO>();
         for (AccommodationSite accommodationSite : accommodationSiteList) {
-            accommodationSiteDTOList.add( assembleToDTO(accommodationSite) );
+            accommodationSiteDTOList.add( assembleToDTOInstance(accommodationSite) );
         }
         return accommodationSiteDTOList;
     }
 
     @Override
-    public AccommodationSite assembleToDomainObject(AccommodationSiteDTO accommodationSiteDTO) {
+    public AccommodationSite assembleToEntityInstance(AccommodationSiteDTO accommodationSiteDTO) {
         AccommodationSite accommodationSite = (AccommodationSite) assembleUtil.shallowCopy(accommodationSiteDTO, AccommodationSite.class);
 
         accommodationSite.setCreateUser((SecureUser) assembleUtil.shallowCopy(accommodationSiteDTO.getCreateUserDTO(), SecureUser.class));
@@ -45,7 +43,7 @@ public class AccommodationSiteAssemblerImpl extends AbstractAssembler implements
     }
 
     @Override
-    public AccommodationSiteDTO assembleToDTO(AccommodationSite accommodationSite) {
+    public AccommodationSiteDTO assembleToDTOInstance(AccommodationSite accommodationSite) {
         AccommodationSiteDTO accommodationSiteDTO = (AccommodationSiteDTO) assembleUtil.shallowCopy(accommodationSite, AccommodationSiteDTO.class);
 
         accommodationSiteDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(accommodationSite.getCreateUser(), SecureUserDTO.class));
@@ -56,6 +54,19 @@ public class AccommodationSiteAssemblerImpl extends AbstractAssembler implements
         accommodationSiteDTO.setLocationDTO((LocationDTO) assembleUtil.shallowCopy(accommodationSite.getLocation(), LocationDTO.class));
 
         return accommodationSiteDTO;
+    }
+
+    @Override
+    public AccommodationSite deepCopy(AccommodationSiteDTO accommodationSiteDTO, AccommodationSite accommodationSite) {
+        String[] ignoreProperties = {"id"};
+        assembleUtil.shallowCopy(accommodationSiteDTO, accommodationSite, ignoreProperties);
+
+        assembleUtil.shallowCopy(accommodationSiteDTO.getCreateUserDTO(), accommodationSite.getCreateUser());
+        assembleUtil.shallowCopy(accommodationSiteDTO.getUpdateUserDTO(), accommodationSite.getUpdateUser());
+        assembleUtil.shallowCopy(accommodationSiteDTO.getAccommodationSiteTypeDTO(), accommodationSite.getAccommodationSiteType());
+        assembleUtil.shallowCopy(accommodationSiteDTO.getLocationDTO(), accommodationSite.getLocation());
+
+        return accommodationSite;
     }
 
 }

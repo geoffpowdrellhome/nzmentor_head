@@ -5,12 +5,9 @@ import com.travel.mentor.dao.dto.general.AccommodationSiteDTO;
 import com.travel.mentor.dao.dto.general.LocationDTO;
 import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.domain.reference.AccommodationSiteType;
-import com.travel.mentor.domain.reference.RoomConfigurationType;
-import com.travel.mentor.domain.reference.RoomType;
 import com.travel.mentor.domain.reference.SiteType;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -67,31 +64,7 @@ public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestC
     @Test
     public void testDelete() {
         AccommodationSiteDTO existingAccommodationSiteDTO = accommodationSiteDAO.find(1L);
-
-        AccommodationSiteDTO addAccommodationSiteDTO = new AccommodationSiteDTO();
-        BeanUtils.copyProperties(existingAccommodationSiteDTO, addAccommodationSiteDTO);
-
-        addAccommodationSiteDTO.setId(null);
-        addAccommodationSiteDTO.setDescription("temp-add");
-        addAccommodationSiteDTO.setName("temp-add");
-        addAccommodationSiteDTO.setLoggedInUser(securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
-
-        List<ReferenceTypeDTO> roomTypeDTOList = referenceTypeDAO.findAll(RoomType.FIND_ALL_ROOM_TYPES_NAMED_QUERY);
-        assertRecordsReturned(roomTypeDTOList);
-        addAccommodationSiteDTO.setRoomTypeDTO( roomTypeDTOList.get(0) );
-
-        List<ReferenceTypeDTO> roomConfigurationTypeDTOList = referenceTypeDAO.findAll(RoomConfigurationType.FIND_ALL_ROOM_CONFIGURATION_TYPES_NAMED_QUERY);
-        assertRecordsReturned(roomConfigurationTypeDTOList);
-        addAccommodationSiteDTO.setRoomConfigurationTypeDTO( roomConfigurationTypeDTOList.get(0) );
-
-        List<ReferenceTypeDTO> accommodationSiteTypeDTOList = referenceTypeDAO.findAll(AccommodationSiteType.FIND_ALL_ACCOMMODATION_SITE_TYPES_NAMED_QUERY);
-        assertRecordsReturned(accommodationSiteTypeDTOList);
-        addAccommodationSiteDTO.setAccommodationSiteTypeDTO( accommodationSiteTypeDTOList.get(0) );
-
-
-        addAccommodationSiteDTO = accommodationSiteDAO.saveOrUpdate(addAccommodationSiteDTO);
-
-        accommodationSiteDAO.delete(addAccommodationSiteDTO);
+        accommodationSiteDAO.delete(existingAccommodationSiteDTO);
     }
 
     @Test
