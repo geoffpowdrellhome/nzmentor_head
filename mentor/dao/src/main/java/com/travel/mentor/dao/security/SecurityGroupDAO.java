@@ -6,12 +6,14 @@ import java.util.List;
 
 public interface SecurityGroupDAO {
 
+    SecurityGroupDTO find(Long id);
+
     List<SecurityGroupDTO> findAllSecurityGroups();
 
-	SecurityGroupDTO saveOrUpdate(SecurityGroupDTO securityGroupDTO);
+    List<SecurityGroupDTO> findSecurityGroupsByLikeGroupName(String groupName);
+
+    SecurityGroupDTO saveOrUpdate(SecurityGroupDTO securityGroupDTO);
 
 	void delete(SecurityGroupDTO securityGroupDTO);
-
-    List<SecurityGroupDTO> getSecurityGroupsLikeGroupName(String value);
 
 }

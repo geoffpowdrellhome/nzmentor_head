@@ -7,10 +7,16 @@ import java.util.List;
 
 public interface SecurityRightTypeDAO {
 
+    List<SecurityRightTypeDTO> findSecurityRightsTypes();
+
     List<SecurityRightDTO> findSecurityRightsByType(Long type);
 
 	List<SecurityRightTypeDTO> findAllSecurityRightTypes();
 
-	SecurityRightTypeDTO getSecurityRightTypeById(Long id);
+	SecurityRightTypeDTO findSecurityRightTypeById(Long id);
+
+    SecurityRightTypeDTO saveOrUpdate(SecurityRightTypeDTO securityRightTypeDTO);
+
+    void delete(SecurityRightTypeDTO securityRightTypeDTO);
 
 }

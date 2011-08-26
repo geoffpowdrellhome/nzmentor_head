@@ -7,11 +7,14 @@ import java.util.List;
 
 public interface SecurityGroupRightDAO {
 
+    SecurityGroupRightDTO find(Long id);
+
     List<SecurityGroupRightDTO> findAllSecurityGroupRights();
+
+    List<SecurityGroupRightDTO> findSecurityGroupRightsBySecurityGroup(SecurityGroupDTO securityGroupDTO);
 
     SecurityGroupRightDTO saveOrUpdate(SecurityGroupRightDTO securityGroupRightDTO);
 
     void delete(SecurityGroupRightDTO securityGroupRightDTO);
 
-    List<SecurityGroupRightDTO> getSecurityGroupRightsBySecurityGroup(SecurityGroupDTO securityGroupDTO);
 }

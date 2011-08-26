@@ -1,8 +1,8 @@
 package com.travel.mentor.dao.dto.security;
 
-import com.travel.mentor.dao.dto.base.AbstractAuditedDTO;
+import com.travel.mentor.dao.dto.base.AbstractAuditedIdDTO;
 
-public class SecurityGroupRightDTO extends AbstractAuditedDTO {
+public class SecurityGroupRightDTO extends AbstractAuditedIdDTO {
 
     private SecurityRightDTO securityRightDTO;
     private SecurityGroupDTO securityGroupDTO;

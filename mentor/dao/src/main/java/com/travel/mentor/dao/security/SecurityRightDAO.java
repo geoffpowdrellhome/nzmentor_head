@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface SecurityRightDAO {
 
-    List<SecurityRightDTO> getSecurityRightsLikeRightName(String value);
+    List<SecurityRightDTO> findSecurityRightsByLikeRightName(String rightName);
 
-	List<SecurityRightDTO> getSecurityRightsLikeRightNameAndType(String value, Long typeId);
+	List<SecurityRightDTO> findSecurityRightsByLikeRightNameAndType(String rightName, Long typeId);
 
-    List<SecurityRightDTO> getSecurityRightsLikeRightNameAndTypes(String value, List<Long> list);
+    List<SecurityRightDTO> findSecurityRightsByLikeRightNameAndTypes(String rightName, List<Long> typeList);
 
     List<SecurityRightDTO> findAllSecurityRights();
 
-    List<SecurityRightDTO> findSecurityRightsByType(Long type);
+    List<SecurityRightDTO> findSecurityRightsByType(Long typeId);
 
 	SecurityRightDTO saveOrUpdate(SecurityRightDTO securityRightDTO);
 

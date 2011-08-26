@@ -8,10 +8,10 @@ public interface SecurityRoleDAO {
 
     List<SecurityRoleDTO> findAllSecurityRoles();
 
+    List<SecurityRoleDTO> findSecurityRolesByLikeRoleName(String value);
+
 	SecurityRoleDTO saveOrUpdate(SecurityRoleDTO securityRoleDTO);
 
 	void delete(SecurityRoleDTO securityRoleDTO);
-
-    List<SecurityRoleDTO> getSecurityRolesLikeRoleName(String value);
 
 }
