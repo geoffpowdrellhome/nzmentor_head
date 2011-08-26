@@ -5,6 +5,7 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.security.SecureUserDAO;
 import com.travel.mentor.domain.security.SecureUser;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,23 +23,17 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
     @Resource
     private SecureUserAssembler secureUserAssembler;
 
-    @Override
-    public List<SecureUserDTO> findAllSecureUsers() {
-        List<SecureUser> secureUserList = em.createNamedQuery(SecureUser.FIND_ALL_SECURE_USERS).getResultList();
-        return secureUserAssembler.assembleToDTOList(secureUserList);
-    }
-
-    @Override
-    public void delete(SecureUserDTO secureUserDTO) {
-        SecureUser secureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
-        em.getEntityManagerFactory().getCache().evict(secureUser.getClass(), secureUser.getUsername());
-    }
-
     @PostConstruct
     protected void cacheDomainObjects() {
         List<String> namedQueries = new ArrayList<String>();
         namedQueries.add(SecureUser.FIND_ALL_SECURE_USERS);
         super.cacheDomainObjects(namedQueries);
+    }
+
+    @Override
+    public List<SecureUserDTO> findAllSecureUsers() {
+        List<SecureUser> secureUserList = em.createNamedQuery(SecureUser.FIND_ALL_SECURE_USERS).getResultList();
+        return secureUserAssembler.assembleToDTOList(secureUserList);
     }
 
     @Override
@@ -49,11 +44,12 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
     @Override
     public SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser) {
         SecureUser secureUser;
-        if (secureUserDTO.getUsername() == null || em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
+        if (secureUserDTO.getUsername() == null ||
+                StringUtils.isEmpty(secureUserDTO.getUsername()) ||
+                em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
             secureUser = secureUserAssembler.assembleToEntityInstance(secureUserDTO);
             secureUser.setCreateDate(new Timestamp(new Date().getTime()));
-        }
-        else {
+        } else {
             secureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
             secureUserAssembler.deepCopy(secureUserDTO, secureUser);
         }
@@ -62,6 +58,12 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
         em.merge(secureUser);
 
         return secureUserAssembler.assembleToDTOInstance(secureUser);
+    }
+
+    @Override
+    public void delete(SecureUserDTO secureUserDTO) {
+        SecureUser secureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
+        em.getEntityManagerFactory().getCache().evict(secureUser.getClass(), secureUser.getUsername());
     }
 
 }
