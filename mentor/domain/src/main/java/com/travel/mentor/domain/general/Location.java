@@ -19,7 +19,7 @@ import java.math.BigDecimal;
                 query = "SELECT o FROM Location o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findLocations")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllLocations")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.location_id_seq", allocationSize = 1)
 public class Location extends AbstractAuditedIdNameDescEntity {

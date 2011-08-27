@@ -15,7 +15,7 @@ import java.math.BigDecimal;
                 query = "SELECT o FROM Region o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findRegions")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllRegions")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.region_id_seq", allocationSize = 1)
 public class Region extends AbstractAuditedIdNameDescEntity {

@@ -15,7 +15,7 @@ import javax.persistence.*;
                 query = "SELECT o FROM Item o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findItems")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllItems")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.item_id_seq", allocationSize = 1)
 public class Item extends AbstractAuditedIdNameDescEntity {

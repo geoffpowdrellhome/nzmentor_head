@@ -8,13 +8,18 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-
 @Entity
 @Table(schema = "public", name = "site")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="siteTypeId")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@NamedQuery(name = "Site.findAll", query = "SELECT o FROM Site o order by o.name")
+@NamedQueries(value = {
+        @NamedQuery(name = Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY,
+                query = "SELECT o FROM Site o order by o.name",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSites")})
+})
 @javax.persistence.SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.site_id_seq", allocationSize = 1)
 public class Site extends AbstractAuditedIdNameDescEntity {
 

@@ -3,7 +3,6 @@ package com.travel.mentor.domain.reference;
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,7 +18,7 @@ import javax.persistence.Table;
                 query = "SELECT o FROM RoomConfigurationType o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "javax.persistence.cache.storeMode", value = "REFRESH")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllRoomConfigurationTypes")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.room_configuration_type_id_seq", allocationSize = 1)
 public class RoomConfigurationType extends AbstractAuditedIdNameDescEntity {

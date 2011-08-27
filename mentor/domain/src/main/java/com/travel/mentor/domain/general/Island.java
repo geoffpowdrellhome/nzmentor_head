@@ -14,7 +14,7 @@ import javax.persistence.*;
                 query = "SELECT o FROM Island o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findIslands")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllIslands")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.island_id_seq", allocationSize = 1)
 public class Island extends AbstractAuditedIdNameDescEntity {

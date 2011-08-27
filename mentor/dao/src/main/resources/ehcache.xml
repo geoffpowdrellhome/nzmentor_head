@@ -59,102 +59,92 @@
             memoryStoreEvictionPolicy="LFU"/>
 
     <!-- Class level caches that JPA/Hibernate uses to store records in -->
-    <cache name="com.travel.mentor.domain.reference.AccommodationSiteType"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
+    <cache name="com.travel.mentor.domain.reference.AccommodationSiteType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.ActivitySiteType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.ClimateConditionType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.ClimateWindfactorType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.ClothingType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.EventType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.FootwearType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.HeadwearType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.ItemType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.LocationType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.PopularityRankingType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.RoomConfigurationType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.RoomType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.SiteType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.SupplierType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.TransferSiteType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.reference.VehicleHireSiteType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
 
-    <cache name="com.travel.mentor.domain.reference.ActivitySiteType"
-           eternal="false"
-           overflowToDisk="false"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
+    <cache name="com.travel.mentor.domain.security.SecureUser" maxElementsInMemory="150" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecurityGroup" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecurityGroupRight" maxElementsInMemory="250" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecurityRight" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecurityRightType" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecureRole" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.security.SecureRoleGroup" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
 
-    <cache name="com.travel.mentor.domain.reference.RoomConfigurationType"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.reference.RoomType"
-           eternal="true"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.general.Region"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.security.SecureUser"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityRole"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityRoleGroup"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="100"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityRight"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="500"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityGroup"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="100"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityGroupRight"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="500"/>
-
-    <cache name="com.travel.mentor.domain.security.SecurityRightType"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
-
-    <cache name="com.travel.mentor.domain.security.SecureRoleGroup"
-           eternal="false"
-           overflowToDisk="true"
-           diskPersistent="true"
-           maxElementsInMemory="50"/>
+    <cache name="com.travel.mentor.domain.general.AccommodationSite" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.ActivitySite" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Country" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Currency" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Event" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.EventHistory" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Island" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Item" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Itinerary" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.ItineraryLocation" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Location" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Region" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Site" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.SuggestedItinerary" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.SuggestedItineraryLocation" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.Supplier" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.TransferSite" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
+    <cache name="com.travel.mentor.domain.general.VehicleHireSite" maxElementsInMemory="50" eternal="false" overflowToDisk="true" diskPersistent="true" />
 
 
-    <cache name="query.findAllRegions"
-           eternal="false"
-           overflowToDisk="false"
-           diskPersistent="false"
-           maxElementsInMemory="50" />
-
-    <cache name="query.findAllSecurityRoles"
-           eternal="false"
-           overflowToDisk="false"
-           diskPersistent="false"
-           maxElementsInMemory="50" />
-
-    <cache name="query.findSecurityRolesByLikeRoleName"
-           eternal="false"
-           overflowToDisk="false"
-           diskPersistent="false"
-           maxElementsInMemory="50" />
-
+    <!-- 2nd level query caching -->
+    <cache name="query.findAccommodationSites" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findActivitySites" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllCountries" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllCurrencies" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllIslands" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllItems" maxElementsInMemory="5000" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllLocations" maxElementsInMemory="500" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllRegions" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSites" maxElementsInMemory="5000" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecureUsers" maxElementsInMemory="150" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecureUsersByLikeUsername" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecureUserByUsername" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecureUserByUsernameAndPassword" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecurityGroups" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityGroupsByLikeGroupName" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecurityGroupRights" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecurityGroupRightsBySecurityGroup" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRights" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRightsByType" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRightsByLikeRightName" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRightsByLikeRightNameAndType" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRightTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecurityRoles" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findSecurityRolesByLikeRoleName" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSecurityRoleGroups" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllAcommodationSiteTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllActivitySiteTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllClimateConditionTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllClimateWindfactorTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllClothingTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllEventTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllFootwearTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllHeadwearTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllItemTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllLocationTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllPopularityRankingTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllRoomConfigurationTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllRoomTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSiteTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
+    <cache name="query.findAllSupplierTypes" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
 
 </ehcache>
