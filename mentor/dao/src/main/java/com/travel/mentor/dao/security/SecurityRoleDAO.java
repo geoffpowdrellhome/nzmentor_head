@@ -8,7 +8,9 @@ public interface SecurityRoleDAO {
 
     List<SecurityRoleDTO> findAllSecurityRoles();
 
-    List<SecurityRoleDTO> findSecurityRolesByLikeRoleName(String value);
+    SecurityRoleDTO find(Long id);
+
+    List<SecurityRoleDTO> findSecurityRolesByLikeRoleName(String roleName);
 
 	SecurityRoleDTO saveOrUpdate(SecurityRoleDTO securityRoleDTO);
 

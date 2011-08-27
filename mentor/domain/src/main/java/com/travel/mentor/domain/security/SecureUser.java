@@ -2,7 +2,6 @@ package com.travel.mentor.domain.security;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -18,7 +17,12 @@ import java.util.List;
                 query = "SELECT o FROM SecureUser o order by o.username",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecurityUsers")}),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecureUsers")}),
+        @NamedQuery(name = SecureUser.FIND_SECURE_USERS_BY_LIKE_USERNAME,
+                query = "SELECT o FROM SecurityGroup o WHERE o.name like :username",
+                hints = {
+                        @QueryHint(name = "org.hibernate.cacheable", value = "true"),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecureUsersByLikeUsername")}),
         @NamedQuery(name = SecureUser.FIND_SECURE_USER_BY_USERNAME,
                 query = "SELECT o FROM SecureUser o WHERE o.username =:username",
                 hints = {
@@ -34,6 +38,7 @@ public class SecureUser implements Serializable {
 
     public static final String FIND_SECURE_USER_BY_USERNAME = "SecureUser.findUserByUsername";
     public static final String FIND_SECURE_USER_BY_USERNAME_PASSWORD = "SecureUser.findUserByUsernamePassword";
+    public static final String FIND_SECURE_USERS_BY_LIKE_USERNAME = "SecureUser.findUserByLikeUsername";
     public static final String FIND_ALL_SECURE_USERS = "SecureUser.findAll";
 
     @Id

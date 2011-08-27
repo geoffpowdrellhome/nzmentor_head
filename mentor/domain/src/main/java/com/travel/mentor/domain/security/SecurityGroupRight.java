@@ -14,12 +14,12 @@ import javax.persistence.*;
                 query = "SELECT o FROM SecurityGroupRight o order by o.securityRight.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = SecurityGroupRight.FIND_ALL_SECURITY_GROUP_RIGHTS)}),
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecurityGroupRights")}),
         @NamedQuery(name = SecurityGroupRight.FIND_ALL_SECURITY_GROUP_RIGHTS_BY_SECURITY_GROUP,
                 query = "SELECT o FROM SecurityGroupRight o WHERE o.securityGroup.id =:securitygroupid",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = SecurityGroupRight.FIND_ALL_SECURITY_GROUP_RIGHTS_BY_SECURITY_GROUP)})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecurityGroupRightsBySecurityGroup")})
 
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_right_id_seq", allocationSize = 1)

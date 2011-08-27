@@ -41,7 +41,7 @@ public class SecurityRightDAOImpl extends AbstractMentorDAO implements SecurityR
     public List<SecurityRightDTO> findSecurityRightsByLikeRightName(String rightName) {
         Assert.notNull(rightName);
         Query query = em.createNamedQuery(SecurityRight.FIND_SECURITY_RIGHTS_BY_LIKE_RIGHT_NAME);
-        query.setParameter("rightname", rightName);
+        query.setParameter("rightname", "%" + rightName + "%");
         return securityRightAssembler.assembleToDTOList(query.getResultList());
     }
 
@@ -50,7 +50,7 @@ public class SecurityRightDAOImpl extends AbstractMentorDAO implements SecurityR
         Assert.notNull(rightName);
         Assert.notNull(typeId);
         Query query = em.createNamedQuery(SecurityRight.FIND_SECURITY_RIGHTS_BY_LIKE_RIGHT_NAME_AND_TYPE);
-        query.setParameter("rightname", rightName);
+        query.setParameter("rightname", "%" + rightName + "%");
         query.setParameter("securityrighttypeid", typeId);
         return securityRightAssembler.assembleToDTOList(query.getResultList());
     }
@@ -59,11 +59,19 @@ public class SecurityRightDAOImpl extends AbstractMentorDAO implements SecurityR
     public List<SecurityRightDTO> findSecurityRightsByLikeRightNameAndTypes(String rightName, List<Long> typeList) {
         Assert.notNull(rightName);
         Assert.notNull(typeList);
-        Long typeId = typeList.get(0);  // @TODO - need to change this to use a list in the future!!!
+        List<SecurityRightDTO> securityRightDTOList = new ArrayList<SecurityRightDTO>();
+
         Query query = em.createNamedQuery(SecurityRight.FIND_SECURITY_RIGHTS_BY_LIKE_RIGHT_NAME_AND_TYPE);
-        query.setParameter("rightname", rightName);
-        query.setParameter("securityrighttypeid", typeId);
-        return securityRightAssembler.assembleToDTOList(query.getResultList());
+
+        for (Long typeId : typeList) {
+            query.setParameter("rightname", "%" + rightName + "%");
+            query.setParameter("securityrighttypeid", typeId);
+            List<SecurityRight> securityRightList = query.getResultList();
+
+            securityRightDTOList.addAll(securityRightAssembler.assembleToDTOList(securityRightList));
+        }
+
+        return securityRightDTOList;
     }
 
     @Override
@@ -79,12 +87,15 @@ public class SecurityRightDAOImpl extends AbstractMentorDAO implements SecurityR
         SecurityRight securityRight;
         if (securityRightDTO.getId() == null || em.find(SecurityRight.class, securityRightDTO.getId()) == null) {
             securityRight = securityRightAssembler.assembleToEntityInstance(securityRightDTO);
+            securityRight.setCreateUser( secureUserAssembler.assembleToEntityInstance(securityRightDTO.getLoggedInUser()) );
             securityRight.setCreateDate(new Timestamp(new Date().getTime()));
-        } else {
+        }
+        else {
             securityRight = em.find(SecurityRight.class, securityRightDTO.getId());
             securityRightAssembler.deepCopy(securityRightDTO, securityRight);
         }
 
+        securityRight.setUpdateUser( secureUserAssembler.assembleToEntityInstance(securityRightDTO.getLoggedInUser()) );
         securityRight.setUpdateDate(new Timestamp(new Date().getTime()));
         em.merge(securityRight);
 

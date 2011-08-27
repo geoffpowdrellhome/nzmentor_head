@@ -15,18 +15,4 @@ public class AssembleUtil {
         return instance;
     }
 
-    public Object shallowCopy(Object copyFrom, Object copyTo) {
-        Assert.notNull(copyFrom);
-        Assert.notNull(copyTo);
-        BeanUtils.copyProperties(copyFrom, copyTo);
-        return copyTo;
-    }
-
-    public Object shallowCopy(Object copyFrom, Object copyTo, String[] ignoreProperties) {
-        Assert.notNull(copyFrom);
-        Assert.notNull(copyTo);
-        BeanUtils.copyProperties(copyFrom, copyTo, ignoreProperties);
-        return copyTo;
-    }
-
 }

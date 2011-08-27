@@ -144,12 +144,6 @@
            diskPersistent="false"
            maxElementsInMemory="50" />
 
-    <cache name="query.RoomTypes"
-           eternal="false"
-           overflowToDisk="false"
-           diskPersistent="false"
-           maxElementsInMemory="50" />
-
     <cache name="query.findAllSecurityRoles"
            eternal="false"
            overflowToDisk="false"

@@ -5,6 +5,7 @@ import com.travel.mentor.dao.base.AbstractMentorDAO;
 import com.travel.mentor.dao.dto.security.*;
 import com.travel.mentor.dao.security.SecurityDAO;
 import com.travel.mentor.domain.security.*;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
@@ -48,22 +49,19 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
 
     @Override
     public SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser) {
-        SecureUser secureUser = secureUserAssembler.assembleToEntityInstance(secureUserDTO);
-
-        if (secureUserDTO.getUsername() == null || em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
-            secureUser.setCreateUser(loggedOnUser.getUsername());
+        SecureUser secureUser;
+        if (secureUserDTO.getUsername() == null ||
+                StringUtils.isEmpty(secureUserDTO.getUsername()) ||
+                em.find(SecureUser.class, secureUserDTO.getUsername()) == null) {
+            secureUser = secureUserAssembler.assembleToEntityInstance(secureUserDTO);
             secureUser.setCreateDate(new Timestamp(new Date().getTime()));
-            secureUser.setUpdateUser(loggedOnUser.getUsername());
-            secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.persist(secureUser);
+        } else {
+            secureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
+            secureUserAssembler.deepCopy(secureUserDTO, secureUser);
         }
-        else {
-            SecureUser existingSecureUser = em.find(SecureUser.class, secureUserDTO.getUsername());
-            BeanUtils.copyProperties(secureUser, existingSecureUser);
-            secureUser.setUpdateUser(loggedOnUser.getUsername());
-            secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
-            em.merge(secureUser);
-        }
+
+        secureUser.setUpdateDate(new Timestamp(new Date().getTime()));
+        em.merge(secureUser);
 
         return secureUserAssembler.assembleToDTOInstance(secureUser);
     }
@@ -144,7 +142,6 @@ public class SecurityDAOImpl extends AbstractMentorDAO implements SecurityDAO {
     public void delete(SecurityRightDTO securityRightDTO) {
         SecurityRight securityRight = em.find(SecurityRight.class, securityRightDTO.getId());
         em.remove(securityRight);
-        em.flush();
         em.getEntityManagerFactory().getCache().evict(securityRight.getClass(), securityRight.getId());
     }
 

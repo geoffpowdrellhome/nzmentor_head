@@ -56,12 +56,15 @@ public class SecurityGroupRightDAOImpl extends AbstractMentorDAO implements Secu
         SecurityGroupRight securityGroupRight;
         if (securityGroupRightDTO.getId() == null || em.find(SecurityGroupRight.class, securityGroupRightDTO.getId()) == null) {
             securityGroupRight = securityGroupRightAssembler.assembleToEntityInstance(securityGroupRightDTO);
+            securityGroupRight.setCreateUser( secureUserAssembler.assembleToEntityInstance(securityGroupRightDTO.getLoggedInUser()) );
             securityGroupRight.setCreateDate(new Timestamp(new Date().getTime()));
-        } else {
+        }
+        else {
             securityGroupRight = em.find(SecurityGroupRight.class, securityGroupRightDTO.getId());
             securityGroupRightAssembler.deepCopy(securityGroupRightDTO, securityGroupRight);
         }
 
+        securityGroupRight.setUpdateUser( secureUserAssembler.assembleToEntityInstance(securityGroupRightDTO.getLoggedInUser()) );
         securityGroupRight.setUpdateDate(new Timestamp(new Date().getTime()));
         em.merge(securityGroupRight);
 

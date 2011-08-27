@@ -8,9 +8,11 @@ import com.travel.mentor.domain.security.SecureUser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.persistence.Query;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +41,14 @@ public class SecureUserDAOImpl extends AbstractMentorDAO implements SecureUserDA
     @Override
     public SecureUserDTO findByUsername(String username) {
         return secureUserAssembler.assembleToDTOInstance(em.find(SecureUser.class, username));
+    }
+
+    @Override
+    public List<SecureUserDTO> findSecureUsersByLikeUserName(String username) {
+        Assert.notNull(username);
+        Query query = em.createNamedQuery(SecureUser.FIND_SECURE_USERS_BY_LIKE_USERNAME);
+        query.setParameter("username", "%" + username + "%");
+        return secureUserAssembler.assembleToDTOList(query.getResultList());
     }
 
     @Override

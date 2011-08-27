@@ -10,6 +10,8 @@ public interface SecureUserDAO {
 
     SecureUserDTO findByUsername(String username);
 
+    List<SecureUserDTO> findSecureUsersByLikeUserName(String username);
+
     SecureUserDTO saveOrUpdate(SecureUserDTO secureUserDTO, SecureUserDTO loggedOnUser);
 
     void delete(SecureUserDTO secureUserDTO);

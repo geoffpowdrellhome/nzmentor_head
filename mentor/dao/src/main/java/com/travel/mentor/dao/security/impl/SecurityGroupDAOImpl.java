@@ -46,7 +46,7 @@ public class SecurityGroupDAOImpl extends AbstractMentorDAO implements SecurityG
     public List<SecurityGroupDTO> findSecurityGroupsByLikeGroupName(String groupName) {
         Assert.notNull(groupName);
         Query query = em.createNamedQuery(SecurityGroup.FIND_SECURITY_GROUPS_BY_LIKE_GROUP_NAME);
-        query.setParameter("groupname", groupName);
+        query.setParameter("groupname", "%" + groupName + "%");
         return securityGroupAssembler.assembleToDTOList(query.getResultList());
     }
 
@@ -55,12 +55,15 @@ public class SecurityGroupDAOImpl extends AbstractMentorDAO implements SecurityG
         SecurityGroup securityGroup;
         if (securityGroupDTO.getId() == null || em.find(SecurityGroup.class, securityGroupDTO.getId()) == null) {
             securityGroup = securityGroupAssembler.assembleToEntityInstance(securityGroupDTO);
+            securityGroup.setCreateUser( secureUserAssembler.assembleToEntityInstance(securityGroupDTO.getLoggedInUser()) );
             securityGroup.setCreateDate(new Timestamp(new Date().getTime()));
-        } else {
+        }
+        else {
             securityGroup = em.find(SecurityGroup.class, securityGroupDTO.getId());
             securityGroupAssembler.deepCopy(securityGroupDTO, securityGroup);
         }
 
+        securityGroup.setUpdateUser( secureUserAssembler.assembleToEntityInstance(securityGroupDTO.getLoggedInUser()) );
         securityGroup.setUpdateDate(new Timestamp(new Date().getTime()));
         em.merge(securityGroup);
 

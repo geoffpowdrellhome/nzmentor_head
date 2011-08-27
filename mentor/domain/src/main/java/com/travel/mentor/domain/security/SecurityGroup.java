@@ -19,7 +19,7 @@ import javax.persistence.*;
                 query = "SELECT o FROM SecurityGroup o WHERE o.name like :groupname",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
-                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecurityGroups")})
+                        @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecurityGroupsByLikeGroupName")})
 })
 @SequenceGenerator(name = "SEQ_STORE", sequenceName = "public.security_group_id_seq", allocationSize = 1)
 public class SecurityGroup extends AbstractAuditedIdNameDescEntity {
