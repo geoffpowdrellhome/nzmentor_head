@@ -49,7 +49,7 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         itemDTO.setDescription("my new item desc");
         itemDTO.setName("my new item");
         itemDTO.setSiteDTO(accommodationSiteDTO);
-        itemDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        itemDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
         itemDTO.setSupplierDTO( supplierDAO.find(1L) );
 
         itemDTO = itemDAO.saveOrUpdate(itemDTO);
@@ -67,7 +67,7 @@ public class ItemDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         ItemDTO itemDTO = itemDAO.find(EXISTING_ID_VALUE);
         itemDTO.setName("update name 2");
         itemDTO.setDescription("update desc 2");
-        itemDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        itemDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
         itemDTO.setSupplierDTO( supplierDAO.find(1L) );
 
         itemDTO = itemDAO.saveOrUpdate(itemDTO);

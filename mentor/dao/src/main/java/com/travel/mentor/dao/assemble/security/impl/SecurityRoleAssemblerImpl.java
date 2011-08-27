@@ -6,6 +6,7 @@ import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityRoleDTO;
 import com.travel.mentor.domain.security.SecureUser;
 import com.travel.mentor.domain.security.SecurityRole;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,20 +26,20 @@ public class SecurityRoleAssemblerImpl extends AbstractAssembler implements Secu
 
     @Override
     public SecurityRole assembleToEntityInstance(SecurityRoleDTO securityRoleDTO) {
-        SecurityRole securityRight = (SecurityRole) assembleUtil.shallowCopy(securityRoleDTO, SecurityRole.class);
+        SecurityRole securityRight = (SecurityRole) assembleUtil.copyPropertiesToInstantiatedClass(securityRoleDTO, SecurityRole.class);
 
-        securityRight.setCreateUser((SecureUser) assembleUtil.shallowCopy(securityRoleDTO.getCreateUserDTO(), SecureUser.class));
-        securityRight.setUpdateUser((SecureUser) assembleUtil.shallowCopy(securityRoleDTO.getUpdateUserDTO(), SecureUser.class));
+        securityRight.setCreateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(securityRoleDTO.getCreateUserDTO(), SecureUser.class));
+        securityRight.setUpdateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(securityRoleDTO.getUpdateUserDTO(), SecureUser.class));
 
         return securityRight;
     }
 
     @Override
     public SecurityRoleDTO assembleToDTOInstance(SecurityRole securityRole) {
-        SecurityRoleDTO securityRightTypeDTO = (SecurityRoleDTO) assembleUtil.shallowCopy(securityRole, SecurityRoleDTO.class);
+        SecurityRoleDTO securityRightTypeDTO = (SecurityRoleDTO) assembleUtil.copyPropertiesToInstantiatedClass(securityRole, SecurityRoleDTO.class);
 
-        securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRole.getCreateUser(), SecureUserDTO.class));
-        securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(securityRole.getUpdateUser(), SecureUserDTO.class));
+        securityRightTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(securityRole.getCreateUser(), SecureUserDTO.class));
+        securityRightTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(securityRole.getUpdateUser(), SecureUserDTO.class));
 
         return securityRightTypeDTO;
     }
@@ -46,10 +47,10 @@ public class SecurityRoleAssemblerImpl extends AbstractAssembler implements Secu
     @Override
     public SecurityRole deepCopy(SecurityRoleDTO securityRoleDTO, SecurityRole securityRole) {
         String[] ignoreProperties = {"id"};
-        assembleUtil.shallowCopy(securityRoleDTO, securityRole, ignoreProperties);
+        BeanUtils.copyProperties(securityRoleDTO, securityRole, ignoreProperties);
 
-        assembleUtil.shallowCopy(securityRoleDTO.getCreateUserDTO(), securityRole.getCreateUser());
-        assembleUtil.shallowCopy(securityRoleDTO.getUpdateUserDTO(), securityRole.getUpdateUser());
+        BeanUtils.copyProperties(securityRoleDTO.getCreateUserDTO(), securityRole.getCreateUser());
+        BeanUtils.copyProperties(securityRoleDTO.getUpdateUserDTO(), securityRole.getUpdateUser());
 
         return securityRole;
     }

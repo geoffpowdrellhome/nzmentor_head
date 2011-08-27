@@ -8,6 +8,7 @@ import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.domain.general.Island;
 import com.travel.mentor.domain.general.Region;
 import com.travel.mentor.domain.security.SecureUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,24 +28,22 @@ public class RegionAssemblerImpl extends AbstractAssembler implements RegionAsse
 
     @Override
     public Region assembleToEntityInstance(RegionDTO regionDTO) {
-        Region region = (Region) assembleUtil.shallowCopy(regionDTO, Region.class);
+        Region region = (Region) assembleUtil.copyPropertiesToInstantiatedClass(regionDTO, Region.class);
 
-        region.setCreateUser((SecureUser) assembleUtil.shallowCopy(regionDTO.getCreateUserDTO(), SecureUser.class));
-        region.setUpdateUser((SecureUser) assembleUtil.shallowCopy(regionDTO.getUpdateUserDTO(), SecureUser.class));
-
-        region.setIsland((Island) assembleUtil.shallowCopy(regionDTO.getIslandDTO(), Island.class));
+        region.setCreateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(regionDTO.getCreateUserDTO(), SecureUser.class));
+        region.setUpdateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(regionDTO.getUpdateUserDTO(), SecureUser.class));
+        region.setIsland((Island) assembleUtil.copyPropertiesToInstantiatedClass(regionDTO.getIslandDTO(), Island.class));
 
         return region;
     }
 
     @Override
     public RegionDTO assembleToDTOInstance(Region region) {
-        RegionDTO regionDTO = (RegionDTO) assembleUtil.shallowCopy(region, RegionDTO.class);
+        RegionDTO regionDTO = (RegionDTO) assembleUtil.copyPropertiesToInstantiatedClass(region, RegionDTO.class);
 
-        regionDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(region.getCreateUser(), SecureUserDTO.class));
-        regionDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(region.getUpdateUser(), SecureUserDTO.class));
-
-        regionDTO.setIslandDTO((IslandDTO) assembleUtil.shallowCopy(region.getIsland(), IslandDTO.class));
+        regionDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(region.getCreateUser(), SecureUserDTO.class));
+        regionDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(region.getUpdateUser(), SecureUserDTO.class));
+        regionDTO.setIslandDTO((IslandDTO) assembleUtil.copyPropertiesToInstantiatedClass(region.getIsland(), IslandDTO.class));
 
         return regionDTO;
     }
@@ -52,11 +51,11 @@ public class RegionAssemblerImpl extends AbstractAssembler implements RegionAsse
     @Override
     public Region deepCopy(RegionDTO regionDTO, Region region) {
         String[] ignoreProperties = {"id"};
-        assembleUtil.shallowCopy(regionDTO, region, ignoreProperties);
+        BeanUtils.copyProperties(regionDTO, region, ignoreProperties);
 
-        assembleUtil.shallowCopy(regionDTO.getCreateUserDTO(), region.getCreateUser());
-        assembleUtil.shallowCopy(regionDTO.getUpdateUserDTO(), region.getUpdateUser());
-        assembleUtil.shallowCopy(regionDTO.getIslandDTO(), region.getIsland());
+        BeanUtils.copyProperties(regionDTO.getCreateUserDTO(), region.getCreateUser());
+        BeanUtils.copyProperties(regionDTO.getUpdateUserDTO(), region.getUpdateUser());
+        BeanUtils.copyProperties(regionDTO.getIslandDTO(), region.getIsland());
 
         return region;
     }

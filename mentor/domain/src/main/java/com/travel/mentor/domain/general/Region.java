@@ -1,6 +1,7 @@
 package com.travel.mentor.domain.general;
 
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(schema = "public", name = "region")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries(value = {
         @NamedQuery(name = Region.FIND_ALL_REGIONS_NAMED_QUERY,
                 query = "SELECT o FROM Region o order by o.name",

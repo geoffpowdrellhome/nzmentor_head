@@ -7,6 +7,7 @@ import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.dao.dto.security.SecurityRoleDTO;
 import com.travel.mentor.domain.security.SecureUser;
 import com.travel.mentor.domain.security.SecurityRole;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -29,12 +30,12 @@ public class SecureUserAssemblerImpl extends AbstractAssembler implements Secure
 
     @Override
     public SecureUser assembleToEntityInstance(SecureUserDTO secureUserDTO) {
-        return (SecureUser) assembleUtil.shallowCopy(secureUserDTO, SecureUser.class);
+        return (SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(secureUserDTO, SecureUser.class);
     }
 
     @Override
     public SecureUserDTO assembleToDTOInstance(SecureUser secureUser) {
-        SecureUserDTO secureUserDTO = (SecureUserDTO) assembleUtil.shallowCopy(secureUser, SecureUserDTO.class);
+        SecureUserDTO secureUserDTO = (SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(secureUser, SecureUserDTO.class);
         for (SecurityRole securityRole : secureUser.getSecurityRoleList()) {
             secureUserDTO.getSecurityRoleDTOList().add( securityRoleAssembler.assembleToDTOInstance(securityRole) );
         }
@@ -44,7 +45,7 @@ public class SecureUserAssemblerImpl extends AbstractAssembler implements Secure
     @Override
     public SecureUser deepCopy(SecureUserDTO secureUserDTO, SecureUser secureUser) {
         String[] ignoreProperties = {"id"};
-        assembleUtil.shallowCopy(secureUserDTO, secureUser, ignoreProperties);
+        BeanUtils.copyProperties(secureUserDTO, secureUser, ignoreProperties);
 
         for (SecurityRoleDTO securityRoleDTO : secureUserDTO.getSecurityRoleDTOList()) {
             secureUser.getSecurityRoleList().add( securityRoleAssembler.assembleToEntityInstance(securityRoleDTO));

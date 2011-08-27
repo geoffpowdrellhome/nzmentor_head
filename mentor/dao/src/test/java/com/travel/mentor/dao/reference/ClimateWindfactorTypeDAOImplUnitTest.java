@@ -19,7 +19,7 @@ public class ClimateWindfactorTypeDAOImplUnitTest extends AbstractReferenceTypeD
     public void testAdd() {
         ReferenceTypeDTO referenceTypeDTO = new ReferenceTypeDTO("name", "desc");
         referenceTypeDTO.setEntityClass(ClimateWindfactorType.class);
-        referenceTypeDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        referenceTypeDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.saveOrUpdate(referenceTypeDTO);
         Assert.assertNotNull(referenceTypeDTO);

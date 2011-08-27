@@ -55,7 +55,7 @@ public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestC
         accommodationSiteDTO.setLatitude(new BigDecimal(166.677));
         accommodationSiteDTO.setLongitude(new BigDecimal(456.666));
         accommodationSiteDTO.setLocationDTO(locationDTO);
-        accommodationSiteDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        accommodationSiteDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         accommodationSiteDTO = accommodationSiteDAO.saveOrUpdate(accommodationSiteDTO);
         Assert.assertNotNull(accommodationSiteDTO);
@@ -72,7 +72,7 @@ public class AccommodationSiteDAOImplUnitTest extends AbstractMentorDAOImplTestC
         AccommodationSiteDTO accommodationSiteDTO = accommodationSiteDAO.find(1L);
         accommodationSiteDTO.setName("update2");
         accommodationSiteDTO.setDescription("update2");
-        accommodationSiteDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        accommodationSiteDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         accommodationSiteDTO = accommodationSiteDAO.saveOrUpdate(accommodationSiteDTO);
         Assert.assertNotNull(accommodationSiteDTO);

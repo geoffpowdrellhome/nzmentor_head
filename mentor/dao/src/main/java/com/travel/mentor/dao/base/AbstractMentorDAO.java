@@ -12,9 +12,7 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import java.util.List;
 
-
 /**
- * Created by geoff
  * Base DAO for those DAO's using the 'mentorPU' persistence layer
  */
 public abstract class AbstractMentorDAO extends MentorObject {

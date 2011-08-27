@@ -6,6 +6,7 @@ import com.travel.mentor.dao.dto.reference.ReferenceTypeDTO;
 import com.travel.mentor.dao.dto.security.SecureUserDTO;
 import com.travel.mentor.domain.base.AbstractAuditedIdNameDescEntity;
 import com.travel.mentor.domain.security.SecureUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,10 +26,10 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
 
     @Override
     public AbstractAuditedIdNameDescEntity assembleToEntityInstance(ReferenceTypeDTO referenceTypeDTO) {
-        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) assembleUtil.shallowCopy(referenceTypeDTO, referenceTypeDTO.getEntityClass());
+        AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity = (AbstractAuditedIdNameDescEntity) assembleUtil.copyPropertiesToInstantiatedClass(referenceTypeDTO, referenceTypeDTO.getEntityClass());
 
-        abstractAuditedNameDescEntity.setCreateUser((SecureUser) assembleUtil.shallowCopy(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
-        abstractAuditedNameDescEntity.setUpdateUser((SecureUser) assembleUtil.shallowCopy(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
+        abstractAuditedNameDescEntity.setCreateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
+        abstractAuditedNameDescEntity.setUpdateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(referenceTypeDTO.getLoggedInUser(), SecureUser.class));
 
         return abstractAuditedNameDescEntity;
     }
@@ -36,11 +37,11 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
 
     @Override
     public ReferenceTypeDTO assembleToDTOInstance(AbstractAuditedIdNameDescEntity abstractAuditedNameDescEntity) {
-        ReferenceTypeDTO referenceTypeDTO = (ReferenceTypeDTO) assembleUtil.shallowCopy(abstractAuditedNameDescEntity, ReferenceTypeDTO.class);
+        ReferenceTypeDTO referenceTypeDTO = (ReferenceTypeDTO) assembleUtil.copyPropertiesToInstantiatedClass(abstractAuditedNameDescEntity, ReferenceTypeDTO.class);
         referenceTypeDTO.setEntityClass(abstractAuditedNameDescEntity.getClass());
 
-        referenceTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(abstractAuditedNameDescEntity.getCreateUser(), SecureUserDTO.class));
-        referenceTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(abstractAuditedNameDescEntity.getUpdateUser(), SecureUserDTO.class));
+        referenceTypeDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(abstractAuditedNameDescEntity.getCreateUser(), SecureUserDTO.class));
+        referenceTypeDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(abstractAuditedNameDescEntity.getUpdateUser(), SecureUserDTO.class));
 
         return referenceTypeDTO;
     }
@@ -48,10 +49,10 @@ public class ReferenceTypeAssemblerImpl extends AbstractAssembler implements Ref
     @Override
     public AbstractAuditedIdNameDescEntity deepCopy(ReferenceTypeDTO referenceTypeDTO, AbstractAuditedIdNameDescEntity abstractAuditedIdNameDescEntity) {
         String[] ignoreProperties = {"id"};
-        assembleUtil.shallowCopy(referenceTypeDTO, abstractAuditedIdNameDescEntity, ignoreProperties);
+        BeanUtils.copyProperties(referenceTypeDTO, abstractAuditedIdNameDescEntity, ignoreProperties);
 
-        assembleUtil.shallowCopy(referenceTypeDTO.getCreateUserDTO(), abstractAuditedIdNameDescEntity.getCreateUser());
-        assembleUtil.shallowCopy(referenceTypeDTO.getUpdateUserDTO(), abstractAuditedIdNameDescEntity.getUpdateUser());
+        BeanUtils.copyProperties(referenceTypeDTO.getCreateUserDTO(), abstractAuditedIdNameDescEntity.getCreateUser());
+        BeanUtils.copyProperties(referenceTypeDTO.getUpdateUserDTO(), abstractAuditedIdNameDescEntity.getUpdateUser());
 
         return abstractAuditedIdNameDescEntity;
     }

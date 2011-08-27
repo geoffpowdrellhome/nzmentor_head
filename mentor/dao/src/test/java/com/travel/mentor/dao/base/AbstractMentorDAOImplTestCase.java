@@ -2,6 +2,7 @@ package com.travel.mentor.dao.base;
 
 import com.travel.mentor.dao.assemble.security.SecureUserAssembler;
 import com.travel.mentor.dao.reference.ReferenceTypeDAO;
+import com.travel.mentor.dao.security.SecureUserDAO;
 import com.travel.mentor.dao.security.SecurityDAO;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
@@ -23,8 +24,8 @@ public class AbstractMentorDAOImplTestCase extends AbstractSpringDAOImplTestCase
     @Resource(name = "referenceTypeDAO")
     protected ReferenceTypeDAO referenceTypeDAO;
 
-    @Resource(name = "securityDAO")
-    protected SecurityDAO securityDAO;
+    @Resource(name = "secureUserDAO")
+    protected SecureUserDAO secureUserDAO;
 
     @Resource
     protected SecureUserAssembler secureUserAssembler;

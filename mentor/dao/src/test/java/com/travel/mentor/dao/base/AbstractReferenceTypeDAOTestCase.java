@@ -29,7 +29,7 @@ public abstract class AbstractReferenceTypeDAOTestCase extends AbstractMentorDAO
         ReferenceTypeDTO referenceTypeDTO = referenceTypeDTOList.get(0); // get the first one.
         referenceTypeDTO.setName("update2");
         referenceTypeDTO.setDescription("update2");
-        referenceTypeDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        referenceTypeDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         referenceTypeDTO = referenceTypeDAO.saveOrUpdate(referenceTypeDTO);
         Assert.assertNotNull(referenceTypeDTO);

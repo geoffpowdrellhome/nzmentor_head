@@ -10,6 +10,7 @@ import com.travel.mentor.domain.general.Location;
 import com.travel.mentor.domain.general.Supplier;
 import com.travel.mentor.domain.reference.SupplierType;
 import com.travel.mentor.domain.security.SecureUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,26 +30,24 @@ public class SupplierAssemblerImpl extends AbstractAssembler implements Supplier
 
     @Override
     public Supplier assembleToEntityInstance(SupplierDTO supplierDTO) {
-        Supplier supplier = (Supplier) assembleUtil.shallowCopy(supplierDTO, Supplier.class);
+        Supplier supplier = (Supplier) assembleUtil.copyPropertiesToInstantiatedClass(supplierDTO, Supplier.class);
 
-        supplier.setCreateUser((SecureUser) assembleUtil.shallowCopy(supplierDTO.getCreateUserDTO(), SecureUser.class));
-        supplier.setUpdateUser((SecureUser) assembleUtil.shallowCopy(supplierDTO.getUpdateUserDTO(), SecureUser.class));
-
-        supplier.setSupplierType((SupplierType) assembleUtil.shallowCopy(supplierDTO.getSupplierTypeDTO(), SupplierType.class));
-        supplier.setLocation((Location) assembleUtil.shallowCopy(supplierDTO.getLocationDTO(), Location.class));
+        supplier.setCreateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(supplierDTO.getCreateUserDTO(), SecureUser.class));
+        supplier.setUpdateUser((SecureUser) assembleUtil.copyPropertiesToInstantiatedClass(supplierDTO.getUpdateUserDTO(), SecureUser.class));
+        supplier.setSupplierType((SupplierType) assembleUtil.copyPropertiesToInstantiatedClass(supplierDTO.getSupplierTypeDTO(), SupplierType.class));
+        supplier.setLocation((Location) assembleUtil.copyPropertiesToInstantiatedClass(supplierDTO.getLocationDTO(), Location.class));
 
         return supplier;
     }
 
     @Override
     public SupplierDTO assembleToDTOInstance(Supplier supplier) {
-        SupplierDTO itemDTO = (SupplierDTO) assembleUtil.shallowCopy(supplier, SupplierDTO.class);
+        SupplierDTO itemDTO = (SupplierDTO) assembleUtil.copyPropertiesToInstantiatedClass(supplier, SupplierDTO.class);
 
-        itemDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(supplier.getCreateUser(), SecureUserDTO.class));
-        itemDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.shallowCopy(supplier.getUpdateUser(), SecureUserDTO.class));
-
-        itemDTO.setSupplierTypeDTO((ReferenceTypeDTO) assembleUtil.shallowCopy(supplier.getSupplierType(), ReferenceTypeDTO.class));
-        itemDTO.setLocationDTO((LocationDTO) assembleUtil.shallowCopy(supplier.getLocation(), LocationDTO.class));
+        itemDTO.setCreateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(supplier.getCreateUser(), SecureUserDTO.class));
+        itemDTO.setUpdateUserDTO((SecureUserDTO) assembleUtil.copyPropertiesToInstantiatedClass(supplier.getUpdateUser(), SecureUserDTO.class));
+        itemDTO.setSupplierTypeDTO((ReferenceTypeDTO) assembleUtil.copyPropertiesToInstantiatedClass(supplier.getSupplierType(), ReferenceTypeDTO.class));
+        itemDTO.setLocationDTO((LocationDTO) assembleUtil.copyPropertiesToInstantiatedClass(supplier.getLocation(), LocationDTO.class));
 
         return itemDTO;
     }
@@ -56,12 +55,12 @@ public class SupplierAssemblerImpl extends AbstractAssembler implements Supplier
     @Override
     public Supplier deepCopy(SupplierDTO supplierDTO, Supplier supplier) {
         String[] ignoreProperties = {"id"};
-        assembleUtil.shallowCopy(supplierDTO, supplier, ignoreProperties);
+        BeanUtils.copyProperties(supplierDTO, supplier, ignoreProperties);
 
-        assembleUtil.shallowCopy(supplierDTO.getCreateUserDTO(), supplier.getCreateUser());
-        assembleUtil.shallowCopy(supplierDTO.getUpdateUserDTO(), supplier.getUpdateUser());
-        assembleUtil.shallowCopy(supplierDTO.getSupplierTypeDTO(), supplier.getSupplierType());
-        assembleUtil.shallowCopy(supplierDTO.getLocationDTO(), supplier.getLocation());
+        BeanUtils.copyProperties(supplierDTO.getCreateUserDTO(), supplier.getCreateUser());
+        BeanUtils.copyProperties(supplierDTO.getUpdateUserDTO(), supplier.getUpdateUser());
+        BeanUtils.copyProperties(supplierDTO.getSupplierTypeDTO(), supplier.getSupplierType());
+        BeanUtils.copyProperties(supplierDTO.getLocationDTO(), supplier.getLocation());
 
         return supplier;
     }

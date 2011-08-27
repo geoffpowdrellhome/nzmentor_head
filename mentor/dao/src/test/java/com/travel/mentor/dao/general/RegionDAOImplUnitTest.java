@@ -45,7 +45,7 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         regionDTO.setDescription("Taranaki");
         regionDTO.setName("Taranaki");
         regionDTO.setPopulation(567333);
-        regionDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        regionDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         regionDTO = regionDAO.saveOrUpdate(regionDTO);
         Assert.assertNotNull(regionDTO);
@@ -62,7 +62,7 @@ public class RegionDAOImplUnitTest extends AbstractMentorDAOImplTestCase {
         RegionDTO regionDTO = regionDAO.find(EXISTING_ID_VALUE);
         regionDTO.setName("update name 2");
         regionDTO.setDescription("update desc 2");
-        regionDTO.setLoggedInUser( securityDAO.findByUsername(EXISTING_USERNAME_VALUE));
+        regionDTO.setLoggedInUser( secureUserDAO.findByUsername(EXISTING_USERNAME_VALUE));
 
         regionDTO = regionDAO.saveOrUpdate(regionDTO);
         Assert.assertNotNull(regionDTO);
