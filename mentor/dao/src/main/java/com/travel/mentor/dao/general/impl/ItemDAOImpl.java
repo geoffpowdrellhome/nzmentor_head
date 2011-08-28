@@ -6,7 +6,6 @@ import com.travel.mentor.dao.dto.general.ItemDTO;
 import com.travel.mentor.dao.general.ItemDAO;
 import com.travel.mentor.domain.general.Item;
 import com.travel.mentor.domain.general.Supplier;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

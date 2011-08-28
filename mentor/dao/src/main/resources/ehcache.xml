@@ -115,6 +115,9 @@
     <cache name="query.findAllLocations" maxElementsInMemory="500" eternal="false" overflowToDisk="false" diskPersistent="false" />
     <cache name="query.findAllRegions" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
     <cache name="query.findAllSites" maxElementsInMemory="5000" eternal="false" overflowToDisk="false" diskPersistent="false" />
+
+    <cache name="query.findSuppliers" maxElementsInMemory="5000" eternal="false" overflowToDisk="false" diskPersistent="false" />
+
     <cache name="query.findAllSecureUsers" maxElementsInMemory="150" eternal="false" overflowToDisk="false" diskPersistent="false" />
     <cache name="query.findSecureUsersByLikeUsername" maxElementsInMemory="50" eternal="false" overflowToDisk="false" diskPersistent="false" />
     <cache name="query.findSecureUserByUsername" maxElementsInMemory="10" eternal="false" overflowToDisk="false" diskPersistent="false" />

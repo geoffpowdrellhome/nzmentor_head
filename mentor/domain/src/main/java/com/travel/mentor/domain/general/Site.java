@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="siteTypeId")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries(value = {
-        @NamedQuery(name = Supplier.FIND_ALL_SUPPLIERS_NAMED_QUERY,
+        @NamedQuery(name = Site.FIND_ALL_SITES_NAMED_QUERY,
                 query = "SELECT o FROM Site o order by o.name",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),

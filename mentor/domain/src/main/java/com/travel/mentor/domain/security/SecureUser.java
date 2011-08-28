@@ -19,7 +19,7 @@ import java.util.List;
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                         @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findAllSecureUsers")}),
         @NamedQuery(name = SecureUser.FIND_SECURE_USERS_BY_LIKE_USERNAME,
-                query = "SELECT o FROM SecurityGroup o WHERE o.name like :username",
+                query = "SELECT o FROM SecureUser o WHERE o.username like :username",
                 hints = {
                         @QueryHint(name = "org.hibernate.cacheable", value = "true"),
                         @QueryHint(name = "org.hibernate.cacheRegion", value = "query.findSecureUsersByLikeUsername")}),
